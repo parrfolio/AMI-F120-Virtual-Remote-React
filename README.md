@@ -6,11 +6,13 @@ A small app for the record collector community. This app helps orgnaize and prep
 
 > ### This is a work in progress but hoping to launch sometime in 2020.
 
-~ [By Ryan Parr, Panic Fan](https://instagram.com/everydayspinjackets)
+~ [By Ryan Parr](https://instagram.com/everydayspinjackets)
 
 Ongoing ideas (usecases) for the app:
 
 1. Ability for users to share lists.
-2. Allow for user to search RSD
+2. Allow for users to search RSD titles
 3. Ability to save multiple lists
 4. Abilty to check list items
+5. Need to build a site scraper
+6. Need auth for FB, Twitter, Custom
