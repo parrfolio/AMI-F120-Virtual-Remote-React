@@ -19,6 +19,7 @@ export const App = () => {
 
       <Switch>
         <Route exact path="/" render={(routeProps) => <Home />} />
+        <Route exact path="/about" component={About} />
         {/* <Route exact path="/country/:country" component={Country} /> */}
       </Switch>
       <GlobalFonts />
