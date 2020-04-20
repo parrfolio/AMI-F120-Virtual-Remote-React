@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
+
 import styled, { createGlobalStyle } from "styled-components";
 // import Chevron from "../../fonts/chevron.js";
 
-export const Home = (props, state) => {
+export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -19,8 +19,7 @@ export const Home = (props, state) => {
     <div>Loading....</div>
   ) : (
     <Fragment>
-      <div>RSD HOME!</div>
-      <Link to="/login">Login</Link>
+      <div>USER HOME!</div>
     </Fragment>
   );
 };
