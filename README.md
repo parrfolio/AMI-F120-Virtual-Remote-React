@@ -1,18 +1,27 @@
-# My RSD List
+# AMI Jukebox App
 
 ## Background
 
-A small app for the record collector community. This app helps orgnaize and prepare for RSD day! Create your list from the official Record Store Day list.
+App to control AMI F 120 Jukebox lights and stepper. 
 
 > ### This is a work in progress but hoping to launch sometime in 2020.
 
 ~ [By Ryan Parr](https://instagram.com/everydayspinjackets)
 
-Ongoing ideas (usecases) for the app:
+ToDo:
 
-1. Ability for users to share lists.
-2. Allow for users to search RSD titles
-3. Ability to save multiple lists
-4. Abilty to check list items
-5. Need to build a site scraper
-6. Need auth for FB, Twitter, Custom
+1. Stepper sequences to play songs
+2. Lights
+3. Cancel Action
+4. Turn on/off Machine
+
+
+
+> ###  GPIO Test Proceedures
+
+python3
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(32,GPIO.OUT)
+GPIO.output(32,GPIO.LOW)
+GPIO.output(32,GPIO.HIGH)

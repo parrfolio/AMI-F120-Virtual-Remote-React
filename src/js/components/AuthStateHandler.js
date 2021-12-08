@@ -54,6 +54,7 @@ export const useAuth = () => {
           }
         },
         (err) => {
+          console.log(err)
           setError(err);
         }
       );

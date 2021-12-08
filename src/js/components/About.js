@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const About = (props, state) => {
@@ -17,7 +18,8 @@ export const About = (props, state) => {
     <div>Loading....</div>
   ) : (
     <Fragment>
-      <div>About! This is the about page!!</div>
+      <div>About Page</div>
+      <Link to="/home">Home</Link>
     </Fragment>
   );
 };

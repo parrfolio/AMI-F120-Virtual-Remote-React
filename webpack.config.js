@@ -21,6 +21,7 @@ if (!dev) {
 module.exports = {
   mode: dev ? "development" : "production",
   context: path.join(__dirname, "src"),
+  node: { fs: 'empty' },
   devtool: "inline-source-map",
   entry: {
     app: "./js/Index.js",

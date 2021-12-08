@@ -15,7 +15,7 @@ export const PublicRoute = ({
         authed === false ? (
           <Component {...{ authed, user, ...rest }} />
         ) : (
-          <Redirect to="/my-rsd-list" />
+          <Redirect to="/home" />
         )
       }
     />

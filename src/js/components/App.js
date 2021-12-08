@@ -1,5 +1,6 @@
 import React from "react";
 import { Home } from "./Home";
+import { About } from "./About";
 import { UserHome } from "./UserHome";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalFonts from "../../fonts/fonts";
@@ -40,8 +41,14 @@ export const App = () => {
         />
 
         <PrivateRoute
-          path="/my-rsd-list"
+          path="/home"
           component={UserHome}
+          {...{ authed, user, admin }}
+        />
+
+        <PrivateRoute
+          path="/about"
+          component={About}
           {...{ authed, user, admin }}
         />
 
