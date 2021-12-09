@@ -4,7 +4,6 @@
   "description": "AMI F 120 Jukbox Virtual Wallbox",
   "main": "webpack.config.js",
   "dependencies": {
-    "child_process": "^1.0.2",
     "firebase": "^7.14.1",
     "flow-typed": "^3.5.0",
     "fs": "0.0.1-security",
@@ -60,7 +59,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack --progress",
-    "start": "webpack-dev-server --progress --host 192.168.135.179 --content-base dist --colors --inline",
+    "start": "webpack-dev-server --progress --host 0.0.0.0 --content-base dist --colors --inline",
     "flow": "flow",
     "linter": "eslint src",
     "bundlesize": "bundlesize",
