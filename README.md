@@ -1,24 +1,24 @@
-# AMI Jukebox App
+# AMI F 120 Jukebox Virtual Remote in React
 
-## Background
+## Project
 
-App to control AMI F 120 Jukebox lights and stepper. 
+App to control my AMI F 120 Jukebox stepper remotely through tablet or mobile device. 
 
-> ### This is a work in progress but hoping to launch sometime in 2020.
+### Capabilities
 
-~ [By Ryan Parr](https://instagram.com/everydayspinjackets)
-
-ToDo:
-
-1. Stepper sequences to play songs
-2. Lights
+1. Send pulses to stepper for selections
+2. Light show
 3. Cancel Action
 4. Turn on/off Machine
+5. Random Selection
 
+### Todo
 
+1. Stepper sequences
+2. Lights sequences
+3. GUI
 
-> ###  GPIO Test Proceedures
-
+###  GPIO Test Proceedures in Python
 python3
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
