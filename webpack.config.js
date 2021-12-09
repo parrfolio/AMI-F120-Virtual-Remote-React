@@ -13,7 +13,7 @@ if (!dev) {
     new BundleAnalyzerPlugin({
       analyzerMode: "static",
       reportFilename: "webpack-report.html",
-      openAnalyzer: false
+      openAnalyzer: false,
     })
   );
 }
@@ -21,21 +21,21 @@ if (!dev) {
 module.exports = {
   mode: dev ? "development" : "production",
   context: path.join(__dirname, "src"),
-  node: { fs: 'empty' },
+  node: { fs: "empty" },
   devtool: "inline-source-map",
   entry: {
     app: "./js/Index.js",
-    lib: ["react", "react-dom", "babel-polyfill"]
+    lib: ["react", "react-dom", "babel-polyfill"],
   },
   resolve: {
-    modules: [path.resolve("./src"), "node_modules"]
+    modules: [path.resolve("./src"), "node_modules"],
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: "babel-loader"
+        loader: "babel-loader",
       },
       {
         test: /\.css$/,
@@ -45,20 +45,20 @@ module.exports = {
             loader: "css-loader",
             options: {
               importLoaders: 1,
-              modules: true
-            }
-          }
+              modules: true,
+            },
+          },
         ],
-        include: /\.module\.css$/
+        include: /\.module\.css$/,
       },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
-        exclude: /\.module\.css$/
+        exclude: /\.module\.css$/,
       },
       {
         test: /\.svg$/,
-        loader: "svg-inline-loader"
+        loader: "svg-inline-loader",
       },
       {
         test: /.(png|gif|jpg|jpeg?)(\?[a-z0-9]+)?$/,
@@ -69,10 +69,10 @@ module.exports = {
               name: "[name].[ext]",
               outputPath: "images/",
               publicPath:
-                process.env.NODE_ENV === "production" ? "images/" : "/images" // override the default path
-            }
-          }
-        ]
+                process.env.NODE_ENV === "production" ? "images/" : "/images", // override the default path
+            },
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -83,27 +83,27 @@ module.exports = {
               name: "[name].[ext]",
               outputPath: "fonts/",
               publicPath:
-                process.env.NODE_ENV === "production" ? "fonts/" : "/fonts"
-            }
-          }
-        ]
-      }
-    ]
+                process.env.NODE_ENV === "production" ? "fonts/" : "/fonts",
+            },
+          },
+        ],
+      },
+    ],
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].bundle.js",
-    publicPath: "/"
+    publicPath: "/",
   },
   devServer: {
     historyApiFallback: true,
-    port: 8080
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/js/Index.js",
-      title: ""
-    })
+      title: "",
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -112,10 +112,10 @@ module.exports = {
           chunks: "initial",
           minChunks: Infinity,
           name: "lib",
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
-  plugins
+  plugins,
 };
