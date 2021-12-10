@@ -21,14 +21,16 @@ if (!dev) {
 module.exports = {
   mode: dev ? "development" : "production",
   context: path.join(__dirname, "src"),
-  node: { fs: "empty" },
+  externals: {
+    fs: "commonjs fs",
+  },
   devtool: "inline-source-map",
   entry: {
-    app: "./js/Index.js",
+    app: "js/Index.js",
     lib: ["react", "react-dom", "babel-polyfill"],
   },
   resolve: {
-    modules: [path.resolve("./src"), "node_modules"],
+    modules: [path.resolve("src"), "node_modules"],
   },
   module: {
     rules: [
@@ -93,7 +95,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/[name].bundle.js",
-    publicPath: "/",
   },
   devServer: {
     historyApiFallback: true,
