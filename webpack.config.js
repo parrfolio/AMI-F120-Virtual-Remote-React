@@ -92,7 +92,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "./js/[name].bundle.js",
+    filename: "js/[name].bundle.js",
     publicPath: "/",
   },
   devServer: {
@@ -101,7 +101,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/js/Index.js",
+      template: "src/js/Index.js",
       title: "",
     }),
   ],
