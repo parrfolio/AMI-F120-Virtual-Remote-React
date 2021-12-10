@@ -30,7 +30,8 @@ GPIO.output(32,GPIO.HIGH)
 Disable Firewall: 
 ```systemctl stop firewalld```
 
-  GNU nano 5.4                              /etc/network/interfaces                                        
+Interfaces Config
+/etc/network/interfaces                                        
 # interfaces(5) file used by ifup(8) and ifdown(8)
 # Include files from /etc/network/interfaces.d:
 source /etc/network/interfaces.d/*
@@ -40,3 +41,10 @@ wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 What ports are open
 sudo netstat -tlnp
+
+HD Allocation
+ df -h
+
+Set of commands to purge unneeded package files:
+sudo apt-get autoremove
+sudo apt-get clean
