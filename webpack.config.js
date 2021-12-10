@@ -21,16 +21,14 @@ if (!dev) {
 module.exports = {
   mode: dev ? "development" : "production",
   context: path.join(__dirname, "src"),
-  externals: {
-    fs: "commonjs fs",
-  },
+  node: { fs: "empty" },
   devtool: "inline-source-map",
   entry: {
-    app: "js/Index.js",
+    app: "./js/Index.js",
     lib: ["react", "react-dom", "babel-polyfill"],
   },
   resolve: {
-    modules: [path.resolve("src"), "node_modules"],
+    modules: [path.resolve("./src"), "node_modules"],
   },
   module: {
     rules: [
@@ -94,7 +92,8 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "js/[name].bundle.js",
+    filename: "./js/[name].bundle.js",
+    publicPath: "/",
   },
   devServer: {
     historyApiFallback: true,
@@ -102,7 +101,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "src/js/Index.js",
+      template: "./src/js/Index.js",
       title: "",
     }),
   ],
