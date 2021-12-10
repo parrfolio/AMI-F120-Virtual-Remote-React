@@ -37,3 +37,6 @@ source /etc/network/interfaces.d/*
 allow-hotplug wlan0
 iface wlan0 inet dhcp
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+What ports are open
+sudo netstat -tlnp
