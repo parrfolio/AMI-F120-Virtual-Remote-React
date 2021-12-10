@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
-import { App } from "./components/App";
-import Theme from "./components/Theme";
+import { App } from "./js/components/App";
+import Theme from "./js/components/Theme";
 
 render(
   <Theme>

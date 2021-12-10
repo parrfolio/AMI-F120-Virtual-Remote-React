@@ -3,20 +3,19 @@ const webpack = require("webpack");
 const path = require("path");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const plugins = [new FriendlyErrorsWebpackPlugin()];
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
-if (!dev) {
-  plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: "static",
-      reportFilename: "webpack-report.html",
-      openAnalyzer: false,
-    })
-  );
-}
+// if (!dev) {
+//   plugins.push(
+//     new webpack.optimize.OccurrenceOrderPlugin(),
+//     new BundleAnalyzerPlugin({
+//       analyzerMode: "static",
+//       reportFilename: "webpack-report.html",
+//       openAnalyzer: false,
+//     })
+//   );
+// }
 
 module.exports = {
   mode: dev ? "development" : "production",
@@ -24,11 +23,19 @@ module.exports = {
   node: { fs: "empty" },
   devtool: "inline-source-map",
   entry: {
-    app: "./js/Index.js",
+    app: "app.js",
     lib: ["react", "react-dom", "babel-polyfill"],
   },
   resolve: {
     modules: [path.resolve("./src"), "node_modules"],
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "js/[name].bundle.js",
+  },
+  devServer: {
+    historyApiFallback: true,
+    port: 3000,
   },
   module: {
     rules: [
@@ -90,21 +97,6 @@ module.exports = {
       },
     ],
   },
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "js/[name].bundle.js",
-    publicPath: "/",
-  },
-  devServer: {
-    historyApiFallback: true,
-    port: 3000,
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "src/js/Index.js",
-      title: "",
-    }),
-  ],
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -117,5 +109,10 @@ module.exports = {
       },
     },
   },
-  plugins,
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.ejs",
+      title: "foo berry",
+    }),
+  ],
 };
