@@ -29,3 +29,11 @@ GPIO.output(32,GPIO.HIGH)
 ### Rasperry pi configs
 Disable Firewall: 
 ```systemctl stop firewalld```
+
+  GNU nano 5.4                              /etc/network/interfaces                                        
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+source /etc/network/interfaces.d/*
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
