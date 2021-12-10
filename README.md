@@ -25,3 +25,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(32,GPIO.OUT)
 GPIO.output(32,GPIO.LOW)
 GPIO.output(32,GPIO.HIGH)
+
+### Rasperry pi configs
+Disable Firewall: 
+```systemctl stop firewalld```
