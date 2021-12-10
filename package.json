@@ -82,11 +82,11 @@
   ],
   "bundlesize": [
     {
-      "path": "./dist/js/app.bundle.js",
+      "path": "dist/js/app.bundle.js",
       "maxSize": "170 kB"
     },
     {
-      "path": "./dist/js/lib.bundle.js",
+      "path": "dist/js/lib.bundle.js",
       "maxSize": "110 kB"
     }
   ],
