@@ -49,35 +49,17 @@ export const UserHome = (props, state) => {
           //   .catch((err) => {
           //     console.log("Error: ", err.toString());
           //   });
-          var gpio = require("rpi-gpio");
 
-          var pin = 32;
-          var delay = 2000;
-          var count = 0;
-          var max = 3;
+          var gpio = require("../rpi-gpio");
 
-          gpio.setup(pin, gpio.DIR_OUT, on);
+          gpio.setup(32, gpio.DIR_OUT, write);
 
-          function on() {
-            if (count >= max) {
-              gpio.destroy(function() {
-                console.log("Closed writePins, now exit");
-              });
-              return;
-            }
-
-            setTimeout(function() {
-              console.log("Off");
-              gpio.write(pin, 1, off);
-              count += 1;
-            }, delay);
-          }
-
-          function off() {
-            setTimeout(function() {
-              console.log("On");
-              gpio.write(pin, 0, on);
-            }, delay);
+          function write(err) {
+            if (err) throw err;
+            gpio.write(7, true, function(err) {
+              if (err) throw err;
+              console.log("Written to pin");
+            });
           }
 
           console.log("hi");
