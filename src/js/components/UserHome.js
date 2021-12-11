@@ -1,13 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+
 // import Chevron from "../../fonts/chevron.js";
-import { PythonShell } from "python-shell";
 
 export const UserHome = (props, state) => {
   const [followedClass, setFollowedClass] = useState(null);
   const [loading, setLoading] = useState(false);
-  declare var variableName: any;
 
   useEffect(() => {
     setLoading(false);
@@ -42,21 +41,46 @@ export const UserHome = (props, state) => {
         onClick={(e: Event) => {
           // var gpiop = require("rpi-gpio").promise;
           // gpiop
-          //   .setup(7, gpiop.DIR_OUT)
+          //   .setup(32, gpiop.DIR_OUT)
           //   .then(() => {
           //     //    return gpiop.write(7, true)
-          //     return console.log(7, true);
+          //     return console.log(32, true);
           //   })
           //   .catch((err) => {
           //     console.log("Error: ", err.toString());
           //   });
+          var gpio = require("rpi-gpio");
+
+          var pin = 32;
+          var delay = 2000;
+          var count = 0;
+          var max = 3;
+
+          gpio.setup(pin, gpio.DIR_OUT, on);
+
+          function on() {
+            if (count >= max) {
+              gpio.destroy(function() {
+                console.log("Closed writePins, now exit");
+              });
+              return;
+            }
+
+            setTimeout(function() {
+              console.log("Off");
+              gpio.write(pin, 1, off);
+              count += 1;
+            }, delay);
+          }
+
+          function off() {
+            setTimeout(function() {
+              console.log("On");
+              gpio.write(pin, 0, on);
+            }, delay);
+          }
 
           console.log("hi");
-
-          PythonShell.run("python/stepper.py", null, function(err) {
-            if (err) throw err;
-            console.log("finished");
-          });
         }}
       >
         Button to call script
