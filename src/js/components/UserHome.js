@@ -1,12 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-
 import styled, { createGlobalStyle } from "styled-components";
 // import Chevron from "../../fonts/chevron.js";
+import { PythonShell } from "python-shell";
 
 export const UserHome = (props, state) => {
   const [followedClass, setFollowedClass] = useState(null);
   const [loading, setLoading] = useState(false);
+  declare var variableName: any;
 
   useEffect(() => {
     setLoading(false);
@@ -39,23 +40,23 @@ export const UserHome = (props, state) => {
       <div
         className={followedClass}
         onClick={(e: Event) => {
-          var gpiop = require("rpi-gpio").promise;
-          gpiop
-            .setup(7, gpiop.DIR_OUT)
-            .then(() => {
-              //    return gpiop.write(7, true)
-              return console.log(7, true);
-            })
-            .catch((err) => {
-              console.log("Error: ", err.toString());
-            });
+          // var gpiop = require("rpi-gpio").promise;
+          // gpiop
+          //   .setup(7, gpiop.DIR_OUT)
+          //   .then(() => {
+          //     //    return gpiop.write(7, true)
+          //     return console.log(7, true);
+          //   })
+          //   .catch((err) => {
+          //     console.log("Error: ", err.toString());
+          //   });
 
-          // console.log("hi");
-          // var PythonShell = require("python-shell");
-          // PythonShell.run("python/stepper.py", options, (err, results) => {
-          //   console.log(err);
-          //   console.log(results);
-          // });
+          console.log("hi");
+
+          PythonShell.run("python/stepper.py", null, function(err) {
+            if (err) throw err;
+            console.log("finished");
+          });
         }}
       >
         Button to call script
