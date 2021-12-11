@@ -25,26 +25,13 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(32,GPIO.OUT)
 GPIO.output(32,GPIO.LOW)
 GPIO.output(32,GPIO.HIGH)
-
 ### Rasperry pi configs
 Disable Firewall: 
 ```systemctl stop firewalld```
-
-Interfaces Config
-/etc/network/interfaces                                        
-# interfaces(5) file used by ifup(8) and ifdown(8)
-# Include files from /etc/network/interfaces.d:
-source /etc/network/interfaces.d/*
-allow-hotplug wlan0
-iface wlan0 inet dhcp
-wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-
-What ports are open
+### What ports are open
 sudo netstat -tlnp
-
-HD Allocation
+### HD Allocation
  df -h
-
-Set of commands to purge unneeded package files:
+### Set of commands to purge unneeded package files:
 sudo apt-get autoremove
 sudo apt-get clean

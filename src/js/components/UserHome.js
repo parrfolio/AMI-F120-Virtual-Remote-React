@@ -51,11 +51,11 @@ export const UserHome = (props, state) => {
           //   });
 
           console.log("hi");
-          // var PythonShell = require("python-shell");
-          // PythonShell.run("", options, (err, results) => {
-          //   console.log(err);
-          //   console.log(results);
-          // });
+          var PythonShell = require("python-shell");
+          PythonShell.run("python/stepper.py", options, (err, results) => {
+            console.log(err);
+            console.log(results);
+          });
         }}
       >
         Button to call script
