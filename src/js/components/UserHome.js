@@ -39,23 +39,23 @@ export const UserHome = (props, state) => {
       <div
         className={followedClass}
         onClick={(e: Event) => {
-          // var gpiop = require("rpi-gpio").promise;
-          // gpiop
-          //   .setup(7, gpiop.DIR_OUT)
-          //   .then(() => {
-          //     //    return gpiop.write(7, true)
-          //     return console.log(7, true);
-          //   })
-          //   .catch((err) => {
-          //     console.log("Error: ", err.toString());
-          //   });
+          var gpiop = require("rpi-gpio").promise;
+          gpiop
+            .setup(7, gpiop.DIR_OUT)
+            .then(() => {
+              //    return gpiop.write(7, true)
+              return console.log(7, true);
+            })
+            .catch((err) => {
+              console.log("Error: ", err.toString());
+            });
 
-          console.log("hi");
-          var PythonShell = require("python-shell");
-          PythonShell.run("python/stepper.py", options, (err, results) => {
-            console.log(err);
-            console.log(results);
-          });
+          // console.log("hi");
+          // var PythonShell = require("python-shell");
+          // PythonShell.run("python/stepper.py", options, (err, results) => {
+          //   console.log(err);
+          //   console.log(results);
+          // });
         }}
       >
         Button to call script
