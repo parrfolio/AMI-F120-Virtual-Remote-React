@@ -20,7 +20,6 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: dev ? "development" : "production",
   context: path.join(__dirname, "src"),
-  node: { fs: "empty", child_process: "empty" },
   devtool: "inline-source-map",
   entry: {
     app: "app.js",
