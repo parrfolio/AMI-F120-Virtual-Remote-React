@@ -22,8 +22,8 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-let speed = 30;
-let pulsedelay = 250;
+let speed = 150;
+let pulsedelay = 2000;
 
 let pulsetrain1 = 2;
 let pulsetrain2 = 10;
