@@ -52,12 +52,12 @@ io.sockets.on("connection", function(socket) {
         for (i; i < pulseTrain1; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
-            console.log("on");
+            // console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(pulseDelay);
               gpio.write(pin, true);
-              console.log("off");
+              //   console.log("off");
             })();
           });
         }
@@ -70,12 +70,12 @@ io.sockets.on("connection", function(socket) {
         for (i; i < pulseTrain2; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
-            console.log("on");
+            // console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(pulseDelay);
               gpio.write(pin, true);
-              console.log("off");
+              //   console.log("off");
             })();
           });
         }
