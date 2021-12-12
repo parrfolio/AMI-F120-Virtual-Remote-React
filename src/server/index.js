@@ -41,7 +41,7 @@ io.sockets.on("connection", function(socket) {
             console.log("on");
             if (err) throw err;
             (async function() {
-              await sleep(200);
+              await sleep(300);
               gpio.write(pin, true);
               console.log("off");
             })();
@@ -57,7 +57,7 @@ io.sockets.on("connection", function(socket) {
               console.log("on");
               if (err) throw err;
               (async function() {
-                await sleep(200);
+                await sleep(300);
                 gpio.write(pin, true);
                 console.log("off");
               })();
