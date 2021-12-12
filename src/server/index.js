@@ -22,26 +22,37 @@ http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
+//pulse train selections=
+//selection 10
 const pin = 32;
+const pulseTrain1 = 2;
+const pulseTrain2 = 10;
+
+//pulse speed settings
+const pulseSpeed = 300;
+const pulseDelay = 200;
+const pulseTrainDelay = 2500;
+
 gpio.setup(pin, gpio.DIR_OUT);
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
+//pulse train 1
 io.sockets.on("connection", function(socket) {
   let direction = "cancel";
   socket.on("direction", function(data) {
     direction = data;
     if (direction === "on") {
       (async function() {
-        for (let i = 0; i < 2; i++) {
-          await sleep(300);
+        for (let i = 0; i < pulseTrain1; i++) {
+          await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
             console.log("on");
             if (err) throw err;
             (async function() {
-              await sleep(200);
+              await sleep(pulseDelay);
               gpio.write(pin, true);
               console.log("off");
             })();
@@ -49,22 +60,23 @@ io.sockets.on("connection", function(socket) {
         }
       })();
 
+      // pulse train 2
       setTimeout(() => {
         (async function() {
-          for (let i = 0; i < 10; i++) {
-            await sleep(300);
+          for (let i = 0; i < pulseTrain2; i++) {
+            await sleep(pulseSpeed);
             gpio.write(pin, false, function(err) {
               console.log("on");
               if (err) throw err;
               (async function() {
-                await sleep(300);
+                await sleep(pulseDelay);
                 gpio.write(pin, true);
                 console.log("off");
               })();
             });
           }
         })();
-      }, 2500);
+      }, pulseTrainDelay);
     } else if (direction === "off") {
       gpio.write(pin, true);
     } else {
