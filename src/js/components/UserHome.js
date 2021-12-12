@@ -1,29 +1,59 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-import fs from "fs";
-// import Chevron from "../../fonts/chevron.js";
+import io from "socket.io-client";
 
+// import Chevron from "../../fonts/chevron.js";
 export const UserHome = (props, state) => {
   const [followedClass, setFollowedClass] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [socket, setSocket] = useState(null);
+  const [socketConnected, setSocketConnected] = useState(false);
 
   useEffect(() => {
     setLoading(false);
+    setSocket(io());
   }, []);
 
+  // establish socket connection
+
+  // subscribe to the socket event
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("connect", () => {
+      setSocketConnected(socket.connected);
+    });
+    socket.on("disconnect", () => {
+      setSocketConnected(socket.connected);
+    });
+
+    // socket.on("getDate", (data) => {
+    //   setDt(data);
+    // });
+  }, [socket]);
+
   useEffect((e) => {
-    console.log("blah");
-    // if (communityUserPage) {
-    // 	authUserPlaylists.includes(playlistId)
-    // 		? setFollowedClass("followed")
-    // 		: setFollowedClass(null);
+    console.log(e);
+    // if (socket) {
+
     // } else {
-    // 	userPlaylists.includes(playlistId)
-    // 		? setFollowedClass("followed")
-    // 		: setFollowedClass(null);
+
     // }
   });
+
+  // // manage socket connection
+  // const handleSocketConnection = () => {
+  //   if (socketConnected) socket.disconnect();
+  //   else {
+  //     socket.connect();
+  //   }
+  // };
+
+  // // subscribe to socket date event
+  // const subscribeToDateEvent = (interval = 1000) => {
+  //   socket.emit("subscribeToDateEvent", interval);
+  // };
 
   //   const { data } = props;
   //   const slides = data.map((slide, index) => {
@@ -39,33 +69,11 @@ export const UserHome = (props, state) => {
       <div
         className={followedClass}
         onClick={(e: Event) => {
-          // var gpiop = require("rpi-gpio").promise;
-          // gpiop
-          //   .setup(32, gpiop.DIR_OUT)
-          //   .then(() => {
-          //     //    return gpiop.write(7, true)
-          //     return console.log(32, true);
-          //   })
-          //   .catch((err) => {
-          //     console.log("Error: ", err.toString());
-          //   });
-
-          var gpio = require("rpi-gpio");
-
-          gpio.setup(32, gpio.DIR_OUT, write);
-
-          function write(err) {
-            if (err) throw err;
-            gpio.write(32, true, function(err) {
-              if (err) throw err;
-              console.log("Written to pin");
-            });
-          }
-
           console.log("hi");
+          socket.emit("direction", "on");
         }}
       >
-        Button to call script
+        Click Me!
       </div>
       <Link to="/about">About</Link>
     </Fragment>
