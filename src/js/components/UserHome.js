@@ -50,7 +50,7 @@ export const UserHome = (props, state) => {
           //     console.log("Error: ", err.toString());
           //   });
 
-          var gpio = require("../rpi-gpio");
+          var gpio = require("rpi-gpio");
 
           gpio.setup(32, gpio.DIR_OUT, write);
 
