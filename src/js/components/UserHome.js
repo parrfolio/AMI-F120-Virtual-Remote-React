@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
-
+import fs from "fs";
 // import Chevron from "../../fonts/chevron.js";
 
 export const UserHome = (props, state) => {
