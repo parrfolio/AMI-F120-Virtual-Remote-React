@@ -41,7 +41,7 @@ io.sockets.on("connection", function(socket) {
             console.log("on");
             if (err) throw err;
             (async function() {
-              await sleep(300);
+              await sleep(200);
               gpio.write(pin, true);
               console.log("off");
             })();
@@ -57,7 +57,7 @@ io.sockets.on("connection", function(socket) {
               console.log("on");
               if (err) throw err;
               (async function() {
-                await sleep(300);
+                await sleep(200);
                 gpio.write(pin, true);
                 console.log("off");
               })();
@@ -66,7 +66,7 @@ io.sockets.on("connection", function(socket) {
         })();
       }, 2500);
     } else if (direction === "off") {
-      gpio.write(pin, false);
+      gpio.write(pin, true);
     } else {
       // By default we turn off the motors
       gpio.write(pin, true);
