@@ -75,7 +75,7 @@ export const UserHome = (props, state) => {
           });
         }}
       >
-        TURN ON
+        Selection 10
       </div>
 
       <div
@@ -87,7 +87,7 @@ export const UserHome = (props, state) => {
           });
         }}
       >
-        TURN OFF
+        Stop
       </div>
       <Link to="/about">About</Link>
     </Fragment>
