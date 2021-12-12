@@ -22,13 +22,13 @@ io.sockets.on("connection", function(socket) {
   let direction = "cancel";
   socket.on("direction", function(data) {
     direction = data;
-    console.log(direction);
     if (direction === "on") {
       for (let i = 0; i < 2; i++) {
         gpio.write(pin, false);
         setTimeout(() => {
           gpio.write(pin, true);
         }, 0.03);
+        console.log(direction);
       }
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
@@ -36,6 +36,7 @@ io.sockets.on("connection", function(socket) {
           setTimeout(() => {
             gpio.write(pin, true);
           }, 0.03);
+          console.log(direction);
         }
       }, 1.25);
     } else if (direction === "off") {
