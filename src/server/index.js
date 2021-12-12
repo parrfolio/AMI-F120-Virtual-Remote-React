@@ -22,15 +22,7 @@ http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
-//pulse train settings
-let pin = 32;
-let pulseTrain1 = 2;
-let pulseTrain2 = 10;
-
-// pulse adjustments
-let pulseSpeed = 3000;
-let pulseTrainDelay = 2500;
-
+const pin = 32;
 gpio.setup(pin, gpio.DIR_OUT);
 
 const sleep = (milliseconds) => {
@@ -43,13 +35,13 @@ io.sockets.on("connection", function(socket) {
     direction = data;
     if (direction === "on") {
       (async function() {
-        for (let i = 0; i < pulseTrain1; i++) {
-          await sleep(pulseSpeed);
+        for (let i = 0; i < 2; i++) {
+          await sleep(300);
           gpio.write(pin, false, function(err) {
             console.log("on");
             if (err) throw err;
             (async function() {
-              await sleep(pulseSpeed);
+              await sleep(200);
               gpio.write(pin, true);
               console.log("off");
             })();
@@ -59,20 +51,20 @@ io.sockets.on("connection", function(socket) {
 
       setTimeout(() => {
         (async function() {
-          for (let i = 0; i < pulseTrain2; i++) {
-            await sleep(pulseSpeed);
+          for (let i = 0; i < 10; i++) {
+            await sleep(300);
             gpio.write(pin, false, function(err) {
               console.log("on");
               if (err) throw err;
               (async function() {
-                await sleep(pulseSpeed);
+                await sleep(200);
                 gpio.write(pin, true);
                 console.log("off");
               })();
             });
           }
         })();
-      }, pulseTrainDelay);
+      }, 2500);
     } else if (direction === "off") {
       gpio.write(pin, false);
     } else {
