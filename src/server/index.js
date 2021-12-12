@@ -19,40 +19,42 @@ const pin = 32;
 gpio.setup(pin, gpio.DIR_OUT);
 
 const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
-  (async function() {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
+
 io.sockets.on("connection", function(socket) {
   let direction = "cancel";
   socket.on("direction", function(data) {
     direction = data;
     if (direction === "on") {
-       
-            for (let i = 0; i < 2; i++) {
-                await sleep(1000)
-                gpio.write(pin, true, function(err) {
-                console.log(direction);
-                if (err) throw err;
-                setTimeout(() => {
-                    gpio.write(pin, false);
-                    console.log(direction);
-                }, 200);
-                });
-            }
+      (async function() {
+        for (let i = 0; i < 2; i++) {
+          await sleep(1000);
+          gpio.write(pin, true, function(err) {
+            console.log(direction);
+            if (err) throw err;
             setTimeout(() => {
-                for (let i = 0; i < 10; i++) {
-                    await sleep(1000)
-                    gpio.write(pin, true, function(err) {
-                    console.log(direction);
-                    if (err) throw err;
-                    setTimeout(() => {
-                        gpio.write(pin, false);
-                        console.log(direction);
-                    }, 200);
-                    });
-                }
-            }, 3000);
-  
+              gpio.write(pin, false);
+              console.log(direction);
+            }, 200);
+          });
+        }
+      })();
+      setTimeout(() => {
+        (async function() {
+          for (let i = 0; i < 10; i++) {
+            await sleep(1000);
+            gpio.write(pin, true, function(err) {
+              console.log(direction);
+              if (err) throw err;
+              setTimeout(() => {
+                gpio.write(pin, false);
+                console.log(direction);
+              }, 200);
+            });
+          }
+        })();
+      }, 3000);
     } else if (direction === "off") {
       gpio.write(pin, true);
     } else {
@@ -61,4 +63,3 @@ io.sockets.on("connection", function(socket) {
     }
   });
 });
-})();
