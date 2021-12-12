@@ -18,6 +18,10 @@ http.listen(PORT, () => {
 const pin = 32;
 gpio.setup(pin, gpio.DIR_OUT);
 
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
 io.sockets.on("connection", function(socket) {
   let direction = "cancel";
   socket.on("direction", function(data) {
