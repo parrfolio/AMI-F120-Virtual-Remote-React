@@ -29,9 +29,9 @@ const pulseTrain1 = 2;
 const pulseTrain2 = 10;
 
 //pulse speed settings
-const pulseSpeed = 300;
-const pulseDelay = 200;
-const pulseTrainDelay = 2500;
+const pulseSpeed = 200;
+const pulseDelay = 100;
+const pulseTrainDelay = 2000;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
@@ -64,7 +64,6 @@ io.sockets.on("connection", function(socket) {
 
       // pulse train 2
       (async function() {
-        console.log("=======-- 2nd ASYNC FUNCTION --=======");
         await sleep(pulseTrainDelay);
         console.log("=======-- Train 2 START --=======");
         for (i; i < pulseTrain2; i++) {
