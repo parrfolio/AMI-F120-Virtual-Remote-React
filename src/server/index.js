@@ -6,10 +6,17 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
+
 app.use(express.static(webroot));
 
-const PORT = process.env.PORT || 8080;
+//for routing
+app.get("*", function(req, res) {
+  res.sendFile("index.html", {
+    root: path.join(__dirname, "/dist/index.html"),
+  });
+});
 
+const PORT = process.env.PORT || 8080;
 http.listen(PORT, () => {
   console.log(webroot);
   console.log(`Server listening on ${PORT}`);
@@ -23,6 +30,7 @@ const pulseTrain2 = 10;
 // pulse adjustments
 const pulseSpeed = 300;
 const pulseTrainDelay = 2000;
+
 gpio.setup(pin, gpio.DIR_OUT);
 
 const sleep = (milliseconds) => {
