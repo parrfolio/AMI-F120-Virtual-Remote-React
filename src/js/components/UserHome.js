@@ -34,7 +34,10 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect((e) => {
-    console.log(socket);
+    console.log("In Click Event");
+    socket.on("data", () => {
+      console.log(data);
+    });
     // if (socket) {
 
     // } else {
