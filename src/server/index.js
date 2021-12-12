@@ -19,19 +19,30 @@ const pin = 32;
 gpio.setup(pin, gpio.DIR_OUT);
 
 io.sockets.on("connection", function(socket) {
-  let direction = "stop"; // direction: forward, backward, stop
+  let direction = "cancel";
   socket.on("direction", function(data) {
-    // Incoming data
     direction = data;
     console.log(direction);
-
     if (direction === "on") {
-      gpio.write(pin, true); // 1 & 0 => Clockwise
+      for (let i = 0; i < 2; i++) {
+        gpio.write(pin, false);
+        setTimeout(() => {
+          gpio.write(pin, true);
+        }, 0.03);
+      }
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          gpio.write(pin, false);
+          setTimeout(() => {
+            gpio.write(pin, true);
+          }, 0.03);
+        }
+      }, 1.25);
     } else if (direction === "off") {
-      gpio.write(pin, false); // 0 & 1 = Counter Clockwise
+      gpio.write(pin, true);
     } else {
       // By default we turn off the motors
-      gpio.write(pin, false);
+      gpio.write(pin, true);
     }
   });
 });
