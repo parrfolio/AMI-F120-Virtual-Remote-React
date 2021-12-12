@@ -64,6 +64,7 @@ io.sockets.on("connection", function(socket) {
 
       // pulse train 2
       (async function() {
+        console.log(i, pulseTrain1);
         console.log(i == pulseTrain1);
         if (i == pulseTrain1 - 1) {
           console.log("=======-- Train 1 DONE --=======");
