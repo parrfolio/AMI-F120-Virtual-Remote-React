@@ -24,18 +24,18 @@ io.sockets.on("connection", function(socket) {
     direction = data;
     if (direction === "on") {
       for (let i = 0; i < 2; i++) {
-        gpio.write(pin, false);
+        gpio.write(pin, true);
         setTimeout(() => {
-          gpio.write(pin, true);
-        }, 30);
+          gpio.write(pin, false);
+        }, 300);
         console.log(direction);
       }
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
-          gpio.write(pin, false);
+          gpio.write(pin, true);
           setTimeout(() => {
-            gpio.write(pin, true);
-          }, 30);
+            gpio.write(pin, false);
+          }, 300);
           console.log(direction);
         }
       }, 1250);
