@@ -25,20 +25,22 @@ io.sockets.on("connection", function(socket) {
     if (direction === "on") {
       for (let i = 0; i < 2; i++) {
         gpio.write(pin, true);
+        console.log(direction);
         setTimeout(() => {
           gpio.write(pin, false);
+          console.log(direction);
         }, 2000);
-        console.log(direction);
       }
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
           gpio.write(pin, true);
+          console.log(direction);
           setTimeout(() => {
             gpio.write(pin, false);
+            console.log(direction);
           }, 2000);
-          console.log(direction);
         }
-      }, 8000);
+      }, 3000);
     } else if (direction === "off") {
       gpio.write(pin, true);
     } else {
