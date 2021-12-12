@@ -44,6 +44,7 @@ io.sockets.on("connection", function(socket) {
   let direction = "cancel";
   socket.on("direction", function(data) {
     direction = data;
+    console.log(data);
     let i = 0;
     if (direction === "on") {
       (async function() {
