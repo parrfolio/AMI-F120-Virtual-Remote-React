@@ -34,8 +34,8 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect((e) => {
-    console.log("In Click Event");
-    socket.on("data", () => {
+    console.log(socket);
+    socket.on("direction", (data) => {
       console.log(data);
     });
     // if (socket) {
@@ -73,10 +73,24 @@ export const UserHome = (props, state) => {
         className={followedClass}
         onClick={(e: Event) => {
           console.log("turned it on");
-          socket.emit("direction", "on");
+          socket.emit("direction", "on", (data) => {
+            console.log(data);
+          });
         }}
       >
-        dont Click Me!
+        TURN ON
+      </div>
+
+      <div
+        className={followedClass}
+        onClick={(e: Event) => {
+          console.log("turned it on");
+          socket.emit("direction", "on", (data) => {
+            console.log(data);
+          });
+        }}
+      >
+        TURN OFF
       </div>
       <Link to="/about">About</Link>
     </Fragment>

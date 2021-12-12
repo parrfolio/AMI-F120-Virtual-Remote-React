@@ -24,6 +24,7 @@ io.sockets.on("connection", function(socket) {
     // Incoming data
     direction = data;
     console.log(direction);
+
     if (direction === "on") {
       gpio.write(pin, true); // 1 & 0 => Clockwise
     } else if (direction === "off") {
