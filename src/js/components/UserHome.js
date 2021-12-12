@@ -81,8 +81,8 @@ export const UserHome = (props, state) => {
       <div
         className={followedClass}
         onClick={(e: Event) => {
-          console.log("turned it on");
-          socket.emit("direction", "on", (data) => {
+          console.log("turned it off");
+          socket.emit("direction", "off", (data) => {
             console.log(data);
           });
         }}
