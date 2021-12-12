@@ -46,6 +46,7 @@ io.sockets.on("connection", function(socket) {
     direction = data;
     if (direction === "on") {
       (async function() {
+        console.log("=======-- Train 1 --=======");
         for (let i = 0; i < pulseTrain1; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
@@ -63,6 +64,7 @@ io.sockets.on("connection", function(socket) {
       // pulse train 2
       setTimeout(() => {
         (async function() {
+          console.log("=======-- Train 2 --=======");
           for (let i = 0; i < pulseTrain2; i++) {
             await sleep(pulseSpeed);
             gpio.write(pin, false, function(err) {
