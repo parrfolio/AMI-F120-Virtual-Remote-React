@@ -9,6 +9,14 @@ const webroot = path.resolve(__dirname, "../../dist");
 
 app.use(express.static(webroot));
 
+//stacktrace logs
+var log = console.log;
+console.log = function() {
+  log.apply(console, arguments);
+  // Print the stack trace
+  console.trace();
+};
+
 //for routing
 app.get("*", function(req, res) {
   res.sendFile("index.html", {
