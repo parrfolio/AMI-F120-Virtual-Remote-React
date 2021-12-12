@@ -64,7 +64,7 @@ export const UserHome = (props, state) => {
     <div>Loading....</div>
   ) : (
     <Fragment>
-      <div>USER HOME!</div>
+      <div>USER HOME Here!</div>
 
       <div
         className={followedClass}
