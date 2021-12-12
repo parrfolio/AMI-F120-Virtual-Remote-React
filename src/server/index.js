@@ -23,13 +23,13 @@ http.listen(PORT, () => {
 });
 
 //pulse train settings
-const pin = 32;
-const pulseTrain1 = 2;
-const pulseTrain2 = 10;
+let pin = 32;
+let pulseTrain1 = 2;
+let pulseTrain2 = 10;
 
 // pulse adjustments
-const pulseSpeed = 300;
-const pulseTrainDelay = 2000;
+let pulseSpeed = 300;
+let pulseTrainDelay = 2500;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
