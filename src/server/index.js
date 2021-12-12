@@ -28,7 +28,7 @@ let pulseTrain1 = 2;
 let pulseTrain2 = 10;
 
 // pulse adjustments
-let pulseSpeed = 300;
+let pulseSpeed = 3000;
 let pulseTrainDelay = 2500;
 
 gpio.setup(pin, gpio.DIR_OUT);
