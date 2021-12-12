@@ -21,8 +21,10 @@ gpio.setup(pin, gpio.DIR_OUT);
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
-let speed = 300;
-let inspeed = 200;
+
+let speed = 30;
+let pulsedelay = 250;
+
 let pulsetrain1 = 2;
 let pulsetrain2 = 10;
 
@@ -31,6 +33,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
     direction = data;
     if (direction === "on") {
+      //Pulse Train 1
       (async function() {
         for (let i = 0; i < pulsetrain1; i++) {
           await sleep(speed);
@@ -38,14 +41,14 @@ io.sockets.on("connection", function(socket) {
             console.log("on");
             if (err) throw err;
             (async function() {
-              await sleep(inspeed);
+              await sleep(speed);
               gpio.write(pin, false);
               console.log("off");
             })();
           });
         }
       })();
-
+      //Pulse Train 2
       setTimeout(() => {
         (async function() {
           for (let i = 0; i < pulsetrain2; i++) {
@@ -54,14 +57,14 @@ io.sockets.on("connection", function(socket) {
               console.log("on");
               if (err) throw err;
               (async function() {
-                await sleep(inspeed);
+                await sleep(speed);
                 gpio.write(pin, false);
                 console.log("off");
               })();
             });
           }
         })();
-      }, 2500);
+      }, pulsedelay);
     } else if (direction === "off") {
       gpio.write(pin, true);
     } else {
