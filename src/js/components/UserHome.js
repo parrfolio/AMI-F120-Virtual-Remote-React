@@ -35,15 +35,12 @@ export const UserHome = (props, state) => {
 
   useEffect((e) => {
     console.log(socket);
-    socket.on("direction", (data) => {
-      console.log(data);
-    });
     // if (socket) {
 
     // } else {
 
     // }
-  });
+  }, []);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
