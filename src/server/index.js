@@ -30,12 +30,12 @@ io.sockets.on("connection", function(socket) {
       (async function() {
         for (let i = 0; i < 3; i++) {
           await sleep(300);
-          gpio.write(pin, true, function(err) {
+          gpio.write(pin, false, function(err) {
             console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(200);
-              gpio.write(pin, false);
+              gpio.write(pin, true);
               console.log("off");
             })();
           });
@@ -46,12 +46,12 @@ io.sockets.on("connection", function(socket) {
         (async function() {
           for (let i = 0; i < 11; i++) {
             await sleep(300);
-            gpio.write(pin, true, function(err) {
+            gpio.write(pin, false, function(err) {
               console.log("on");
               if (err) throw err;
               (async function() {
                 await sleep(200);
-                gpio.write(pin, false);
+                gpio.write(pin, true);
                 console.log("off");
               })();
             });
@@ -59,7 +59,7 @@ io.sockets.on("connection", function(socket) {
         })();
       }, 2500);
     } else if (direction === "off") {
-      gpio.write(pin, true);
+      gpio.write(pin, false);
     } else {
       // By default we turn off the motors
       gpio.write(pin, true);
