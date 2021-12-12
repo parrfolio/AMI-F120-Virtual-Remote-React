@@ -39,3 +39,7 @@ sudo apt-get clean
 ### Clone HD if you need to upgrade HD card
 https://github.com/billw2/rpi-clone
 sudo rpi-clone sdb
+### Set correct permissions (ownership) so npm can access your (sub)directories with your normal user permissions:
+
+sudo chown -R $USER <directory>
+Most likely: sudo chown -R pi /home/pi/
