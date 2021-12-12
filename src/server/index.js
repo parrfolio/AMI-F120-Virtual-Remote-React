@@ -12,7 +12,7 @@ app.use(express.static(webroot));
 //for routing
 app.get("*", function(req, res) {
   res.sendFile("index.html", {
-    root: path.join(__dirname, "/dist/index.html"),
+    root: path.join(__dirname, "/"),
   });
 });
 
