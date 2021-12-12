@@ -28,7 +28,7 @@ io.sockets.on("connection", function(socket) {
     direction = data;
     if (direction === "on") {
       (async function() {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 2; i++) {
           await sleep(300);
           gpio.write(pin, false, function(err) {
             console.log("on");
@@ -44,7 +44,7 @@ io.sockets.on("connection", function(socket) {
 
       setTimeout(() => {
         (async function() {
-          for (let i = 0; i < 11; i++) {
+          for (let i = 0; i < 10; i++) {
             await sleep(300);
             gpio.write(pin, false, function(err) {
               console.log("on");
