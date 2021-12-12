@@ -9,14 +9,6 @@ const webroot = path.resolve(__dirname, "../../dist");
 
 app.use(express.static(webroot));
 
-//stacktrace logs
-var log = console.log;
-console.log = function() {
-  log.apply(console, arguments);
-  // Print the stack trace
-  console.trace();
-};
-
 //for routing
 app.get("*", function(req, res) {
   res.sendFile("index.html", {
@@ -52,7 +44,7 @@ io.sockets.on("connection", function(socket) {
   let direction = "cancel";
   socket.on("direction", function(data) {
     direction = data;
-    console.log(data);
+    console.log("DATA: ", data);
     let i = 0;
     if (direction === "on") {
       (async function() {
