@@ -64,24 +64,20 @@ io.sockets.on("connection", function(socket) {
 
       // pulse train 2
       (async function() {
-        console.log(i, pulseTrain1);
-        console.log(i == pulseTrain1);
-        if (i == pulseTrain1 - 1) {
-          console.log("=======-- Train 1 DONE --=======");
-          await sleep(pulseTrainDelay);
-          console.log("=======-- Train 2 START --=======");
-          for (i; i < pulseTrain2; i++) {
-            await sleep(pulseSpeed);
-            gpio.write(pin, false, function(err) {
-              console.log("on");
-              if (err) throw err;
-              (async function() {
-                await sleep(pulseDelay);
-                gpio.write(pin, true);
-                console.log("off");
-              })();
-            });
-          }
+        console.log("=======-- 2nd ASYNC FUNCTION --=======");
+        await sleep(pulseTrainDelay);
+        console.log("=======-- Train 2 START --=======");
+        for (i; i < pulseTrain2; i++) {
+          await sleep(pulseSpeed);
+          gpio.write(pin, false, function(err) {
+            console.log("on");
+            if (err) throw err;
+            (async function() {
+              await sleep(pulseDelay);
+              gpio.write(pin, true);
+              console.log("off");
+            })();
+          });
         }
       })();
     } else if (direction === "off") {
