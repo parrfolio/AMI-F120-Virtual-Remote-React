@@ -29,13 +29,13 @@ io.sockets.on("connection", function(socket) {
     if (direction === "on") {
       (async function() {
         for (let i = 0; i < 2; i++) {
-          await sleep(1000);
+          await sleep(300);
           gpio.write(pin, true, function(err) {
-            console.log(direction);
+            console.log("on");
             if (err) throw err;
             setTimeout(() => {
               gpio.write(pin, false);
-              console.log(direction);
+              console.log("off");
             }, 200);
           });
         }
@@ -43,18 +43,18 @@ io.sockets.on("connection", function(socket) {
       setTimeout(() => {
         (async function() {
           for (let i = 0; i < 10; i++) {
-            await sleep(1000);
+            await sleep(300);
             gpio.write(pin, true, function(err) {
-              console.log(direction);
+              console.log("on");
               if (err) throw err;
               setTimeout(() => {
                 gpio.write(pin, false);
-                console.log(direction);
+                console.log("off");
               }, 200);
             });
           }
         })();
-      }, 3000);
+      }, 2500);
     } else if (direction === "off") {
       gpio.write(pin, true);
     } else {
