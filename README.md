@@ -35,3 +35,7 @@ sudo netstat -tlnp
 ### Set of commands to purge unneeded package files:
 sudo apt-get autoremove
 sudo apt-get clean
+
+### Clone HD if you need to upgrade HD card
+https://github.com/billw2/rpi-clone
+sudo rpi-clone sdb
