@@ -28,33 +28,35 @@ io.sockets.on("connection", function(socket) {
     direction = data;
     if (direction === "on") {
       (async function() {
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 10; i++) {
           await sleep(300);
           gpio.write(pin, true, function(err) {
             console.log("on");
             if (err) throw err;
-            setTimeout(() => {
+            (async function() {
+              await sleep(200);
               gpio.write(pin, false);
               console.log("off");
-            }, 200);
+            })();
           });
         }
       })();
-      setTimeout(() => {
-        (async function() {
-          for (let i = 0; i < 10; i++) {
-            await sleep(300);
-            gpio.write(pin, true, function(err) {
-              console.log("on");
-              if (err) throw err;
-              setTimeout(() => {
-                gpio.write(pin, false);
-                console.log("off");
-              }, 200);
-            });
-          }
-        })();
-      }, 2500);
+
+      (async function() {
+        await sleep(2500);
+        for (let i = 0; i < 10; i++) {
+          await sleep(300);
+          gpio.write(pin, true, function(err) {
+            console.log("on");
+            if (err) throw err;
+            (async function() {
+              await sleep(200);
+              gpio.write(pin, false);
+              console.log("off");
+            })();
+          });
+        }
+      })();
     } else if (direction === "off") {
       gpio.write(pin, true);
     } else {
