@@ -46,7 +46,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       (async function() {
         console.log("=======-- Train 1 START --=======");
-        for (i; i < data.ptrains.ptrain1; i++) {
+        for (i; i < data.ptrains[0]; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
             // console.log("on");
@@ -64,7 +64,7 @@ io.sockets.on("connection", function(socket) {
       (async function() {
         await sleep(pulseTrainDelay);
         console.log("=======-- Train 2 START --=======");
-        for (i; i < data.ptrains.ptrain2; i++) {
+        for (i; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
             // console.log("on");

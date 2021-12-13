@@ -60,35 +60,37 @@ export const UserHome = (props, state) => {
   //     return <div key={index}></div>;
   //   });
 
+  const { jukebox } = props;
+  console.log(props);
+  const jukebox_data = jukebox.map((selection, index) => {
+    return (
+      <div
+        key={selection.id}
+        className={followedClass}
+        onClick={(e: Event) => {
+          console.log("turned it on");
+          socket.emit("direction", selection.select, (data) => {
+            //console.log(data);
+          });
+        }}
+      >
+        {/* <Slide
+          {...slide}
+          beforeChange={beforeChange}
+          afterChange={afterChange}
+          onResize={onResize}
+        /> */}
+        Selection {selection.id}
+      </div>
+    );
+  });
+
   return loading ? (
     <div>Loading....</div>
   ) : (
     <Fragment>
-      <div>USER HOME! WHAT IS HAPPENING!?</div>
-
-      <div
-        className={followedClass}
-        onClick={(e: Event) => {
-          console.log("turned it on");
-          socket.emit(
-            "direction",
-            {
-              state: "on",
-              selection: 10,
-              ptrains: {
-                ptrain1: 2,
-                ptrain2: 10,
-              },
-            },
-            (data) => {
-              //console.log(data);
-            }
-          );
-        }}
-      >
-        Selection 10
-      </div>
-
+      <div>USER HOME!</div>
+      {jukebox_data}
       <div
         className={followedClass}
         onClick={(e: Event) => {
@@ -98,10 +100,7 @@ export const UserHome = (props, state) => {
             {
               state: "off",
               selection: 0,
-              ptrains: {
-                ptrain1: 0,
-                ptrain2: 0,
-              },
+              ptrains: [2, 10],
             },
             (data) => {
               //console.log(data);
