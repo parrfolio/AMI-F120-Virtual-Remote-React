@@ -25,8 +25,6 @@ http.listen(PORT, () => {
 //pulse train selections=
 //selection 10
 const pin = 32;
-const pulseTrain1 = 2;
-const pulseTrain2 = 10;
 
 //pulse speed settings
 const pulseSpeed = 200;
@@ -41,15 +39,14 @@ const sleep = (milliseconds) => {
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
-  let direction = "cancel";
   socket.on("direction", function(data) {
-    direction = data;
     console.log("DATA: ", data);
+    console.log("Selection", data.selection);
     let i = 0;
-    if (direction === "on") {
+    if (data.state === "on") {
       (async function() {
         console.log("=======-- Train 1 START --=======");
-        for (i; i < pulseTrain1; i++) {
+        for (i; i < data.ptrains.ptrain1; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
             // console.log("on");
@@ -67,7 +64,7 @@ io.sockets.on("connection", function(socket) {
       (async function() {
         await sleep(pulseTrainDelay);
         console.log("=======-- Train 2 START --=======");
-        for (i; i < pulseTrain2; i++) {
+        for (i; i < data.ptrains.ptrain2; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
             // console.log("on");
@@ -80,7 +77,7 @@ io.sockets.on("connection", function(socket) {
           });
         }
       })();
-    } else if (direction === "off") {
+    } else if (data.state === "off") {
       gpio.write(pin, true);
     } else {
       // By default we turn off the motors

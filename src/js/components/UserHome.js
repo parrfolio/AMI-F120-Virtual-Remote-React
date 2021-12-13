@@ -70,9 +70,20 @@ export const UserHome = (props, state) => {
         className={followedClass}
         onClick={(e: Event) => {
           console.log("turned it on");
-          socket.emit("direction", "on", (data) => {
-            //console.log(data);
-          });
+          socket.emit(
+            "direction",
+            {
+              state: "on",
+              selection: 10,
+              ptrains: {
+                ptrain1: 2,
+                ptrain2: 10,
+              },
+            },
+            (data) => {
+              //console.log(data);
+            }
+          );
         }}
       >
         Selection 10
@@ -82,9 +93,20 @@ export const UserHome = (props, state) => {
         className={followedClass}
         onClick={(e: Event) => {
           console.log("turned it off");
-          socket.emit("direction", "off", (data) => {
-            //console.log(data);
-          });
+          socket.emit(
+            "direction",
+            {
+              state: "off",
+              selection: 0,
+              ptrains: {
+                ptrain1: 0,
+                ptrain2: 0,
+              },
+            },
+            (data) => {
+              //console.log(data);
+            }
+          );
         }}
       >
         Stop
