@@ -42,6 +42,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
+    console.log("===-- SELECTION --===", data.selection);
     let i = 0;
     if (data.state === "on") {
       (async function() {
@@ -49,12 +50,12 @@ io.sockets.on("connection", function(socket) {
         for (i; i < data.ptrains[0]; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
-            // console.log("on");
+            console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(pulseDelay);
               gpio.write(pin, true);
-              //   console.log("off");
+              console.log("off");
             })();
           });
         }
@@ -67,12 +68,12 @@ io.sockets.on("connection", function(socket) {
         for (i; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
           gpio.write(pin, false, function(err) {
-            // console.log("on");
+            console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(pulseDelay);
               gpio.write(pin, true);
-              //   console.log("off");
+              console.log("off");
             })();
           });
         }
