@@ -100,7 +100,7 @@ export const UserHome = (props, state) => {
             {
               state: "off",
               selection: 0,
-              ptrains: [2, 10],
+              ptrains: [0, 0],
             },
             (data) => {
               //console.log(data);
