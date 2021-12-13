@@ -43,6 +43,11 @@ io.sockets.on("connection", function(socket) {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
     console.log("===-- SELECTION --===", data.selection);
+    console.log(
+      "===-- Pulse Train Rel --===",
+      data.ptrains[0],
+      data.ptrains[1]
+    );
     let i = 0;
     if (data.state === "on") {
       (async function() {
