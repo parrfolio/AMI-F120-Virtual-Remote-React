@@ -27,9 +27,9 @@ http.listen(PORT, () => {
 const pin = 32;
 
 //pulse speed settings
-const pulseSpeed = 200;
-const pulseDelay = 100;
-const pulseTrainDelay = 1500;
+const pulseSpeed = 100;
+const pulseDelay = 50;
+const pulseTrainDelay = 800;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
