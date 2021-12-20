@@ -54,12 +54,12 @@ io.sockets.on("connection", function(socket) {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.ptrains[0]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(pin, false, function(err) {
+          gpio.write(pin, true, function(err) {
             console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(pulseDelay);
-              gpio.write(pin, true);
+              gpio.write(pin, false);
               console.log("off");
             })();
           });
@@ -72,22 +72,22 @@ io.sockets.on("connection", function(socket) {
         console.log("=======-- Train 2 START --=======");
         for (let i = 0; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(pin, false, function(err) {
+          gpio.write(pin, true, function(err) {
             console.log("on");
             if (err) throw err;
             (async function() {
               await sleep(pulseDelay);
-              gpio.write(pin, true);
+              gpio.write(pin, false);
               console.log("off");
             })();
           });
         }
       })();
     } else if (data.state === "off") {
-      gpio.write(pin, true);
+      gpio.write(pin, false);
     } else {
       // By default we turn off the motors
-      gpio.write(pin, true);
+      gpio.write(pin, false);
     }
   });
 });
