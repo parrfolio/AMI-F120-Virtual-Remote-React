@@ -91,7 +91,7 @@ export const UserHome = (props, state) => {
     <Fragment>
       <div>USER HOME!</div>
       {jukebox_data}
-      <div
+      {/* <div
         className={followedClass}
         onClick={(e: Event) => {
           console.log("turned it off");
@@ -109,7 +109,7 @@ export const UserHome = (props, state) => {
         }}
       >
         Stop
-      </div>
+      </div> */}
       <Link to="/about">About</Link>
     </Fragment>
   );
