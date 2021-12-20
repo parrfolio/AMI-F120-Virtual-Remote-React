@@ -29,10 +29,10 @@ const pin = 32;
 //pulse speed settings
 const pulseSpeed = 70;
 const pulseDelay = 30;
-const pulseTrainDelay = 400;
+const pulseTrainDelay = 300;
 
-// const pulseSpeed = 120;
-// const pulseDelay = 70;
+// const pulseSpeed = 70;
+// const pulseDelay = 30;
 // const pulseTrainDelay = 400;
 
 gpio.setup(pin, gpio.DIR_OUT);
