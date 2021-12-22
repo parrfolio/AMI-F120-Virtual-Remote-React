@@ -36,6 +36,7 @@ const pulseTrainDelay = 1400;
 // const pulseDelay = 33;
 // const pulseTrainDelay = 130;
 
+//working good-ish
 // const pulseSpeed = 70;
 // const pulseDelay = 30;
 // const pulseTrainDelay = 400;
