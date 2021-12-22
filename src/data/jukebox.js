@@ -31,6 +31,16 @@ const jukebox_data = {
       },
     },
     {
+      id: 61,
+      songTitle: "foo bar",
+      side: "A",
+      select: {
+        state: "on",
+        selection: 61,
+        ptrains: [5, 1],
+      },
+    },
+    {
       id: 71,
       songTitle: "foo bar",
       side: "A",
