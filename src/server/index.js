@@ -29,7 +29,7 @@ const pin = 32;
 // pulse speed settings
 const pulseSpeed = 70;
 const pulseDelay = 30;
-const pulseTrainDelay = 500;
+const pulseTrainDelay = 600;
 
 //according to the manual
 // const pulseSpeed = 43;
