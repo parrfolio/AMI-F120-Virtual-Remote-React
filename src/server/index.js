@@ -27,8 +27,8 @@ http.listen(PORT, () => {
 const pin = 32;
 
 // pulse speed settings
-const pulseSpeed = 63;
-const pulseDelay = 33;
+const pulseSpeed = 70;
+const pulseDelay = 30;
 const pulseTrainDelay = 400;
 
 //according to the manual
