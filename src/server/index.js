@@ -23,7 +23,6 @@ http.listen(PORT, () => {
 });
 
 //pulse train selections=
-//selection 10
 const pin = 32;
 
 // pulse speed settings
@@ -36,10 +35,10 @@ const pulseTrainDelay = 600;
 // const pulseDelay = 33;
 // const pulseTrainDelay = 130;
 
-//working good-ish
+//working!
 // const pulseSpeed = 70;
 // const pulseDelay = 30;
-// const pulseTrainDelay = 400;
+// const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
