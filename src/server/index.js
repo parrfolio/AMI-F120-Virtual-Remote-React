@@ -28,7 +28,6 @@ const pin = 32;
 // pulse speed settings
 const pulseSpeed = 70;
 const pulseDelay = 30;
-const pulseTrainDelay = 600;
 
 //according to the manual
 // const pulseSpeed = 43;
@@ -49,6 +48,7 @@ const sleep = (milliseconds) => {
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
+    
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
     console.log("===-- SELECTION --===", data.selection);
@@ -77,7 +77,7 @@ io.sockets.on("connection", function(socket) {
 
       // pulse train 2
       (async function() {
-        await sleep(pulseTrainDelay);
+        await sleep(data.ptrainDelay);
         console.log("=======-- Train 2 START --=======");
         for (let i = 0; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
@@ -91,7 +91,7 @@ io.sockets.on("connection", function(socket) {
             })();
           });
         }
-      })();
+      })();data
     } else if (data.state === "off") {
       gpio.write(pin, false);
     } else {
