@@ -32,8 +32,8 @@ dd {
 
 html, body {
   height:100%;
-  color: ${props => `${props.theme.textColor}`}
-  background-color: ${props => `${props.theme.backgroundColor}`};
+  color: ${(props) => `${props.theme.textColor}`};
+  background-color: ${(props) => `${props.theme.backgroundColor}`};
 }
 
 body {
@@ -46,7 +46,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: 'liga','kern';
     font-size:10px;
+    font-family: ${(props) => props.theme.primaryFont};
     ${({ theme }) => theme.mamabear`font-size:8px; overflow-y:hidden;`}
+    
 
   
   }

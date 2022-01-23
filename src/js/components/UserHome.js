@@ -4,6 +4,16 @@ import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
 
 // import Chevron from "../../fonts/chevron.js";
+
+const Block = styled.div`
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  position: relative;
+  width: 100%;
+  ${({ theme }) => theme.mamabear`margin-left:-5%`}
+`;
+
 export const UserHome = (props, state) => {
   const [followedClass, setFollowedClass] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,10 +37,6 @@ export const UserHome = (props, state) => {
     socket.on("disconnect", () => {
       setSocketConnected(socket.connected);
     });
-
-    // socket.on("getDate", (data) => {
-    //   setDt(data);
-    // });
   }, [socket]);
 
   useEffect((e) => {
@@ -50,16 +56,6 @@ export const UserHome = (props, state) => {
   //   }
   // };
 
-  // // subscribe to socket date event
-  // const subscribeToDateEvent = (interval = 1000) => {
-  //   socket.emit("subscribeToDateEvent", interval);
-  // };
-
-  //   const { data } = props;
-  //   const slides = data.map((slide, index) => {
-  //     return <div key={index}></div>;
-  //   });
-
   const { jukebox } = props;
   console.log(props);
   const jukebox_data = jukebox.map((selection, index) => {
@@ -74,13 +70,7 @@ export const UserHome = (props, state) => {
           });
         }}
       >
-        {/* <Slide
-          {...slide}
-          beforeChange={beforeChange}
-          afterChange={afterChange}
-          onResize={onResize}
-        /> */}
-        Selection {selection.id}
+        Selection {selection.id} - {selection.songTitle}
       </div>
     );
   });
@@ -89,8 +79,7 @@ export const UserHome = (props, state) => {
     <div>Loading....</div>
   ) : (
     <Fragment>
-      <div>USER HOME!</div>
-      {jukebox_data}
+      <Block>{jukebox_data}</Block>
       <div
         className={followedClass}
         onClick={(e: Event) => {

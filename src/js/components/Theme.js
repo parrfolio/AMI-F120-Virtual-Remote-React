@@ -6,14 +6,10 @@ const Theme = ({ children }) => (
     theme={{
       primaryFont: "SFProDisplayRegular",
       secondaryFont: "SFProDisplayBold",
-      textColor: "#555",
-      primaryColor: "#00A9E6",
-      secondaryColor: "#FFAA00",
-      fontSize: { xsm: ".8em", sm: "1em", md: "1.5em", lg: "2em" },
-      backgroundColor: "#fff",
-      borderColor: "#777",
-      linkColor: "red",
-      ...media
+      textColor: "#333",
+      backgroundColor: "#900",
+      borderColor: "#333",
+      ...media,
     }}
   >
     {children}
