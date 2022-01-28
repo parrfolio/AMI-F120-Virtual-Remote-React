@@ -23,7 +23,7 @@ http.listen(PORT, () => {
 });
 
 //pulse train selections=
-const pin = 18;
+const pin = 32;
 
 // pulse speed settings
 const pulseSpeed = 70;
