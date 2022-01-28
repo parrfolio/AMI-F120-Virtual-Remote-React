@@ -122,7 +122,7 @@ io.sockets.on("connection", function(socket) {
 
       const colorArray = channel.array;
       for (let i = 0; i < channel.count; i++) {
-        console.log(colorsArray[i]);
+        console.log(colorArray[i]);
         colorArray[i] = 0xffcc22;
       }
       ws281x.render();
