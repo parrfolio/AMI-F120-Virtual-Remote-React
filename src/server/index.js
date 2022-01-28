@@ -43,7 +43,6 @@ const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
-gpio.setup(18, gpio.DIR_IN, readInput);
 
 //lights!
 // const lightpin = 18;
@@ -135,6 +134,7 @@ io.sockets.on("connection", function(socket) {
           console.log("The value is " + value);
         });
       }
+      gpio.setup(18, gpio.DIR_IN, readInput);
     }
   });
 });
