@@ -23,7 +23,7 @@ http.listen(PORT, () => {
 });
 
 //pulse train selections=
-const pin = 32;
+const pin = 18;
 
 // pulse speed settings
 const pulseSpeed = 70;
@@ -48,7 +48,6 @@ const sleep = (milliseconds) => {
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
-    
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
     console.log("===-- SELECTION --===", data.selection);
@@ -91,7 +90,8 @@ io.sockets.on("connection", function(socket) {
             })();
           });
         }
-      })();data
+      })();
+      data;
     } else if (data.state === "off") {
       gpio.write(pin, false);
     } else {
