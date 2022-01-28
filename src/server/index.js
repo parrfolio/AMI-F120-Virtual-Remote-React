@@ -8,6 +8,8 @@ const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("rpi-ws281x-native");
 
+const channel = ws281x(300, { stripType: "ws2812" });
+
 app.use(express.static(webroot));
 
 //for routing
@@ -105,19 +107,24 @@ io.sockets.on("connection", function(socket) {
     }
   });
   socket.on("lights", function(data) {
-    const options = {
-      dma: 10,
-      freq: 800000,
-      gpio: 18,
-      invert: false,
-      brightness: 255,
-      stripType: ws281x.stripType.WS2812,
-    };
-
-    const channel = ws281x(20, options);
-    const colors = channel.array;
+    console.log("Lights State", data.state);
     if (data.state === "on") {
-      colors[42] = 0xffcc22;
+      const options = {
+        dma: 10,
+        freq: 800000,
+        gpio: 18,
+        invert: false,
+        brightness: 255,
+        stripType: ws281x.stripType.WS2812,
+      };
+      const pixles = 300;
+      const channel = ws281x(pixles, options);
+
+      const colorArray = channel.array;
+      for (let i = 0; i < channel.count; i++) {
+        console.log(colorsArray[i]);
+        colorsArray[i] = 0xffcc22;
+      }
       ws281x.render();
     }
   });

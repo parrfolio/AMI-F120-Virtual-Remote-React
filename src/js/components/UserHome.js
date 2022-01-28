@@ -114,7 +114,7 @@ export const UserHome = (props, state) => {
           );
         }}
       >
-        Stop
+        Lights
       </div>
       <Link to="/about">About</Link>
     </Fragment>
