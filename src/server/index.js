@@ -117,7 +117,7 @@ io.sockets.on("connection", function(socket) {
         brightness: 255,
         stripType: ws281x.stripType.WS2812,
       };
-      const pixles = 300;
+      const pixles = 60;
       const channel = ws281x(pixles, options);
       const colorArray = channel.array;
 
