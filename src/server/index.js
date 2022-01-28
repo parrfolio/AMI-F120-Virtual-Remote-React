@@ -6,6 +6,7 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
+const ws281x = require("rpi-ws281x-native");
 
 app.use(express.static(webroot));
 
@@ -40,6 +41,10 @@ const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
+
+//lights!
+// const lightpin = 18;
+// gpio.setup(lightpin, gpio.DIR_OUT);
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -97,6 +102,23 @@ io.sockets.on("connection", function(socket) {
     } else {
       // By default we turn off the motors
       gpio.write(pin, false);
+    }
+  });
+  socket.on("lights", function(data) {
+    const options = {
+      dma: 10,
+      freq: 800000,
+      gpio: 18,
+      invert: false,
+      brightness: 255,
+      stripType: ws281x.stripType.WS2812,
+    };
+
+    const channel = ws281x(20, options);
+    const colors = channel.array;
+    if (data.state === "on") {
+      colors[42] = 0xffcc22;
+      ws281x.render();
     }
   });
 });

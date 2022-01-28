@@ -99,6 +99,23 @@ export const UserHome = (props, state) => {
       >
         Stop
       </div>
+      <div
+        className={followedClass}
+        onClick={(e: Event) => {
+          console.log("lights!!");
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+            },
+            (data) => {
+              //console.log(data);
+            }
+          );
+        }}
+      >
+        Stop
+      </div>
       <Link to="/about">About</Link>
     </Fragment>
   );
