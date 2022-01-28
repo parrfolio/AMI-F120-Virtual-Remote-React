@@ -43,6 +43,7 @@ const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
+gpio.setup(18, gpio.DIR_IN, readInput);
 
 //lights!
 // const lightpin = 18;
@@ -119,13 +120,21 @@ io.sockets.on("connection", function(socket) {
       };
       const pixles = 300;
       const channel = ws281x(pixles, options);
-
       const colorArray = channel.array;
+
+      console.log(channel, colorArray);
       for (let i = 0; i < channel.count; i++) {
-        console.log(colorArray[i]);
         colorArray[i] = 0xffcc22;
       }
       ws281x.render();
+
+      function readInput(err) {
+        if (err) throw err;
+        gpio.read(18, function(err, value) {
+          if (err) throw err;
+          console.log("The value is " + value);
+        });
+      }
     }
   });
 });
