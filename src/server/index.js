@@ -109,32 +109,14 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      const options = {
-        dma: 10,
-        freq: 800000,
-        gpio: 18,
-        invert: false,
-        brightness: 255,
-        stripType: ws281x.stripType.WS2812,
-      };
-      const pixles = 60;
-      const channel = ws281x(pixles, options);
-      const colorArray = channel.array;
+      const channel = ws281x(300, { stripType: "ws2812" });
 
-      console.log(channel, colorArray);
+      const colorArray = channel.array;
       for (let i = 0; i < channel.count; i++) {
         colorArray[i] = 0xffcc22;
       }
+      console.log(colorArray);
       ws281x.render();
-
-      function readInput(err) {
-        if (err) throw err;
-        gpio.read(18, function(err, value) {
-          if (err) throw err;
-          console.log("The value is " + value);
-        });
-      }
-      gpio.setup(18, gpio.DIR_IN, readInput);
     }
   });
 });
