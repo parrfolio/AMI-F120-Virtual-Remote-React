@@ -50,9 +50,13 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-ws281x.configure({
-  leds: 16,
-});
+// ws281x.configure({
+//   leds: 16,
+//   dma: 10,
+//   brightness: 255,
+//   gpio: 18,
+//   stripType: "grb",
+// });
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
