@@ -6,9 +6,9 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
-const ws281x = require("rpi-ws281x-native");
+var ws281x = require("rpi-ws281x");
 
-const channel = ws281x(300, { stripType: "ws2812" });
+ws281x.configure({ leds: 300 });
 
 app.use(express.static(webroot));
 
@@ -109,14 +109,24 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      const channel = ws281x(300, { stripType: "ws2812" });
+      console.log("Lights Clicked On!!!");
+      let pixelConfig = {
+        leds: 300,
+        dma: 10,
+        brightness: 255,
+        gpio: 18,
+        stripType: "grb",
+      };
+      ws281x.configure(pixelConfig);
+      var pixels = new Uint32Array(pixelConfig.leds);
+      var red = 255,
+        green = 0,
+        blue = 0;
+      var color = (red << 16) | (green << 8) | blue;
 
-      const colorArray = channel.array;
-      for (let i = 0; i < channel.count; i++) {
-        colorArray[i] = 0xffcc22;
-      }
-      console.log(colorArray);
-      ws281x.render();
+      for (var i = 0; i < pixelConfig.leds; i++) pixels[i] = color;
+
+      ws281x.render(pixels);
     }
   });
 });

@@ -43,3 +43,9 @@ sudo rpi-clone sdb
 
 sudo chown -R $USER <directory>
 Most likely: sudo chown -R pi /home/pi/
+
+### Lights
+https://github.com/meg768/rpi-ws281x
+Only works with node 10.21.0
+Only works on Raspberry Pi linux and will fail on MacOS
+Use NVM to change
