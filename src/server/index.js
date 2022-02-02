@@ -8,13 +8,51 @@ const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 var ws281x = require("rpi-ws281x");
 
-ws281x.configure({
-  leds: 300,
-  dma: 10,
-  brightness: 255,
-  gpio: 18,
-  stripType: "grb",
-});
+class Example {
+  constructor() {
+    this.config = {};
+
+    // Number of leds in my strip
+    this.config.leds = 300;
+
+    // Use DMA 10 (default 10)
+    this.config.dma = 10;
+
+    // Set full brightness, a value from 0 to 255 (default 255)
+    this.config.brightness = 255;
+
+    // Set the GPIO number to communicate with the Neopixel strip (default 18)
+    this.config.gpio = 18;
+
+    // The RGB sequence may vary on some strips. Valid values
+    // are "rgb", "rbg", "grb", "gbr", "bgr", "brg".
+    // Default is "rgb".
+    // RGBW strips are not currently supported.
+    this.config.stripType = "grb";
+
+    // Configure ws281x
+    ws281x.configure(this.config);
+  }
+
+  run() {
+    // Create a pixel array matching the number of leds.
+    // This must be an instance of Uint32Array.
+    var pixels = new Uint32Array(this.config.leds);
+
+    // Create a fill color with red/green/blue.
+    var red = 255,
+      green = 0,
+      blue = 0;
+    var color = (red << 16) | (green << 8) | blue;
+
+    for (var i = 0; i < this.config.leds; i++) pixels[i] = color;
+
+    // Render to strip
+    ws281x.render(pixels);
+  }
+}
+
+var example = new Example();
 
 app.use(express.static(webroot));
 
@@ -115,21 +153,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      console.log("Lights Clicked On!!!");
-      // Create a pixel array matching the number of leds.
-      // This must be an instance of Uint32Array.
-      var pixels = new Uint32Array(300);
-
-      // Create a fill color with red/green/blue.
-      var red = 255,
-        green = 0,
-        blue = 0;
-      var color = (red << 16) | (green << 8) | blue;
-
-      for (var i = 0; i < 300; i++) pixels[i] = color;
-
-      // Render to strip
-      ws281x.render(pixels);
+      example.run();
     }
   });
 });
