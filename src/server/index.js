@@ -51,7 +51,7 @@ const sleep = (milliseconds) => {
 };
 
 ws281x.configure({
-  leds: 300,
+  leds: 16,
   dma: 10,
   brightness: 255,
   gpio: 18,
