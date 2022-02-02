@@ -8,8 +8,6 @@ const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 var ws281x = require("rpi-ws281x");
 
-ws281x.configure({ leds: 300 });
-
 app.use(express.static(webroot));
 
 //for routing
@@ -51,6 +49,14 @@ gpio.setup(pin, gpio.DIR_OUT);
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
+
+ws281x.configure({
+  leds: 300,
+  dma: 10,
+  brightness: 255,
+  gpio: 18,
+  stripType: "grb",
+});
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
@@ -110,14 +116,7 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
       console.log("Lights Clicked On!!!");
-      let pixelConfig = {
-        leds: 300,
-        dma: 10,
-        brightness: 255,
-        gpio: 18,
-        stripType: "grb",
-      };
-      ws281x.configure(pixelConfig);
+
       var pixels = new Uint32Array(pixelConfig.leds);
       var red = 255,
         green = 0,
