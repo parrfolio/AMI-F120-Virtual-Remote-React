@@ -116,15 +116,19 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
       console.log("Lights Clicked On!!!");
+      // Create a pixel array matching the number of leds.
+      // This must be an instance of Uint32Array.
+      var pixels = new Uint32Array(300);
 
-      var pixels = new Uint32Array(pixelConfig.leds);
+      // Create a fill color with red/green/blue.
       var red = 255,
         green = 0,
         blue = 0;
       var color = (red << 16) | (green << 8) | blue;
 
-      for (var i = 0; i < pixelConfig.leds; i++) pixels[i] = color;
+      for (var i = 0; i < 300; i++) pixels[i] = color;
 
+      // Render to strip
       ws281x.render(pixels);
     }
   });
