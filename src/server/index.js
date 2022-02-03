@@ -61,6 +61,7 @@ const options = {
 };
 
 const channel = ws281x(300, options);
+console.log(channel);
 const colors = channel.array;
 
 //pulse train 1
@@ -121,6 +122,7 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
       colors[42] = 0xffcc22;
+      console.log(colors);
       ws281x.render();
     }
   });

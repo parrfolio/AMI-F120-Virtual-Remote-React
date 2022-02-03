@@ -49,3 +49,6 @@ https://github.com/meg768/rpi-ws281x
 Only works with node 10.21.0
 Only works on Raspberry Pi linux and will fail on MacOS
 Use NVM to change
+
+### Node Library for Lights
+https://github.com/FeBe95/node-rpi-ws281x-native/tree/a705e6826663bf29e18bb6f55e30c9e80c612860
