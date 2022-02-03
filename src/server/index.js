@@ -51,18 +51,19 @@ const sleep = (milliseconds) => {
 };
 
 //lights
-const options = {
-  dma: 10,
-  freq: 800000,
-  gpio: 18,
-  invert: false,
-  brightness: 255,
-  stripType: ws281x.stripType.WS2812,
-};
 
-const channel = ws281x(300, options);
-console.log(channel);
-const colors = channel.array;
+// const options = {
+//   dma: 10,
+//   freq: 800000,
+//   gpio: 18,
+//   invert: false,
+//   brightness: 255,
+//   stripType: ws281x.stripType.WS2812,
+// };
+
+// const channel = ws281x(300, options);
+// console.log(channel);
+// const colors = channel.array;
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
@@ -121,10 +122,31 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      colors[0] = 0xffcc22;
-      console.log(colors);
-      ws281x.reset();
-      ws281x.render();
+      console.log("INSIDE LIGHTS ON!");
+      var NUM_LEDS = parseInt(process.argv[2], 10) || 10,
+        pixelData = new Uint32Array(NUM_LEDS);
+
+      ws281x.init(NUM_LEDS);
+
+      // ---- trap the SIGINT and reset before exit
+      process.on("SIGINT", function() {
+        ws281x.reset();
+        process.nextTick(function() {
+          process.exit(0);
+        });
+      });
+
+      var offset = 0;
+      setInterval(function() {
+        var i = NUM_LEDS;
+        while (i--) {
+          pixelData[i] = 0;
+        }
+        pixelData[offset] = 0xffffff;
+
+        offset = (offset + 1) % NUM_LEDS;
+        ws281x.render(pixelData);
+      }, 100);
     }
   });
 });
