@@ -121,7 +121,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      colors[42] = 0xffcc22;
+      colors[0] = 0xffcc22;
       console.log(colors);
       ws281x.reset();
       ws281x.render();
