@@ -123,6 +123,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       colors[42] = 0xffcc22;
       console.log(colors);
+      ws281x.reset();
       ws281x.render();
     }
   });
