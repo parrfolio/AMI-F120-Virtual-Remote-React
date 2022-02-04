@@ -63,7 +63,7 @@
     "webpack-dev-server": "^3.0.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress",
+    "build": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --progress",
     "dev": "webpack-dev-server --progress --host 0.0.0.0 --content-base dist --colors --inline",
     "start": "node src/server/index.js",
     "flow": "flow",
