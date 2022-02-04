@@ -133,6 +133,7 @@ io.sockets.on("connection", function(socket) {
       }
 
       ws281x.render();
+      console.log(ws281x);
     }
   });
 });
