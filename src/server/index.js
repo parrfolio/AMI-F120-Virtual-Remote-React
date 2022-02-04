@@ -7,7 +7,6 @@ const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-const { write } = require("fs");
 
 app.use(express.static(webroot));
 
@@ -41,12 +40,7 @@ const pulseDelay = 30;
 // const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
-gpio.setup(pin, gpio.DIR_OUT, writeToPin);
-const writeToPin = () => {
-  gpio.write(pin, true, function(err) {
-    console.log(err);
-  });
-};
+gpio.setup(pin, gpio.DIR_OUT);
 
 //lights!
 // const lightpin = 18;
@@ -70,10 +64,6 @@ const sleep = (milliseconds) => {
 // const channel = ws281x(300, options);
 // console.log(channel);
 // const colors = channel.array;
-
-const channel = ws281x(300, { stripType: "ws2812" });
-
-const colorArray = channel.array;
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
@@ -132,14 +122,24 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      console.log("lights on!");
+      (async function() {
+        await 2000;
+        const options = {
+          dma: 10,
+          freq: 800000,
+          gpio: 18,
+          invert: false,
+          brightness: 255,
+          stripType: ws281x.stripType.WS2812,
+        };
 
-      for (let i = 0; i < channel.count; i++) {
-        colorArray[i] = 0xffcc22;
-      }
+        const channel = ws281x(60, options);
+        const colors = channel.array;
 
-      ws281x.render();
-      console.log(ws281x);
+        // update color-values
+        colors[42] = 0xffcc22;
+        ws281x.render();
+      })();
     }
   });
 });
