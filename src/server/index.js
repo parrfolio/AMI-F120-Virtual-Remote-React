@@ -134,6 +134,7 @@ io.sockets.on("connection", function(socket) {
         };
 
         const channel = ws281x(60, options);
+        console.log(channel);
         const colors = channel.array;
 
         // update color-values
