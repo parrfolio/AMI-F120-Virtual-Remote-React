@@ -65,6 +65,10 @@ const sleep = (milliseconds) => {
 // console.log(channel);
 // const colors = channel.array;
 
+const channel = ws281x(300, { stripType: "ws2812" });
+
+const colorArray = channel.array;
+
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
@@ -123,9 +127,7 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
       console.log("lights on!");
-      const channel = ws281x(300, { stripType: "ws2812" });
 
-      const colorArray = channel.array;
       for (let i = 0; i < channel.count; i++) {
         colorArray[i] = 0xffcc22;
       }
