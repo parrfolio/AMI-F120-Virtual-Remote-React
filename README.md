@@ -52,3 +52,10 @@ Use NVM to change
 
 ### Node Library for Lights
 https://github.com/FeBe95/node-rpi-ws281x-native/tree/a705e6826663bf29e18bb6f55e30c9e80c612860
+
+### NPM Commands
+npm cache clean --force
+npm cache verify
+
+### NVM Commands
+https://heynode.com/tutorial/install-nodejs-locally-nvm/
