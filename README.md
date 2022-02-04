@@ -51,6 +51,9 @@ Only works on Raspberry Pi linux and will fail on MacOS
 Use NVM to change
 
 ### Node Library for Lights
+
+Trying this one now:https://github.com/gbkwiatt/node-rpi-ws281x-native
+
 https://github.com/FeBe95/node-rpi-ws281x-native/tree/a705e6826663bf29e18bb6f55e30c9e80c612860
 
 ### NPM Commands
