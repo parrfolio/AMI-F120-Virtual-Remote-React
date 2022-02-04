@@ -7,6 +7,7 @@ const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+const { write } = require("fs");
 
 app.use(express.static(webroot));
 
@@ -40,7 +41,12 @@ const pulseDelay = 30;
 // const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
-gpio.setup(pin, gpio.DIR_OUT);
+gpio.setup(pin, gpio.DIR_OUT, writeToPin);
+const writeToPin = () => {
+  gpio.write(pin, true, function(err) {
+    console.log(err);
+  });
+};
 
 //lights!
 // const lightpin = 18;
