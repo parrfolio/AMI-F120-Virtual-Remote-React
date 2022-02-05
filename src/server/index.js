@@ -41,6 +41,7 @@ const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
+gpio.setup(18, gpio.DIR_IN, readInput);
 
 //lights!
 // const lightpin = 18;
@@ -140,6 +141,11 @@ io.sockets.on("connection", function(socket) {
         // update color-values
         colors[42] = 0xffcc22;
         ws281x.render();
+        if (err) throw err;
+        gpio.read(18, function(err, value) {
+          if (err) throw err;
+          console.log("The value is " + value);
+        });
       })();
     }
   });
