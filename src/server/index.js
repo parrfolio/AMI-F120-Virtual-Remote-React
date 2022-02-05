@@ -41,14 +41,7 @@ const pulseDelay = 30;
 // const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
-gpio.setup(18, gpio.DIR_IN, readInput);
-function readInput(err) {
-  if (err) throw err;
-  gpio.read(7, function(err, value) {
-    if (err) throw err;
-    console.log("The value is " + value);
-  });
-}
+
 //lights!
 // const lightpin = 18;
 // gpio.setup(lightpin, gpio.DIR_OUT);
@@ -129,25 +122,21 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      (async function() {
-        await 2000;
-        const options = {
-          dma: 10,
-          freq: 800000,
-          gpio: 18,
-          invert: false,
-          brightness: 255,
-          stripType: ws281x.stripType.WS2812,
-        };
+      const options = {
+        dma: 10,
+        freq: 800000,
+        gpio: 18,
+        invert: false,
+        brightness: 255,
+        stripType: ws281x.stripType.WS2812,
+      };
 
-        const channel = ws281x(60, options);
-        console.log(channel);
-        const colors = channel.array;
+      const channel = ws281x(60, options);
+      const colors = channel.array;
 
-        // update color-values
-        colors[42] = 0xffcc22;
-        ws281x.render();
-      })();
+      // update color-values
+      colors[42] = 0xffcc22;
+      ws281x.render();
     }
   });
 });
