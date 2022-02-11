@@ -6,27 +6,20 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
-// const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
-var ParseStream = require("openpixelcontrol-stream").OpcParseStream,
-  net = require("net"),
-  ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+const NUM_LEDS = parseInt(process.argv[2], 10) || 10,
+  pixelData = new Uint32Array(NUM_LEDS);
 
-var server = net.createServer(function(conn) {
-  var parser = new ParseStream({
-    channel: 1,
-    dataFormat: ParseStream.DataFormat.UINT32_ARRAY,
+ws281x.init(NUM_LEDS);
+
+// ---- trap the SIGINT and reset before exit
+process.on("SIGINT", function() {
+  ws281x.reset();
+  process.nextTick(function() {
+    process.exit(0);
   });
-
-  parser.on("setpixelcolors", function(data) {
-    ws281x.render(data);
-  });
-
-  conn.pipe(parser);
 });
-
-ws281x.init(100);
-server.listen(7890);
 
 app.use(express.static(webroot));
 
@@ -143,6 +136,20 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
+      let offset = 0;
+      setInterval(function() {
+        let i = NUM_LEDS;
+        while (i--) {
+          pixelData[i] = 0;
+        }
+        pixelData[offset] = 0xffffff;
+
+        offset = (offset + 1) % NUM_LEDS;
+        ws281x.render(pixelData);
+        console.log("interval", pixelData);
+      }, 100);
+
+      console.log("Press <ctrl>+C to exit.");
     }
   });
 });

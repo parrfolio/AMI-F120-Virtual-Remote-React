@@ -56,33 +56,6 @@ export const UserHome = (props, state) => {
   //   }
   // };
 
-  var ClientStream = require("openpixelcontrol-stream").OpcClientStream,
-    net = require("net");
-
-  var NUM_LEDS = 100,
-    OPC_CHANNEL = 0;
-
-  var client = new ClientStream();
-
-  // connect to openpixelcontrol-server at `192.168.1.42:7890`
-  var socketPipe = net.createConnection(7890, "192.168.135.204", function() {
-    client.pipe(socketPipe);
-
-    run();
-  });
-
-  function run() {
-    // create a typed-array for color-data
-    var data = new Uint32Array(NUM_LEDS);
-
-    // setup an animation-loop at 10FPS
-    setInterval(function() {
-      // ... update colors in `data` ...
-
-      client.setPixelColors(OPC_CHANNEL, data);
-    }, 100);
-  }
-
   const { jukebox } = props;
   console.log(props);
   const jukebox_data = jukebox.map((selection, index) => {
