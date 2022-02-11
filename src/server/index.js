@@ -6,7 +6,8 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
-import Driver from "rpi-ws281x-led";
+
+const { Driver } = require("rpi-ws281x-led");
 const driver = new Driver({
   freq: 800000,
   channels: [
