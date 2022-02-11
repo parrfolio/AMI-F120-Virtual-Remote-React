@@ -136,7 +136,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      const offset = 0;
+      let offset = 0;
       setInterval(function() {
         let i = NUM_LEDS;
         while (i--) {
