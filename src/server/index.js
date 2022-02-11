@@ -6,27 +6,20 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
+import Driver from "rpi-ws281x-led";
 
-const { Driver } = require("rpi-ws281x-led");
-const driver = new Driver({
-  freq: 800000,
-  channels: [
-    {
-      gpio: 18,
-      count: 100,
-      type: StripType.WS2812_STRIP,
-      brightness: 64,
-    },
-    {
-      gpio: 13,
-      count: 200,
-      type: StripType.WS2811_STRIP_RGB,
-      brightness: 255,
-    },
-  ],
+const NUM_LEDS = parseInt(process.argv[2], 10) || 10,
+  pixelData = new Uint32Array(NUM_LEDS);
+
+ws281x.init(NUM_LEDS);
+
+// ---- trap the SIGINT and reset before exit
+process.on("SIGINT", function() {
+  ws281x.reset();
+  process.nextTick(function() {
+    process.exit(0);
+  });
 });
-
-const channel1 = driver.channels[0];
 
 app.use(express.static(webroot));
 
@@ -143,12 +136,19 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      channel1.leds[50] = 0xffff00;
-      channel1.brightness = 255;
-      channel1.render(); // OR driver.render();
+      let offset = 0;
+      setInterval(function() {
+        let i = NUM_LEDS;
+        while (i--) {
+          pixelData[i] = 0;
+        }
+        pixelData[offset] = 0xffffff;
 
-      channel1.leds = new Uint32Array(100).fill(0x000000);
-      channel1.render();
+        offset = (offset + 1) % NUM_LEDS;
+        ws281x.render(pixelData);
+      }, 100);
+
+      console.log("Press <ctrl>+C to exit.");
     }
   });
 });
