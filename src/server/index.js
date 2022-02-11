@@ -138,7 +138,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       const offset = 0;
       setInterval(function() {
-        const i = NUM_LEDS;
+        let i = NUM_LEDS;
         while (i--) {
           pixelData[i] = 0;
         }
