@@ -119,23 +119,17 @@ io.sockets.on("connection", function(socket) {
       gpio.write(pin, false);
     }
   });
+
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      const options = {
-        dma: 10,
-        freq: 800000,
-        gpio: 18,
-        invert: false,
-        brightness: 255,
-        stripType: ws281x.stripType.WS2812,
-      };
+      const channel = ws281x(100, { stripType: "ws2812" });
 
-      const channel = ws281x(60, options);
-      const colors = channel.array;
+      const colorsArray = channel.array;
+      for (let i = 0; i < channel.count; i++) {
+        colorsArray[i] = 0xffcc22;
+      }
 
-      // update color-values
-      colors[42] = 0xffcc22;
       ws281x.render();
     }
   });

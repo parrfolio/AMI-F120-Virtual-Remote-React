@@ -65,3 +65,23 @@ npm cache verify
 
 ### NVM Commands
 https://heynode.com/tutorial/install-nodejs-locally-nvm/
+
+### Troublshooting Lights
+The leds do not light up as expected?
+
+It is important to have common ground for LEDs and RPi. Assure, ground is same for all of them (Thanks to euchkatzl).
+
+Assure to connect the LED strip in the right direction. Little arrows indicate that along the strip (Thanks to euchkatzl).
+
+Assure correct functionality of leds:
+
+cd ~/rpi_ws281x/python/examples vim strandtest.py # Set number of leds, pin, etc. sudo python strandtest.py
+
+The leds should light up now…
+
+Disable the RPis soundcard (since it might interfere with the PMW-channel, sending data to the LEDs. Thanks to ELViTO12 for reporting):
+
+sudo sh -c "echo blacklist snd_bcm2835 >> /etc/modprobe.d/alsa-blacklist.conf";
+sudo reboot;
+
+In case the LEDs are flickering as shown in this video https://www.youtube.com/watch?v=UHxVS8SkXOU (Thanks to oxivanisher), consider the usage of a level-shifter to connect the GPIO-pin of the raspberry to the LED-strip. Further reading: https://github.com/jgarff/rpi_ws281x/issues/127 https://github.com/bk1285/rpi_wordclock/issues/38
