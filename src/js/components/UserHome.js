@@ -65,8 +65,8 @@ export const UserHome = (props, state) => {
   var client = new ClientStream();
 
   // connect to openpixelcontrol-server at `192.168.1.42:7890`
-  var socket = net.createConnection(7890, "192.168.135.204", function() {
-    client.pipe(socket);
+  var socketPipe = net.createConnection(7890, "192.168.135.204", function() {
+    client.pipe(socketPipe);
 
     run();
   });
