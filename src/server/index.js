@@ -7,13 +7,6 @@ const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-const channel = ws281x(100, { stripType: "ws2812" });
-const colorsArray = channel.array;
-for (let i = 0; i < channel.count; i++) {
-  colorsArray[i] = 0xffcc22;
-}
-
-ws281x.render();
 
 app.use(express.static(webroot));
 
@@ -130,7 +123,6 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      ws281x.render();
     }
   });
 });
