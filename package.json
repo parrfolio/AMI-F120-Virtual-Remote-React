@@ -66,7 +66,7 @@
   "scripts": {
     "build": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --progress",
     "dev": "webpack-dev-server --progress --host 0.0.0.0 --content-base dist --colors --inline",
-    "start": "node src/server/index.js",
+    "start": "sudo node src/server/index.js",
     "flow": "flow",
     "linter": "eslint src",
     "bundlesize": "bundlesize",
