@@ -7,19 +7,13 @@ const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+const channel = ws281x(100, { stripType: "ws2812" });
+const colorsArray = channel.array;
+for (let i = 0; i < channel.count; i++) {
+  colorsArray[i] = 0xffcc22;
+}
 
-const NUM_LEDS = parseInt(process.argv[2], 10) || 10,
-  pixelData = new Uint32Array(NUM_LEDS);
-
-ws281x.init(NUM_LEDS);
-
-// ---- trap the SIGINT and reset before exit
-process.on("SIGINT", function() {
-  ws281x.reset();
-  process.nextTick(function() {
-    process.exit(0);
-  });
-});
+ws281x.render();
 
 app.use(express.static(webroot));
 
@@ -136,20 +130,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      let offset = 0;
-      setInterval(function() {
-        let i = NUM_LEDS;
-        while (i--) {
-          pixelData[i] = 0;
-        }
-        pixelData[offset] = 0xffffff;
-
-        offset = (offset + 1) % NUM_LEDS;
-        ws281x.render(pixelData);
-        console.log("interval", pixelData);
-      }, 100);
-
-      console.log("Press <ctrl>+C to exit.");
+      ws281x.render();
     }
   });
 });
