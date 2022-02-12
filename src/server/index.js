@@ -6,7 +6,7 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
-const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+var ws281x = require("rpi-ws281x-native");
 
 const NUM_LEDS = parseInt(process.argv[2], 10) || 10,
   pixelData = new Uint32Array(NUM_LEDS);
