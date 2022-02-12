@@ -123,6 +123,14 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
+      const channel = ws281x(100, { stripType: "ws2812" });
+
+      const colorsArray = channel.array;
+      for (let i = 0; i < channel.count; i++) {
+        colorsArray[i] = 0xffcc22;
+      }
+
+      ws281x.render();
     }
   });
 });
