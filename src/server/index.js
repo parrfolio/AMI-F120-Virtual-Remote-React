@@ -50,21 +50,6 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
-//lights
-
-// const options = {
-//   dma: 10,
-//   freq: 800000,
-//   gpio: 18,
-//   invert: false,
-//   brightness: 255,
-//   stripType: ws281x.stripType.WS2812,
-// };
-
-// const channel = ws281x(300, options);
-// console.log(channel);
-// const colors = channel.array;
-
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
@@ -123,22 +108,44 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
       const options = {
-        dma: 10,
-        freq: 800000,
-        gpio: 18,
-        invert: false,
-        brightness: 255,
-        stripType: ws281x.stripType.WS2812,
+        dma: config.leds.dma,
+        freq: config.leds.freq,
+        channels: [
+          {
+            count: 20,
+            gpio: 18,
+            invert: false,
+            brightness: 255,
+            stripType: ws281x.stripType.WS2812,
+          },
+          {
+            count: 20,
+            gpio: 19,
+            invert: false,
+            brightness: 255,
+            stripType: ws281x.stripType.WS2812,
+          },
+        ],
       };
-      console.log(ws281x(20, options));
-      const channel = ws281x(20, options);
+      // ---- trap the SIGINT and reset before exit
+      process.on("SIGINT", function() {
+        ws281x.reset();
+        log.debug("Reseting Leds on exit...");
+        process.nextTick(function() {
+          process.exit(0);
+        });
+      });
+      const channel = ws281x.init(options);
+      // Rainbow test on channel 1
+      var offset = 0;
+      setInterval(function() {
+        for (var i = 0; i < 20; i++) {
+          channel[1].array[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
 
-      const colors = channel.array;
-
-      // update color-values
-      colors[42] = 0xffcc22;
-      ws281x.render();
-      console.log(ws281x(20, options));
+        ws281x.render();
+      }, 1000 / 30);
     }
   });
 });
