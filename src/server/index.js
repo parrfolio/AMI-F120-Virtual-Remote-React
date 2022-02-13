@@ -130,13 +130,15 @@ io.sockets.on("connection", function(socket) {
         brightness: 255,
         stripType: ws281x.stripType.WS2812,
       };
-
+      console.log(ws281x(20, options));
       const channel = ws281x(20, options);
+
       const colors = channel.array;
 
       // update color-values
       colors[42] = 0xffcc22;
       ws281x.render();
+      console.log(ws281x(20, options));
     }
   });
 });
