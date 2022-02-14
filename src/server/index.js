@@ -7,7 +7,26 @@ const gpio = require("rpi-gpio");
 const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-
+const channels = ws281x.init({
+  dma: 10,
+  freq: 800000,
+  channels: [
+    {
+      count: 20,
+      gpio: 18,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+    {
+      count: 20,
+      gpio: 13,
+      invert: false,
+      brightness: 128,
+      stripType: "sk6812-rgbw",
+    },
+  ],
+});
 app.use(express.static(webroot));
 
 //for routing
@@ -107,45 +126,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      const options = {
-        dma: 5,
-        freq: 800000,
-        channels: [
-          {
-            count: 20,
-            gpio: 18,
-            invert: false,
-            brightness: 255,
-            stripType: ws281x.stripType.WS2812,
-          },
-          {
-            count: 20,
-            gpio: 19,
-            invert: false,
-            brightness: 255,
-            stripType: ws281x.stripType.WS2812,
-          },
-        ],
-      };
-      // ---- trap the SIGINT and reset before exit
-      process.on("SIGINT", function() {
-        ws281x.reset();
-        log.debug("Reseting Leds on exit...");
-        process.nextTick(function() {
-          process.exit(0);
-        });
-      });
-      const channel = ws281x.init(options);
-      // Rainbow test on channel 1
-      var offset = 0;
-      setInterval(function() {
-        for (var i = 0; i < 20; i++) {
-          channel[1].array[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-
-        ws281x.render();
-      }, 1000 / 30);
+      ws281x.render();
     }
   });
 });
