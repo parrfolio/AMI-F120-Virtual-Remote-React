@@ -108,8 +108,8 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
       const options = {
-        dma: config.leds.dma,
-        freq: config.leds.freq,
+        dma: 5,
+        freq: 800000,
         channels: [
           {
             count: 20,
