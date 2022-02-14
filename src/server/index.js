@@ -22,7 +22,6 @@ const channels = ws281x.init({
       count: 20,
       gpio: 13,
       invert: false,
-      brightness: 128,
       stripType: "sk6812-rgbw",
     },
   ],
