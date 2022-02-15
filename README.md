@@ -152,17 +152,28 @@ sudo reboot;
 In case the LEDs are flickering as shown in this video https://www.youtube.com/watch?v=UHxVS8SkXOU (Thanks to oxivanisher), consider the usage of a level-shifter to connect the GPIO-pin of the raspberry to the LED-strip. Further reading: https://github.com/jgarff/rpi_ws281x/issues/127 https://github.com/bk1285/rpi_wordclock/issues/38
 
 
+### Fixing node-rpi-ws281x-native for node 17.5
+ref: https://github.com/ibmtjbot/tjbot/issues/158
 
+//install from package manager in node_modules
+npm install @gbkwiatt/node-rpi-ws281x-native
 
-### Fixing LED Library
-1. pi@raspberrypi:~$ cp -r ~/rpi_ws281x ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/src
-2. 
+//install outside project
+npm install rpi-ws281x --save 
 
+// cd to
+~/node_modules/@gbkwiatt/node-rpi-ws281x-native/src
 
- cd ~/.node-red/nodes/node-red-contrib-tjbot/node_modules/rpi-ws281x-native/src
-# rm -rf rpi_ws281x/
-# git clone --recursive https://github.com/beyondscreen/rpi_ws281x.git
-# cd ~/.node-red/nodes/node-red-contrib-tjbot/node_modules/rpi-ws281x-native
-# node-gyp rebuild
+// delete rpi_ws281x
+rm -rf rpi_ws281x/
+
+// copy 
+cp -r ~/rpi_ws281x ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/src
+
+// cd out to main folder
+cd ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/
+
+// run rebuild
+node-gyp rebuild
 
 
