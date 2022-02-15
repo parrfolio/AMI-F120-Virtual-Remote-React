@@ -110,6 +110,7 @@ io.sockets.on("connection", function(socket) {
       var NUM_LEDS = parseInt(process.argv[2], 10) || 10,
         pixelData = new Uint32Array(NUM_LEDS);
 
+      console.log(NUM_LEDS, pixelData);
       ws281x.init(NUM_LEDS);
 
       // ---- trap the SIGINT and reset before exit
@@ -124,7 +125,7 @@ io.sockets.on("connection", function(socket) {
       var offset = 0;
       setInterval(function() {
         for (var i = 0; i < NUM_LEDS; i++) {
-          console.log(pixelData[i]);
+          //console.log(pixelData[i]);
           pixelData[i] = colorwheel((offset + i) % 256);
         }
 
