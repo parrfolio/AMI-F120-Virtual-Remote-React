@@ -63,6 +63,11 @@ https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-st
 npm cache clean --force
 npm cache verify
 
+
+### Installing Node 
+https://www.instructables.com/Install-Nodejs-and-Npm-on-Raspberry-Pi/
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps
+
 ### NVM Commands
 https://heynode.com/tutorial/install-nodejs-locally-nvm/
 // check version
@@ -145,3 +150,19 @@ sudo sh -c "echo blacklist snd_bcm2835 >> /etc/modprobe.d/alsa-blacklist.conf";
 sudo reboot;
 
 In case the LEDs are flickering as shown in this video https://www.youtube.com/watch?v=UHxVS8SkXOU (Thanks to oxivanisher), consider the usage of a level-shifter to connect the GPIO-pin of the raspberry to the LED-strip. Further reading: https://github.com/jgarff/rpi_ws281x/issues/127 https://github.com/bk1285/rpi_wordclock/issues/38
+
+
+
+
+### Fixing LED Library
+1. pi@raspberrypi:~$ cp -r ~/rpi_ws281x ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/src
+2. 
+
+
+ cd ~/.node-red/nodes/node-red-contrib-tjbot/node_modules/rpi-ws281x-native/src
+# rm -rf rpi_ws281x/
+# git clone --recursive https://github.com/beyondscreen/rpi_ws281x.git
+# cd ~/.node-red/nodes/node-red-contrib-tjbot/node_modules/rpi-ws281x-native
+# node-gyp rebuild
+
+
