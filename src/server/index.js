@@ -110,8 +110,8 @@ io.sockets.on("connection", function(socket) {
       var NUM_LEDS = parseInt(process.argv[2], 10) || 10,
         pixelData = new Uint32Array(NUM_LEDS);
 
-      console.log(NUM_LEDS, pixelData);
       ws281x.init(NUM_LEDS);
+      console.log(ws281x.init(NUM_LEDS));
 
       // ---- trap the SIGINT and reset before exit
       process.on("SIGINT", function() {
