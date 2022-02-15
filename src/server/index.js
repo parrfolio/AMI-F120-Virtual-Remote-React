@@ -109,7 +109,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       const channel = ws281x(100, { stripType: "ws2812" });
 
-      const colorArray = channel.array;
+      const colorsArray = channel.array;
       for (let i = 0; i < channel.count; i++) {
         colorsArray[i] = 0xffcc22;
       }
