@@ -125,6 +125,8 @@ io.sockets.on("connection", function(socket) {
 
       const colorsArray = channel.array;
 
+      let pixelData = new Uint32Array(channel.count);
+
       ws281x.init(channel.count);
 
       var offset = 0;
