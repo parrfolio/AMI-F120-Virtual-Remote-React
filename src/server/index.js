@@ -125,7 +125,7 @@ io.sockets.on("connection", function(socket) {
       }
 
       const channel = ws281x(100, { stripType: "ws2812" });
-      csonlle;
+      console.log(channel.array);
       const colorArray = channel.array;
       let pixelData = new Uint32Array(channel.count);
 
