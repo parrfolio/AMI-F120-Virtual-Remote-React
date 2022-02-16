@@ -109,7 +109,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       const channel = ws281x(100, { stripType: "ws2812" });
       var pixelData = new Uint32Array(channel.count);
-      ws281x.init(NUM_LEDS);
+      ws281x.init(channel.count);
       process.on("SIGINT", function() {
         ws281x.reset();
         process.nextTick(function() {
@@ -119,18 +119,18 @@ io.sockets.on("connection", function(socket) {
       // ---- animation-loop
       var offset = 0;
       setInterval(function() {
-        var i = NUM_LEDS;
+        var i = channel.count;
         while (i--) {
           pixelData[i] = 0;
         }
         pixelData[offset] = 0xffffff;
 
-        offset = (offset + 1) % NUM_LEDS;
+        offset = (offset + 1) % channel.count;
         ws281x.render(pixelData);
       }, 100);
 
       console.log("Press <ctrl>+C to exit.");
-      console.log(NUM_LEDS, pixelData);
+      console.log(channel.count, pixelData);
     }
   });
 });
