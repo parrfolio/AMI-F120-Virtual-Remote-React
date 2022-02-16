@@ -107,6 +107,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
+      let offset = 0;
       const channel = ws281x(100, { stripType: "ws2812" });
 
       const colorsArray = channel.array;
