@@ -114,10 +114,14 @@ io.sockets.on("connection", function(socket) {
 
       (async () => {
         await sleep(1000 / 30);
+
         for (let i = 0; i < channel.count; i++) {
           //colorsArray[i] = 0xffcc22;
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
+
+        offset = (offset + 1) % 256;
+
         ws281x.render(colorsArray);
       })();
 
