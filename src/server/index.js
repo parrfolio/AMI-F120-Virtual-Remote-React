@@ -122,12 +122,12 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("lights", function(data) {
-    console.log("Lights State", data.state);
+    console.log("Lights On", data.state);
     if (data.state === "on") {
       let offset = 0;
       const channel = ws281x(100, { stripType: "ws2812" });
       const colorsArray = channel.array;
-      const interval = setInterval(() => {
+      const rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }

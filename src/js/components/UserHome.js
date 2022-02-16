@@ -40,7 +40,7 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect((e) => {
-    console.log(socket);
+    console.log(e);
     // if (socket) {
 
     // } else {
