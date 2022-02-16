@@ -176,4 +176,8 @@ cd ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/
 // run rebuild
 node-gyp rebuild
 
-
+//anoter potential fix
+$ npm install rpi-ws281x-native@latest
+$ git clone --single-branch --branch raspi4support https://github.com/jimbotel/rpi_ws281x.git
+$ cp -r rpi_ws281x/* node_modules/rpi-ws281x-native/src/rpi_ws281x
+$ npm build node_modules/rpi-ws281x-native
