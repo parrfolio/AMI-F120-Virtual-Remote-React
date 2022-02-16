@@ -43,22 +43,8 @@ const pulseDelay = 30;
 gpio.setup(pin, gpio.DIR_OUT);
 
 //lights!
-let colorwheel = (pos) => {
-  pos = 255 - pos;
-  if (pos < 85) {
-    return rgb2Int(255 - pos * 3, 0, pos * 3);
-  } else if (pos < 170) {
-    pos -= 85;
-    return rgb2Int(0, pos * 3, 255 - pos * 3);
-  } else {
-    pos -= 170;
-    return rgb2Int(pos * 3, 255 - pos * 3, 0);
-  }
-};
-
-let rgb2Int = (r, g, b) => {
-  return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-};
+// const lightpin = 18;
+// gpio.setup(lightpin, gpio.DIR_OUT);
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -121,22 +107,32 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      const channel = ws281x(100, { stripType: "ws2812" });
-
-      const colorsArray = channel.array;
-
-      let pixelData = new Uint32Array(channel.count);
-
-      ws281x.init(channel.count);
-
-      var offset = 0;
-
-      for (var i = 0; i < channel.count; i++) {
-        pixelData[i] = colorwheel((offset + i) % 256);
+      function colorwheel(pos) {
+        pos = 255 - pos;
+        if (pos < 85) {
+          return rgb2Int(255 - pos * 3, 0, pos * 3);
+        } else if (pos < 170) {
+          pos -= 85;
+          return rgb2Int(0, pos * 3, 255 - pos * 3);
+        } else {
+          pos -= 170;
+          return rgb2Int(pos * 3, 255 - pos * 3, 0);
+        }
       }
 
-      offset = (offset + 1) % 256;
-      ws281x.render(pixelData);
+      function rgb2Int(r, g, b) {
+        return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+      }
+
+      const channel = ws281x(100, { stripType: "ws2812" });
+      let offset = 0;
+      const colorsArray = channel.array;
+      for (let i = 0; i < channel.count; i++) {
+        //colorsArray[i] = 0xcc9900;
+        colorwheel((offset + i) % 256);
+      }
+
+      ws281x.render();
     }
   });
 });
