@@ -107,8 +107,8 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      var NUM_LEDS = parseInt(process.argv[2], 10) || 10,
-        pixelData = new Uint32Array(NUM_LEDS);
+      const channel = ws281x(100, { stripType: "ws2812" });
+      var pixelData = new Uint32Array(channel.count);
       ws281x.init(NUM_LEDS);
       process.on("SIGINT", function() {
         ws281x.reset();
