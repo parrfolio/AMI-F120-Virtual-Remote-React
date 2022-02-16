@@ -112,9 +112,7 @@ io.sockets.on("connection", function(socket) {
 
       const colorsArray = channel.array;
 
-      (async () => {
-        await sleep(1000 / 30);
-
+      const interval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           //colorsArray[i] = 0xffcc22;
           colorsArray[i] = colorwheel((offset + i) % 256);
@@ -123,7 +121,7 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
 
         ws281x.render(colorsArray);
-      })();
+      }, 1000 / 30);
 
       function colorwheel(pos) {
         pos = 255 - pos;
