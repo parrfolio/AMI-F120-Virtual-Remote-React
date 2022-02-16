@@ -130,14 +130,13 @@ io.sockets.on("connection", function(socket) {
       ws281x.init(channel.count);
 
       var offset = 0;
-      setInterval(function() {
-        for (var i = 0; i < channel.count; i++) {
-          pixelData[i] = colorwheel((offset + i) % 256);
-        }
 
-        offset = (offset + 1) % 256;
-        ws281x.render(pixelData);
-      }, 1000 / 30);
+      for (var i = 0; i < channel.count; i++) {
+        pixelData[i] = colorwheel((offset + i) % 256);
+      }
+
+      offset = (offset + 1) % 256;
+      ws281x.render(pixelData);
     }
   });
 });
