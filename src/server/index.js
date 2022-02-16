@@ -111,12 +111,15 @@ io.sockets.on("connection", function(socket) {
       const channel = ws281x(100, { stripType: "ws2812" });
 
       const colorsArray = channel.array;
-      for (let i = 0; i < channel.count; i++) {
-        //colorsArray[i] = 0xffcc22;
-        colorsArray[i] = colorwheel((offset + i) % 256);
-      }
 
-      ws281x.render(colorsArray);
+      (async () => {
+        await sleep(1000 / 30);
+        for (let i = 0; i < channel.count; i++) {
+          //colorsArray[i] = 0xffcc22;
+          colorsArray[i] = colorwheel((offset + i) % 256);
+        }
+        ws281x.render(colorsArray);
+      })();
 
       function colorwheel(pos) {
         pos = 255 - pos;
