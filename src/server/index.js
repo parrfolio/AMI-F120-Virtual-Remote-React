@@ -107,32 +107,10 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights State", data.state);
     if (data.state === "on") {
-      function colorwheel(pos) {
-        pos = 255 - pos;
-        if (pos < 85) {
-          return rgb2Int(255 - pos * 3, 0, pos * 3);
-        } else if (pos < 170) {
-          pos -= 85;
-          return rgb2Int(0, pos * 3, 255 - pos * 3);
-        } else {
-          pos -= 170;
-          return rgb2Int(pos * 3, 255 - pos * 3, 0);
-        }
-      }
+      var NUM_LEDS = parseInt(process.argv[2], 10) || 10,
+        pixelData = new Uint32Array(NUM_LEDS);
 
-      function rgb2Int(r, g, b) {
-        return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-      }
-
-      const channel = ws281x(100, { stripType: "ws2812" });
-      let offset = 0;
-      const colorsArray = channel.array;
-      for (let i = 0; i < channel.count; i++) {
-        //colorsArray[i] = 0xcc9900;
-        colorwheel((offset + i) % 256);
-      }
-
-      ws281x.render();
+      console.log(NUM_LEDS, pixelData);
     }
   });
 });
