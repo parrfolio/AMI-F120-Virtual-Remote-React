@@ -158,7 +158,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("lights", function(data) {
-    console.log("Lights Turned On", data.state);
+    console.log("Lights", data.state);
 
     //only when the app terminates the ligts turn off
     process.on("SIGINT", function() {
@@ -177,11 +177,15 @@ io.sockets.on("connection", function(socket) {
         }
         offset = (offset + 1) % 256;
         ws281x.render(colorsArray);
-        if (data.state === "off") {
-          console.log(data.state);
-          console.log("Lights Turned Off");
-        }
       }, 1000 / 30);
+    } else {
+      console.log("Lights", data.state);
+      // clearInterval(rainbowInterval);
+      console.log("BEFORE RESET", colorsArray);
+      ws281x.reset();
+      console.log("AFTER RESET", colorsArray);
+      ws281x.finalize();
+      console.log("AFTER FINALIZE", colorsArray);
     }
   });
 });
