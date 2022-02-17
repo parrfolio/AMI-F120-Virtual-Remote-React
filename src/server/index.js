@@ -177,13 +177,14 @@ io.sockets.on("connection", function(socket) {
         }
         offset = (offset + 1) % 256;
         console.log(colorsArray);
-        if (colorsArray === 0) {
-          clearInterval(rainbowInterval);
-          console.log("interval cleared!");
-          ws281x.finalize(colorsArray);
-        } else {
-          ws281x.render(colorsArray);
-        }
+        // if (colorsArray === 0) {
+        //   clearInterval(rainbowInterval);
+        //   console.log("interval cleared!");
+        //   ws281x.finalize(colorsArray);
+        // } else {
+
+        // }
+        ws281x.render(colorsArray);
       }, 1000 / 30);
     } else {
       console.log("Lights", data.state);
