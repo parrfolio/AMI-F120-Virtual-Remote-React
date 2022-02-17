@@ -179,8 +179,8 @@ io.sockets.on("connection", function(socket) {
 
       console.log("LED COUNT", channel.count);
     } else {
-      clearInterval();
-      //ws281x.reset();
+      //clearInterval();
+      ws281x.reset();
     }
   });
 });
