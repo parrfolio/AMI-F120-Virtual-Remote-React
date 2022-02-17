@@ -87,7 +87,7 @@ const channels = ws281x.init({
 });
 console.log(channels);
 
-const rainbowInterval = null;
+const rainbowInterval = {};
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
