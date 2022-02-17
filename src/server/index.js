@@ -158,6 +158,12 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights On", data.state);
     if (data.state === "on") {
+      process.on("SIGINT", function() {
+        ws281x.reset();
+        process.nextTick(function() {
+          process.exit(0);
+        });
+      });
       let offset = 0;
       //const channel = ws281x(100, { stripType: "ws2812" });
       const channel = channels[0];
@@ -173,16 +179,8 @@ io.sockets.on("connection", function(socket) {
 
       console.log("LED COUNT", channel.count);
     } else {
-      process.on("SIGINT", function() {
-        ws281x.reset();
-        ws281x.finalize();
-
-        process.nextTick(function() {
-          process.exit(0);
-        });
-      });
-
       clearInterval();
+      //ws281x.reset();
     }
   });
 });
