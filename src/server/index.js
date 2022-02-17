@@ -176,6 +176,7 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render(colorsArray);
         if (data.state != "on") {
+          console.log(data.state);
           clearInterval(rainbowInterval);
           ws281x.reset(colorsArray);
           ws281x.finalize(colorsArray);
