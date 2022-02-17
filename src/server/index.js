@@ -156,7 +156,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("lights", function(data) {
-    console.log("Lights On", data.state);
+    console.log("Lights", data.state);
     if (data.state === "on") {
       process.on("SIGINT", function() {
         ws281x.reset();
@@ -169,17 +169,17 @@ io.sockets.on("connection", function(socket) {
       const channel = channels[0];
       const colorsArray = channel.array;
 
-      const rainbowInterval = setInterval(() => {
+      let rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render(colorsArray);
         if (data.state != "on") {
-          console.log(data.state);
+          console.log("Shut down", data.state);
           clearInterval(rainbowInterval);
-          ws281x.reset(colorsArray);
-          ws281x.finalize(colorsArray);
+          ws281x.reset();
+          ws281x.finalize();
         }
       }, 1000 / 30);
       console.log("LED COUNT", channel.count);
