@@ -158,7 +158,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("lights", function(data) {
-    console.log("Lights", data.state);
+    console.log("Lights Turned On", data.state);
 
     //only when the app terminates the ligts turn off
     process.on("SIGINT", function() {
@@ -179,13 +179,9 @@ io.sockets.on("connection", function(socket) {
         ws281x.render(colorsArray);
         if (data.state === "off") {
           console.log(data.state);
+          console.log("Lights Turned Off");
         }
       }, 1000 / 30);
-    } else {
-      console.log("Shut down", data.state);
-      // clearInterval(rainbowInterval);
-      // ws281x.reset();
-      // ws281x.finalize();
     }
   });
 });
