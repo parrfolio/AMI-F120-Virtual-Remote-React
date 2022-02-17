@@ -147,7 +147,7 @@ io.sockets.on("connection", function(socket) {
       });
 
       //const channel = ws281x(100, { stripType: "ws2812" });
-      const channel = channels.channels[0];
+      //const channel = channels.channels[0];
       const colorsArray = channel.array;
 
       const rainbowInterval = setInterval(() => {
