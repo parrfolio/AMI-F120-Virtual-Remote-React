@@ -64,20 +64,6 @@ const rgb2Int = (r, g, b) => {
   return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 };
 
-const channels = ws281x.init({
-  dma: 10,
-  freq: 800000,
-  channels: [
-    {
-      count: 100,
-      gpio: 18,
-      invert: false,
-      brightness: 255,
-      stripType: "ws2812",
-    },
-  ],
-});
-
 // const channels = ws281x.init({
 //   dma: 10,
 //   freq: 800000,
@@ -89,15 +75,29 @@ const channels = ws281x.init({
 //       brightness: 255,
 //       stripType: "ws2812",
 //     },
-//     {
-//       count: 100,
-//       gpio: 13,
-//       invert: false,
-//       brightness: 255,
-//       stripType: "ws2812",
-//     },
 //   ],
 // });
+
+const channels = ws281x.init({
+  dma: 10,
+  freq: 800000,
+  channels: [
+    {
+      count: 100,
+      gpio: 18,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+    {
+      count: 100,
+      gpio: 13,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+  ],
+});
 console.log(channels);
 let offset = 0;
 const channel = channels[0];
@@ -176,17 +176,21 @@ io.sockets.on("connection", function(socket) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.render(colorsArray);
+
+        if (colorsArray[0] == 0) {
+          clearInterval(rainbowInterval);
+          console.log("interval cleared!");
+          ws281x.finalize(colorsArray);
+        } else {
+          ws281x.render(colorsArray);
+        }
       }, 1000 / 30);
     } else {
       console.log("Lights", data.state);
       // clearInterval(rainbowInterval);
       console.log("BEFORE RESET", colorsArray);
       ws281x.reset(colorsArray);
-      ws281x.render(colorsArray);
       console.log("AFTER RESET", colorsArray);
-      ws281x.finalize(colorsArray);
-      console.log("AFTER FINALIZE", colorsArray);
     }
   });
 });
