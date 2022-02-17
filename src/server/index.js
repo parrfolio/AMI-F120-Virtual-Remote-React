@@ -76,15 +76,29 @@ const channels = ws281x.init({
       brightness: 255,
       stripType: "ws2812",
     },
-    {
-      count: 100,
-      gpio: 13,
-      invert: false,
-      brightness: 255,
-      stripType: "ws2812",
-    },
   ],
 });
+
+// const channels = ws281x.init({
+//   dma: 10,
+//   freq: 800000,
+//   channels: [
+//     {
+//       count: 100,
+//       gpio: 18,
+//       invert: false,
+//       brightness: 255,
+//       stripType: "ws2812",
+//     },
+//     {
+//       count: 100,
+//       gpio: 13,
+//       invert: false,
+//       brightness: 255,
+//       stripType: "ws2812",
+//     },
+//   ],
+// });
 console.log(channels);
 
 //pulse train 1
