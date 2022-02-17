@@ -176,8 +176,8 @@ io.sockets.on("connection", function(socket) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-
-        if (colorsArray[0] === 0) {
+        console.log(colorsArray);
+        if (colorsArray === 0) {
           clearInterval(rainbowInterval);
           console.log("interval cleared!");
           ws281x.finalize(colorsArray);
@@ -188,9 +188,9 @@ io.sockets.on("connection", function(socket) {
     } else {
       console.log("Lights", data.state);
       // clearInterval(rainbowInterval);
-      console.log("BEFORE RESET", colorsArray);
+      // console.log("BEFORE RESET", colorsArray);
       ws281x.reset(colorsArray);
-      console.log("AFTER RESET", colorsArray);
+      //console.log("AFTER RESET", colorsArray);
     }
   });
 });
