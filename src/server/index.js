@@ -79,10 +79,6 @@ const channels = ws281x.init({
   ],
 });
 
-let offset = 0;
-const channel = channels[0];
-const colorsArray = channel.array;
-
 // const channels = ws281x.init({
 //   dma: 10,
 //   freq: 800000,
@@ -104,6 +100,9 @@ const colorsArray = channel.array;
 //   ],
 // });
 console.log(channels);
+let offset = 0;
+const channel = channels[0];
+const colorsArray = channel.array;
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
@@ -161,6 +160,7 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
+    if (data.state === "on") {
       let rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
@@ -170,9 +170,9 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
     } else {
       console.log("Shut down", data.state);
-          clearInterval(rainbowInterval);
-          ws281x.reset();
-          ws281x.finalize();
+      clearInterval(rainbowInterval);
+      ws281x.reset(colorsArray);
+      ws281x.finalize(colorsArray);
     }
   });
 });
