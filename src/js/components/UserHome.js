@@ -56,7 +56,7 @@ export const UserHome = (props, state) => {
           console.log(data);
         }
       );
-    } else {
+    } else if (isActive != null) {
       socket.emit(
         "lights",
         {

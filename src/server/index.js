@@ -161,6 +161,7 @@ io.sockets.on("connection", function(socket) {
     } else {
       ws281x.reset();
       ws281x.finalize();
+      //clearInterval(rainbowInterval);
     }
   });
 });
