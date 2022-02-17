@@ -169,9 +169,9 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
-
+    let rainbowInterval = null;
     if (data.state === "on") {
-      let rainbowInterval = setInterval(() => {
+      rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
@@ -191,6 +191,8 @@ io.sockets.on("connection", function(socket) {
       // clearInterval(rainbowInterval);
       console.log("BEFORE RESET", colorsArray);
       ws281x.reset(colorsArray);
+      // ws281x.finalize(colorsArray);
+
       console.log("AFTER RESET", colorsArray);
     }
   });
