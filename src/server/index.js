@@ -4,7 +4,6 @@ const path = require("path");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
-const gpiop = gpio.promise;
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
@@ -160,6 +159,17 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
+
+    //only when the app terminates the ligts turn off
+    process.on("SIGINT", function() {
+      ws281x.reset();
+      ws281x.finalize();
+
+      process.nextTick(function() {
+        process.exit(0);
+      });
+    });
+
     if (data.state === "on") {
       let rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
@@ -172,9 +182,7 @@ io.sockets.on("connection", function(socket) {
       console.log("Shut down", data.state);
       // clearInterval(rainbowInterval);
       ws281x.reset();
-      setTimeout(() => {
-        ws281x.finalize();
-      }, 2000);
+      ws281x.finalize();
     }
   });
 });
