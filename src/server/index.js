@@ -176,7 +176,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        console.log(colorsArray);
+        //console.log(colorsArray);
         // if (colorsArray === 0) {
         //   clearInterval(rainbowInterval);
         //   console.log("interval cleared!");
@@ -185,17 +185,18 @@ io.sockets.on("connection", function(socket) {
 
         // }
 
-        console.log(data.state);
+        console.log("Ligths", data.state);
+
         ws281x.render(colorsArray);
       }, 1000 / 30);
     } else {
-      console.log("Lights", data.state);
+      //  console.log("Lights", data.state);
       // clearInterval(rainbowInterval);
-      console.log("BEFORE RESET", colorsArray);
+      // console.log("BEFORE RESET", colorsArray);
       ws281x.reset(colorsArray);
       // ws281x.finalize(colorsArray);
 
-      console.log("AFTER RESET", colorsArray);
+      // console.log("AFTER RESET", colorsArray);
     }
   });
 });
