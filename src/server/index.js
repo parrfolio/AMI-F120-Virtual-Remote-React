@@ -184,6 +184,8 @@ io.sockets.on("connection", function(socket) {
         // } else {
 
         // }
+
+        console.log(data.state);
         ws281x.render(colorsArray);
       }, 1000 / 30);
     } else {
