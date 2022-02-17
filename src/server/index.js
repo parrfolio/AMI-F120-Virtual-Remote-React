@@ -141,14 +141,14 @@ io.sockets.on("connection", function(socket) {
             gpio: 13,
             invert: false,
             brightness: 255,
-            stripType: "SK6812",
+            stripType: "ws2812",
           },
         ],
       });
       console.log(channels);
 
       //const channel = ws281x(100, { stripType: "ws2812" });
-      const channel = channels[0];
+      const channel = channels[1];
       const colorsArray = channel.array;
 
       const rainbowInterval = setInterval(() => {
