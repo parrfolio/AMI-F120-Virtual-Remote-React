@@ -189,9 +189,9 @@ io.sockets.on("connection", function(socket) {
     } else {
       console.log("Lights", data.state);
       // clearInterval(rainbowInterval);
-      // console.log("BEFORE RESET", colorsArray);
+      console.log("BEFORE RESET", colorsArray);
       ws281x.reset(colorsArray);
-      //console.log("AFTER RESET", colorsArray);
+      console.log("AFTER RESET", colorsArray);
     }
   });
 });
