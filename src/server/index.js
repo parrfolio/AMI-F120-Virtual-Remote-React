@@ -160,7 +160,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
-    //only when the app terminates the ligts turn off
+    //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
       ws281x.finalize();
@@ -182,9 +182,10 @@ io.sockets.on("connection", function(socket) {
       console.log("Lights", data.state);
       // clearInterval(rainbowInterval);
       console.log("BEFORE RESET", colorsArray);
-      ws281x.reset();
+      ws281x.reset(colorsArray);
+      ws281x.render(colorsArray);
       console.log("AFTER RESET", colorsArray);
-      ws281x.finalize();
+      ws281x.finalize(colorsArray);
       console.log("AFTER FINALIZE", colorsArray);
     }
   });
