@@ -100,7 +100,7 @@ const channels = ws281x.init({
 });
 console.log(channels);
 let offset = 0;
-const channel = channels;
+const channel = channels[0];
 const colorsArray = channel.array;
 
 //pulse train 1
