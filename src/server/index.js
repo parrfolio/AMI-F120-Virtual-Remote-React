@@ -26,19 +26,17 @@ http.listen(PORT, () => {
 //pulse train selections=
 const pin = 32;
 
-// pulse speed settings
+// pulse speed settings that seem to be working with my stepper
 const pulseSpeed = 70;
 const pulseDelay = 30;
 
 //according to the manual
 // const pulseSpeed = 43;
 // const pulseDelay = 33;
-// const pulseTrainDelay = 130;
 
 //working!
 // const pulseSpeed = 70;
 // const pulseDelay = 30;
-// const pulseTrainDelay = 600;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
@@ -66,6 +64,28 @@ const colorwheel = (pos) => {
 const rgb2Int = (r, g, b) => {
   return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 };
+
+const channels = ws281x.init({
+  dma: 10,
+  freq: 800000,
+  channels: [
+    {
+      count: 100,
+      gpio: 18,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+    {
+      count: 100,
+      gpio: 13,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+  ],
+});
+console.log(channels);
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
@@ -125,28 +145,6 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights On", data.state);
     if (data.state === "on") {
       let offset = 0;
-      const channels = ws281x.init({
-        dma: 10,
-        freq: 800000,
-        channels: [
-          {
-            count: 100,
-            gpio: 18,
-            invert: false,
-            brightness: 255,
-            stripType: "ws2812",
-          },
-          {
-            count: 100,
-            gpio: 13,
-            invert: false,
-            brightness: 255,
-            stripType: "ws2812",
-          },
-        ],
-      });
-      console.log(channels);
-
       //const channel = ws281x(100, { stripType: "ws2812" });
       const channel = channels[0];
       const colorsArray = channel.array;
@@ -160,6 +158,9 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
 
       console.log("LED COUNT", channel.count);
+    } else {
+      ws281x.reset();
+      ws281x.finalize();
     }
   });
 });

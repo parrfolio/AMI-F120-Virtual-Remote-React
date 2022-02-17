@@ -15,10 +15,16 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  const [followedClass, setFollowedClass] = useState(null);
+  const [lights, setLight] = useState(null);
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
+
+  const [isActive, setActive] = useState(false);
+
+  const toggleClass = () => {
+    setActive(!isActive);
+  };
 
   useEffect(() => {
     setLoading(false);
@@ -39,14 +45,29 @@ export const UserHome = (props, state) => {
     });
   }, [socket]);
 
-  useEffect((e) => {
-    console.log(socket);
-    // if (socket) {
-
-    // } else {
-
-    // }
-  }, []);
+  useEffect(() => {
+    if (isActive) {
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+        },
+        (data) => {
+          console.log(data);
+        }
+      );
+    } else {
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+        },
+        (data) => {
+          console.log(data);
+        }
+      );
+    }
+  }, [isActive]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
@@ -62,7 +83,6 @@ export const UserHome = (props, state) => {
     return (
       <div
         key={selection.id}
-        className={followedClass}
         onClick={(e: Event) => {
           console.log("turned it on");
           socket.emit("direction", selection.select, (data) => {
@@ -81,7 +101,6 @@ export const UserHome = (props, state) => {
     <Fragment>
       <Block>{jukebox_data}</Block>
       <div
-        className={followedClass}
         onClick={(e: Event) => {
           console.log("turned it off");
           socket.emit(
@@ -100,21 +119,10 @@ export const UserHome = (props, state) => {
         Stop
       </div>
       <div
-        className={followedClass}
-        onClick={(e: Event) => {
-          console.log("lights!!");
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-            },
-            (data) => {
-              //console.log(data);
-            }
-          );
-        }}
+        className={isActive ? "lightson" : "lightsoff"}
+        onClick={toggleClass}
       >
-        Lights
+        Light Strip 1
       </div>
       <Link to="/about">About</Link>
     </Fragment>
