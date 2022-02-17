@@ -87,6 +87,8 @@ const channels = ws281x.init({
 });
 console.log(channels);
 
+const rainbowInterval = null;
+
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
@@ -149,7 +151,7 @@ io.sockets.on("connection", function(socket) {
       const channel = channels[0];
       const colorsArray = channel.array;
 
-      const rainbowInterval = setInterval(() => {
+      rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
