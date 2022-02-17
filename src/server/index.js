@@ -105,21 +105,25 @@ io.sockets.on("connection", function(socket) {
   });
 
   socket.on("lights", function(data) {
-    console.log("Lights On", data.state);
+    console.log("Lights State", data.state);
     if (data.state === "on") {
       let offset = 0;
       const channel = ws281x(100, { stripType: "ws2812" });
+
       const colorsArray = channel.array;
 
-      const rainbowInterval = setInterval(() => {
+      const interval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
+          //colorsArray[i] = 0xffcc22;
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
+
         offset = (offset + 1) % 256;
+
         ws281x.render(colorsArray);
       }, 1000 / 30);
 
-      const colorwheel = (pos) => {
+      function colorwheel(pos) {
         pos = 255 - pos;
         if (pos < 85) {
           return rgb2Int(255 - pos * 3, 0, pos * 3);
@@ -130,13 +134,13 @@ io.sockets.on("connection", function(socket) {
           pos -= 170;
           return rgb2Int(pos * 3, 255 - pos * 3, 0);
         }
-      };
+      }
 
-      const rgb2Int = (r, g, b) => {
+      function rgb2Int(r, g, b) {
         return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-      };
+      }
 
-      console.log("LED COUNT", channel.count);
+      console.log(channel.count);
     }
   });
 });
