@@ -100,7 +100,7 @@ const channels = ws281x.init({
 });
 console.log(channels);
 let offset = 0;
-const channel = channels[0];
+const channel = channels;
 const colorsArray = channel.array;
 
 //pulse train 1
@@ -177,7 +177,7 @@ io.sockets.on("connection", function(socket) {
         }
         offset = (offset + 1) % 256;
 
-        if (colorsArray.Uint32Array(100)[0] === 0) {
+        if (colorsArray[0] === 0) {
           clearInterval(rainbowInterval);
           console.log("interval cleared!");
           ws281x.finalize(colorsArray);
