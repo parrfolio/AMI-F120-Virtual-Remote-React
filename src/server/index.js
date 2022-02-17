@@ -79,6 +79,10 @@ const channels = ws281x.init({
   ],
 });
 
+let offset = 0;
+const channel = channels[0];
+const colorsArray = channel.array;
+
 // const channels = ws281x.init({
 //   dma: 10,
 //   freq: 800000,
@@ -157,18 +161,6 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
-    if (data.state === "on") {
-      process.on("SIGINT", function() {
-        ws281x.reset();
-        process.nextTick(function() {
-          process.exit(0);
-        });
-      });
-      let offset = 0;
-      //const channel = ws281x(100, { stripType: "ws2812" });
-      const channel = channels[0];
-      const colorsArray = channel.array;
-
       let rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
@@ -176,13 +168,11 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render(colorsArray);
       }, 1000 / 30);
-      if (data.state != "on") {
-        console.log("Shut down", data.state);
-        clearInterval(rainbowInterval);
-        ws281x.reset();
-        ws281x.finalize();
-      }
-      console.log("LED COUNT", channel.count);
+    } else {
+      console.log("Shut down", data.state);
+          clearInterval(rainbowInterval);
+          ws281x.reset();
+          ws281x.finalize();
     }
   });
 });
