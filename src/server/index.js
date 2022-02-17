@@ -145,7 +145,7 @@ io.sockets.on("connection", function(socket) {
           },
         ],
       });
-      console.log(channel);
+      console.log(channels);
 
       //const channel = ws281x(100, { stripType: "ws2812" });
       const channel = channels.channels[1];
