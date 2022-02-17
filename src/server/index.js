@@ -173,8 +173,15 @@ io.sockets.on("connection", function(socket) {
 
       console.log("LED COUNT", channel.count);
     } else {
-      ws281x.finalize();
-      ws281x.reset();
+      process.on("SIGINT", function() {
+        ws281x.reset();
+        ws281x.finalize();
+
+        process.nextTick(function() {
+          process.exit(0);
+        });
+      });
+
       clearInterval();
     }
   });
