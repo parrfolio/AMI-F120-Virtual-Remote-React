@@ -187,6 +187,12 @@ io.sockets.on("connection", function(socket) {
 
         console.log("Ligths", data.state);
 
+        if (data.state === "off") {
+          console.log(
+            "============================OFF========================"
+          );
+        }
+
         ws281x.render(colorsArray);
       }, 1000 / 30);
     } else {
