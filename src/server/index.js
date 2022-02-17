@@ -125,7 +125,7 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights On", data.state);
     if (data.state === "on") {
       let offset = 0;
-      const channel = ws281x.init({
+      const channels = ws281x.init({
         dma: 10,
         freq: 800000,
         channels: [
@@ -148,7 +148,7 @@ io.sockets.on("connection", function(socket) {
       console.log(channel);
 
       //const channel = ws281x(100, { stripType: "ws2812" });
-      //const channel = channels.channels[0];
+      const channel = channels.channels[1];
       const colorsArray = channel.array;
 
       const rainbowInterval = setInterval(() => {
