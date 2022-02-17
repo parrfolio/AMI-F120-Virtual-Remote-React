@@ -148,8 +148,8 @@ io.sockets.on("connection", function(socket) {
       console.log(channels);
 
       //const channel = ws281x(100, { stripType: "ws2812" });
-
-      const colorsArray = channels[1].array;
+      const channel = channels[1];
+      const colorsArray = channel.array;
 
       const rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
@@ -158,6 +158,8 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render(colorsArray);
       }, 1000 / 30);
+
+      console.log("LED COUNT", channel.count);
     }
   });
 });
