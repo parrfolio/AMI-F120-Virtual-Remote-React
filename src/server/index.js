@@ -175,13 +175,9 @@ io.sockets.on("connection", function(socket) {
         }
         offset = (offset + 1) % 256;
         ws281x.render(colorsArray);
+        if (data.state != "on") clearInterval(rainbowInterval);
       }, 1000 / 30);
-      console.log(rainbowInterval);
-
       console.log("LED COUNT", channel.count);
-    } else {
-      //clearInterval();
-      ws281x.reset();
     }
   });
 });
