@@ -172,7 +172,9 @@ io.sockets.on("connection", function(socket) {
       console.log("Shut down", data.state);
       // clearInterval(rainbowInterval);
       ws281x.reset();
-      ws281x.finalize();
+      setTimeout(() => {
+        ws281x.finalize();
+      }, 2000);
     }
   });
 });
