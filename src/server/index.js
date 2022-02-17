@@ -172,8 +172,8 @@ io.sockets.on("connection", function(socket) {
     } else {
       console.log("Shut down", data.state);
       clearInterval(rainbowInterval);
-      ws281x.reset(colorsArray);
-      ws281x.finalize(colorsArray);
+      // ws281x.reset(colorsArray);
+      // ws281x.finalize(colorsArray);
     }
   });
 });
