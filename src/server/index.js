@@ -196,9 +196,9 @@ io.sockets.on("connection", function(socket) {
       console.log(colorsArray);
       setTimeout(() => {
         console.log(colorsArray);
-        ws281x.reset();
+        ws281x.reset(colorsArray);
         console.log("FINALIZE");
-        ws281x.finalize();
+        //ws281x.finalize();
       }, 2000);
     }
   });
