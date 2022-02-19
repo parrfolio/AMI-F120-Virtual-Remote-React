@@ -206,12 +206,6 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      setTimeout(() => {
-        rainbowInterval.pause();
-        ws281x.reset();
-        ws281x.finalize();
-      }, 2000);
-
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
       //     for (let i = 0; i < channel.count; i++) {
@@ -222,6 +216,11 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
     } else if (data.state === "off") {
+      setTimeout(() => {
+        rainbowInterval.pause();
+        ws281x.reset();
+        ws281x.finalize();
+      }, 5000);
       //rainbowInterval.pause();
       // console.log(colorsArray);
       // ws281x.reset();
