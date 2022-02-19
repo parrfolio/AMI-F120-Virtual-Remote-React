@@ -223,7 +223,9 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
       console.log(rainbowInterval);
     } else {
-      rainbowInterval = new RecurringTimer.pause();
+      rainbowInterval = new RecurringTimer(function() {
+        this.pause();
+      }, 0);
       // console.log(colorsArray);
       // ws281x.reset();
       // console.log("FINALIZE");
