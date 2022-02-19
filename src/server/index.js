@@ -179,13 +179,13 @@ io.sockets.on("connection", function(socket) {
           remaining = delay;
 
         this.pause = function() {
-          window.clearTimeout(timerId);
+          clearTimeout(timerId);
           remaining -= new Date() - start;
         };
 
         var resume = function() {
           start = new Date();
-          timerId = window.setTimeout(function() {
+          timerId = setTimeout(function() {
             remaining = delay;
             resume();
             callback();
