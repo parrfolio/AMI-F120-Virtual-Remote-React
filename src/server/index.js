@@ -161,6 +161,7 @@ io.sockets.on("connection", function(socket) {
     let channel = channels[0];
     let colorsArray = channel.array;
     let rainbowInterval;
+    let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
@@ -172,15 +173,50 @@ io.sockets.on("connection", function(socket) {
     });
 
     if (data.state === "on") {
-      rainbowInterval = setInterval(() => {
+      function RecurringTimer(callback, delay) {
+        var timerId,
+          start,
+          remaining = delay;
+
+        this.pause = function() {
+          window.clearTimeout(timerId);
+          remaining -= new Date() - start;
+        };
+
+        var resume = function() {
+          start = new Date();
+          timerId = window.setTimeout(function() {
+            remaining = delay;
+            resume();
+            callback();
+          }, remaining);
+        };
+
+        this.resume = resume;
+
+        this.resume();
+      }
+
+      var rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
+
+      // rainbowInterval = setInterval(() => {
+      //   if (timer) {
+      //     for (let i = 0; i < channel.count; i++) {
+      //       colorsArray[i] = colorwheel((offset + i) % 256);
+      //     }
+      //     offset = (offset + 1) % 256;
+      //     ws281x.render();
+      //   }
+      // }, 1000 / 30);
     } else if (data.state === "off") {
       clearInterval(rainbowInterval);
+      timer = false;
       console.log(colorsArray);
       ws281x.reset();
       console.log("FINALIZE");
