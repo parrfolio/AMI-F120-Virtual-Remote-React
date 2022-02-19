@@ -171,14 +171,12 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
-
-    let pause = null;
     function RecurringTimer(callback, delay) {
       var timerId,
         start,
         remaining = delay;
 
-      pause = () => {
+      this.pause = function() {
         console.log("pause was called");
         clearTimeout(timerId);
         remaining -= new Date() - start;
@@ -208,11 +206,11 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      setTimeout(() => {
-        rainbowInterval.pause();
-        ws281x.reset();
-        ws281x.finalize();
-      }, 5000);
+      // setTimeout(() => {
+      //   rainbowInterval.pause();
+      //   ws281x.reset();
+      //   ws281x.finalize();
+      // }, 5000);
 
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
@@ -224,7 +222,8 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
     } else if (data.state === "off") {
-      //rainbowInterval.pause();
+      console.log(rainbowInterval);
+      rainbowInterval.pause();
       // console.log(colorsArray);
       // ws281x.reset();
       // console.log("FINALIZE");
