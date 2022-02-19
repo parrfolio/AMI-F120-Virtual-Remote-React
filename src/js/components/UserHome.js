@@ -122,7 +122,7 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={toggleClass}
       >
-        Light Strip 1
+        Lights {isActive ? "On" : "Off"}
       </div>
       <Link to="/about">About</Link>
     </Fragment>
