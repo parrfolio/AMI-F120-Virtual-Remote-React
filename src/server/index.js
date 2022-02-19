@@ -161,42 +161,30 @@ io.sockets.on("connection", function(socket) {
     let colorsArray = channel.array;
 
     //only when the app terminates the ligts turn off with node Signal Int
-    // process.on("SIGINT", function() {
-    //   ws281x.reset();
-    //   ws281x.finalize();
+    process.on("SIGINT", function() {
+      ws281x.reset();
+      ws281x.finalize();
 
-    //   process.nextTick(function() {
-    //     process.exit(0);
-    //   });
-    // });
+      process.nextTick(function() {
+        process.exit(0);
+      });
+    });
 
     let rainbowInterval;
-    let timer;
     if (data.state === "on") {
       timer = true;
-      if (timer) {
-        for (let i = 0; i < channel.count; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
 
-        ws281x.render();
+      for (let i = 0; i < channel.count; i++) {
+        colorsArray[i] = colorwheel((offset + i) % 256);
       }
+      offset = (offset + 1) % 256;
+
+      ws281x.render();
     } else if (data.state === "off") {
       console.log(colorsArray);
-      setTimeout(() => {
-        timer = false;
-
-        // for (let i = 0; i < channel.count; i++) {
-        //   colorsArray[i] = 0;
-        // }
-        // ws281x.render(colorsArray);
-
-        console.log(colorsArray);
-        ws281x.reset();
-        console.log("FINALIZE");
-        ws281x.finalize();
-      }, 2000);
+      ws281x.reset();
+      console.log("FINALIZE");
+      ws281x.finalize();
     }
   });
 });
