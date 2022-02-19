@@ -175,20 +175,20 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       timer = true;
       if (timer) {
-        // rainbowInterval = setInterval(() => {
-        //   for (let i = 0; i < channel.count; i++) {
-        //     colorsArray[i] = colorwheel((offset + i) % 256);
-        //   }
-        //   offset = (offset + 1) % 256;
-        // }, 1000 / 30);
+        rainbowInterval = setInterval(() => {
+          for (let i = 0; i < channel.count; i++) {
+            colorsArray[i] = colorwheel((offset + i) % 256);
+          }
+          offset = (offset + 1) % 256;
+
+          ws281x.render();
+        }, 1000 / 30);
       }
-      colorsArray[0] = 0xffcc22;
-      ws281x.render();
     } else if (data.state === "off") {
       console.log(colorsArray);
       setTimeout(() => {
-        // clearInterval(rainbowInterval);
-        // timer = false;
+        clearInterval(rainbowInterval);
+        timer = false;
 
         // for (let i = 0; i < channel.count; i++) {
         //   colorsArray[i] = 0;
