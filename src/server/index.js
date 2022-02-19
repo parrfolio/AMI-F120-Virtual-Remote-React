@@ -171,7 +171,7 @@ io.sockets.on("connection", function(socket) {
     // });
 
     let rainbowInterval;
-    let timer;
+    let timer = true;
     if (data.state === "on") {
       if (timer) {
         rainbowInterval = setInterval(() => {
