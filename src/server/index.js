@@ -161,14 +161,14 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights", data.state);
 
     //only when the app terminates the ligts turn off with node Signal Int
-    process.on("SIGINT", function() {
-      ws281x.reset();
-      ws281x.finalize();
+    // process.on("SIGINT", function() {
+    //   ws281x.reset();
+    //   ws281x.finalize();
 
-      process.nextTick(function() {
-        process.exit(0);
-      });
-    });
+    //   process.nextTick(function() {
+    //     process.exit(0);
+    //   });
+    // });
 
     let rainbowInterval;
     if (data.state === "on") {
@@ -182,13 +182,13 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
     } else if (data.state === "off") {
       clearInterval(rainbowInterval);
-      ws281x.render(colorsArray);
-      ws281x.reset(colorsArray);
-      setTimeout(() => {
-        ws281x.finalize(colorsArray);
-      }, 2000);
 
-      console.log("AFTER Finalize", colorsArray);
+      setTimeout(() => {
+        console.log(colorsArray);
+        ws281x.reset();
+        console.log("FINALIZE");
+        ws281x.finalize();
+      }, 2000);
     }
   });
 });
