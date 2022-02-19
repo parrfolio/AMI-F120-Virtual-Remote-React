@@ -132,6 +132,7 @@ io.sockets.on("connection", function(socket) {
       gpio.write(pin, false);
     }
   });
+  let rainbowInterval = null;
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
@@ -160,7 +161,6 @@ io.sockets.on("connection", function(socket) {
     let offset = 0;
     let channel = channels[0];
     let colorsArray = channel.array;
-    let rainbowInterval = null;
     let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
@@ -224,6 +224,7 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
       console.log(rainbowInterval);
     } else {
+      console.log(rainbowInterval);
       rainbowInterval.pause();
       // console.log(colorsArray);
       // ws281x.reset();
