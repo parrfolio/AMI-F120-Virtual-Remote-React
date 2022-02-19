@@ -78,31 +78,6 @@ const rgb2Int = (r, g, b) => {
 //   ],
 // });
 
-let channels = ws281x.init({
-  dma: 10,
-  freq: 800000,
-  channels: [
-    {
-      count: 100,
-      gpio: 18,
-      invert: false,
-      brightness: 255,
-      stripType: "ws2812",
-    },
-    {
-      count: 100,
-      gpio: 13,
-      invert: false,
-      brightness: 255,
-      stripType: "ws2812",
-    },
-  ],
-});
-console.log(channels);
-let offset = 0;
-let channel = channels[0];
-let colorsArray = channel.array;
-
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
@@ -159,6 +134,31 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
+
+    let channels = ws281x.init({
+      dma: 10,
+      freq: 800000,
+      channels: [
+        {
+          count: 100,
+          gpio: 18,
+          invert: false,
+          brightness: 255,
+          stripType: "ws2812",
+        },
+        {
+          count: 100,
+          gpio: 13,
+          invert: false,
+          brightness: 255,
+          stripType: "ws2812",
+        },
+      ],
+    });
+    console.log(channels);
+    let offset = 0;
+    let channel = channels[0];
+    let colorsArray = channel.array;
 
     //only when the app terminates the ligts turn off with node Signal Int
     // process.on("SIGINT", function() {
