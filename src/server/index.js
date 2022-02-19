@@ -187,6 +187,9 @@ io.sockets.on("connection", function(socket) {
     } else if (data.state === "off") {
       clearInterval(rainbowInterval);
       timer = false;
+      for (let i = 0; i < channel.count; i++) {
+        colorsArray[i] = 0;
+      }
       setTimeout(() => {
         console.log(colorsArray);
         ws281x.reset();
