@@ -171,6 +171,7 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
+
     function RecurringTimer(callback, delay) {
       var timerId,
         start,
@@ -222,7 +223,7 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
       console.log(rainbowInterval);
-    } else if (data.state === "off") {
+    } else {
       console.log(rainbowInterval);
       rainbowInterval.pause();
       // console.log(colorsArray);
