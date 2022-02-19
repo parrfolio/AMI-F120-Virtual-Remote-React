@@ -195,10 +195,17 @@ io.sockets.on("connection", function(socket) {
 
       console.log(colorsArray);
       setTimeout(() => {
+        for (let i = 0; i < channel.count; i++) {
+          colorsArray[i] = 0;
+          console.log(colorsArray[i]);
+          ws281x.render(colorsArray);
+        }
         console.log(colorsArray);
+
+        clearInterval(rainbowInterval);
         ws281x.reset(colorsArray);
         console.log("FINALIZE");
-        //ws281x.finalize();
+        ws281x.finalize();
       }, 2000);
     }
   });
