@@ -222,10 +222,10 @@ io.sockets.on("connection", function(socket) {
       //     ws281x.render();
       //   }
       // }, 1000 / 30);
-      console.log(rainbowInterval);
     } else {
-      console.log(rainbowInterval);
       rainbowInterval.pause();
+      ws281x.reset();
+      ws281x.finalize();
       // console.log(colorsArray);
       // ws281x.reset();
       // console.log("FINALIZE");
