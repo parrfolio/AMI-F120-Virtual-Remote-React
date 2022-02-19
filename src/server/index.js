@@ -6,6 +6,7 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+const { clearInterval } = require("timers");
 
 app.use(express.static(webroot));
 
@@ -159,7 +160,7 @@ io.sockets.on("connection", function(socket) {
     let offset = 0;
     let channel = channels[0];
     let colorsArray = channel.array;
-
+    let rainbowInterval;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
@@ -170,17 +171,16 @@ io.sockets.on("connection", function(socket) {
       });
     });
 
-    let rainbowInterval;
     if (data.state === "on") {
-      timer = true;
-
-      for (let i = 0; i < channel.count; i++) {
-        colorsArray[i] = colorwheel((offset + i) % 256);
-      }
-      offset = (offset + 1) % 256;
-
-      ws281x.render();
+      rainbowInterval = setInterval(() => {
+        for (let i = 0; i < channel.count; i++) {
+          colorsArray[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
     } else if (data.state === "off") {
+      clearInterval(rainbowInterval);
       console.log(colorsArray);
       ws281x.reset();
       console.log("FINALIZE");
