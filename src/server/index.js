@@ -204,9 +204,9 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      setTimeout(() => {
-        rainbowInterval.pause();
-      }, 2000);
+      // setTimeout(() => {
+      //   rainbowInterval.pause();
+      // }, 2000);
 
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
