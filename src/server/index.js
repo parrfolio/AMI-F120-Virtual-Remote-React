@@ -78,7 +78,7 @@ const rgb2Int = (r, g, b) => {
 //   ],
 // });
 
-const channels = ws281x.init({
+let channels = ws281x.init({
   dma: 10,
   freq: 800000,
   channels: [
@@ -100,8 +100,8 @@ const channels = ws281x.init({
 });
 console.log(channels);
 let offset = 0;
-const channel = channels[0];
-const colorsArray = channel.array;
+let channel = channels[0];
+let colorsArray = channel.array;
 
 //pulse train 1
 io.sockets.on("connection", function(socket) {
