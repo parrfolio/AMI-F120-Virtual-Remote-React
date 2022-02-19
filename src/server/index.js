@@ -171,32 +171,31 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
+    function RecurringTimer(callback, delay) {
+      var timerId,
+        start,
+        remaining = delay;
+
+      this.pause = function() {
+        clearTimeout(timerId);
+        remaining -= new Date() - start;
+      };
+
+      var resume = function() {
+        start = new Date();
+        timerId = setTimeout(function() {
+          remaining = delay;
+          resume();
+          callback();
+        }, remaining);
+      };
+
+      this.resume = resume;
+
+      this.resume();
+    }
 
     if (data.state === "on") {
-      function RecurringTimer(callback, delay) {
-        var timerId,
-          start,
-          remaining = delay;
-
-        this.pause = function() {
-          clearTimeout(timerId);
-          remaining -= new Date() - start;
-        };
-
-        var resume = function() {
-          start = new Date();
-          timerId = setTimeout(function() {
-            remaining = delay;
-            resume();
-            callback();
-          }, remaining);
-        };
-
-        this.resume = resume;
-
-        this.resume();
-      }
-
       rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
