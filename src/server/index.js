@@ -177,7 +177,6 @@ io.sockets.on("connection", function(socket) {
         remaining = delay;
 
       this.pause = function() {
-        console.log("pause was called");
         clearTimeout(timerId);
         remaining -= new Date() - start;
       };
@@ -189,7 +188,6 @@ io.sockets.on("connection", function(socket) {
           resume();
           callback();
         }, remaining);
-        console.log("resume was called");
       };
 
       this.resume = resume;
@@ -206,11 +204,11 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      setTimeout(() => {
-        rainbowInterval.pause();
-        ws281x.reset();
-        ws281x.finalize();
-      }, 5000);
+      console.log(data.state);
+
+      // rainbowInterval.pause();
+      // ws281x.reset();
+      // ws281x.finalize();
 
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
@@ -221,12 +219,6 @@ io.sockets.on("connection", function(socket) {
       //     ws281x.render();
       //   }
       // }, 1000 / 30);
-    } else if (data.state === "off") {
-      //rainbowInterval.pause();
-      // console.log(colorsArray);
-      // ws281x.reset();
-      // console.log("FINALIZE");
-      // ws281x.finalize();
     }
   });
 });
