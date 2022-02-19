@@ -26,7 +26,7 @@ export const App = () => {
     <BrowserRouter>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>My Record Store Day List</title>
+        <title>Jukebox Controller - AMi F-120</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </Helmet>

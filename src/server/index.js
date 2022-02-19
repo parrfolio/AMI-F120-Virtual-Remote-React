@@ -221,6 +221,7 @@ io.sockets.on("connection", function(socket) {
       //     ws281x.render();
       //   }
       // }, 1000 / 30);
+      console.log(rainbowInterval);
     } else if (data.state === "off") {
       console.log(rainbowInterval);
       rainbowInterval.pause();
