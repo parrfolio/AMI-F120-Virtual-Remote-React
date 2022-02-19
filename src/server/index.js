@@ -170,7 +170,7 @@ io.sockets.on("connection", function(socket) {
       });
     });
 
-    let rainbowInterval = null;
+    let rainbowInterval;
     if (data.state === "on") {
       rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
