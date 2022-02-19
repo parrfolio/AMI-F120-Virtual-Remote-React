@@ -177,17 +177,19 @@ io.sockets.on("connection", function(socket) {
         remaining = delay;
 
       this.pause = function() {
+        console.log("pause was called");
         clearTimeout(timerId);
         remaining -= new Date() - start;
       };
 
-      var resume = function() {
+      let resume = function() {
         start = new Date();
         timerId = setTimeout(function() {
           remaining = delay;
           resume();
           callback();
         }, remaining);
+        console.log("resume was called");
       };
 
       this.resume = resume;
