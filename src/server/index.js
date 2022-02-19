@@ -160,7 +160,7 @@ io.sockets.on("connection", function(socket) {
     let offset = 0;
     let channel = channels[0];
     let colorsArray = channel.array;
-    let rainbowInterval;
+    let rainbowInterval = null;
     let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
