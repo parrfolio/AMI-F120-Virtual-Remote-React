@@ -170,7 +170,7 @@ io.sockets.on("connection", function(socket) {
       });
     });
 
-    let rainbowInterval = null;
+    let rainbowInterval;
     if (data.state === "on") {
       rainbowInterval = setInterval(() => {
         for (let i = 0; i < channel.count; i++) {
@@ -181,15 +181,11 @@ io.sockets.on("connection", function(socket) {
         ws281x.render(colorsArray);
       }, 1000 / 30);
     } else if (data.state === "off") {
-      setImmediate(() => {
-        clearInterval(rainbowInterval);
-      });
-
-      console.log(rainbowInterval);
-      //ws281x.reset(colorsArray);
-      console.log("BEFORE RESET", colorsArray);
-      // ws281x.finalize(colorsArray);
-      console.log("AFTER RESET", colorsArray);
+      clearInterval(rainbowInterval);
+      ws281x.render(colorsArray);
+      ws281x.reset(colorsArray);
+      ws281x.finalize(colorsArray);
+      console.log("AFTER Finalize", colorsArray);
     }
   });
 });
