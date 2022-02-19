@@ -183,14 +183,13 @@ io.sockets.on("connection", function(socket) {
       };
 
       let resume = function() {
-        ws281x.reset();
-        ws281x.finalize();
         start = new Date();
         timerId = setTimeout(function() {
           remaining = delay;
           resume();
           callback();
         }, remaining);
+        console.log("resume was called");
       };
 
       this.resume = resume;
@@ -207,9 +206,9 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      // setTimeout(() => {
-      //   rainbowInterval.pause();
-      // }, 2000);
+      setTimeout(() => {
+        rainbowInterval.pause();
+      }, 2000);
 
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
