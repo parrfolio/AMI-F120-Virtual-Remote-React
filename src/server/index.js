@@ -177,7 +177,7 @@ io.sockets.on("connection", function(socket) {
         start,
         remaining = delay;
 
-      this.pause = function() {
+      var pause = function() {
         console.log("pause was called");
         clearTimeout(timerId);
         remaining -= new Date() - start;
@@ -193,6 +193,7 @@ io.sockets.on("connection", function(socket) {
       };
 
       this.resume = resume;
+      this.pause = pause;
 
       this.resume();
     }
@@ -223,9 +224,7 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
       console.log(rainbowInterval);
     } else {
-      rainbowInterval = new RecurringTimer(function() {
-        this.pause();
-      }, 0);
+      rainbowInterval.pause();
       // console.log(colorsArray);
       // ws281x.reset();
       // console.log("FINALIZE");
