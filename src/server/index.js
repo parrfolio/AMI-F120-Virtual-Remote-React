@@ -186,9 +186,13 @@ io.sockets.on("connection", function(socket) {
       for (let i = 0; i < channel.count; i++) {
         colorsArray[i] = 0;
       }
-      ws281x.reset(colorsArray);
+      ws281x
+        .render(colorsArray)
+        .reset()
+        .finalize();
+      //ws281x.reset(colorsArray);
       console.log("BEFORE RESET", colorsArray);
-      ws281x.finalize(colorsArray);
+      //ws281x.finalize(colorsArray);
       console.log("AFTER RESET", colorsArray);
     }
   });
