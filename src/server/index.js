@@ -183,13 +183,14 @@ io.sockets.on("connection", function(socket) {
       };
 
       let resume = function() {
+        ws281x.reset();
+        ws281x.finalize();
         start = new Date();
         timerId = setTimeout(function() {
           remaining = delay;
           resume();
           callback();
         }, remaining);
-        console.log("resume was called");
       };
 
       this.resume = resume;
