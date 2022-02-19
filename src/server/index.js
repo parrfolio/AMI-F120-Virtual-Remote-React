@@ -190,6 +190,7 @@ io.sockets.on("connection", function(socket) {
       for (let i = 0; i < channel.count; i++) {
         colorsArray[i] = 0;
       }
+      ws281x.render(colorsArray);
       setTimeout(() => {
         console.log(colorsArray);
         ws281x.reset();
