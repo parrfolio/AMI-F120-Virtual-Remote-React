@@ -181,7 +181,11 @@ io.sockets.on("connection", function(socket) {
         clearTimeout(timerId);
         remaining -= new Date() - start;
       };
-
+      setTimeout(() => {
+        // rainbowInterval.pause();
+        ws281x.reset();
+        ws281x.finalize();
+      }, 5000);
       let resume = function() {
         start = new Date();
         timerId = setTimeout(function() {
@@ -216,11 +220,6 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
     } else if (data.state === "off") {
-      setTimeout(() => {
-        rainbowInterval.pause();
-        ws281x.reset();
-        ws281x.finalize();
-      }, 5000);
       //rainbowInterval.pause();
       // console.log(colorsArray);
       // ws281x.reset();
