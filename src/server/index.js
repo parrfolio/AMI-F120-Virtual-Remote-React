@@ -197,7 +197,7 @@ io.sockets.on("connection", function(socket) {
         this.resume();
       }
 
-      var rainbowInterval = new RecurringTimer(function() {
+      rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < channel.count; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
