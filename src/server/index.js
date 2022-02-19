@@ -182,13 +182,12 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
     } else if (data.state === "off") {
       console.log("Lights", data.state);
-      clearInterval(rainbowInterval);
+
       for (let i = 0; i < channel.count; i++) {
         colorsArray[i] = 0;
       }
-      ws281x.render(colorsArray, () => {
-        console.log("Callback Test");
-      });
+      ws281x.render(colorsArray);
+      clearInterval(rainbowInterval);
       //ws281x.reset(colorsArray);
       console.log("BEFORE RESET", colorsArray);
       //ws281x.finalize(colorsArray);
