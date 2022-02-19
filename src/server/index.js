@@ -204,10 +204,13 @@ io.sockets.on("connection", function(socket) {
         }
         offset = (offset + 1) % 256;
         ws281x.render();
-        setTimeout(() => {
-          this.pause();
-        }, 2000);
       }, 1000 / 30);
+
+      setTimeout(() => {
+        rainbowInterval.pause();
+        ws281x.reset();
+        //ws281x.finalize();
+      }, 2000);
 
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
