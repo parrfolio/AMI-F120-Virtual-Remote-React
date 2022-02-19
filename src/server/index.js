@@ -180,10 +180,10 @@ io.sockets.on("connection", function(socket) {
         //     colorsArray[i] = colorwheel((offset + i) % 256);
         //   }
         //   offset = (offset + 1) % 256;
-
         // }, 1000 / 30);
-        ws281x.render(0xffcc22);
       }
+      colorsArray[0] = 0xffcc22;
+      ws281x.render();
     } else if (data.state === "off") {
       console.log(colorsArray);
       setTimeout(() => {
