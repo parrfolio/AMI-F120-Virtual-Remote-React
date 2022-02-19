@@ -209,7 +209,7 @@ io.sockets.on("connection", function(socket) {
       setTimeout(() => {
         rainbowInterval.pause();
         ws281x.reset();
-        //ws281x.finalize();
+        ws281x.finalize();
       }, 2000);
 
       // rainbowInterval = setInterval(() => {
