@@ -156,7 +156,7 @@ io.sockets.on("connection", function(socket) {
         },
       ],
     });
-    console.log(channels);
+
     let offset = 0;
     let channel = channels[0];
     let colorsArray = channel.array;
