@@ -214,12 +214,11 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
     } else if (data.state === "off") {
-      clearInterval(rainbowInterval);
-      timer = false;
-      console.log(colorsArray);
-      ws281x.reset();
-      console.log("FINALIZE");
-      ws281x.finalize();
+      rainbowInterval.pause();
+      // console.log(colorsArray);
+      // ws281x.reset();
+      // console.log("FINALIZE");
+      // ws281x.finalize();
     }
   });
 });
