@@ -204,6 +204,10 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
+      setTimeout(() => {
+        rainbowInterval.pause();
+      }, 2000);
+
       // rainbowInterval = setInterval(() => {
       //   if (timer) {
       //     for (let i = 0; i < channel.count; i++) {
@@ -214,7 +218,7 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
     } else if (data.state === "off") {
-      rainbowInterval.pause();
+      //rainbowInterval.pause();
       // console.log(colorsArray);
       // ws281x.reset();
       // console.log("FINALIZE");
