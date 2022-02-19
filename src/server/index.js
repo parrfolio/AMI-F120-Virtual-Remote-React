@@ -190,7 +190,6 @@ io.sockets.on("connection", function(socket) {
           resume();
           callback();
         }, remaining);
-        console.log("resume was called");
       };
 
       this.resume = resume;
