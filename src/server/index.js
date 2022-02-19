@@ -180,15 +180,15 @@ io.sockets.on("connection", function(socket) {
         ws281x.render(colorsArray);
       }, 1000 / 30);
     } else {
-      console.log("Lights", data.state);
-      clearInterval(rainbowInterval);
-      for (let i = 0; i < channel.count; i++) {
-        colorsArray[i] = 0;
-      }
-      ws281x.reset(colorsArray);
-      console.log("BEFORE RESET", colorsArray);
-      ws281x.finalize(colorsArray);
-      console.log("AFTER RESET", colorsArray);
+      // console.log("Lights", data.state);
+      // clearInterval(rainbowInterval);
+      // for (let i = 0; i < channel.count; i++) {
+      //   colorsArray[i] = 0;
+      // }
+      // ws281x.reset(colorsArray);
+      // console.log("BEFORE RESET", colorsArray);
+      // ws281x.finalize(colorsArray);
+      // console.log("AFTER RESET", colorsArray);
     }
   });
 });
