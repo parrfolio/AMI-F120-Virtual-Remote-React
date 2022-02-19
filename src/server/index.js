@@ -184,7 +184,10 @@ io.sockets.on("connection", function(socket) {
       clearInterval(rainbowInterval);
       ws281x.render(colorsArray);
       ws281x.reset(colorsArray);
-      ws281x.finalize(colorsArray);
+      setTimeout(() => {
+        ws281x.finalize(colorsArray);
+      }, 2000);
+
       console.log("AFTER Finalize", colorsArray);
     }
   });
