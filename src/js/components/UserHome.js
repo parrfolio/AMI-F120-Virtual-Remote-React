@@ -44,6 +44,7 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
+    setActive(!isActive);
     // if (isActive) {
     //   socket.emit(
     //     "lights",
