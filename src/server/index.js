@@ -208,7 +208,7 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
       rainbowInterval = new RecurringTimer(function() {
         for (let i = 4; i < 9; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 100);
+          colorsArray[i] = colorwheel((offset + i) % 1256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
