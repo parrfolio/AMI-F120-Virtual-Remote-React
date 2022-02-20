@@ -36,7 +36,6 @@ export const UserHome = (props, state) => {
     if (!socket) return;
 
     socket.on("connect", () => {
-      console.log(connect);
       setSocketConnected(socket.connected);
     });
     socket.on("disconnect", () => {
