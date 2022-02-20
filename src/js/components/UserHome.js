@@ -15,7 +15,6 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  const [lights, setLight] = useState(null);
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
@@ -26,18 +25,18 @@ export const UserHome = (props, state) => {
     setActive(!isActive);
   };
 
+  // establish socket connection
   useEffect(() => {
     setLoading(false);
     setSocket(io());
   }, []);
-
-  // establish socket connection
 
   // subscribe to the socket event
   useEffect(() => {
     if (!socket) return;
 
     socket.on("connect", () => {
+      console.log(connect);
       setSocketConnected(socket.connected);
     });
     socket.on("disconnect", () => {
@@ -46,27 +45,27 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
-    if (isActive) {
-      socket.emit(
-        "lights",
-        {
-          state: "on",
-        },
-        (data) => {
-          console.log(data);
-        }
-      );
-    } else if (isActive != null) {
-      socket.emit(
-        "lights",
-        {
-          state: "off",
-        },
-        (data) => {
-          console.log(data);
-        }
-      );
-    }
+    // if (isActive) {
+    //   socket.emit(
+    //     "lights",
+    //     {
+    //       state: "on",
+    //     },
+    //     (data) => {
+    //       console.log(data);
+    //     }
+    //   );
+    // } else if (isActive != null) {
+    //   socket.emit(
+    //     "lights",
+    //     {
+    //       state: "off",
+    //     },
+    //     (data) => {
+    //       console.log(data);
+    //     }
+    //   );
+    // }
   }, [isActive]);
 
   // // manage socket connection
@@ -118,11 +117,62 @@ export const UserHome = (props, state) => {
       >
         Stop
       </div>
-      <div
+      {/* <div
         className={isActive ? "lightson" : "lightsoff"}
         onClick={toggleClass}
       >
-        Lights {isActive ? "On" : "Off"}
+        Rainbow Lights {isActive ? "On" : "Off"}
+      </div> */}
+
+      <div
+        className={isActive ? "lightson" : "lightsoff"}
+        onClick={(e: Event) => {
+          socket.emit(
+            "direction",
+            {
+              state: "off",
+              selection: 0,
+              ptrains: [0, 0],
+            },
+            (data) => {
+              //console.log(data);
+            }
+          );
+        }}
+      >
+        {(() => {
+          if (isActive) {
+            socket.emit(
+              "lights",
+              {
+                state: "on",
+              },
+              (data) => {
+                console.log(data);
+              }
+            );
+          } else if (isActive != null) {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+              },
+              (data) => {
+                console.log(data);
+              }
+            );
+          } else {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+              },
+              (data) => {
+                console.log(data);
+              }
+            );
+          }
+        })()}
       </div>
       <Link to="/about">About</Link>
     </Fragment>

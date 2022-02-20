@@ -132,8 +132,8 @@ io.sockets.on("connection", function(socket) {
       gpio.write(pin, false);
     }
   });
-  let rainbowInterval = null;
 
+  let rainbowInterval = null;
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -206,30 +206,10 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
-
-      // setTimeout(() => {
-      //   rainbowInterval.pause();
-      //   ws281x.reset();
-      //   ws281x.finalize();
-      // }, 5000);
-
-      // rainbowInterval = setInterval(() => {
-      //   if (timer) {
-      //     for (let i = 0; i < channel.count; i++) {
-      //       colorsArray[i] = colorwheel((offset + i) % 256);
-      //     }
-      //     offset = (offset + 1) % 256;
-      //     ws281x.render();
-      //   }
-      // }, 1000 / 30);
     } else {
       rainbowInterval.pause();
       ws281x.reset();
       ws281x.finalize();
-      // console.log(colorsArray);
-      // ws281x.reset();
-      // console.log("FINALIZE");
-      // ws281x.finalize();
     }
   });
 });
