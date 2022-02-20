@@ -127,52 +127,44 @@ export const UserHome = (props, state) => {
       <div
         className={isActive ? "lightson" : "lightsoff"}
         onClick={(e: Event) => {
-          socket.emit(
-            "direction",
-            {
-              state: "off",
-              selection: 0,
-              ptrains: [0, 0],
-            },
-            (data) => {
-              //console.log(data);
-            }
-          );
+          {
+            (() => {
+              if (isActive) {
+                socket.emit(
+                  "lights",
+                  {
+                    state: "on",
+                  },
+                  (data) => {
+                    console.log(data);
+                  }
+                );
+              } else if (isActive != null) {
+                socket.emit(
+                  "lights",
+                  {
+                    state: "off",
+                  },
+                  (data) => {
+                    console.log(data);
+                  }
+                );
+              } else {
+                socket.emit(
+                  "lights",
+                  {
+                    state: "off",
+                  },
+                  (data) => {
+                    console.log(data);
+                  }
+                );
+              }
+            })();
+          }
         }}
       >
-        {(() => {
-          if (isActive) {
-            socket.emit(
-              "lights",
-              {
-                state: "on",
-              },
-              (data) => {
-                console.log(data);
-              }
-            );
-          } else if (isActive != null) {
-            socket.emit(
-              "lights",
-              {
-                state: "off",
-              },
-              (data) => {
-                console.log(data);
-              }
-            );
-          } else {
-            socket.emit(
-              "lights",
-              {
-                state: "off",
-              },
-              (data) => {
-                console.log(data);
-              }
-            );
-          }
-        })()}
+        Lights {isActive ? "On" : "Off"}
       </div>
       <Link to="/about">About</Link>
     </Fragment>
