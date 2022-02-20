@@ -43,30 +43,29 @@ export const UserHome = (props, state) => {
     });
   }, [socket]);
 
-  useEffect(() => {
-    setActive(!isActive);
-    // if (isActive) {
-    //   socket.emit(
-    //     "lights",
-    //     {
-    //       state: "on",
-    //     },
-    //     (data) => {
-    //       console.log(data);
-    //     }
-    //   );
-    // } else if (isActive != null) {
-    //   socket.emit(
-    //     "lights",
-    //     {
-    //       state: "off",
-    //     },
-    //     (data) => {
-    //       console.log(data);
-    //     }
-    //   );
-    // }
-  }, [isActive]);
+  // useEffect(() => {
+  //   if (isActive) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "on",
+  //       },
+  //       (data) => {
+  //         console.log(data);
+  //       }
+  //     );
+  //   } else if (isActive != null) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "off",
+  //       },
+  //       (data) => {
+  //         console.log(data);
+  //       }
+  //     );
+  //   }
+  // }, [isActive]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
@@ -127,6 +126,7 @@ export const UserHome = (props, state) => {
       <div
         className={isActive ? "lightson" : "lightsoff"}
         onClick={(e: Event) => {
+          setActive(!isActive);
           {
             (() => {
               if (isActive) {
