@@ -206,9 +206,15 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
+
+      for (let i = 4; i < 8; i++) {
+        colorsArray[i] = 0xffcc22;
+      }
+      ws281x.render();
+
       rainbowInterval = new RecurringTimer(function() {
-        for (let i = 4; i < 9; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 1256);
+        for (let i = 8; i < 12; i++) {
+          colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
