@@ -142,7 +142,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 5,
+          count: 100,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -200,7 +200,7 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       rainbowInterval = new RecurringTimer(function() {
-        for (let i = 0; i < channel.count; i++) {
+        for (let i = 0; i < 4; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
