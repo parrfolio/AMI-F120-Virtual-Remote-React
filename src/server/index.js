@@ -134,6 +134,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   let rainbowInterval = null;
+  let rainbowInterval2 = null;
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -212,7 +213,7 @@ io.sockets.on("connection", function(socket) {
       }
       ws281x.render();
 
-      rainbowInterval = new RecurringTimer(function() {
+      rainbowInterval2 = new RecurringTimer(function() {
         for (let i = 8; i < 12; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
@@ -221,6 +222,7 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
     } else {
       rainbowInterval.pause();
+      rainbowInterval2.pause();
       ws281x.reset();
       ws281x.finalize();
     }
