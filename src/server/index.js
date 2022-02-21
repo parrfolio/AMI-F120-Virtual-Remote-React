@@ -40,45 +40,7 @@ const pulseDelay = 30;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
-//lights!
-// const lightpin = 18;
-// gpio.setup(lightpin, gpio.DIR_OUT);
-
-const sleep = (milliseconds) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
-
-const colorwheel = (pos) => {
-  pos = 255 - pos;
-  if (pos < 85) {
-    return rgb2Int(255 - pos * 3, 0, pos * 3);
-  } else if (pos < 170) {
-    pos -= 85;
-    return rgb2Int(0, pos * 3, 255 - pos * 3);
-  } else {
-    pos -= 170;
-    return rgb2Int(pos * 3, 255 - pos * 3, 0);
-  }
-};
-
-const rgb2Int = (r, g, b) => {
-  return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
-};
-
-// const channels = ws281x.init({
-//   dma: 10,
-//   freq: 800000,
-//   channels: [
-//     {
-//       count: 100,
-//       gpio: 18,
-//       invert: false,
-//       brightness: 255,
-//       stripType: "ws2812",
-//     },
-//   ],
-// });
-
+//PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
   socket.on("direction", function(data) {
@@ -133,8 +95,31 @@ io.sockets.on("connection", function(socket) {
     }
   });
 
+  //LIGHTS!
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
+  const colorwheel = (pos) => {
+    pos = 255 - pos;
+    if (pos < 85) {
+      return rgb2Int(255 - pos * 3, 0, pos * 3);
+    } else if (pos < 170) {
+      pos -= 85;
+      return rgb2Int(0, pos * 3, 255 - pos * 3);
+    } else {
+      pos -= 170;
+      return rgb2Int(pos * 3, 255 - pos * 3, 0);
+    }
+  };
+
+  const rgb2Int = (r, g, b) => {
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+  };
+
   let rainbowInterval = null;
   let rainbowInterval2 = null;
+
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -143,14 +128,14 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 100,
-          gpio: 18,
+          count: 60,
+          gpio: 23,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 100,
+          count: 60,
           gpio: 13,
           invert: false,
           brightness: 255,
