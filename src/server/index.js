@@ -120,6 +120,7 @@ io.sockets.on("connection", function(socket) {
   let rainbowInterval = null;
   let rainbowInterval2 = null;
   let rainbowInterval3 = null;
+  let rainbowInterval4 = null;
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
@@ -129,7 +130,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 60,
+          count: 68,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -219,10 +220,20 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
+
+      //neopixel stick
+      rainbowInterval4 = new RecurringTimer(function() {
+        for (let i = 60; i < 68; i++) {
+          colorsArray[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
     } else {
       rainbowInterval.pause();
       rainbowInterval2.pause();
       rainbowInterval3.pause();
+      rainbowInterval4.pause();
       ws281x.reset();
       ws281x.finalize();
     }
