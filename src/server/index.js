@@ -119,6 +119,7 @@ io.sockets.on("connection", function(socket) {
 
   let rainbowInterval = null;
   let rainbowInterval2 = null;
+  let rainbowInterval3 = null;
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
@@ -186,46 +187,33 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       rainbowInterval = new RecurringTimer(function() {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 8; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
-      for (let i = 4; i < 8; i++) {
+      for (let i = 8; i < 16; i++) {
         colorsArray[i] = 0xffcc22;
       }
       ws281x.render();
 
       rainbowInterval2 = new RecurringTimer(function() {
-        for (let i = 8; i < 12; i++) {
+        for (let i = 16; i < 24; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
-      for (let i = 12; i < 16; i++) {
+      for (let i = 24; i < 30; i++) {
         colorsArray[i] = 0xffcc22;
       }
       ws281x.render();
 
       rainbowInterval3 = new RecurringTimer(function() {
-        for (let i = 16; i < 20; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
-
-      for (let i = 20; i < 24; i++) {
-        colorsArray[i] = 0xffcc22;
-      }
-      ws281x.render();
-
-      rainbowInterval4 = new RecurringTimer(function() {
-        for (let i = 24; i < 28; i++) {
+        for (let i = 30; i < 60; i++) {
           colorsArray[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
@@ -235,7 +223,6 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval.pause();
       rainbowInterval2.pause();
       rainbowInterval3.pause();
-      rainbowInterval4.pause();
       ws281x.reset();
       ws281x.finalize();
     }
