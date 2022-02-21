@@ -129,7 +129,7 @@ io.sockets.on("connection", function(socket) {
       channels: [
         {
           count: 60,
-          gpio: 23,
+          gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
