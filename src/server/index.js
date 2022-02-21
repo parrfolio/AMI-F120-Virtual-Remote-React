@@ -205,9 +205,37 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
+
+      for (let i = 12; i < 16; i++) {
+        colorsArray[i] = 0xffcc22;
+      }
+      ws281x.render();
+
+      rainbowInterval3 = new RecurringTimer(function() {
+        for (let i = 16; i < 20; i++) {
+          colorsArray[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
+
+      for (let i = 20; i < 24; i++) {
+        colorsArray[i] = 0xffcc22;
+      }
+      ws281x.render();
+
+      rainbowInterval4 = new RecurringTimer(function() {
+        for (let i = 24; i < 28; i++) {
+          colorsArray[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
     } else {
       rainbowInterval.pause();
       rainbowInterval2.pause();
+      rainbowInterval3.pause();
+      rainbowInterval4.pause();
       ws281x.reset();
       ws281x.finalize();
     }
