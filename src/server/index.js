@@ -133,7 +133,7 @@ io.sockets.on("connection", function(socket) {
           count: 68,
           gpio: 18,
           invert: false,
-          brightness: 255,
+          brightness: 10,
           stripType: "ws2812",
         },
         {
@@ -196,7 +196,7 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
 
       for (let i = 8; i < 16; i++) {
-        colorsArray[i] = 0xffcc22;
+        ` colorsArray[i] = 0xffcc22;`;
       }
       ws281x.render();
 
@@ -234,6 +234,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval2.pause();
       rainbowInterval3.pause();
       rainbowInterval4.pause();
+
       ws281x.reset();
       ws281x.finalize();
     }
