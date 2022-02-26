@@ -19,7 +19,7 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
 
-  const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState(null);
 
   const toggleClass = () => {
     setActive(!isActive);
@@ -44,11 +44,9 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
-    console.log("Lights Active or Not?", isActive);
-
-    let currentLightState = props.location.state.lightsActive;
-
-    setActive(currentLightState);
+    console.log("Lights in View", isActive);
+    setActive(props.location.state.lightsActive);
+    console.log("From Route Light Active", props.location.state.lightsActive);
 
     if (isActive) {
       socket.emit(
@@ -60,7 +58,7 @@ export const UserHome = (props, state) => {
           console.log(data);
         }
       );
-    } else if (!isActive) {
+    } else if (isActive != null) {
       socket.emit(
         "lights",
         {
