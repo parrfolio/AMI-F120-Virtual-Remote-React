@@ -19,7 +19,7 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
 
-  const [isActive, setActive] = useState(null);
+  const [isActive, setActive] = useState(false);
 
   const toggleClass = () => {
     setActive(!isActive);
@@ -45,6 +45,11 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     console.log("Lights Active or Not?", isActive);
+
+    let currentLightState = props.location.state.lightsActive;
+
+    setActive(currentLightState);
+
     if (isActive) {
       socket.emit(
         "lights",
@@ -55,7 +60,7 @@ export const UserHome = (props, state) => {
           console.log(data);
         }
       );
-    } else if (isActive != null) {
+    } else {
       socket.emit(
         "lights",
         {
@@ -77,6 +82,7 @@ export const UserHome = (props, state) => {
   // };
 
   const { jukebox } = props;
+
   console.log(props);
   const jukebox_data = jukebox.map((selection, index) => {
     return (
