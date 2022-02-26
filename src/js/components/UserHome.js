@@ -44,6 +44,7 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
+    console.log("Lights Active or Not?", isActive);
     if (isActive) {
       socket.emit(
         "lights",
@@ -122,14 +123,7 @@ export const UserHome = (props, state) => {
       >
         Rainbow Lights {isActive ? "On" : "Off"}
       </div>
-      <Link
-        to="/about"
-        onClick={() => {
-          setActive((isActive) => !isActive);
-        }}
-      >
-        About
-      </Link>
+      <Link to="/about">About</Link>
     </Fragment>
   );
 };
