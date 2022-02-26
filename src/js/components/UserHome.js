@@ -19,7 +19,9 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
 
-  const [isActive, setActive] = useState(props.location.state != undefined);
+  const [isActive, setActive] = useState(
+    props.location.state != undefined && props.location.state != null
+  );
 
   const toggleClass = () => {
     setActive(!isActive);
