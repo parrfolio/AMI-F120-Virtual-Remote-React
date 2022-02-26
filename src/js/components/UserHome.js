@@ -48,9 +48,10 @@ export const UserHome = (props, state) => {
     // setActive(props.location.state.lightsActive);
     console.log("From Route Light Active", props.location.state.lightsActive);
 
-    if (props.location.state.lightsActive) {
-      setActive(true);
-    }
+    // if (props.location.state.lightsActive) {
+    //   setActive(true);
+    // }
+    if (!props.location.state.lightsActive) return;
 
     if (isActive) {
       socket.emit(
