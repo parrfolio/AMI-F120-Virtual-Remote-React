@@ -122,7 +122,9 @@ export const UserHome = (props, state) => {
       >
         Rainbow Lights {isActive ? "On" : "Off"}
       </div>
-      <Link to="/about">About</Link>
+      <Link to="/about" onClick={toggleClass}>
+        About
+      </Link>
     </Fragment>
   );
 };
