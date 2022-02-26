@@ -14,6 +14,8 @@ export const About = (props, state) => {
   //     return <div key={index}></div>;
   //   });
 
+  console.log(props);
+
   return loading ? (
     <div>Loading....</div>
   ) : (
