@@ -196,7 +196,7 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
 
       for (let i = 8; i < 16; i++) {
-        ` colorsArray[i] = 0xffcc22;`;
+        colorsArray[i] = 0xffcc22;
       }
       ws281x.render();
 
