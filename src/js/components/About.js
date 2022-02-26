@@ -16,8 +16,6 @@ export const About = (props, state) => {
 
   console.log(props);
 
-  const { state } = props.location;
-
   return loading ? (
     <div>Loading....</div>
   ) : (
@@ -27,7 +25,7 @@ export const About = (props, state) => {
         to={{
           pathname: "/home",
           state: {
-            lightsActive: state,
+            lightsActive: props.location.state,
           },
         }}
       >
