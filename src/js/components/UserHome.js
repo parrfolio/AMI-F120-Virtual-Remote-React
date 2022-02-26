@@ -45,7 +45,7 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     console.log("Lights in View", isActive);
-    setActive(props.location.state.lightsActive);
+    // setActive(props.location.state.lightsActive);
     console.log("From Route Light Active", props.location.state.lightsActive);
 
     if (isActive) {
