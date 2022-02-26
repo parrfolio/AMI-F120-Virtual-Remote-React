@@ -16,12 +16,23 @@ export const About = (props, state) => {
 
   console.log(props);
 
+  const { state } = props.location;
+
   return loading ? (
     <div>Loading....</div>
   ) : (
     <Fragment>
       <div>About Page</div>
-      <Link to="/home">Home</Link>
+      <Link
+        to={{
+          pathname: "/home",
+          state: {
+            lightsActive: state,
+          },
+        }}
+      >
+        Home
+      </Link>
     </Fragment>
   );
 };
