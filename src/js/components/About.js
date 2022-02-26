@@ -22,12 +22,12 @@ export const About = (props, state) => {
     <Fragment>
       <div>About Page</div>
       <Link
-        to={{
-          pathname: "/home",
-          state: {
-            lightsActive: props.location.state,
+        to={
+          ({
+            pathname: "/home",
           },
-        }}
+          props.location.state)
+        }
       >
         Home
       </Link>
