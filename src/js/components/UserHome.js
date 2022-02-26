@@ -51,7 +51,9 @@ export const UserHome = (props, state) => {
     // if (props.location.state.lightsActive) {
     //   setActive(true);
     // }
-    if (!props.location.state.lightsActive) return;
+
+    const lightprops = props.location.state.lightsActive;
+    if (!lightprops) return;
 
     if (isActive) {
       socket.emit(
