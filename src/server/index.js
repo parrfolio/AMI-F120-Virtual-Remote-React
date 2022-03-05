@@ -147,8 +147,9 @@ io.sockets.on("connection", function(socket) {
     });
 
     let offset = 0;
-    let channel = channels[0];
-    let colorsArray = channel.array;
+    let channel1 = channels[0];
+    let colorsArray1 = channel1.array;
+
     let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
@@ -189,33 +190,33 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < 8; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 256);
+          colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
       for (let i = 8; i < 16; i++) {
-        colorsArray[i] = 0xffcc22;
+        colorsArray1[i] = 0xffcc22;
       }
       ws281x.render();
 
       rainbowInterval2 = new RecurringTimer(function() {
         for (let i = 16; i < 24; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 256);
+          colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
       for (let i = 24; i < 30; i++) {
-        colorsArray[i] = 0xffcc22;
+        colorsArray1[i] = 0xffcc22;
       }
       ws281x.render();
 
       rainbowInterval3 = new RecurringTimer(function() {
         for (let i = 30; i < 60; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 256);
+          colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
@@ -224,7 +225,7 @@ io.sockets.on("connection", function(socket) {
       //neopixel stick
       rainbowInterval4 = new RecurringTimer(function() {
         for (let i = 60; i < 68; i++) {
-          colorsArray[i] = colorwheel((offset + i) % 256);
+          colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
