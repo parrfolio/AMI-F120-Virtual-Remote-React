@@ -135,7 +135,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 10,
+          count: 68,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -253,6 +253,7 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
+
       rainbowInterval6 = new RecurringTimer(function() {
         for (let i = 60; i < 120; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
@@ -272,7 +273,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval6.pause();
 
       ws281x.reset();
-      ws281x.finalize();
+      //ws281x.finalize();
     }
   });
 });
