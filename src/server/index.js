@@ -135,7 +135,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 68,
+          count: 10,
           gpio: 18,
           invert: false,
           brightness: 255,

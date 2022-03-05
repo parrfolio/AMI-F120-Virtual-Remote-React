@@ -174,10 +174,21 @@ cp -r ~/rpi_ws281x ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/src
 cd ~/node_modules/@gbkwiatt/node-rpi-ws281x-native/
 
 // run rebuild
-node-gyp rebuild
+sudo node-gyp rebuild
+
+// run build
+npm run build
+
+//start
+npm start
+
 
 //anoter potential fix
 $ npm install rpi-ws281x-native@latest
 $ git clone --single-branch --branch raspi4support https://github.com/jimbotel/rpi_ws281x.git
 $ cp -r rpi_ws281x/* node_modules/rpi-ws281x-native/src/rpi_ws281x
 $ npm build node_modules/rpi-ws281x-native
+
+
+//also had to fix the hardcoding of channel 1 if you are using mutple gpio's and channels as I am
+More info here: https://github.com/beyondscreen/node-rpi-ws281x-native/commit/49c7018da34df5cd8f9d653ba0f17f8141365327
