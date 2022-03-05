@@ -247,6 +247,11 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
+
+      for (let i = 60; i < 120; i++) {
+        colorsArray2[i] = 0xffcc22;
+      }
+      ws281x.render();
     } else {
       rainbowInterval.pause();
       rainbowInterval2.pause();
