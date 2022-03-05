@@ -117,6 +117,15 @@ io.sockets.on("connection", function(socket) {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
+  //channel 1 strips
+  let rainbowInterval = null;
+  let rainbowInterval2 = null;
+  let rainbowInterval3 = null;
+  let rainbowInterval4 = null;
+
+  //channel 2 strips
+  let rainbowInterval5 = null;
+
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -143,20 +152,13 @@ io.sockets.on("connection", function(socket) {
 
     let offset = 0;
     //channel 1
-    let rainbowInterval = null;
-    let rainbowInterval2 = null;
-    let rainbowInterval3 = null;
-    let rainbowInterval4 = null;
     let channel1 = channels[0];
     let colorsArray1 = channel1.array;
-
     //channel 2
-    let rainbowInterval5 = null;
     let channel2 = channels[1];
     let colorsArray2 = channel2.array;
 
     let timer = true;
-
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
@@ -167,7 +169,6 @@ io.sockets.on("connection", function(socket) {
       });
     });
 
-    //timer function for fades
     function RecurringTimer(callback, delay) {
       var timerId,
         start,
@@ -195,7 +196,6 @@ io.sockets.on("connection", function(socket) {
     }
 
     if (data.state === "on") {
-      //channel 1 strips
       rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < 8; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
@@ -239,19 +239,14 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      //channel 2 strips
+      //channel 2 stips
       rainbowInterval5 = new RecurringTimer(function() {
-        for (let i = 60; i < 24; i++) {
-          colorsArray1[i] = colorwheel((offset + i) % 256);
+        for (let i = 0; i < 60; i++) {
+          colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
-
-      for (let i = 24; i < 30; i++) {
-        colorsArray1[i] = 0xffcc22;
-      }
-      ws281x.render();
     } else {
       rainbowInterval.pause();
       rainbowInterval2.pause();
