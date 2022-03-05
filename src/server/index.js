@@ -143,7 +143,7 @@ io.sockets.on("connection", function(socket) {
         },
         {
           count: 120,
-          gpio: 10,
+          gpio: 13,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
@@ -159,6 +159,8 @@ io.sockets.on("connection", function(socket) {
     //channel 2 strips
     let channel2 = channels[1];
     let colorsArray2 = channel2.array;
+
+    console.log(colorsArray2.length);
 
     let timer = true;
 
@@ -245,7 +247,7 @@ io.sockets.on("connection", function(socket) {
 
       //channel 2 stips
       rainbowInterval5 = new RecurringTimer(function() {
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 120; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
