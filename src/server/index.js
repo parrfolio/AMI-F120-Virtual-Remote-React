@@ -117,6 +117,16 @@ io.sockets.on("connection", function(socket) {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
+  //channel 1 strips
+  let rainbowInterval = null;
+  let rainbowInterval2 = null;
+  let rainbowInterval3 = null;
+  let rainbowInterval4 = null;
+
+  //channel 2 strips
+  let rainbowInterval5 = null;
+  let rainbowInterval6 = null;
+
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -143,20 +153,15 @@ io.sockets.on("connection", function(socket) {
 
     let offset = 0;
     //channel 1 strips
-    let rainbowInterval = null;
-    let rainbowInterval2 = null;
-    let rainbowInterval3 = null;
-    let rainbowInterval4 = null;
     let channel1 = channels[0];
     let colorsArray1 = channel1.array;
 
     //channel 2 strips
-    let rainbowInterval5 = null;
-    let rainbowInterval6 = null;
     let channel2 = channels[1];
     let colorsArray2 = channel2.array;
 
     let timer = true;
+
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
