@@ -117,15 +117,6 @@ io.sockets.on("connection", function(socket) {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
-  //channel 1 strips
-  let rainbowInterval = null;
-  let rainbowInterval2 = null;
-  let rainbowInterval3 = null;
-  let rainbowInterval4 = null;
-
-  //channel 2 strips
-  let rainbowInterval5 = null;
-
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -151,10 +142,17 @@ io.sockets.on("connection", function(socket) {
     });
 
     let offset = 0;
-    //channel 1
+    //channel 1 strips
+    let rainbowInterval = null;
+    let rainbowInterval2 = null;
+    let rainbowInterval3 = null;
+    let rainbowInterval4 = null;
     let channel1 = channels[0];
     let colorsArray1 = channel1.array;
-    //channel 2
+
+    //channel 2 strips
+    let rainbowInterval5 = null;
+    let rainbowInterval6 = null;
     let channel2 = channels[1];
     let colorsArray2 = channel2.array;
 
@@ -196,6 +194,7 @@ io.sockets.on("connection", function(socket) {
     }
 
     if (data.state === "on") {
+      //channel 1 strips
       rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < 8; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
@@ -230,7 +229,7 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      //neopixel stick
+      //channel 1 neopixel sticks
       rainbowInterval4 = new RecurringTimer(function() {
         for (let i = 60; i < 68; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
@@ -248,16 +247,23 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      for (let i = 60; i < 120; i++) {
-        colorsArray2[i] = 0xffcc22;
-      }
-      ws281x.render();
+      rainbowInterval6 = new RecurringTimer(function() {
+        for (let i = 60; i < 120; i++) {
+          colorsArray2[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
     } else {
+      //channel 1 strips
       rainbowInterval.pause();
       rainbowInterval2.pause();
       rainbowInterval3.pause();
       rainbowInterval4.pause();
+
+      //channel 2 strips
       rainbowInterval5.pause();
+      rainbowInterval6.pause();
 
       ws281x.reset();
       ws281x.finalize();
