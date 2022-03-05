@@ -150,6 +150,7 @@ io.sockets.on("connection", function(socket) {
         },
       ],
     });
+    ws281x.reset();
 
     let offset = 0;
     //channel 1 strips
