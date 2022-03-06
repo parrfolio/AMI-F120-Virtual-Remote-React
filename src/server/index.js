@@ -272,7 +272,11 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval5.pause();
       rainbowInterval6.pause();
 
-      ws281x.reset();
+      process.on("SIGINT", function() {
+        ws281x.reset();
+      });
+
+      //      ws281x.reset();
       //ws281x.finalize();
     }
   });
