@@ -198,6 +198,7 @@ io.sockets.on("connection", function(socket) {
       this.pause = pause;
 
       this.resume();
+      ws281x.reset();
     }
 
     if (data.state === "on") {
@@ -272,11 +273,6 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval5.pause();
       rainbowInterval6.pause();
 
-      process.on("SIGINT", function() {
-        ws281x.reset();
-      });
-
-      //      ws281x.reset();
       //ws281x.finalize();
     }
   });
