@@ -192,3 +192,11 @@ $ npm build node_modules/rpi-ws281x-native
 
 //also had to fix the hardcoding of channel 1 if you are using mutple gpio's and channels as I am
 More info here: https://github.com/beyondscreen/node-rpi-ws281x-native/commit/49c7018da34df5cd8f9d653ba0f17f8141365327
+
+
+// pins that can be used
+    PWM0, which can be set to use GPIOs 12, 18, 40, and 52.
+        Only 12 (pin 32) and 18 (pin 12) are available on the B+/2B/3B
+
+     PWM1 which can be set to use GPIOs 13, 19, 41, 45 and 53.
+        Only 13 is available on the B+/2B/PiZero/3B, on pin 33

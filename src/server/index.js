@@ -271,10 +271,8 @@ io.sockets.on("connection", function(socket) {
       //channel 2 strips
       rainbowInterval5.pause();
       rainbowInterval6.pause();
-      setTimeout(() => {
-        ws281x.reset();
-      }, 2000);
 
+      ws281x.reset();
       //ws281x.finalize();
     }
   });
