@@ -203,13 +203,13 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       //channel 1 strips
-      // rainbowInterval = new RecurringTimer(function() {
-      //   for (let i = 0; i < 8; i++) {
-      //     colorsArray1[i] = colorwheel((offset + i) % 256);
-      //   }
-      //   offset = (offset + 1) % 256;
-      //   ws281x.render();
-      // }, 1000 / 30);
+      rainbowInterval = new RecurringTimer(function() {
+        for (let i = 0; i < 8; i++) {
+          colorsArray1[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
 
       // for (let i = 8; i < 16; i++) {
       //   colorsArray1[i] = 0xffcc22;
@@ -264,7 +264,7 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
     } else {
       //channel 1 strips
-      // rainbowInterval.pause();
+      rainbowInterval.pause();
       // rainbowInterval2.pause();
       // rainbowInterval3.pause();
       // rainbowInterval4.pause();
