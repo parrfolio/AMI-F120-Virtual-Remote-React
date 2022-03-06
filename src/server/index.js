@@ -139,18 +139,17 @@ io.sockets.on("connection", function(socket) {
           gpio: 18,
           invert: false,
           brightness: 255,
-          stripType: "ws2812",
+          stripType: ws281x.stripType.WS2812,
         },
         {
           count: 120,
           gpio: 13,
           invert: false,
           brightness: 255,
-          stripType: "ws2812",
+          stripType: ws281x.stripType.WS2812,
         },
       ],
     });
-    ws281x.reset();
 
     let offset = 0;
     //channel 1 strips
@@ -184,7 +183,6 @@ io.sockets.on("connection", function(socket) {
         console.log("pause was called");
         clearTimeout(timerId);
         remaining -= new Date() - start;
-        ws281x.reset();
       };
 
       let resume = function() {
