@@ -135,7 +135,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 60,
+          count: 68,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -160,8 +160,6 @@ io.sockets.on("connection", function(socket) {
     let channel2 = channels[1];
     let colorsArray2 = channel2.array;
 
-    console.log(colorsArray2.length);
-
     let timer = true;
 
     //only when the app terminates the ligts turn off with node Signal Int
@@ -181,11 +179,7 @@ io.sockets.on("connection", function(socket) {
 
       var pause = function() {
         console.log("pause was called");
-        while (timerId--) {
-          clearTimeout(timerId);
-          ws281x.reset();
-        }
-
+        clearTimeout(timerId);
         remaining -= new Date() - start;
       };
 
@@ -207,7 +201,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       //channel 1 strips
       rainbowInterval = new RecurringTimer(function() {
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 8; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
@@ -257,14 +251,6 @@ io.sockets.on("connection", function(socket) {
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
-
-      rainbowInterval6 = new RecurringTimer(function() {
-        for (let i = 60; i < 120; i++) {
-          colorsArray2[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
     } else {
       //channel 1 strips
       rainbowInterval.pause();
@@ -276,6 +262,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval5.pause();
       rainbowInterval6.pause();
 
+      ws281x.reset();
       //ws281x.finalize();
     }
   });
