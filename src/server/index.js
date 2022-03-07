@@ -161,7 +161,6 @@ io.sockets.on("connection", function(socket) {
     let colorsArray2 = channel2.array;
 
     let timer = true;
-
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
@@ -245,7 +244,15 @@ io.sockets.on("connection", function(socket) {
 
       //channel 2 stips
       rainbowInterval5 = new RecurringTimer(function() {
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 60; i++) {
+          colorsArray2[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
+
+      rainbowInterval6 = new RecurringTimer(function() {
+        for (let i = 60; i < 120; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
@@ -263,7 +270,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval6.pause();
 
       ws281x.reset();
-      //ws281x.finalize();
+      ws281x.finalize();
     }
   });
 });
