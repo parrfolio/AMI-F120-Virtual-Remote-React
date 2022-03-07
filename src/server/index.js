@@ -185,7 +185,7 @@ io.sockets.on("connection", function(socket) {
         ws281x.reset();
 
         while (timerId--) {
-          window.clearTimeout(timerId);
+          clearTimeout(timerId);
         }
 
         remaining -= new Date() - start;
