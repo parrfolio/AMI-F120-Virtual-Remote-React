@@ -182,6 +182,7 @@ io.sockets.on("connection", function(socket) {
       var pause = function() {
         console.log("pause was called");
         clearTimeout(timerId);
+        ws281x.reset();
         remaining -= new Date() - start;
       };
 
@@ -272,8 +273,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval5.pause();
       rainbowInterval6.pause();
 
-      ws281x.reset();
-      ws281x.finalize();
+      //ws281x.finalize();
     }
   });
 });
