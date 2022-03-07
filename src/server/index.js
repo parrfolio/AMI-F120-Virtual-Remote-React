@@ -139,7 +139,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: new Uint32Array(NUM_LEDS1),
+          count: NUM_LEDS1,
           gpio: 18,
           invert: false,
           brightness: 255,
