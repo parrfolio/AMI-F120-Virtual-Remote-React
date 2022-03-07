@@ -130,12 +130,16 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
+    var NUM_LEDS1 = parseInt(process.argv[2], 68) || 68;
+
+    console.log(NUM_LEDS1);
+
     let channels = ws281x.init({
       dma: 10,
       freq: 800000,
       channels: [
         {
-          count: 68,
+          count: NUM_LEDS1,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -155,6 +159,8 @@ io.sockets.on("connection", function(socket) {
     //channel 1 strips
     let channel1 = channels[0];
     let colorsArray1 = channel1.array;
+
+    new Uint32Array(NUM_LEDS);
 
     //channel 2 strips
     let channel2 = channels[1];
