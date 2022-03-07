@@ -139,7 +139,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: NUM_LEDS1,
+          count: new Uint32Array(NUM_LEDS1),
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -159,8 +159,6 @@ io.sockets.on("connection", function(socket) {
     //channel 1 strips
     let channel1 = channels[0];
     let colorsArray1 = channel1.array;
-
-    new Uint32Array(NUM_LEDS);
 
     //channel 2 strips
     let channel2 = channels[1];
