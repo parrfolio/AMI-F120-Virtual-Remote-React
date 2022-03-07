@@ -183,6 +183,11 @@ io.sockets.on("connection", function(socket) {
         console.log("pause was called");
         clearTimeout(timerId);
         ws281x.reset();
+
+        while (timerId--) {
+          window.clearTimeout(timerId);
+        }
+
         remaining -= new Date() - start;
       };
 
