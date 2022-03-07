@@ -130,16 +130,12 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
-    var NUM_LEDS1 = parseInt(process.argv[2], 68) || 68;
-
-    console.log(NUM_LEDS1);
-
     let channels = ws281x.init({
       dma: 10,
       freq: 800000,
       channels: [
         {
-          count: NUM_LEDS1,
+          count: 68,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -277,7 +273,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval6.pause();
 
       ws281x.reset();
-      //ws281x.finalize();
+      ws281x.finalize();
     }
   });
 });
