@@ -135,15 +135,15 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 120,
-          gpio: 18,
+          count: 68,
+          gpio: 13,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 68,
-          gpio: 13,
+          count: 120,
+          gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
