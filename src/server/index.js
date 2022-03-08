@@ -135,14 +135,14 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 120,
+          count: 68,
           gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 68,
+          count: 120,
           gpio: 13,
           invert: false,
           brightness: 255,
@@ -155,7 +155,6 @@ io.sockets.on("connection", function(socket) {
     //channel 1 strips
     let channel1 = channels[0];
     let colorsArray1 = channel1.array;
-
     //channel 2 strips
     let channel2 = channels[1];
     let colorsArray2 = channel2.array;

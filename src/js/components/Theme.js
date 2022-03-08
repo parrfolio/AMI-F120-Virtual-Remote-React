@@ -6,9 +6,9 @@ const Theme = ({ children }) => (
     theme={{
       primaryFont: "SFProDisplayRegular",
       secondaryFont: "SFProDisplayBold",
-      textColor: "#333",
-      backgroundColor: "#fff",
-      borderColor: "#333",
+      textColor: "#fff",
+      backgroundColor: "#111",
+      borderColor: "#fff",
       ...media,
     }}
   >
