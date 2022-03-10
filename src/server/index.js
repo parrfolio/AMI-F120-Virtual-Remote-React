@@ -143,7 +143,7 @@ io.sockets.on("connection", function(socket) {
         },
         {
           count: 120,
-          gpio: 12,
+          gpio: 19,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
