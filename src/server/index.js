@@ -259,14 +259,19 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
     } else {
       //channel 1 strips
-      rainbowInterval.pause().reset();
-      rainbowInterval2.pause().reset();
-      rainbowInterval3.pause().reset();
-      rainbowInterval4.pause().reset();
-
+      rainbowInterval.pause();
+      ws281x.reset();
+      rainbowInterval2.pause();
+      ws281x.reset();
+      rainbowInterval3.pause();
+      ws281x.reset();
+      rainbowInterval4.pause();
+      ws281x.reset();
       //channel 2 strips
-      rainbowInterval5.pause().reset();
-      rainbowInterval6.pause().reset();
+      rainbowInterval5.pause();
+      ws281x.reset();
+      rainbowInterval6.pause();
+      ws281x.reset();
 
       ws281x.finalize();
     }
