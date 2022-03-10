@@ -203,6 +203,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
+        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -216,6 +217,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
+        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -229,6 +231,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
+        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -238,6 +241,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
+        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -247,6 +251,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
+        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -255,6 +260,7 @@ io.sockets.on("connection", function(socket) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
+        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
     } else {
