@@ -203,7 +203,6 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -217,7 +216,6 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -231,7 +229,6 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -241,7 +238,6 @@ io.sockets.on("connection", function(socket) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -251,7 +247,6 @@ io.sockets.on("connection", function(socket) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
 
@@ -260,21 +255,19 @@ io.sockets.on("connection", function(socket) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
-        ws281x.reset();
         ws281x.render();
       }, 1000 / 30);
     } else {
       //channel 1 strips
-      rainbowInterval.pause();
-      rainbowInterval2.pause();
-      rainbowInterval3.pause();
-      rainbowInterval4.pause();
+      rainbowInterval.pause().reset();
+      rainbowInterval2.pause().reset();
+      rainbowInterval3.pause().reset();
+      rainbowInterval4.pause().reset();
 
       //channel 2 strips
-      rainbowInterval5.pause();
-      rainbowInterval6.pause();
+      rainbowInterval5.pause().reset();
+      rainbowInterval6.pause().reset();
 
-      ws281x.reset();
       ws281x.finalize();
     }
   });
