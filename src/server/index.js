@@ -155,10 +155,10 @@ io.sockets.on("connection", function(socket) {
 
     let offset = 0;
     //channel 1 strips
-    let channel1 = channels[0];
+    let channel1 = channels[1];
     let colorsArray1 = channel1.array;
     //channel 2 strips
-    let channel2 = channels[1];
+    let channel2 = channels[0];
     let colorsArray2 = channel2.array;
 
     let timer = true;
