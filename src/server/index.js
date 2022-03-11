@@ -143,13 +143,15 @@ io.sockets.on("connection", function(socket) {
         },
         {
           count: 120,
-          gpio: 19,
+          gpio: 13,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
       ],
     });
+
+    // gpio: 19 works as well
 
     let offset = 0;
     //channel 1 strips
@@ -260,19 +262,15 @@ io.sockets.on("connection", function(socket) {
     } else {
       //channel 1 strips
       rainbowInterval.pause();
-      ws281x.reset();
       rainbowInterval2.pause();
-      ws281x.reset();
       rainbowInterval3.pause();
-      ws281x.reset();
       rainbowInterval4.pause();
-      ws281x.reset();
+
       //channel 2 strips
       rainbowInterval5.pause();
-      ws281x.reset();
       rainbowInterval6.pause();
-      ws281x.reset();
 
+      ws281x.reset();
       ws281x.finalize();
     }
   });
