@@ -123,7 +123,7 @@ io.sockets.on("connection", function(socket) {
   let rainbowInterval3 = null;
   let rainbowInterval4 = null;
 
-  //channel 2 strips
+  //channel 2 strips here
   let rainbowInterval5 = null;
   let rainbowInterval6 = null;
 
@@ -135,14 +135,14 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 120,
+          count: 68,
           gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 68,
+          count: 120,
           gpio: 13,
           invert: false,
           brightness: 255,
@@ -155,10 +155,10 @@ io.sockets.on("connection", function(socket) {
 
     let offset = 0;
     //channel 1 strips
-    let channel1 = channels[1];
+    let channel1 = channels[0];
     let colorsArray1 = channel1.array;
     //channel 2 strips
-    let channel2 = channels[0];
+    let channel2 = channels[1];
     let colorsArray2 = channel2.array;
 
     let timer = true;
