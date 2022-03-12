@@ -42,7 +42,7 @@ gpio.setup(pin, gpio.DIR_OUT);
 //PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
-  socket.on("direction", function(data) {
+  socket.on("direction", (data, callback) => {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
     console.log("===-- SELECTION --===", data.selection);
@@ -88,7 +88,7 @@ io.sockets.on("connection", function(socket) {
       })();
 
       callback({
-        status: true,
+        status: false,
       });
     } else if (data.state === "off") {
       gpio.write(pin, false);
