@@ -42,6 +42,26 @@ gpio.setup(pin, gpio.DIR_OUT);
 //PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
+  let channels = ws281x.init({
+    dma: 10,
+    freq: 800000,
+    channels: [
+      {
+        count: ledCount,
+        gpio: 18,
+        invert: false,
+        brightness: 255,
+        stripType: "ws2812",
+      },
+      {
+        count: ledCount,
+        gpio: 13,
+        invert: false,
+        brightness: 255,
+        stripType: "ws2812",
+      },
+    ],
+  });
   socket.on("direction", function(data) {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
@@ -186,27 +206,6 @@ io.sockets.on("connection", function(socket) {
     console.log("Lights", data.state);
 
     let ledCount = 300;
-
-    let channels = ws281x.init({
-      dma: 10,
-      freq: 800000,
-      channels: [
-        {
-          count: ledCount,
-          gpio: 18,
-          invert: false,
-          brightness: 255,
-          stripType: "ws2812",
-        },
-        {
-          count: ledCount,
-          gpio: 13,
-          invert: false,
-          brightness: 255,
-          stripType: "ws2812",
-        },
-      ],
-    });
 
     // gpio: 19 works as well
 
