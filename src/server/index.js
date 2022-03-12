@@ -141,13 +141,13 @@ io.sockets.on("connection", function(socket) {
           brightness: 255,
           stripType: "ws2812",
         },
-        // {
-        //   count: 120,
-        //   gpio: 13,
-        //   invert: false,
-        //   brightness: 255,
-        //   stripType: "ws2812",
-        // },
+        {
+          count: 68,
+          gpio: 13,
+          invert: false,
+          brightness: 255,
+          stripType: "ws2812",
+        },
       ],
     });
 
@@ -155,8 +155,8 @@ io.sockets.on("connection", function(socket) {
 
     let offset = 0;
     //channel 1 strips
-    // let channel1 = channels[0];
-    // let colorsArray1 = channel1.array;
+    let channel1 = channels[1];
+    let colorsArray1 = channel1.array;
     //channel 2 strips
     let channel2 = channels[0];
     let colorsArray2 = channel2.array;
@@ -200,13 +200,13 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       //channel 1 strips
-      // rainbowInterval = new RecurringTimer(function() {
-      //   for (let i = 0; i < 8; i++) {
-      //     colorsArray1[i] = colorwheel((offset + i) % 256);
-      //   }
-      //   offset = (offset + 1) % 256;
-      //   ws281x.render();
-      // }, 1000 / 30);
+      rainbowInterval = new RecurringTimer(function() {
+        for (let i = 0; i < 68; i++) {
+          colorsArray1[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
 
       // for (let i = 8; i < 16; i++) {
       //   colorsArray1[i] = 0xffcc22;
