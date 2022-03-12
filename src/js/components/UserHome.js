@@ -45,9 +45,9 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
-    console.log("Lights in View", isActive);
+    //console.log("Lights in View", isActive);
     // setActive(props.location.state.lightsActive);
-    console.log("From Route Light Active", props.location.state);
+    //console.log("From Route Light Active", props.location.state);
 
     // if (props.location.state.lightsActive) {
     //   setActive(true);
@@ -100,8 +100,8 @@ export const UserHome = (props, state) => {
 
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
+            console.log(response);
             if (response.status) {
-              console.log(response);
               setActive(true);
             }
           });
