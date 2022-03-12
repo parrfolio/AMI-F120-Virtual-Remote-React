@@ -108,6 +108,7 @@ export const UserHome = (props, state) => {
     <Fragment>
       <Block>{jukebox_data}</Block>
       <div
+        className={isActive ? "lightson" : "lightsoff"}
         onClick={(e: Event) => {
           console.log("turned it off");
           {
