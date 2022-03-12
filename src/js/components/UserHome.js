@@ -96,9 +96,9 @@ export const UserHome = (props, state) => {
           {
             toggleClass;
           }
-          socket.emit("direction", selection.select, (data) => {
-            //console.log(data);
-          });
+          // socket.emit("direction", selection.select, (data) => {
+          //   //console.log(data);
+          // });
         }}
       >
         Selection {selection.id} - {selection.songTitle}
