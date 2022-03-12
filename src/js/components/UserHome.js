@@ -91,7 +91,15 @@ export const UserHome = (props, state) => {
       <div
         key={selection.id}
         onClick={(e: Event) => {
-          console.log("turned it on");
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+            },
+            (data) => {
+              console.log("turned lights off!");
+            }
+          );
           socket.emit("direction", selection.select, (data) => {
             //console.log(data);
           });
@@ -108,12 +116,7 @@ export const UserHome = (props, state) => {
     <Fragment>
       <Block>{jukebox_data}</Block>
       <div
-        className={isActive ? "lightson" : "lightsoff"}
         onClick={(e: Event) => {
-          console.log("turned it off");
-          {
-            toggleClass;
-          }
           socket.emit(
             "direction",
             {
