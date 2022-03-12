@@ -255,7 +255,7 @@ io.sockets.on("connection", function(socket) {
       rainbowInterval.pause();
       rainbowInterval2.pause();
       //channel 2 strips
-      ainbowInterval3.pause();
+      rainbowInterval3.pause();
       rainbowInterval4.pause();
       ws281x.finalize();
     }
