@@ -101,6 +101,7 @@ export const UserHome = (props, state) => {
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
             if (response.status) {
+              console.log(response);
               setActive(true);
             }
           });
