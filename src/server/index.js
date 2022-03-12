@@ -130,7 +130,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
-    let ledCount = 308;
+    let ledCount = 240;
 
     let channels = ws281x.init({
       dma: 10,
