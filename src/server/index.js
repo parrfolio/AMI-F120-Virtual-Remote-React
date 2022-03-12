@@ -117,59 +117,59 @@ io.sockets.on("connection", function(socket) {
   };
 
   //twinkle
-  let TwinkleColors = [
-    0xffffff,
-    0xfcfcfc,
-    0xfafafa,
-    0xf7f7f7,
-    0xf5f5f5,
-    0xf2f2f2,
-    0xf0f0f0,
-    0xededed,
-    0xebebeb,
-    0xe8e8e8,
-    0xe5e5e5,
-    0xe3e3e3,
-    0xe0e0e0,
-    0xdedede,
-    0xdbdbdb,
-    0xd9d9d9,
-    0xd6d6d6,
-    0xd4d4d4,
-    0xd1d1d1,
-    0xcfcfcf,
-    0xcccccc,
-    0xc9c9c9,
-    0xc7c7c7,
-    0xc4c4c4,
-    0xc2c2c2,
-    0xbfbfbf,
-    0xbdbdbd,
-    0xbababa,
-    0xb8b8b8,
-    0xb5b5b5,
-    0xb3b3b3,
-    0xb0b0b0,
-  ];
+  // let TwinkleColors = [
+  //   0xffffff,
+  //   0xfcfcfc,
+  //   0xfafafa,
+  //   0xf7f7f7,
+  //   0xf5f5f5,
+  //   0xf2f2f2,
+  //   0xf0f0f0,
+  //   0xededed,
+  //   0xebebeb,
+  //   0xe8e8e8,
+  //   0xe5e5e5,
+  //   0xe3e3e3,
+  //   0xe0e0e0,
+  //   0xdedede,
+  //   0xdbdbdb,
+  //   0xd9d9d9,
+  //   0xd6d6d6,
+  //   0xd4d4d4,
+  //   0xd1d1d1,
+  //   0xcfcfcf,
+  //   0xcccccc,
+  //   0xc9c9c9,
+  //   0xc7c7c7,
+  //   0xc4c4c4,
+  //   0xc2c2c2,
+  //   0xbfbfbf,
+  //   0xbdbdbd,
+  //   0xbababa,
+  //   0xb8b8b8,
+  //   0xb5b5b5,
+  //   0xb3b3b3,
+  //   0xb0b0b0,
+  // ];
 
-  let WasTwinkling = false;
-  let TwinkleSpeed = 250;
-  let LastStates = [];
+  // let WasTwinkling = false;
+  // let TwinkleSpeed = 250;
+  // let LastStates = [];
 
-  let getRandomInt = function(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  // let getRandomInt = function(min, max) {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // };
 
-  let GetNextColor = function(col, rand) {
-    var ind = TwinkleColors.indexOf(col);
-    if (ind == TwinkleColors.length + 1) {
-      // choose the first
-      return TwinkleColors[0];
-    } else {
-      // choose the next
-      return TwinkleColors[ind + 1];
-    }
-  };
+  // let GetNextColor = function(col, rand) {
+  //   var ind = TwinkleColors.indexOf(col);
+  //   if (ind == TwinkleColors.length + 1) {
+  //     // choose the first
+  //     return TwinkleColors[0];
+  //   } else {
+  //     // choose the next
+  //     return TwinkleColors[ind + 1];
+  //   }
+  // };
 
   //channel 1 strips
   let rainbowInterval = null;
@@ -191,14 +191,14 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 240,
+          count: 300,
           gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 120,
+          count: 60,
           gpio: 13,
           invert: false,
           brightness: 255,
