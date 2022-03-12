@@ -40,8 +40,11 @@ const pulseDelay = 30;
 gpio.setup(pin, gpio.DIR_OUT);
 
 //PULSE TRAINS FOR STEPPER
-//pulse train 1
 io.sockets.on("connection", function(socket) {
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
   socket.on("direction", (data, callback) => {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
@@ -53,6 +56,7 @@ io.sockets.on("connection", function(socket) {
     );
 
     if (data.state === "on") {
+      //pulse train 1
       (async () => {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.ptrains[0]; i++) {
@@ -87,9 +91,12 @@ io.sockets.on("connection", function(socket) {
         }
       })();
 
-      callback({
-        status: true,
-      });
+      //once trains are finished then turn on lights
+      (async () => {
+        callback({
+          status: true,
+        });
+      })();
     } else if (data.state === "off") {
       gpio.write(pin, false);
     } else {
@@ -97,10 +104,6 @@ io.sockets.on("connection", function(socket) {
       gpio.write(pin, false);
     }
   });
-
-  const sleep = (milliseconds) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  };
 
   //light functions
   const colorwheel = (pos) => {
