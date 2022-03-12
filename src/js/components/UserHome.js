@@ -110,15 +110,9 @@ export const UserHome = (props, state) => {
       <div
         onClick={(e: Event) => {
           console.log("turned it off");
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-            },
-            (data) => {
-              console.log(data);
-            }
-          );
+          {
+            toggleClass;
+          }
           socket.emit(
             "direction",
             {
@@ -128,15 +122,6 @@ export const UserHome = (props, state) => {
             },
             (data) => {
               //console.log(data);
-              //     socket.emit(
-              //   "lights",
-              //   {
-              //     state: "off",
-              //   },
-              //   (data) => {
-              //     console.log(data);
-              //   }
-              // );
             }
           );
         }}
