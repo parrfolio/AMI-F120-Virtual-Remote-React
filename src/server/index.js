@@ -89,16 +89,13 @@ io.sockets.on("connection", function(socket) {
             })();
           });
         }
-
         console.log("FOR LOOP FINISHED!");
-      })();
-
-      //once trains are finished then turn on lights
-      (async () => {
-        console.log("BEFORE CALLBACK!");
+        await sleep(1000);
+        //once trains are finished then turn on lights
         callback({
           status: true,
         });
+        console.log("CALLBACK FIRED!");
       })();
     } else if (data.state === "off") {
       gpio.write(pin, false);
