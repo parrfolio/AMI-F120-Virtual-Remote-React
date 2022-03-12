@@ -266,7 +266,7 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       //channel 1 stips
-      rainbowInterval = new RecurringTimer(function() {
+      rainbowInterval = RecurringTimer(function() {
         for (let i = 0; i < 150; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
@@ -274,7 +274,7 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      rainbowInterval2 = new RecurringTimer(function() {
+      rainbowInterval2 = RecurringTimer(function() {
         for (let i = 150; i < 300; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
@@ -318,7 +318,7 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
 
       //channel 2 strips
-      rainbowInterval3 = new RecurringTimer(function() {
+      rainbowInterval3 = RecurringTimer(function() {
         for (let i = 0; i < 20; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
@@ -331,7 +331,7 @@ io.sockets.on("connection", function(socket) {
       }
       ws281x.render();
 
-      rainbowInterval4 = new RecurringTimer(function() {
+      rainbowInterval4 = RecurringTimer(function() {
         for (let i = 40; i < 60; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
