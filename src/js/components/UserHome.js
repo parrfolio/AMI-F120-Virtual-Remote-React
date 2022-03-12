@@ -95,7 +95,7 @@ export const UserHome = (props, state) => {
         onClick={(e: Event) => {
           console.log("selection choose");
 
-          setActive(isActive);
+          setActive(false);
 
           socket.emit("direction", selection.select, (data) => {
             //console.log(data);
