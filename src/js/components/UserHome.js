@@ -95,9 +95,14 @@ export const UserHome = (props, state) => {
         onClick={(e: Event) => {
           console.log("selection choose");
 
+          //turn off lights before pulse trains starts (performance)
           setActive(false);
-          socket.on("direction", selection.select, () => {
-            //console.log(data);
+
+          socket.emit("direction", selection.select, (response) => {
+            //when pulse train is done, turn back on lights
+            if (response.status) {
+              setActive(true);
+            }
           });
         }}
       >

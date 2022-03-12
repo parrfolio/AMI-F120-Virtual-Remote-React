@@ -86,6 +86,10 @@ io.sockets.on("connection", function(socket) {
           });
         }
       })();
+
+      callback({
+        status: true,
+      });
     } else if (data.state === "off") {
       gpio.write(pin, false);
     } else {
