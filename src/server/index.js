@@ -306,15 +306,6 @@ io.sockets.on("connection", function(socket) {
       //   }
       // }, 1000 / 30);
 
-      //channel 1 neopixel sticks
-      // rainbowInterval4 = new RecurringTimer(function() {
-      //   for (let i = 60; i < 68; i++) {
-      //     colorsArray1[i] = colorwheel((offset + i) % 256);
-      //   }
-      //   offset = (offset + 1) % 256;
-      //   ws281x.render();
-      // }, 1000 / 30);
-
       //channel 2 strips
       rainbowInterval3 = new RecurringTimer(function() {
         for (let i = 0; i < 20; i++) {
@@ -330,8 +321,17 @@ io.sockets.on("connection", function(socket) {
       ws281x.render();
 
       rainbowInterval4 = new RecurringTimer(function() {
-        for (let i = 40; i < 60; i++) {
+        for (let i = 40; i < 90; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
+
+      //channel 1 neopixel sticks
+      rainbowInterval5 = new RecurringTimer(function() {
+        for (let i = 90; i < 98; i++) {
+          colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
@@ -344,6 +344,7 @@ io.sockets.on("connection", function(socket) {
       //channel 2 strips
       rainbowInterval3.pause();
       rainbowInterval4.pause();
+      rainbowInterval5.pause();
       ws281x.finalize();
     }
   });
