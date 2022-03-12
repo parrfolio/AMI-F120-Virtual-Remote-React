@@ -43,7 +43,7 @@ gpio.setup(pin, gpio.DIR_OUT);
 //PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
-  var RecurringTimer = (callback, delay) => {
+  function RecurringTimer(callback, delay) {
     var timerId,
       start,
       remaining = delay;
@@ -67,8 +67,7 @@ io.sockets.on("connection", function(socket) {
     this.pause = pause;
 
     this.resume();
-  };
-
+  }
   let ledCount = 300;
   let channels = ws281x.init({
     dma: 10,
@@ -263,7 +262,7 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       //channel 1 stips
-      rainbowInterval = RecurringTimer(function() {
+      rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < 150; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
@@ -271,7 +270,7 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
-      rainbowInterval2 = RecurringTimer(function() {
+      rainbowInterval2 = new RecurringTimer(function() {
         for (let i = 150; i < 300; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
@@ -315,7 +314,7 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
 
       //channel 2 strips
-      rainbowInterval3 = RecurringTimer(function() {
+      rainbowInterval3 = new RecurringTimer(function() {
         for (let i = 0; i < 20; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
@@ -328,7 +327,7 @@ io.sockets.on("connection", function(socket) {
       }
       ws281x.render();
 
-      rainbowInterval4 = RecurringTimer(function() {
+      rainbowInterval4 = new RecurringTimer(function() {
         for (let i = 40; i < 60; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
