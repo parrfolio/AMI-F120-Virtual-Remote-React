@@ -125,12 +125,12 @@ export const UserHome = (props, state) => {
       >
         Stop
       </div>
-      <div
+      <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={toggleClass}
       >
         Rainbow Lights {isActive ? "On" : "Off"}
-      </div>
+      </button>
       <Link
         to={{
           pathname: "/about",
