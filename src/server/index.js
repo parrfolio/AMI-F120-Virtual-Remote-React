@@ -90,7 +90,7 @@ io.sockets.on("connection", function(socket) {
           });
         }
         console.log("FOR LOOP FINISHED!");
-        await sleep(1000);
+        // await sleep(1000);
         //once trains are finished then turn on lights
         callback({
           status: true,
