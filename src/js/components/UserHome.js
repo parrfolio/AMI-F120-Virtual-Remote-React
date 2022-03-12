@@ -89,17 +89,13 @@ export const UserHome = (props, state) => {
   const jukebox_data = jukebox.map((selection, index) => {
     return (
       <div
+        className={isActive ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-            },
-            (data) => {
-              console.log("turned lights off!");
-            }
-          );
+          console.log("selection choose");
+          {
+            toggleClass;
+          }
           socket.emit("direction", selection.select, (data) => {
             //console.log(data);
           });
@@ -117,6 +113,7 @@ export const UserHome = (props, state) => {
       <Block>{jukebox_data}</Block>
       <div
         onClick={(e: Event) => {
+          console.log("turn off selections");
           socket.emit(
             "direction",
             {
