@@ -42,6 +42,7 @@ gpio.setup(pin, gpio.DIR_OUT);
 //PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
+  let ledCount = 300;
   let channels = ws281x.init({
     dma: 10,
     freq: 800000,
@@ -62,6 +63,17 @@ io.sockets.on("connection", function(socket) {
       },
     ],
   });
+
+  // gpio: 19 works as well
+
+  let offset = 0;
+  //channel 1 strips on GPIO 18
+  let channel1 = channels[0];
+  let colorsArray1 = channel1.array;
+
+  //channel 2 strips on GPIO 13
+  let channel2 = channels[1];
+  let colorsArray2 = channel2.array;
   socket.on("direction", function(data) {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
@@ -138,48 +150,48 @@ io.sockets.on("connection", function(socket) {
   };
 
   //twinkle
-  let TwinkleColors = [
-    0xffffff,
-    0xfcfcfc,
-    0xfafafa,
-    0xf7f7f7,
-    0xf5f5f5,
-    0xf2f2f2,
-    0xf0f0f0,
-    0xededed,
-    0xebebeb,
-    0xe8e8e8,
-    0xe5e5e5,
-    0xe3e3e3,
-    0xe0e0e0,
-    0xdedede,
-    0xdbdbdb,
-    0xd9d9d9,
-    0xd6d6d6,
-    0xd4d4d4,
-    0xd1d1d1,
-    0xcfcfcf,
-    0xcccccc,
-    0xc9c9c9,
-    0xc7c7c7,
-    0xc4c4c4,
-    0xc2c2c2,
-    0xbfbfbf,
-    0xbdbdbd,
-    0xbababa,
-    0xb8b8b8,
-    0xb5b5b5,
-    0xb3b3b3,
-    0xb0b0b0,
-  ];
+  // let TwinkleColors = [
+  //   0xffffff,
+  //   0xfcfcfc,
+  //   0xfafafa,
+  //   0xf7f7f7,
+  //   0xf5f5f5,
+  //   0xf2f2f2,
+  //   0xf0f0f0,
+  //   0xededed,
+  //   0xebebeb,
+  //   0xe8e8e8,
+  //   0xe5e5e5,
+  //   0xe3e3e3,
+  //   0xe0e0e0,
+  //   0xdedede,
+  //   0xdbdbdb,
+  //   0xd9d9d9,
+  //   0xd6d6d6,
+  //   0xd4d4d4,
+  //   0xd1d1d1,
+  //   0xcfcfcf,
+  //   0xcccccc,
+  //   0xc9c9c9,
+  //   0xc7c7c7,
+  //   0xc4c4c4,
+  //   0xc2c2c2,
+  //   0xbfbfbf,
+  //   0xbdbdbd,
+  //   0xbababa,
+  //   0xb8b8b8,
+  //   0xb5b5b5,
+  //   0xb3b3b3,
+  //   0xb0b0b0,
+  // ];
 
-  let WasTwinkling = false;
-  let TwinkleSpeed = 250;
-  let LastStates = [];
+  // let WasTwinkling = false;
+  // let TwinkleSpeed = 250;
+  // let LastStates = [];
 
-  let getRandomInt = function(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  // let getRandomInt = function(min, max) {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // };
 
   let GetNextColor = function(col, rand) {
     var ind = TwinkleColors.indexOf(col);
@@ -205,20 +217,6 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
-    let ledCount = 300;
-
-    // gpio: 19 works as well
-
-    let offset = 0;
-    //channel 1 strips on GPIO 18
-    let channel1 = channels[0];
-    let colorsArray1 = channel1.array;
-
-    //channel 2 strips on GPIO 13
-    let channel2 = channels[1];
-    let colorsArray2 = channel2.array;
-
-    let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
