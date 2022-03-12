@@ -95,7 +95,7 @@ export const UserHome = (props, state) => {
         onClick={(e: Event) => {
           console.log("selection choose");
 
-          toggleClass();
+          setActive(!isActive);
 
           socket.emit("direction", selection.select, (data) => {
             //console.log(data);
