@@ -6,7 +6,6 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-const { clearInterval } = require("timers");
 
 app.use(express.static(webroot));
 
@@ -95,11 +94,11 @@ io.sockets.on("connection", function(socket) {
     }
   });
 
-  //LIGHTS!
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
+  //light functions
   const colorwheel = (pos) => {
     pos = 255 - pos;
     if (pos < 85) {
@@ -115,6 +114,61 @@ io.sockets.on("connection", function(socket) {
 
   const rgb2Int = (r, g, b) => {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+  };
+
+  //twinkle
+  let TwinkleColors = [
+    0xffffff,
+    0xfcfcfc,
+    0xfafafa,
+    0xf7f7f7,
+    0xf5f5f5,
+    0xf2f2f2,
+    0xf0f0f0,
+    0xededed,
+    0xebebeb,
+    0xe8e8e8,
+    0xe5e5e5,
+    0xe3e3e3,
+    0xe0e0e0,
+    0xdedede,
+    0xdbdbdb,
+    0xd9d9d9,
+    0xd6d6d6,
+    0xd4d4d4,
+    0xd1d1d1,
+    0xcfcfcf,
+    0xcccccc,
+    0xc9c9c9,
+    0xc7c7c7,
+    0xc4c4c4,
+    0xc2c2c2,
+    0xbfbfbf,
+    0xbdbdbd,
+    0xbababa,
+    0xb8b8b8,
+    0xb5b5b5,
+    0xb3b3b3,
+    0xb0b0b0,
+  ];
+
+  let WasTwinkling = false;
+  let TwinkleSpeed = 250;
+  let LastStates = [];
+
+  let getRandomInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  let GetNextColor = function(col, rand) {
+    var ind = TwinkleColors.indexOf(col);
+    if (ind == TwinkleColors.length + 1) {
+      // choose the first
+      return TwinkleColors[0];
+    } else {
+      // choose the next
+      return TwinkleColors[ind + 1];
+    }
   };
 
   //channel 1 strips
@@ -211,12 +265,38 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
 
+      // rainbowInterval2 = new RecurringTimer(function() {
+      //   for (let i = 120; i < 240; i++) {
+      //     colorsArray1[i] = colorwheel((offset + i) % 256);
+      //   }
+      //   offset = (offset + 1) % 256;
+      //   ws281x.render();
+      // }, 1000 / 30);
+
+      //twinkle animation
       rainbowInterval2 = new RecurringTimer(function() {
-        for (let i = 120; i < 240; i++) {
-          colorsArray1[i] = colorwheel((offset + i) % 256);
+        if (!WasTwinkling) {
+          for (let i = 120; i < 240; i++) {
+            var init = getRandomInt(0, TwinkleColors.length - 1);
+            LastStates[i] = TwinkleColors[init]; // default white color
+            colorsArray1[i] = LastStates[i];
+          }
+
+          ws281x.render();
+          WasTwinkling = true;
+        } else {
+          for (let i = 120; i < 240; i++) {
+            var shouldTwinkle = getRandomInt(0, 100);
+            if (shouldTwinkle > 10) {
+              // only a 50% chance of twinkling
+              var currentColor = LastStates[i];
+              var newColor = GetNextColor(currentColor);
+              LastStates[i] = newColor;
+              colorsArray1[i] = LastStates[i];
+            }
+          }
+          ws281x.render();
         }
-        offset = (offset + 1) % 256;
-        ws281x.render();
       }, 1000 / 30);
 
       //channel 1 neopixel sticks
