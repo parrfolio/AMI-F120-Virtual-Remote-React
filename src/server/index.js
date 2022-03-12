@@ -184,7 +184,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
-    let ledCount = 240;
+    let ledCount = 300;
 
     let channels = ws281x.init({
       dma: 10,
@@ -276,7 +276,7 @@ io.sockets.on("connection", function(socket) {
       //twinkle animation
       rainbowInterval2 = new RecurringTimer(function() {
         if (!WasTwinkling) {
-          for (let i = 120; i < 240; i++) {
+          for (let i = 120; i < 300; i++) {
             var init = getRandomInt(0, TwinkleColors.length - 1);
             LastStates[i] = TwinkleColors[init]; // default white color
             colorsArray1[i] = LastStates[i];
