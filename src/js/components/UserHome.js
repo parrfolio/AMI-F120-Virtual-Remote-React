@@ -96,8 +96,7 @@ export const UserHome = (props, state) => {
           console.log("selection choose");
 
           setActive(false);
-
-          socket.emit("direction", selection.select, (data) => {
+          socket.on("direction", selection.select, () => {
             //console.log(data);
           });
         }}
