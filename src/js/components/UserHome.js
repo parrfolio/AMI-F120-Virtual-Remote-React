@@ -96,7 +96,7 @@ export const UserHome = (props, state) => {
           console.log("selection choose");
 
           //turn off lights before pulse trains starts (performance)
-          if (!isActive) setActive(false);
+          if (isActive) setActive(false);
 
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
