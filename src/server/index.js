@@ -330,13 +330,13 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
     } else {
-      ws281x.reset();
       //channel 1 strips
       rainbowInterval.pause();
       rainbowInterval2.pause();
       //channel 2 strips
       rainbowInterval3.pause();
       rainbowInterval4.pause();
+      ws281x.reset();
       ws281x.finalize();
     }
   });
