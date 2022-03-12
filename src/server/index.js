@@ -23,8 +23,7 @@ http.listen(PORT, () => {
 });
 
 //pulse train selections=
-// const pin = 32;
-const pin = 7;
+const pin = 32;
 
 // pulse speed settings that seem to be working with my stepper
 const pulseSpeed = 70;
@@ -43,74 +42,6 @@ gpio.setup(pin, gpio.DIR_OUT);
 //PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
-  function RecurringTimer(callback, delay) {
-    var timerId,
-      start,
-      remaining = delay;
-
-    var pause = function() {
-      console.log("pause was called");
-      clearTimeout(timerId);
-      remaining -= new Date() - start;
-    };
-
-    let resume = function() {
-      start = new Date();
-      timerId = setTimeout(function() {
-        remaining = delay;
-        resume();
-        callback();
-      }, remaining);
-    };
-
-    this.resume = resume;
-    this.pause = pause;
-
-    this.resume();
-  }
-  let ledCount = 300;
-  let channels = ws281x.init({
-    dma: 10,
-    freq: 800000,
-    channels: [
-      {
-        count: ledCount,
-        gpio: 18,
-        invert: false,
-        brightness: 255,
-        stripType: "ws2812",
-      },
-      {
-        count: ledCount,
-        gpio: 13,
-        invert: false,
-        brightness: 255,
-        stripType: "ws2812",
-      },
-    ],
-  });
-
-  // gpio: 19 works as well
-
-  let offset = 0;
-  //channel 1 strips on GPIO 18
-  let channel1 = channels[0];
-  let colorsArray1 = channel1.array;
-
-  //channel 2 strips on GPIO 13
-  let channel2 = channels[1];
-  let colorsArray2 = channel2.array;
-
-  //channel 1 strips
-  let rainbowInterval = null;
-  let rainbowInterval2 = null;
-  let rainbowInterval3 = null;
-  let rainbowInterval4 = null;
-
-  //channel 2 strips here
-  let rainbowInterval5 = null;
-  let rainbowInterval6 = null;
-
   socket.on("direction", function(data) {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
@@ -122,13 +53,6 @@ io.sockets.on("connection", function(socket) {
     );
 
     if (data.state === "on") {
-      ws281x.reset();
-      //channel 1 strips
-      rainbowInterval.pause();
-      rainbowInterval2.pause();
-      //channel 2 strips
-      rainbowInterval3.pause();
-      rainbowInterval4.pause();
       (async () => {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.ptrains[0]; i++) {
@@ -193,48 +117,48 @@ io.sockets.on("connection", function(socket) {
   };
 
   //twinkle
-  // let TwinkleColors = [
-  //   0xffffff,
-  //   0xfcfcfc,
-  //   0xfafafa,
-  //   0xf7f7f7,
-  //   0xf5f5f5,
-  //   0xf2f2f2,
-  //   0xf0f0f0,
-  //   0xededed,
-  //   0xebebeb,
-  //   0xe8e8e8,
-  //   0xe5e5e5,
-  //   0xe3e3e3,
-  //   0xe0e0e0,
-  //   0xdedede,
-  //   0xdbdbdb,
-  //   0xd9d9d9,
-  //   0xd6d6d6,
-  //   0xd4d4d4,
-  //   0xd1d1d1,
-  //   0xcfcfcf,
-  //   0xcccccc,
-  //   0xc9c9c9,
-  //   0xc7c7c7,
-  //   0xc4c4c4,
-  //   0xc2c2c2,
-  //   0xbfbfbf,
-  //   0xbdbdbd,
-  //   0xbababa,
-  //   0xb8b8b8,
-  //   0xb5b5b5,
-  //   0xb3b3b3,
-  //   0xb0b0b0,
-  // ];
+  let TwinkleColors = [
+    0xffffff,
+    0xfcfcfc,
+    0xfafafa,
+    0xf7f7f7,
+    0xf5f5f5,
+    0xf2f2f2,
+    0xf0f0f0,
+    0xededed,
+    0xebebeb,
+    0xe8e8e8,
+    0xe5e5e5,
+    0xe3e3e3,
+    0xe0e0e0,
+    0xdedede,
+    0xdbdbdb,
+    0xd9d9d9,
+    0xd6d6d6,
+    0xd4d4d4,
+    0xd1d1d1,
+    0xcfcfcf,
+    0xcccccc,
+    0xc9c9c9,
+    0xc7c7c7,
+    0xc4c4c4,
+    0xc2c2c2,
+    0xbfbfbf,
+    0xbdbdbd,
+    0xbababa,
+    0xb8b8b8,
+    0xb5b5b5,
+    0xb3b3b3,
+    0xb0b0b0,
+  ];
 
-  // let WasTwinkling = false;
-  // let TwinkleSpeed = 250;
-  // let LastStates = [];
+  let WasTwinkling = false;
+  let TwinkleSpeed = 250;
+  let LastStates = [];
 
-  // let getRandomInt = function(min, max) {
-  //   return Math.floor(Math.random() * (max - min + 1)) + min;
-  // };
+  let getRandomInt = function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
 
   let GetNextColor = function(col, rand) {
     var ind = TwinkleColors.indexOf(col);
@@ -247,9 +171,54 @@ io.sockets.on("connection", function(socket) {
     }
   };
 
+  //channel 1 strips
+  let rainbowInterval = null;
+  let rainbowInterval2 = null;
+  let rainbowInterval3 = null;
+  let rainbowInterval4 = null;
+
+  //channel 2 strips here
+  let rainbowInterval5 = null;
+  let rainbowInterval6 = null;
+
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
+    let ledCount = 300;
+
+    let channels = ws281x.init({
+      dma: 10,
+      freq: 800000,
+      channels: [
+        {
+          count: ledCount,
+          gpio: 18,
+          invert: false,
+          brightness: 255,
+          stripType: "ws2812",
+        },
+        {
+          count: ledCount,
+          gpio: 13,
+          invert: false,
+          brightness: 255,
+          stripType: "ws2812",
+        },
+      ],
+    });
+
+    // gpio: 19 works as well
+
+    let offset = 0;
+    //channel 1 strips on GPIO 18
+    let channel1 = channels[0];
+    let colorsArray1 = channel1.array;
+
+    //channel 2 strips on GPIO 13
+    let channel2 = channels[1];
+    let colorsArray2 = channel2.array;
+
+    let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
@@ -259,6 +228,32 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
+
+    function RecurringTimer(callback, delay) {
+      var timerId,
+        start,
+        remaining = delay;
+
+      var pause = function() {
+        console.log("pause was called");
+        clearTimeout(timerId);
+        remaining -= new Date() - start;
+      };
+
+      let resume = function() {
+        start = new Date();
+        timerId = setTimeout(function() {
+          remaining = delay;
+          resume();
+          callback();
+        }, remaining);
+      };
+
+      this.resume = resume;
+      this.pause = pause;
+
+      this.resume();
+    }
 
     if (data.state === "on") {
       //channel 1 stips
@@ -271,7 +266,7 @@ io.sockets.on("connection", function(socket) {
       }, 1000 / 30);
 
       rainbowInterval2 = new RecurringTimer(function() {
-        for (let i = 150; i < 300; i++) {
+        for (let i = 120; i < 300; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
