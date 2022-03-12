@@ -258,46 +258,46 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       //channel 1 stips
       rainbowInterval = new RecurringTimer(function() {
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 150; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
-      // rainbowInterval2 = new RecurringTimer(function() {
-      //   for (let i = 120; i < 240; i++) {
-      //     colorsArray1[i] = colorwheel((offset + i) % 256);
-      //   }
-      //   offset = (offset + 1) % 256;
-      //   ws281x.render();
-      // }, 1000 / 30);
+      rainbowInterval2 = new RecurringTimer(function() {
+        for (let i = 150; i < 300; i++) {
+          colorsArray1[i] = colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
 
       //twinkle animation
-      rainbowInterval2 = new RecurringTimer(function() {
-        if (!WasTwinkling) {
-          for (let i = 120; i < 300; i++) {
-            var init = getRandomInt(0, TwinkleColors.length - 1);
-            LastStates[i] = TwinkleColors[init]; // default white color
-            colorsArray1[i] = LastStates[i];
-          }
+      // rainbowInterval2 = new RecurringTimer(function() {
+      //   if (!WasTwinkling) {
+      //     for (let i = 120; i < 300; i++) {
+      //       var init = getRandomInt(0, TwinkleColors.length - 1);
+      //       LastStates[i] = TwinkleColors[init]; // default white color
+      //       colorsArray1[i] = LastStates[i];
+      //     }
 
-          ws281x.render();
-          WasTwinkling = true;
-        } else {
-          for (let i = 120; i < 240; i++) {
-            var shouldTwinkle = getRandomInt(0, 100);
-            if (shouldTwinkle > 10) {
-              // only a 50% chance of twinkling
-              var currentColor = LastStates[i];
-              var newColor = GetNextColor(currentColor);
-              LastStates[i] = newColor;
-              colorsArray1[i] = LastStates[i];
-            }
-          }
-          ws281x.render();
-        }
-      }, 1000 / 30);
+      //     ws281x.render();
+      //     WasTwinkling = true;
+      //   } else {
+      //     for (let i = 120; i < 240; i++) {
+      //       var shouldTwinkle = getRandomInt(0, 100);
+      //       if (shouldTwinkle > 10) {
+      //         // only a 50% chance of twinkling
+      //         var currentColor = LastStates[i];
+      //         var newColor = GetNextColor(currentColor);
+      //         LastStates[i] = newColor;
+      //         colorsArray1[i] = LastStates[i];
+      //       }
+      //     }
+      //     ws281x.render();
+      //   }
+      // }, 1000 / 30);
 
       //channel 1 neopixel sticks
       // rainbowInterval4 = new RecurringTimer(function() {
