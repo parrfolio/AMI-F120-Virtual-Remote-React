@@ -129,7 +129,7 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={toggleClass}
       >
-        Rainbow Lights {isActive ? "On" : "Off"}
+        Lights {isActive ? "On" : "Off"}
       </button>
       <Link
         to={{
