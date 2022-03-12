@@ -23,6 +23,7 @@ export const UserHome = (props, state) => {
 
   const toggleClass = () => {
     setActive(!isActive);
+    console.log(isActive);
   };
 
   // establish socket connection
@@ -93,12 +94,12 @@ export const UserHome = (props, state) => {
         key={selection.id}
         onClick={(e: Event) => {
           console.log("selection choose");
-          {
-            toggleClass;
-          }
-          // socket.emit("direction", selection.select, (data) => {
-          //   //console.log(data);
-          // });
+
+          toggleClass();
+
+          socket.emit("direction", selection.select, (data) => {
+            //console.log(data);
+          });
         }}
       >
         Selection {selection.id} - {selection.songTitle}
