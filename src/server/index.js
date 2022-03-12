@@ -192,7 +192,7 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: ledCount,
+          count: 10,
           gpio: 18,
           invert: false,
           brightness: 255,
@@ -207,7 +207,6 @@ io.sockets.on("connection", function(socket) {
         },
       ],
     });
-
     // gpio: 19 works as well
 
     let offset = 0;
