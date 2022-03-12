@@ -89,10 +89,13 @@ io.sockets.on("connection", function(socket) {
             })();
           });
         }
+
+        console.log("FOR LOOP FINISHED!");
       })();
 
       //once trains are finished then turn on lights
       (async () => {
+        console.log("BEFORE CALLBACK!");
         callback({
           status: true,
         });
