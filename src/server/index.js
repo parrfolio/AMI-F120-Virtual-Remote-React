@@ -75,6 +75,17 @@ io.sockets.on("connection", function(socket) {
   //channel 2 strips on GPIO 13
   let channel2 = channels[1];
   let colorsArray2 = channel2.array;
+
+  //channel 1 strips
+  let rainbowInterval = null;
+  let rainbowInterval2 = null;
+  let rainbowInterval3 = null;
+  let rainbowInterval4 = null;
+
+  //channel 2 strips here
+  let rainbowInterval5 = null;
+  let rainbowInterval6 = null;
+
   socket.on("direction", function(data) {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
@@ -87,6 +98,12 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       ws281x.reset();
+      //channel 1 strips
+      rainbowInterval.pause();
+      rainbowInterval2.pause();
+      //channel 2 strips
+      rainbowInterval3.pause();
+      rainbowInterval4.pause();
       (async () => {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.ptrains[0]; i++) {
@@ -204,16 +221,6 @@ io.sockets.on("connection", function(socket) {
       return TwinkleColors[ind + 1];
     }
   };
-
-  //channel 1 strips
-  let rainbowInterval = null;
-  let rainbowInterval2 = null;
-  let rainbowInterval3 = null;
-  let rainbowInterval4 = null;
-
-  //channel 2 strips here
-  let rainbowInterval5 = null;
-  let rainbowInterval6 = null;
 
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
