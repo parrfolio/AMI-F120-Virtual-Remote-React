@@ -191,14 +191,14 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 300,
+          count: ledCount,
           gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 60,
+          count: ledCount,
           gpio: 13,
           invert: false,
           brightness: 255,
