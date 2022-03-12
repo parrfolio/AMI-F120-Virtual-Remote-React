@@ -24,7 +24,7 @@ http.listen(PORT, () => {
 
 //pulse train selections=
 // const pin = 32; //gpio 12
-const pin = 7; //gpio 7
+const pin = 7; //gpio
 
 // pulse speed settings that seem to be working with my stepper
 const pulseSpeed = 70;
@@ -40,6 +40,42 @@ const pulseDelay = 30;
 
 gpio.setup(pin, gpio.DIR_OUT);
 
+//channel 1 strips
+let rainbowInterval = null;
+let rainbowInterval2 = null;
+let rainbowInterval3 = null;
+let rainbowInterval4 = null;
+
+//channel 2 strips here
+let rainbowInterval5 = null;
+let rainbowInterval6 = null;
+
+let RecurringTimer = (callback, delay) => {
+  var timerId,
+    start,
+    remaining = delay;
+
+  var pause = function() {
+    console.log("pause was called");
+    clearTimeout(timerId);
+    remaining -= new Date() - start;
+  };
+
+  let resume = function() {
+    start = new Date();
+    timerId = setTimeout(function() {
+      remaining = delay;
+      resume();
+      callback();
+    }, remaining);
+  };
+
+  this.resume = resume;
+  this.pause = pause;
+
+  this.resume();
+};
+
 //PULSE TRAINS FOR STEPPER
 //pulse train 1
 io.sockets.on("connection", function(socket) {
@@ -54,6 +90,14 @@ io.sockets.on("connection", function(socket) {
     );
 
     if (data.state === "on") {
+      ws281x.reset();
+      //channel 1 strips
+      rainbowInterval.pause();
+      rainbowInterval2.pause();
+      //channel 2 strips
+      rainbowInterval3.pause();
+      rainbowInterval4.pause();
+      ws281x.finalize();
       (async () => {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.ptrains[0]; i++) {
@@ -172,16 +216,6 @@ io.sockets.on("connection", function(socket) {
   //   }
   // };
 
-  //channel 1 strips
-  let rainbowInterval = null;
-  let rainbowInterval2 = null;
-  let rainbowInterval3 = null;
-  let rainbowInterval4 = null;
-
-  //channel 2 strips here
-  let rainbowInterval5 = null;
-  let rainbowInterval6 = null;
-
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -192,14 +226,14 @@ io.sockets.on("connection", function(socket) {
       freq: 800000,
       channels: [
         {
-          count: 10,
+          count: ledCount,
           gpio: 18,
           invert: false,
           brightness: 255,
           stripType: "ws2812",
         },
         {
-          count: 10,
+          count: ledCount,
           gpio: 13,
           invert: false,
           brightness: 255,
@@ -207,6 +241,7 @@ io.sockets.on("connection", function(socket) {
         },
       ],
     });
+
     // gpio: 19 works as well
 
     let offset = 0;
@@ -228,32 +263,6 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
-
-    function RecurringTimer(callback, delay) {
-      var timerId,
-        start,
-        remaining = delay;
-
-      var pause = function() {
-        console.log("pause was called");
-        clearTimeout(timerId);
-        remaining -= new Date() - start;
-      };
-
-      let resume = function() {
-        start = new Date();
-        timerId = setTimeout(function() {
-          remaining = delay;
-          resume();
-          callback();
-        }, remaining);
-      };
-
-      this.resume = resume;
-      this.pause = pause;
-
-      this.resume();
-    }
 
     if (data.state === "on") {
       //channel 1 stips
@@ -330,13 +339,13 @@ io.sockets.on("connection", function(socket) {
         ws281x.render();
       }, 1000 / 30);
     } else {
+      ws281x.reset();
       //channel 1 strips
       rainbowInterval.pause();
       rainbowInterval2.pause();
       //channel 2 strips
       rainbowInterval3.pause();
       rainbowInterval4.pause();
-      ws281x.reset();
       ws281x.finalize();
     }
   });
