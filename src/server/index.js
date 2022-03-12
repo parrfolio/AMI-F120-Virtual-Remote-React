@@ -23,7 +23,8 @@ http.listen(PORT, () => {
 });
 
 //pulse train selections=
-const pin = 32;
+// const pin = 32; //gpio 12
+const pin = 7; //gpio 7
 
 // pulse speed settings that seem to be working with my stepper
 const pulseSpeed = 70;
