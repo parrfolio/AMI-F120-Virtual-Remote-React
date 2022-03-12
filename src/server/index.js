@@ -201,7 +201,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       //channel 1 strips
       rainbowInterval = new RecurringTimer(function() {
-        for (let i = 0; i < 68; i++) {
+        for (let i = 0; i < 8; i++) {
           colorsArray1[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
@@ -264,12 +264,12 @@ io.sockets.on("connection", function(socket) {
 
       //channel 2 strips
       ws281x.reset();
-      rainbowInterval5.pause();
-      rainbowInterval6.pause();
       rainbowInterval.pause();
       rainbowInterval2.pause();
       rainbowInterval3.pause();
       rainbowInterval4.pause();
+      rainbowInterval5.pause();
+      rainbowInterval6.pause();
 
       ws281x.finalize();
     }
