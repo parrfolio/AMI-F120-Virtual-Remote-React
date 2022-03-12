@@ -102,7 +102,7 @@ export const UserHome = (props, state) => {
             //when pulse train is done, turn back on lights
             console.log(response);
             if (response.status) {
-              setActive(true);
+              setActive(response.status);
             }
           });
         }}
