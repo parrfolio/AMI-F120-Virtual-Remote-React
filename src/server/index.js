@@ -321,17 +321,22 @@ io.sockets.on("connection", function(socket) {
       ws281x.render();
 
       rainbowInterval4 = new RecurringTimer(function() {
-        for (let i = 40; i < 90; i++) {
+        for (let i = 40; i < 60; i++) {
           colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
+      for (let i = 60; i < 120; i++) {
+        colorsArray2[i] = 0xcc0000;
+      }
+      ws281x.render();
+
       //channel 1 neopixel sticks
       rainbowInterval5 = new RecurringTimer(function() {
-        for (let i = 90; i < 98; i++) {
-          colorsArray1[i] = colorwheel((offset + i) % 256);
+        for (let i = 120; i < 128; i++) {
+          colorsArray2[i] = colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
