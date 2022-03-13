@@ -117,6 +117,34 @@ io.sockets.on("connection", function(socket) {
   let rainbowInterval5 = null;
   let rainbowInterval6 = null;
 
+  var RecurringTimer = class RecurringTimer {
+    constructor(callback, delay) {
+      var timerId,
+        start,
+        remaining = delay;
+
+      var pause = function() {
+        console.log("pause was called");
+        clearTimeout(timerId);
+        remaining -= new Date() - start;
+      };
+
+      let resume = function() {
+        start = new Date();
+        timerId = setTimeout(function() {
+          remaining = delay;
+          resume();
+          //callback();
+        }, remaining);
+      };
+
+      this.resume = resume;
+      this.pause = pause;
+
+      this.resume();
+    }
+  };
+
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
@@ -167,8 +195,7 @@ io.sockets.on("connection", function(socket) {
     if (data.state === "on") {
       //channel 1 stips
 
-      common.foo();
-      rainbowInterval = common.RecurringTimer(function() {
+      rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < 150; i++) {
           colorsArray1[i] = common.colorwheel((offset + i) % 256);
         }
