@@ -24,6 +24,7 @@ http.listen(PORT, () => {
 
 const timers = require("../animations/timer");
 const common = require("../animations/common");
+const rainbow = require("../animations/rainbow");
 
 //pulse train selections=
 // const pin = 32;
@@ -267,17 +268,19 @@ io.sockets.on("connection", function(socket) {
     //   }
     // }
 
-    let RecurringTimer = common.RecurringTimer;
+    //    let RecurringTimer = timers.RecurringTimer;
 
     if (data.state === "on") {
       //channel 1 stips
-      rainbowInterval = new RecurringTimer(function() {
-        for (let i = 0; i < 150; i++) {
-          colorsArray1[i] = common.colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
+      // rainbowInterval = new RecurringTimer(function() {
+      //   for (let i = 0; i < 150; i++) {
+      //     colorsArray1[i] = common.colorwheel((offset + i) % 256);
+      //   }
+      //   offset = (offset + 1) % 256;
+      //   ws281x.render();
+      // }, 1000 / 30);
+
+      rainbow.Rainbow();
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {
