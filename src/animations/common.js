@@ -34,7 +34,7 @@ function common() {
       timerId = setTimeout(function() {
         remaining = delay;
         resume();
-        callback();
+        //callback();
       }, remaining);
     };
 
