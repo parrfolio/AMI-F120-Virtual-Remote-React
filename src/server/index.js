@@ -354,7 +354,7 @@ io.sockets.on("connection", function(socket) {
     } else {
       ws281x.reset();
       //channel 1 strips
-      rainbow.Rainbow().pause();
+      rainbowInterval.pause();
       // rainbowInterval2.pause();
       // //channel 2 strips
       // rainbowInterval3.pause();
