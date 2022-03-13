@@ -36,7 +36,7 @@ let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
 
-let interval;
+let interval = null;
 
 function Rainbow(delay) {
   interval = new RecurringTimer(function() {
@@ -49,6 +49,7 @@ function Rainbow(delay) {
 }
 
 function RainbowPause() {
+  console.log(interval);
   interval.pause();
 }
 
