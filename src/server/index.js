@@ -267,7 +267,7 @@ io.sockets.on("connection", function(socket) {
     //   }
     // }
 
-    let RecurringTimer = timers.RecurringTimer;
+    let RecurringTimer = common.RecurringTimer;
 
     if (data.state === "on") {
       //channel 1 stips
