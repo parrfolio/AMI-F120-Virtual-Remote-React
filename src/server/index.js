@@ -195,41 +195,41 @@ io.sockets.on("connection", function(socket) {
   socket.on("lights", function(data) {
     console.log("Lights", data.state);
 
-    let ledCount = 300;
+    // let ledCount = 300;
 
-    let channels = ws281x.init({
-      dma: 10,
-      freq: 800000,
-      channels: [
-        {
-          count: ledCount,
-          gpio: 18,
-          invert: false,
-          brightness: 255,
-          stripType: "ws2812",
-        },
-        {
-          count: ledCount,
-          gpio: 13,
-          invert: false,
-          brightness: 255,
-          stripType: "ws2812",
-        },
-      ],
-    });
+    // let channels = ws281x.init({
+    //   dma: 10,
+    //   freq: 800000,
+    //   channels: [
+    //     {
+    //       count: ledCount,
+    //       gpio: 18,
+    //       invert: false,
+    //       brightness: 255,
+    //       stripType: "ws2812",
+    //     },
+    //     {
+    //       count: ledCount,
+    //       gpio: 13,
+    //       invert: false,
+    //       brightness: 255,
+    //       stripType: "ws2812",
+    //     },
+    //   ],
+    // });
 
-    // gpio: 19 works as well
+    // // gpio: 19 works as well
 
-    let offset = 0;
-    //channel 1 strips on GPIO 18
-    let channel1 = channels[0];
-    let colorsArray1 = channel1.array;
+    // let offset = 0;
+    // //channel 1 strips on GPIO 18
+    // let channel1 = channels[0];
+    // let colorsArray1 = channel1.array;
 
-    //channel 2 strips on GPIO 13
-    let channel2 = channels[1];
-    let colorsArray2 = channel2.array;
+    // //channel 2 strips on GPIO 13
+    // let channel2 = channels[1];
+    // let colorsArray2 = channel2.array;
 
-    let timer = true;
+    // let timer = true;
     //only when the app terminates the ligts turn off with node Signal Int
     process.on("SIGINT", function() {
       ws281x.reset();
