@@ -168,13 +168,13 @@ io.sockets.on("connection", function(socket) {
       //channel 1 stips
 
       common.foo();
-      // rainbowInterval = common.RecurringTimer(function() {
-      //   for (let i = 0; i < 150; i++) {
-      //     colorsArray1[i] = common.colorwheel((offset + i) % 256);
-      //   }
-      //   offset = (offset + 1) % 256;
-      //   ws281x.render();
-      // }, 1000 / 30);
+      rainbowInterval = common.RecurringTimer(function() {
+        for (let i = 0; i < 150; i++) {
+          colorsArray1[i] = common.colorwheel((offset + i) % 256);
+        }
+        offset = (offset + 1) % 256;
+        ws281x.render();
+      }, 1000 / 30);
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {

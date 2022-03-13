@@ -17,12 +17,12 @@ function common() {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
-  this.foo = new (function() {
+  this.foo = function() {
     console.log("FOO WORKING");
-  })();
+  };
 
   //interval timer
-  this.RecurringTimer = new (function(callback, delay) {
+  this.RecurringTimer = function(callback, delay) {
     var timerId,
       start,
       remaining = delay;
@@ -46,7 +46,7 @@ function common() {
     this.pause = pause;
 
     this.resume();
-  })();
+  };
   //radomizer
   this.getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
