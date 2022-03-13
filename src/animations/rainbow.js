@@ -35,26 +35,23 @@ let channel2 = channels[1];
 let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
+let rainbowInterval = null;
 
 function Rainbow(delay, pause) {
-  let rainbowInterval = null;
-  if (!pause) {
-    console.log("lights running");
-    rainbowInterval = new RecurringTimer(function() {
-      for (let i = 0; i < 150; i++) {
-        colorsArray1[i] = common.colorwheel((offset + i) % 256);
-      }
-      offset = (offset + 1) % 256;
-      ws281x.render();
-    }, delay);
-    console.log(rainbowInterval);
-  } else {
-    console.log("lights paused");
+  rainbowInterval = new RecurringTimer(function() {
+    for (let i = 0; i < 150; i++) {
+      colorsArray1[i] = common.colorwheel((offset + i) % 256);
+    }
+    offset = (offset + 1) % 256;
+    ws281x.render();
+  }, delay);
+}
 
-    timers.RecurringTimer.pause();
-  }
+function RainbowPause() {
+  rainbowInterval.pause();
 }
 
 module.exports = {
   Rainbow: Rainbow,
+  RainbowPause: RainbowPause,
 };
