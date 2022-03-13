@@ -236,33 +236,36 @@ io.sockets.on("connection", function(socket) {
       });
     });
 
-    class RecurringTimer {
-      constructor(callback, delay) {
-        var timerId,
-          start,
-          remaining = delay;
+    // class RecurringTimer {
+    //   constructor(callback, delay) {
+    //     var timerId,
+    //       start,
+    //       remaining = delay;
 
-        var pause = function() {
-          console.log("pause was called");
-          clearTimeout(timerId);
-          remaining -= new Date() - start;
-        };
+    //     var pause = function() {
+    //       console.log("pause was called");
+    //       clearTimeout(timerId);
+    //       remaining -= new Date() - start;
+    //     };
 
-        let resume = function() {
-          start = new Date();
-          timerId = setTimeout(function() {
-            remaining = delay;
-            resume();
-            callback();
-          }, remaining);
-        };
+    //     let resume = function() {
+    //       start = new Date();
+    //       timerId = setTimeout(function() {
+    //         remaining = delay;
+    //         resume();
+    //         callback();
+    //       }, remaining);
+    //     };
 
-        this.resume = resume;
-        this.pause = pause;
+    //     this.resume = resume;
+    //     this.pause = pause;
 
-        this.resume();
-      }
-    }
+    //     this.resume();
+    //   }
+    // }
+
+    const timers = require("../animations/timer");
+    let RecurringTimer = timers.RecurringTimer;
 
     if (data.state === "on") {
       //channel 1 stips
