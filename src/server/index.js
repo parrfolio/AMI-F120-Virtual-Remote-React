@@ -269,7 +269,7 @@ io.sockets.on("connection", function(socket) {
     // }
 
     //    let RecurringTimer = timers.RecurringTimer;
-
+    let rainbowInterval = rainbow.Rainbow();
     if (data.state === "on") {
       //channel 1 stips
       // rainbowInterval = new RecurringTimer(function() {
@@ -280,7 +280,7 @@ io.sockets.on("connection", function(socket) {
       //   ws281x.render();
       // }, 1000 / 30);
 
-      let rainbowInterval = rainbow.Rainbow();
+      rainbowInterval();
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {
