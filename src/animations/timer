@@ -1,4 +1,4 @@
-function RecurringTimer(callback, delay) {
+function timer(callback, delay) {
   var timerId,
     start,
     remaining = delay;
@@ -23,4 +23,4 @@ function RecurringTimer(callback, delay) {
   this.resume();
 }
 
-module.exports = new RecurringTimer();
+module.exports = new timer();
