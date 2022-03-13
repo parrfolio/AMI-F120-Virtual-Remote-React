@@ -280,7 +280,9 @@ io.sockets.on("connection", function(socket) {
       //   ws281x.render();
       // }, 1000 / 30);
 
-      rainbow.Rainbow(1000 / 30, strip1);
+      rainbow.Rainbow(1000 / 30, rainbowInterval);
+
+      console.log(rainbowInterval);
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {
@@ -353,8 +355,9 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
     } else {
       //channel 1 strips
+      console.log(rainbowInterval);
       // rainbowInterval.pause();
-      rainbow.RainbowPause(strip1);
+      rainbow.RainbowPause(rainbowInterval);
       // rainbowInterval2.pause();
       // //channel 2 strips
       // rainbowInterval3.pause();
