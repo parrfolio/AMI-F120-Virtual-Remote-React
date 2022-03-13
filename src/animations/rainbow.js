@@ -35,10 +35,9 @@ let channel2 = channels[1];
 let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
-let rainbowInterval = null;
 
-function Rainbow(delay, pause) {
-  rainbowInterval = new RecurringTimer(function() {
+function Rainbow(interval, delay) {
+  interval = new RecurringTimer(function() {
     for (let i = 0; i < 150; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
@@ -47,8 +46,8 @@ function Rainbow(delay, pause) {
   }, delay);
 }
 
-function RainbowPause() {
-  rainbowInterval.pause();
+function RainbowPause(interval) {
+  interval.pause();
 }
 
 module.exports = {
