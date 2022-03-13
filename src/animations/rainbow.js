@@ -37,19 +37,19 @@ let colorsArray2 = channel2.array;
 let RecurringTimer = timers.RecurringTimer;
 
 function Rainbow(interval, delay, pause) {
-  interval = new RecurringTimer(function() {
-    if (!pause) {
-      console.log("pause is false");
+  if (!pause) {
+    console.log("lights running");
+    interval = new RecurringTimer(function() {
       for (let i = 0; i < 150; i++) {
         colorsArray1[i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
       ws281x.render();
-    } else {
-      console.log("pause is true");
-      interval.pause();
-    }
-  }, delay);
+    }, delay);
+  } else {
+    console.log("lights paused");
+    interval.pause();
+  }
 }
 
 module.exports = {

@@ -269,7 +269,7 @@ io.sockets.on("connection", function(socket) {
     // }
 
     //    let RecurringTimer = timers.RecurringTimer;
-
+    let rainbowInterval = null;
     if (data.state === "on") {
       //channel 1 stips
       // rainbowInterval = new RecurringTimer(function() {
