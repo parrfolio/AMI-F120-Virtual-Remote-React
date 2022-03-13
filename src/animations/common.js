@@ -17,32 +17,6 @@ function common() {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
-  //interval timer
-  // this.RecurringTimer = function(callback, delay) {
-  //   var timerId,
-  //     start,
-  //     remaining = delay;
-
-  //   var pause = function() {
-  //     console.log("pause was called");
-  //     clearTimeout(timerId);
-  //     remaining -= new Date() - start;
-  //   };
-
-  //   let resume = function() {
-  //     start = new Date();
-  //     timerId = setTimeout(function() {
-  //       remaining = delay;
-  //       resume();
-  //       //callback();
-  //     }, remaining);
-  //   };
-
-  //   this.resume = resume;
-  //   this.pause = pause;
-
-  //   this.resume();
-  // };
   //radomizer
   this.getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;

@@ -23,6 +23,7 @@ http.listen(PORT, () => {
 });
 
 const timers = require("../animations/timer");
+const common = require("../animations/common");
 
 //pulse train selections=
 // const pin = 32;
@@ -272,19 +273,19 @@ io.sockets.on("connection", function(socket) {
       //channel 1 stips
       rainbowInterval = new RecurringTimer(function() {
         for (let i = 0; i < 150; i++) {
-          colorsArray1[i] = colorwheel((offset + i) % 256);
+          colorsArray1[i] = common.colorwheel((offset + i) % 256);
         }
         offset = (offset + 1) % 256;
         ws281x.render();
       }, 1000 / 30);
 
-      rainbowInterval2 = new RecurringTimer(function() {
-        for (let i = 120; i < 300; i++) {
-          colorsArray1[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
+      // rainbowInterval2 = new RecurringTimer(function() {
+      //   for (let i = 120; i < 300; i++) {
+      //     colorsArray1[i] = colorwheel((offset + i) % 256);
+      //   }
+      //   offset = (offset + 1) % 256;
+      //   ws281x.render();
+      // }, 1000 / 30);
 
       //twinkle animation
       // rainbowInterval2 = new RecurringTimer(function() {
@@ -313,49 +314,49 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
 
       //channel 2 strips
-      rainbowInterval3 = new RecurringTimer(function() {
-        for (let i = 0; i < 20; i++) {
-          colorsArray2[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
+      // rainbowInterval3 = new RecurringTimer(function() {
+      //   for (let i = 0; i < 20; i++) {
+      //     colorsArray2[i] = colorwheel((offset + i) % 256);
+      //   }
+      //   offset = (offset + 1) % 256;
+      //   ws281x.render();
+      // }, 1000 / 30);
 
-      for (let i = 20; i < 40; i++) {
-        colorsArray2[i] = 0xffcc22;
-      }
-      ws281x.render();
+      // for (let i = 20; i < 40; i++) {
+      //   colorsArray2[i] = 0xffcc22;
+      // }
+      // ws281x.render();
 
-      rainbowInterval4 = new RecurringTimer(function() {
-        for (let i = 40; i < 60; i++) {
-          colorsArray2[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
+      // rainbowInterval4 = new RecurringTimer(function() {
+      //   for (let i = 40; i < 60; i++) {
+      //     colorsArray2[i] = colorwheel((offset + i) % 256);
+      //   }
+      //   offset = (offset + 1) % 256;
+      //   ws281x.render();
+      // }, 1000 / 30);
 
-      for (let i = 60; i < 120; i++) {
-        colorsArray2[i] = 0xcc0000;
-      }
-      ws281x.render();
+      // for (let i = 60; i < 120; i++) {
+      //   colorsArray2[i] = 0xcc0000;
+      // }
+      // ws281x.render();
 
-      //channel 1 neopixel sticks
-      rainbowInterval5 = new RecurringTimer(function() {
-        for (let i = 120; i < 128; i++) {
-          colorsArray2[i] = colorwheel((offset + i) % 256);
-        }
-        offset = (offset + 1) % 256;
-        ws281x.render();
-      }, 1000 / 30);
+      // //channel 1 neopixel sticks
+      // rainbowInterval5 = new RecurringTimer(function() {
+      //   for (let i = 120; i < 128; i++) {
+      //     colorsArray2[i] = colorwheel((offset + i) % 256);
+      //   }
+      //   offset = (offset + 1) % 256;
+      //   ws281x.render();
+      // }, 1000 / 30);
     } else {
       ws281x.reset();
       //channel 1 strips
       rainbowInterval.pause();
-      rainbowInterval2.pause();
-      //channel 2 strips
-      rainbowInterval3.pause();
-      rainbowInterval4.pause();
-      rainbowInterval5.pause();
+      // rainbowInterval2.pause();
+      // //channel 2 strips
+      // rainbowInterval3.pause();
+      // rainbowInterval4.pause();
+      // rainbowInterval5.pause();
       ws281x.finalize();
     }
   });
