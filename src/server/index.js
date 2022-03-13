@@ -8,8 +8,7 @@ const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
 var common = require("../animations/common");
-var timer = require("../animations/timer");
-
+var reocurringTimer = require("../animations/reocurringTimer");
 app.use(express.static(webroot));
 
 //for routing
@@ -167,7 +166,7 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       //channel 1 stips
-      rainbowInterval = timer(() => {
+      rainbowInterval = reocurringTimer(function() {
         for (let i = 0; i < 150; i++) {
           colorsArray1[i] = common.colorwheel((offset + i) % 256);
         }
