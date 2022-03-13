@@ -50,8 +50,8 @@ function Rainbow(delay, pause) {
     console.log(rainbowInterval);
   } else {
     console.log("lights paused");
-    console.log(rainbowInterval);
-    rainbowInterval.pause();
+    console.log(RecurringTimer.pause());
+    RecurringTimer.pause();
   }
 }
 
