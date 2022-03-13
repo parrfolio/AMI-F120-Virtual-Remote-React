@@ -40,7 +40,6 @@ let interval = null;
 
 function Rainbow(delay) {
   console.log(interval);
-  interval = null;
   interval = new RecurringTimer(function() {
     for (let i = 0; i < 150; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
@@ -54,6 +53,7 @@ function RainbowPause() {
   console.log(interval);
   ws281x.reset();
   interval.pause();
+  interval = null;
   ws281x.finalize();
 }
 
