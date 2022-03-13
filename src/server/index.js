@@ -22,6 +22,8 @@ http.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
 
+const timers = require("../animations/timer");
+
 //pulse train selections=
 // const pin = 32;
 const pin = 7;
@@ -264,7 +266,6 @@ io.sockets.on("connection", function(socket) {
     //   }
     // }
 
-    const timers = require("../animations/timer");
     let RecurringTimer = timers.RecurringTimer;
 
     if (data.state === "on") {
