@@ -1,4 +1,4 @@
-function RecurringTimer(callback, delay) {
+let RecurringTimer = (callback, delay) => {
   var timerId,
     start,
     remaining = delay;
@@ -22,7 +22,7 @@ function RecurringTimer(callback, delay) {
   this.pause = pause;
 
   this.resume();
-}
+};
 
 module.exports = {
   RecurringTimer: RecurringTimer,
