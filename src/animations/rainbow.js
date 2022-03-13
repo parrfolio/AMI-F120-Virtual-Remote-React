@@ -36,8 +36,8 @@ let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
 
-function Rainbow(interval, delay, pause) {
-  let rainbowInterval = interval;
+function Rainbow(delay, pause) {
+  let rainbowInterval = null;
   if (!pause) {
     console.log("lights running");
     rainbowInterval = new RecurringTimer(function() {
@@ -47,6 +47,7 @@ function Rainbow(interval, delay, pause) {
       offset = (offset + 1) % 256;
       ws281x.render();
     }, delay);
+    console.log(rainbowInterval);
   } else {
     console.log("lights paused");
     console.log(rainbowInterval);
