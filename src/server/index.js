@@ -361,7 +361,7 @@ io.sockets.on("connection", function(socket) {
       // rainbowInterval3.pause();
       // rainbowInterval4.pause();
       // rainbowInterval5.pause();
-      ws281x.finalize();
+      // ws281x.finalize();
     }
   });
 });

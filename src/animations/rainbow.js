@@ -48,11 +48,11 @@ function Rainbow(delay) {
   }, delay);
 }
 
-// function RainbowPause() {
-//   interval.pause();
-// }
+function RainbowPause() {
+  interval.pause();
+}
 
 module.exports = {
   Rainbow: Rainbow,
-  RainbowPause: interval.pause(),
+  RainbowPause: RainbowPause,
 };
