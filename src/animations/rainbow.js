@@ -39,6 +39,8 @@ let RecurringTimer = timers.RecurringTimer;
 let interval = null;
 
 function Rainbow(delay) {
+  console.log(interval);
+  interval = null;
   interval = new RecurringTimer(function() {
     for (let i = 0; i < 150; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
