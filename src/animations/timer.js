@@ -23,4 +23,4 @@ function timer(callback, delay) {
   this.resume();
 }
 
-module.exports = new timer(callback, delay);
+module.exports = new timer();
