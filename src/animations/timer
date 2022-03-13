@@ -1,6 +1,4 @@
 function RecurringTimer(callback, delay) {
-  //interval timer
-
   var timerId,
     start,
     remaining = delay;
@@ -16,7 +14,6 @@ function RecurringTimer(callback, delay) {
     timerId = setTimeout(function() {
       remaining = delay;
       resume();
-      callback();
     }, remaining);
   };
 
