@@ -93,7 +93,7 @@ io.sockets.on("connection", function(socket) {
         // await sleep(1000);
         //once trains are finished then turn on lights
         callback({
-          status: true,
+          done: true,
         });
         console.log("CALLBACK FIRED!");
       })();
