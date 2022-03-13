@@ -7,8 +7,6 @@ const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
-var common = require("../animations/common");
-
 app.use(express.static(webroot));
 
 //for routing
@@ -23,6 +21,8 @@ http.listen(PORT, () => {
   console.log(webroot);
   console.log(`Server listening on ${PORT}`);
 });
+
+var common = require("../animations/common.js");
 
 //pulse train selections=
 // const pin = 32;
