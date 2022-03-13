@@ -37,7 +37,6 @@ let colorsArray2 = channel2.array;
 let RecurringTimer = timers.RecurringTimer;
 
 function Rainbow(delay, strip) {
-  console.log(interval);
   interval[strip] = new RecurringTimer(function() {
     for (let i = 0; i < 150; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
