@@ -38,9 +38,9 @@ let RecurringTimer = timers.RecurringTimer;
 
 let interval = null;
 
-function Rainbow(delay) {
+function Rainbow(delay, strip) {
   console.log(interval);
-  interval = new RecurringTimer(function() {
+  interval[strip] = new RecurringTimer(function() {
     for (let i = 0; i < 150; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
@@ -49,11 +49,9 @@ function Rainbow(delay) {
   }, delay);
 }
 
-function RainbowPause() {
-  console.log(interval);
+function RainbowPause(strip) {
+  interval[strip].pause();
   ws281x.reset();
-  interval.pause();
-  interval = null;
   ws281x.finalize();
 }
 
