@@ -65,6 +65,6 @@ function common() {
 }
 
 module.exports = {
-  common: new common(),
-  RecurringTimer: RecurringTimer,
+  common: common,
+  RecurringTimer: this.RecurringTimer,
 };
