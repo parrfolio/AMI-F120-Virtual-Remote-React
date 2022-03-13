@@ -167,7 +167,7 @@ io.sockets.on("connection", function(socket) {
 
     if (data.state === "on") {
       //channel 1 stips
-      rainbowInterval = timer(() => {
+      rainbowInterval = this.timer(() => {
         for (let i = 0; i < 150; i++) {
           colorsArray1[i] = common.colorwheel((offset + i) % 256);
         }
