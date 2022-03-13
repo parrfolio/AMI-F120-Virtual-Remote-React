@@ -36,8 +36,10 @@ let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
 
-function Rainbow(delay, strip) {
-  interval[strip] = new RecurringTimer(function() {
+let interval = null;
+
+function Rainbow(delay) {
+  interval = new RecurringTimer(function() {
     for (let i = 0; i < 150; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
@@ -46,9 +48,10 @@ function Rainbow(delay, strip) {
   }, delay);
 }
 
-function RainbowPause(strip) {
-  interval[strip].pause();
+function RainbowPause() {
+  console.log(interval);
   ws281x.reset();
+  interval.pause();
   ws281x.finalize();
 }
 

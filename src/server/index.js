@@ -183,7 +183,7 @@ io.sockets.on("connection", function(socket) {
   };
 
   //channel 1 strips
-  let rainbowInterval = 0;
+  let rainbowInterval = null;
   let rainbowInterval2 = null;
   let rainbowInterval3 = null;
   let rainbowInterval4 = null;
@@ -280,9 +280,7 @@ io.sockets.on("connection", function(socket) {
       //   ws281x.render();
       // }, 1000 / 30);
 
-      rainbow.Rainbow(1000 / 30, rainbowInterval);
-
-      console.log(rainbowInterval);
+      rainbow.Rainbow(1000 / 30, false);
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {
@@ -354,15 +352,16 @@ io.sockets.on("connection", function(socket) {
       //   ws281x.render();
       // }, 1000 / 30);
     } else {
+      ws281x.reset();
       //channel 1 strips
-      console.log(rainbowInterval);
       // rainbowInterval.pause();
-      rainbow.RainbowPause(rainbowInterval);
+      rainbow.RainbowPause();
       // rainbowInterval2.pause();
       // //channel 2 strips
       // rainbowInterval3.pause();
       // rainbowInterval4.pause();
       // rainbowInterval5.pause();
+      ws281x.finalize();
     }
   });
 });
