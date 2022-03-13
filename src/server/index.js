@@ -280,7 +280,7 @@ io.sockets.on("connection", function(socket) {
       //   ws281x.render();
       // }, 1000 / 30);
 
-      rainbow.Rainbow(1000 / 30, false);
+      rainbow.Rainbow(1000 / 30);
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {

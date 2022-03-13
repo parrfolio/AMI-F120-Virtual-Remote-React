@@ -48,14 +48,11 @@ function Rainbow(delay) {
   }, delay);
 }
 
-function RainbowPause() {
-  console.log(interval);
-  ws281x.reset();
-  interval.pause();
-  ws281x.finalize();
-}
+// function RainbowPause() {
+//   interval.pause();
+// }
 
 module.exports = {
   Rainbow: Rainbow,
-  RainbowPause: RainbowPause,
+  RainbowPause: interval.pause(),
 };
