@@ -17,9 +17,9 @@ function common() {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
-  this.foo = function() {
+  this.foo = new (function() {
     console.log("FOO WORKING");
-  };
+  })();
 
   //interval timer
   this.RecurringTimer = new (function(callback, delay) {
