@@ -352,7 +352,6 @@ io.sockets.on("connection", function(socket) {
       //   ws281x.render();
       // }, 1000 / 30);
     } else {
-      ws281x.reset();
       //channel 1 strips
       // rainbowInterval.pause();
       rainbow.RainbowPause();
@@ -361,7 +360,6 @@ io.sockets.on("connection", function(socket) {
       // rainbowInterval3.pause();
       // rainbowInterval4.pause();
       // rainbowInterval5.pause();
-      ws281x.finalize();
     }
   });
 });

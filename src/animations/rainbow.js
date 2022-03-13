@@ -50,7 +50,9 @@ function Rainbow(delay) {
 
 function RainbowPause() {
   console.log(interval);
+  ws281x.reset();
   interval.pause();
+  ws281x.finalize();
 }
 
 module.exports = {
