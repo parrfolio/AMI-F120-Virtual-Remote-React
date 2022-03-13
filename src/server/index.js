@@ -183,7 +183,7 @@ io.sockets.on("connection", function(socket) {
   };
 
   //channel 1 strips
-  let rainbowInterval = null;
+  let rainbowInterval = 0;
   let rainbowInterval2 = null;
   let rainbowInterval3 = null;
   let rainbowInterval4 = null;
