@@ -58,6 +58,7 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "on",
+          animation: "rainbow",
         },
         (data) => {
           console.log(data);
@@ -68,6 +69,7 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "off",
+          animation: "rainbow",
         },
         (data) => {
           console.log(data);

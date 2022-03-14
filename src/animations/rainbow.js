@@ -50,7 +50,6 @@ function Rainbow(...config) {
 
 function RainbowPause() {
   interval.pause();
-  ws281x.finalize();
 }
 
 module.exports = {

@@ -279,8 +279,20 @@ io.sockets.on("connection", function(socket) {
       //   offset = (offset + 1) % 256;
       //   ws281x.render();
       // }, 1000 / 30);
-      let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
-      rainbow.Rainbow(...strip1Config);
+
+      switch (data.state.animation) {
+        case "rainbow":
+          let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
+          rainbow.Rainbow(...strip1Config);
+          break;
+        case "say_hi":
+          let message = "hi";
+          console.log(message);
+          break;
+        default:
+          console.log("Empty action received.");
+          break;
+      }
 
       // rainbowInterval2 = new RecurringTimer(function() {
       //   for (let i = 120; i < 300; i++) {
