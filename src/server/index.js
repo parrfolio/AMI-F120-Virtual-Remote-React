@@ -273,13 +273,20 @@ io.sockets.on("connection", function(socket) {
       name: "strip1",
       delay: 1000 / 30,
       start: 0,
-      stop: 150,
+      stop: 60,
     };
 
     let strip2Config = {
       name: "strip2",
       delay: 1000 / 30,
-      start: 150,
+      start: 60,
+      stop: 120,
+    };
+
+    let strip3Config = {
+      name: "strip3",
+      delay: 1000 / 30,
+      start: 120,
       stop: 300,
     };
     if (data.state === "on") {
@@ -296,6 +303,7 @@ io.sockets.on("connection", function(socket) {
         case "rainbow":
           rainbow.Rainbow(strip1Config);
           rainbow.Rainbow(strip2Config);
+          rainbow.Rainbow(strip3Config);
           break;
         case "say_hi":
           let message = "hi";
@@ -380,6 +388,7 @@ io.sockets.on("connection", function(socket) {
 
       rainbow.RainbowPause(strip1Config);
       rainbow.RainbowPause(strip2Config);
+      rainbow.RainbowPause(strip3Config);
 
       //channel 1 strips
       // rainbowInterval.pause();
