@@ -1,6 +1,7 @@
-var common = require("./common");
+const common = require("./common");
+const timers = require("./timer");
 
-function twinkle() {
+function Twinkle() {
   let TwinkleColors = [
     0xffffff,
     0xfcfcfc,
@@ -66,4 +67,4 @@ function twinkle() {
   }, 1000 / 30);
 }
 
-module.exports = new twinkle();
+module.exports = new Twinkle();
