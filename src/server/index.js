@@ -279,7 +279,7 @@ io.sockets.on("connection", function(socket) {
       //   offset = (offset + 1) % 256;
       //   ws281x.render();
       // }, 1000 / 30);
-      let strip1Config = [1000 / 30, { start: 0, stop: 150 }];
+      let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
       rainbow.Rainbow(...strip1Config);
 
       // rainbowInterval2 = new RecurringTimer(function() {

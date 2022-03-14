@@ -38,14 +38,15 @@ let RecurringTimer = timers.RecurringTimer;
 
 let interval = null;
 
-function Rainbow(delay, start, stop) {
+function Rainbow(config) {
+  console.log();
   interval = new RecurringTimer(function() {
-    for (let i = start.start; i < stop.stop; i++) {
+    for (let i = config[1].start; i < config[1].stop; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
     ws281x.render();
-  }, delay);
+  }, config[0].delay);
 }
 
 function RainbowPause() {
