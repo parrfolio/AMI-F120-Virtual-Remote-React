@@ -38,7 +38,7 @@ let RecurringTimer = timers.RecurringTimer;
 
 let interval = null;
 
-function Rainbow(config) {
+function Rainbow(...config) {
   console.log(config);
   interval = new RecurringTimer(function() {
     for (let i = config[1].start; i < config[1].stop; i++) {
