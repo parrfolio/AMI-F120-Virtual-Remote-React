@@ -1,17 +1,16 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
-const strip = require("./strip");
 const common = require("./common");
-const timers = require("./timer");
-
-let RecurringTimer = timers.RecurringTimer;
+const { RecurringTimer } = require("./timer");
+const { Strip } = require("./strip");
 
 let interval = {};
 
 function Rainbow(config) {
+  console.log(Strip, Strip.colorsArray1);
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      strip.colorsArray1[i] = common.colorwheel((strip.offset + i) % 256);
+      Strip.colorsArray1[i] = common.colorwheel((strip.offset + i) % 256);
     }
     offset = (strip.offset + 1) % 256;
     ws281x.render();
