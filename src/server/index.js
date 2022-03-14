@@ -269,7 +269,7 @@ io.sockets.on("connection", function(socket) {
     // }
 
     //    let RecurringTimer = timers.RecurringTimer;
-    let animationType = data.state.animation;
+
     if (data.state === "on") {
       //channel 1 stips
       // rainbowInterval = new RecurringTimer(function() {
@@ -279,8 +279,8 @@ io.sockets.on("connection", function(socket) {
       //   offset = (offset + 1) % 256;
       //   ws281x.render();
       // }, 1000 / 30);
-      console.log(animationType);
-      switch (animationType) {
+      console.log(data.animation);
+      switch (data.animation) {
         case "rainbow":
           let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
           rainbow.Rainbow(...strip1Config);
