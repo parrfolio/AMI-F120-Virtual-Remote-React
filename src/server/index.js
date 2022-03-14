@@ -289,6 +289,7 @@ io.sockets.on("connection", function(socket) {
       start: 120,
       stop: 300,
     };
+
     if (data.state === "on") {
       //channel 1 stips
       // rainbowInterval = new RecurringTimer(function() {
