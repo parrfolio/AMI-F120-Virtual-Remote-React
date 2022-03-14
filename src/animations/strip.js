@@ -29,6 +29,8 @@ function Strip() {
   this.offset = 0;
   //channel 1 strips on GPIO 18
 
+  console.log(channels);
+
   var colorsArray1 = function(...channels) {
     return channels[0].array;
   };
@@ -39,8 +41,6 @@ function Strip() {
 
   this.colorsArray1 = colorsArray1;
   this.colorsArray2 = colorsArray2;
-
-  console.log(colorsArray1, colorsArray2);
 }
 module.exports = {
   Strip: Strip,
