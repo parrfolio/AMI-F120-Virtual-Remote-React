@@ -294,8 +294,8 @@ io.sockets.on("connection", function(socket) {
       console.log(data.animation);
       switch (data.animation) {
         case "rainbow":
-          rainbow.Rainbow(...strip1Config);
-          rainbow.Rainbow(...strip2Config);
+          rainbow.Rainbow(strip1Config);
+          rainbow.Rainbow(strip2Config);
           break;
         case "say_hi":
           let message = "hi";
@@ -378,8 +378,8 @@ io.sockets.on("connection", function(socket) {
     } else {
       ws281x.reset();
 
-      rainbow.RainbowPause(...strip1Config);
-      rainbow.RainbowPause(...strip2Config);
+      rainbow.RainbowPause(strip1Config);
+      rainbow.RainbowPause(strip2Config);
 
       //channel 1 strips
       // rainbowInterval.pause();

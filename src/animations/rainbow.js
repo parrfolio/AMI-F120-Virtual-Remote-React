@@ -38,7 +38,7 @@ let RecurringTimer = timers.RecurringTimer;
 
 //let interval = null;
 
-function Rainbow(...config) {
+function Rainbow(config) {
   config.name = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
@@ -48,7 +48,7 @@ function Rainbow(...config) {
   }, config.delay);
 }
 
-function RainbowPause(...config) {
+function RainbowPause(config) {
   config.name.pause();
 }
 
