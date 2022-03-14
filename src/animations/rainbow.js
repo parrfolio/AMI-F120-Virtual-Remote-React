@@ -51,7 +51,6 @@ function Rainbow(config) {
     interval[config.name].pause();
   };
 }
-
 module.exports = {
   Rainbow: Rainbow,
 };
