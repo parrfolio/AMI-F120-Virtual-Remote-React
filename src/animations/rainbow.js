@@ -4,6 +4,35 @@ const common = require("./common");
 const { RecurringTimer } = require("./timer");
 const { Strip } = require("./strip");
 
+let channels = ws281x.init({
+  dma: 10,
+  freq: 800000,
+  channels: [
+    {
+      count: ledCount,
+      gpio: 18,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+    {
+      count: ledCount,
+      gpio: 13,
+      invert: false,
+      brightness: 255,
+      stripType: "ws2812",
+    },
+  ],
+});
+
+var colorsArray1 = function(...channels) {
+  return Channel.array;
+};
+console.log(colorsArray1);
+
+console.log(...channels);
+console.log(channels);
+
 let interval = {};
 
 function Rainbow(config) {
