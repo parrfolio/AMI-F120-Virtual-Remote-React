@@ -284,6 +284,10 @@ io.sockets.on("connection", function(socket) {
         case "rainbow":
           let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
           rainbow.Rainbow(...strip1Config);
+
+          let strip2Config = [{ delay: 1000 / 30 }, { start: 150, stop: 300 }];
+          rainbow.Rainbow(...strip2Config);
+
           break;
         case "say_hi":
           let message = "hi";
