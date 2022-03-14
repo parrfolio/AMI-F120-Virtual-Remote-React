@@ -1,9 +1,9 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
 function Strip() {
-  this.ledCount = 300;
+  let ledCount = 300;
 
-  this.channels = ws281x.init({
+  let channels = ws281x.init({
     dma: 10,
     freq: 800000,
     channels: [
