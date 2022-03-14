@@ -7,7 +7,7 @@ const { Strip } = require("./strip");
 let interval = {};
 
 function Rainbow(config) {
-  console.log(Strip, Strip.colorsArray1);
+  console.log(Strip, Strip.colorsArray1());
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       Strip.colorsArray1[i] = common.colorwheel((strip.offset + i) % 256);
