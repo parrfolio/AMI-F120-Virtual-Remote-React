@@ -67,4 +67,6 @@ function Twinkle() {
   }, 1000 / 30);
 }
 
-module.exports = new Twinkle();
+module.exports = {
+  Twinkle: Twinkle,
+};

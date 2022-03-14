@@ -1,7 +1,6 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
 const timers = require("./timer");
-
 let ledCount = 300;
 let channels = ws281x.init({
   dma: 10,
@@ -52,4 +51,6 @@ function Rainbow(config) {
     interval[config.name].pause();
   };
 }
-module.exports = new Rainbow();
+module.exports = {
+  Rainbow: Rainbow,
+};
