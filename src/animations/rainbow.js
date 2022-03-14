@@ -39,7 +39,7 @@ let RecurringTimer = timers.RecurringTimer;
 let interval = null;
 
 function Rainbow(config) {
-  console.log();
+  console.log(config);
   interval = new RecurringTimer(function() {
     for (let i = config[1].start; i < config[1].stop; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
