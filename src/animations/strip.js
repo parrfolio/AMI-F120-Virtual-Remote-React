@@ -34,6 +34,9 @@ function Strip() {
   };
   console.log(colorsArray1);
 
+  console.log(...channels);
+  console.log(channels);
+
   var colorsArray2 = function(...channels) {
     return Channel.array;
   };
