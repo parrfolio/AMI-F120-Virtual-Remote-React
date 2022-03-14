@@ -36,23 +36,26 @@ let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
 
-//let interval = null;
+let interval = {};
 
 function Rainbow(config) {
-  config.name = new RecurringTimer(function() {
+  interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
     ws281x.render();
   }, config.delay);
+
+  this.RainbowPause = function(config) {
+    interval[config.name].pause();
+  };
 }
 
-function RainbowPause(config) {
-  config.name.pause();
-}
+// function RainbowPause(config) {
+//   interval.pause();
+// }
 
 module.exports = {
   Rainbow: Rainbow,
-  RainbowPause: RainbowPause,
 };

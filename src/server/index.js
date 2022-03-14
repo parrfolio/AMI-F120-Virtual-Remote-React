@@ -378,8 +378,8 @@ io.sockets.on("connection", function(socket) {
     } else {
       ws281x.reset();
 
-      rainbow.RainbowPause(strip1Config);
-      rainbow.RainbowPause(strip2Config);
+      rainbow.Rainbow.RainbowPause(strip1Config);
+      rainbow.Rainbow.RainbowPause(strip2Config);
 
       //channel 1 strips
       // rainbowInterval.pause();
