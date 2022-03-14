@@ -269,7 +269,19 @@ io.sockets.on("connection", function(socket) {
     // }
 
     //    let RecurringTimer = timers.RecurringTimer;
+    let strip1Config = {
+      name: "strip1",
+      delay: 1000 / 30,
+      start: 0,
+      stop: 150,
+    };
 
+    let strip2Config = {
+      name: "strip2",
+      delay: 1000 / 30,
+      start: 150,
+      stop: 300,
+    };
     if (data.state === "on") {
       //channel 1 stips
       // rainbowInterval = new RecurringTimer(function() {
@@ -282,12 +294,8 @@ io.sockets.on("connection", function(socket) {
       console.log(data.animation);
       switch (data.animation) {
         case "rainbow":
-          let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
           rainbow.Rainbow(...strip1Config);
-
-          let strip2Config = [{ delay: 1000 / 30 }, { start: 150, stop: 300 }];
           rainbow.Rainbow(...strip2Config);
-
           break;
         case "say_hi":
           let message = "hi";
@@ -369,7 +377,10 @@ io.sockets.on("connection", function(socket) {
       // }, 1000 / 30);
     } else {
       ws281x.reset();
-      rainbow.RainbowPause();
+
+      rainbow.RainbowPause(...strip1Config);
+      rainbow.RainbowPause(...strip2Config);
+
       //channel 1 strips
       // rainbowInterval.pause();
 
