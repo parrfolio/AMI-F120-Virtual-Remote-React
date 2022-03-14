@@ -11,10 +11,12 @@ let interval = {};
 function Rainbow(config) {
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      strip.colorsArray1[i] = common.colorwheel((strip.offset + i) % 256);
+      strip.Strip.colorsArray1[i] = common.colorwheel(
+        (strip.Strip.offset + i) % 256
+      );
     }
-    offset = (strip.offset + 1) % 256;
-    ws281x.render();
+    offset = (strip.Strip.offset + 1) % 256;
+    strip.Strip.ws281x.render();
   }, config.delay);
 
   this.RainbowPause = function(config) {
