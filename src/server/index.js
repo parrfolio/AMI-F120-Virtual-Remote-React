@@ -282,6 +282,7 @@ io.sockets.on("connection", function(socket) {
 
       switch (data.state.animation) {
         case "rainbow":
+          console.log(data.state.animation);
           let strip1Config = [{ delay: 1000 / 30 }, { start: 0, stop: 150 }];
           rainbow.Rainbow(...strip1Config);
           break;
