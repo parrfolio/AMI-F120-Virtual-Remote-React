@@ -25,7 +25,7 @@ let channels = ws281x.init({
   ],
 });
 
-var colorsArray1 = function(...channels) {
+var colorsArray1 = function(channels) {
   return Channel.array;
 };
 console.log(colorsArray1());
