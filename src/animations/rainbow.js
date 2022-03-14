@@ -28,10 +28,12 @@ let channels = ws281x.init({
 var colorsArray1 = function(...channels) {
   return Channel.array;
 };
-console.log(colorsArray1);
+console.log(colorsArray1());
 
 console.log(...channels);
 console.log(channels);
+
+console.log(Strip.colorsArray1);
 
 let interval = {};
 
