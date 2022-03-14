@@ -38,9 +38,9 @@ let RecurringTimer = timers.RecurringTimer;
 
 let interval = null;
 
-function Rainbow(delay) {
+function Rainbow(delay, start, stop) {
   interval = new RecurringTimer(function() {
-    for (let i = 0; i < 150; i++) {
+    for (let i = start.start; i < stop.stop; i++) {
       colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
@@ -50,6 +50,7 @@ function Rainbow(delay) {
 
 function RainbowPause() {
   interval.pause();
+  //ws281x.finalize();
 }
 
 module.exports = {
