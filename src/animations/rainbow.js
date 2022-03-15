@@ -11,26 +11,24 @@ let strip = {};
 // let colorsArray2 = channel2.array;
 
 function Rainbow(config) {
-  config.forEach((item) => {
-    let offset = 0;
-    let channelSet = item.channelSet;
-    console.log(item.channelSet);
-    console.log(item.name);
-    strip[item.name] = new Strip(item).findStrip();
+  let offset = 0;
+  let channelSet = config.channelSet;
+  console.log(config.channelSet);
+  console.log(config.name);
+  strip[config.name] = new Strip(config).findStrip();
 
-    interval[item.name] = new RecurringTimer(function() {
-      for (let i = item.start; i < item.stop; i++) {
-        strip[item.name][i] = common.colorwheel((offset + i) % 256);
-      }
-      offset = (offset + 1) % 256;
+  interval[config.name] = new RecurringTimer(function() {
+    for (let i = config.start; i < config.stop; i++) {
+      strip[config.name][i] = common.colorwheel((offset + i) % 256);
+    }
+    offset = (offset + 1) % 256;
 
-      ws281x.render();
-    }, item.delay);
+    ws281x.render();
+  }, config.delay);
 
-    this.RainbowPause = function(config) {
-      interval[item.name].pause();
-    };
-  });
+  this.RainbowPause = function(config) {
+    interval[config.name].pause();
+  };
 }
 module.exports = {
   Rainbow: Rainbow,
