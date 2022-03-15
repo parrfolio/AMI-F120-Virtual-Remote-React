@@ -24,7 +24,7 @@ function Rainbow(config) {
       }
       offset = (offset + 1) % 256;
 
-      ws281x.render();
+      new Strip().Render();
     }, item.delay);
 
     this.RainbowPause = function(config) {

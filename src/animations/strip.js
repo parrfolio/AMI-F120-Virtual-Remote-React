@@ -28,11 +28,12 @@ function Strip(config) {
   };
 
   this.findStrip = findStrip;
+  this.Render = Render;
   this.findStrip();
 
-  //   this.Render = () => {
-  //     ws281x.render();
-  //   };
+  this.Render = () => {
+    return ws281x.render();
+  };
 }
 
 module.exports = {
