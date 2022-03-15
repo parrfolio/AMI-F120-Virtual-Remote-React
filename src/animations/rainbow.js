@@ -4,6 +4,8 @@ const timers = require("./timer");
 const strip = require("./strip");
 
 console.log(strip.Strip.colorsArray1);
+console.log(strip.colorsArray1);
+console.log(Strip.colorsArray1);
 
 let ledCount = 300;
 let channels = ws281x.init({
