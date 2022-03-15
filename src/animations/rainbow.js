@@ -12,19 +12,19 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
-  colors = new Strip(config, function() {
+  let foo = new Strip(config, function() {
     console.log("In Channel Set Name");
     console.log(config);
     console.log(this.findStrip(config.channelSet));
     return this.findStrip(config.channelSet);
-  })();
+  });
 
   console.log("OUTESIDE CHANNEL SET NAME");
-  // console.log(foo.findStrip());
+  console.log(foo.findStrip());
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      colors[config.channelSet][i] = common.colorwheel((offset + i) % 256);
+      config.channelSetName[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
     ws281x.render();
