@@ -13,7 +13,7 @@ function Rainbow(config) {
   console.log("Channel Set from Config", config.channelSet);
   let channelSet = config.channelSet;
   let colors = {};
-  console.log("Channel Set from Color Object", color[channelSet]);
+  console.log("Channel Set from Color Object", colors[channelSet]);
   let offset = 0;
   let strip = new Strip(config).findStrip();
 
