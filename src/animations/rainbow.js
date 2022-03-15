@@ -25,6 +25,7 @@ function Rainbow(config) {
         strip[item.name][i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
+
       ws281x.render();
     }, item.delay);
 
