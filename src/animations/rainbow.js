@@ -6,15 +6,16 @@ const strip = require("./strip");
 let RecurringTimer = timers.RecurringTimer;
 let interval = {};
 let colors = {};
+
 function Rainbow(config) {
   let offset = 0;
-  colors[config.channel] = strip.findStrip(config.channel);
+  colors[config.channel] = strip.FindStrip(config.channel);
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       colors[config.channel][i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
-    ws281x.render();
+    strip.Render();
   }, config.delay);
 
   this.RainbowPause = function(config) {
