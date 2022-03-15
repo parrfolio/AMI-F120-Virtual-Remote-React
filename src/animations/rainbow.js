@@ -16,6 +16,8 @@ function Rainbow(config) {
   let offset = 0;
   config.channelSetName = new Strip(config.channelSet);
 
+  console.log(config.channelSetName);
+
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       config.channelSetName[i] = common.colorwheel((offset + i) % 256);
