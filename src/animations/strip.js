@@ -48,8 +48,8 @@ function strip() {
   //   };
 
   this.colorsArray1 = (channels) => {
-    let channel1 = channels[0];
-    return channel1.array;
+    console.log(channels);
+    console.log(...channels);
   };
 }
 module.exports = new strip();
