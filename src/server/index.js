@@ -223,10 +223,10 @@ io.sockets.on("connection", function(socket) {
       }
     } else {
       ws281x.reset();
-      rainbow.RainbowPause(strip1Config);
-      rainbow.RainbowPause(strip2Config);
-      rainbow.RainbowPause(strip3Config);
-      rainbow.RainbowPause(strip4Config);
+      rainbow.RainbowPause(stripsConfig);
+      // rainbow.RainbowPause(strip2Config);
+      // rainbow.RainbowPause(strip3Config);
+      // rainbow.RainbowPause(strip4Config);
       // rainbow.RainbowPause(strip5Config);
       // rainbow.RainbowPause(strip6Config);
     }
