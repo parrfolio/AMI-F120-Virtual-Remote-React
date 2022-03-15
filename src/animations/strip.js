@@ -1,6 +1,6 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
-function strip() {
+function Strip() {
   //channel 1 strips on GPIO 18
   //   let channel1 = channels[0];
   //   let colorsArray1 = channel1.array;
@@ -49,4 +49,6 @@ function strip() {
     return strips[0].array;
   };
 }
-module.exports = new strip();
+module.exports = {
+  Strip: Strip,
+};
