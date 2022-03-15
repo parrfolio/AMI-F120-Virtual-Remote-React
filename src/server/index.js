@@ -119,29 +119,29 @@ io.sockets.on("connection", function(socket) {
       });
     });
 
-    let strip4Config = {
-      name: "strip4",
-      delay: 1000 / 30,
-      start: 0,
-      stop: 60,
-      channel: 1,
-    };
+    // let strip4Config = {
+    //   name: "strip4",
+    //   delay: 1000 / 30,
+    //   start: 0,
+    //   stop: 60,
+    //   channel: 1,
+    // };
 
-    let strip5Config = {
-      name: "strip5",
-      delay: 1000 / 30,
-      start: 60,
-      stop: 120,
-      channel: 1,
-    };
+    // let strip5Config = {
+    //   name: "strip5",
+    //   delay: 1000 / 30,
+    //   start: 60,
+    //   stop: 120,
+    //   channel: 1,
+    // };
 
-    let strip6Config = {
-      name: "strip6",
-      delay: 1000 / 30,
-      start: 120,
-      stop: 128,
-      channel: 1,
-    };
+    // let strip6Config = {
+    //   name: "strip6",
+    //   delay: 1000 / 30,
+    //   start: 120,
+    //   stop: 128,
+    //   channel: 1,
+    // };
 
     let strip1Config = {
       name: "strip1",
