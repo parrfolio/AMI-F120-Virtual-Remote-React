@@ -23,8 +23,7 @@ function strip() {
         },
       ],
     });
-    console.log(channel);
-    return strips[channel].array;
+    return strips[channel];
   };
 
   this.Render = () => {

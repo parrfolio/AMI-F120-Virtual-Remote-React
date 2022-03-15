@@ -10,7 +10,7 @@ let colors = {};
 function Rainbow(config) {
   let offset = 0;
 
-  colors[config.channel] = strip.FindStrip(config.channel);
+  colors[config.channel] = strip.FindStrip(config.channel.array);
   console.log(colors[config.channel]);
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
