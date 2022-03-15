@@ -24,6 +24,7 @@ function Strip(channelSet, callback) {
         },
       ],
     });
+    callback();
     console.log("Count", channelCount);
     console.log("array", strips[channelCount].array);
     return strips[channelCount].array;
