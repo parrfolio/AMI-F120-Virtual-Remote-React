@@ -20,7 +20,7 @@ function Rainbow(config) {
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      colors[config.channel][i] = common.colorwheel((offset + i) % 256);
+      colors[config.name][i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
 
