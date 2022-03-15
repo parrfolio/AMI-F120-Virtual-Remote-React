@@ -17,7 +17,7 @@ function Rainbow(config) {
       colors[config.channel][i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
-    strip.Render();
+    ws281x.render();
   }, config.delay);
 
   this.RainbowPause = function(config) {
