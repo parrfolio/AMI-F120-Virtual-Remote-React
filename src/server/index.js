@@ -118,29 +118,6 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
-    let strip1Config = {
-      name: "strip1",
-      delay: 1000 / 30,
-      start: 0,
-      stop: 60,
-      channel: 0,
-    };
-
-    let strip2Config = {
-      name: "strip2",
-      delay: 1000 / 30,
-      start: 60,
-      stop: 120,
-      channel: 0,
-    };
-
-    let strip3Config = {
-      name: "strip3",
-      delay: 1000 / 30,
-      start: 120,
-      stop: 300,
-      channel: 0,
-    };
 
     let strip4Config = {
       name: "strip4",
@@ -164,6 +141,30 @@ io.sockets.on("connection", function(socket) {
       start: 120,
       stop: 128,
       channel: 1,
+    };
+
+    let strip1Config = {
+      name: "strip1",
+      delay: 1000 / 30,
+      start: 0,
+      stop: 60,
+      channel: 0,
+    };
+
+    let strip2Config = {
+      name: "strip2",
+      delay: 1000 / 30,
+      start: 60,
+      stop: 120,
+      channel: 0,
+    };
+
+    let strip3Config = {
+      name: "strip3",
+      delay: 1000 / 30,
+      start: 120,
+      stop: 300,
+      channel: 0,
     };
 
     if (data.state === "on") {
