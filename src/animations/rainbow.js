@@ -18,8 +18,6 @@ function Rainbow(config) {
     console.log(item.name);
     strip[item.name] = new Strip(item).findStrip();
 
-    console.log(strip[item.name]);
-
     interval[item.name] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
         strip[item.name][i] = common.colorwheel((offset + i) % 256);
@@ -28,7 +26,7 @@ function Rainbow(config) {
 
       ws281x.render();
     }, item.delay);
-
+    console.log(strip[item.name]);
     this.RainbowPause = function(config) {
       interval[item.name].pause();
     };
