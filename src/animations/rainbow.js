@@ -7,23 +7,14 @@ let RecurringTimer = timers.RecurringTimer;
 let interval = {};
 let colors = {};
 
-// let channel1 = channels[0];
-// let colorsArray1 = channel1.array;
-
 function Rainbow(config) {
-  let channel1 = strip.FindStrip(0);
-  let colorsArray1 = channel1.array;
-
   let offset = 0;
-  console.log("Color Var Name", colors[config.foo]);
-  // let colorsArray1 = strip.FindStrip(0);
-
+  colors[config.channel] = strip.FindStrip(config.channel);
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      colorsArray1[i] = common.colorwheel((offset + i) % 256);
+      colors[config.channel][i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
-
     ws281x.render();
   }, config.delay);
 
