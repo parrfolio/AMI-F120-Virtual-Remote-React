@@ -13,6 +13,8 @@ let colors = {};
 function Rainbow(config) {
   let offset = 0;
   config.channelSetName = new Strip(config, function() {
+    console.log(config);
+    console.log(config.channelSet);
     return this.findStrip(config.channelSet);
   });
 
