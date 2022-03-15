@@ -135,49 +135,81 @@ io.sockets.on("connection", function(socket) {
     //   channel: 1,
     // };
 
-    let strip1Config = {
-      name: "strip1",
-      delay: 1000 / 30,
-      start: 0,
-      stop: 60,
-      channelSet: 0,
-      channelSetName: "set1",
-    };
+    // let strip1Config = {
+    //   name: "strip1",
+    //   delay: 1000 / 30,
+    //   start: 0,
+    //   stop: 60,
+    //   channelSet: 0,
+    //   channelSetName: "set1",
+    // };
 
-    let strip2Config = {
-      name: "strip2",
-      delay: 1000 / 30,
-      start: 60,
-      stop: 120,
-      channelSet: 0,
-      channelSetName: "set1",
-    };
+    // let strip2Config = {
+    //   name: "strip2",
+    //   delay: 1000 / 30,
+    //   start: 60,
+    //   stop: 120,
+    //   channelSet: 0,
+    //   channelSetName: "set1",
+    // };
 
-    let strip3Config = {
-      name: "strip3",
-      delay: 1000 / 30,
-      start: 120,
-      stop: 300,
-      channelSet: 0,
-      channelSetName: "set1",
-    };
+    // let strip3Config = {
+    //   name: "strip3",
+    //   delay: 1000 / 30,
+    //   start: 120,
+    //   stop: 300,
+    //   channelSet: 0,
+    //   channelSetName: "set1",
+    // };
 
-    let strip4Config = {
-      name: "strip4",
-      delay: 1000 / 30,
-      start: 0,
-      stop: 60,
-      channelSet: 1,
-      channelSetName: "set2",
-    };
+    // let strip4Config = {
+    //   name: "strip4",
+    //   delay: 1000 / 30,
+    //   start: 0,
+    //   stop: 60,
+    //   channelSet: 1,
+    //   channelSetName: "set2",
+    // };
+
+    let stripsConfig = [
+      {
+        name: "strip1",
+        delay: 1000 / 30,
+        start: 0,
+        stop: 60,
+        channelSet: 0,
+        channelSetName: "set1",
+      },
+      {
+        name: "strip2",
+        delay: 1000 / 30,
+        start: 60,
+        stop: 120,
+        channelSet: 0,
+        channelSetName: "set1",
+      },
+      {
+        name: "strip3",
+        delay: 1000 / 30,
+        start: 120,
+        stop: 300,
+        channelSet: 0,
+        channelSetName: "set1",
+      },
+      {
+        name: "strip4",
+        delay: 1000 / 30,
+        start: 0,
+        stop: 60,
+        channelSet: 1,
+        channelSetName: "set2",
+      },
+    ];
 
     if (data.state === "on") {
       switch (data.animation) {
         case "rainbow":
-          rainbow.Rainbow(strip1Config);
-          rainbow.Rainbow(strip2Config);
-          rainbow.Rainbow(strip3Config);
-          rainbow.Rainbow(strip4Config);
+          rainbow.Rainbow(stripsConfig);
           // rainbow.Rainbow(strip5Config);
           // rainbow.Rainbow(strip6Config);
           break;
