@@ -15,8 +15,8 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
-  console.log("Color Var Name", colors[config.channel]);
-  let colorsArray1 = strip.FindStrip(config.channel);
+  console.log("Color Var Name", colors[config.foo]);
+  let colorsArray1 = strip.FindStrip(0);
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
