@@ -26,7 +26,7 @@ function Rainbow(config) {
 
       ws281x.render();
     }, item.delay);
-    console.log(strip[item.name]);
+
     this.RainbowPause = function(config) {
       interval[item.name].pause();
     };
