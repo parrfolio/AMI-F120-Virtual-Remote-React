@@ -36,8 +36,8 @@ function Strip(config) {
     return strips[channelConfig.channelSet].array;
   };
 
-  //   this.findStrip = findStrip;
-  //   this.findStrip();
+  this.findStrip = findStrip;
+  this.findStrip();
 
   //   this.Render = () => {
   //     ws281x.render();
