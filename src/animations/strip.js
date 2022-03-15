@@ -40,7 +40,7 @@ function Strip() {
   //channel 1 strips on GPIO 18
 
   var colorsArray1 = function(channels) {
-    return channels[0].array;
+    return "foo";
   };
 
   var colorsArray2 = function(channels) {
@@ -52,4 +52,5 @@ function Strip() {
 }
 module.exports = {
   Strip: Strip,
+  colorsArray1: colorsArray1,
 };
