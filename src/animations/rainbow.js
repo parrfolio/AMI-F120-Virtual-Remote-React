@@ -1,13 +1,11 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
 const timers = require("./timer");
-const strip = require("./strip");
+const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
 let interval = {};
 let colors = {};
-
-let Strip = strip.Strip;
 
 // let channel2 = channels[1];
 // let colorsArray2 = channel2.array;
@@ -15,7 +13,8 @@ let Strip = strip.Strip;
 function Rainbow(config) {
   let offset = 0;
   config.channelSetName = new Strip(config.channelSet);
-
+  console.log("In Rainbow Config");
+  console.log(config);
   console.log(config.channelSet);
   console.log(config.channelSetName);
   console.log(new Strip(config.channelSet));
