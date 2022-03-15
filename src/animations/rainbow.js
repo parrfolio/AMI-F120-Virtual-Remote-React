@@ -12,12 +12,16 @@ let interval = {};
 function Rainbow(config) {
   console.log("Channel Set from Config", config.channelSet);
   let channelSet = config.channelSet;
-  let colors = {};
-  console.log("Channel Set from Color Object", colors[channelSet]);
+
+  let colors = {
+    [channelSet]: channelSet,
+  };
+
+  console.log("Channel Set from Color Object", colors);
   let offset = 0;
   let strip = new Strip(config).findStrip();
 
-  config.name = new RecurringTimer(function() {
+  interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       strip[i] = common.colorwheel((offset + i) % 256);
     }
@@ -25,7 +29,7 @@ function Rainbow(config) {
     ws281x.render();
   }, config.delay);
   this.RainbowPause = function(config) {
-    config.name.pause();
+    interval[config.name].pause();
   };
 }
 module.exports = {
