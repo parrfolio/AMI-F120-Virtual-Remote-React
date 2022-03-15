@@ -23,7 +23,7 @@ function Strip(config) {
         },
       ],
     });
-    console.log("STRIPS ARRAY", strips[channelConfig].array);
+    //console.log("STRIPS ARRAY", strips[channelConfig].array);
     return strips[channelConfig].array;
   };
 
