@@ -23,7 +23,7 @@ function Strip(channel, callback) {
       ],
     });
 
-    return strips[channel.channelSet].array;
+    return strips[0].array;
   };
 
   this.findStrip = findStrip;
