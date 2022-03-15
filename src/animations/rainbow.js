@@ -16,7 +16,9 @@ function Rainbow(config) {
   let offset = 0;
   config.channelSetName = new Strip(config.channelSet);
 
+  console.log(config.channelSet);
   console.log(config.channelSetName);
+  console.log(new Strip(config.channelSet));
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
