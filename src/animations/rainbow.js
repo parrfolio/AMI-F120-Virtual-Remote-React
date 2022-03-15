@@ -11,10 +11,9 @@ function Rainbow(config) {
   let offset = 0;
 
   colors[config.channel] = strip.FindStrip(config.channel);
-  console.log(interval[config.name]);
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      colors[config.channel][i] = common.colorwheel((offset + i) % 256);
+      colors[config.channel][i] = new common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
     ws281x.render();
