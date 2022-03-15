@@ -17,7 +17,7 @@ function Rainbow(config) {
   let offset = 0;
   let strip = new Strip(config).findStrip();
 
-  interval[config.name] = new RecurringTimer(function() {
+  config.name = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       strip[i] = common.colorwheel((offset + i) % 256);
     }
@@ -25,7 +25,7 @@ function Rainbow(config) {
     ws281x.render();
   }, config.delay);
   this.RainbowPause = function(config) {
-    interval[config.name].pause();
+    config.name.pause();
   };
 }
 module.exports = {

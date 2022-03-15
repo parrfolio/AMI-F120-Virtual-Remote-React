@@ -3,7 +3,7 @@ function Strip(config) {
   let channelConfig = config.channelSet;
   const findStrip = () => {
     const ledCount = 300;
-    const strips = ws281x.init({
+    let strips = ws281x.init({
       dma: 10,
       freq: 800000,
       channels: [
