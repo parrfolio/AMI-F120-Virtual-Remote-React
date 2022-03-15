@@ -1,7 +1,7 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-function Strip(config) {
-  console.log("FULL CONFIG OUTSIDE FINDSTRIP", config);
-  console.log("CHANNEL SET OUTSIDE", config.channelSet);
+function Strip() {
+  //   console.log("FULL CONFIG OUTSIDE FINDSTRIP", config);
+  //   console.log("CHANNEL SET OUTSIDE", config.channelSet);
   let channelConfig = config;
   let findStrip = (config) => {
     console.log("FULL CONFIG INSIDE FINDSTRIP", config);
