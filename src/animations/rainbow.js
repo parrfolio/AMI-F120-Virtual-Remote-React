@@ -8,24 +8,18 @@ let interval = {};
 let colors = {};
 
 function Rainbow(config) {
-  const sleep = (milliseconds) => {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-  };
   let offset = 0;
 
   colors[config.channel] = strip.FindStrip(config.channel);
-
-  (async () => {
-    await sleep(colors[config.channel]);
-    interval[config.name] = new RecurringTimer(function() {
-      for (let i = config.start; i < config.stop; i++) {
-        colors[config.channel][i] = common.colorwheel((offset + i) % 256);
-      }
-
-      offset = (offset + 1) % 256;
-      ws281x.render();
-    }, config.delay);
-  })();
+  console.log(interval[config.name]);
+  console.log(colors[config.channel]);
+  interval[config.name] = new RecurringTimer(function() {
+    for (let i = config.start; i < config.stop; i++) {
+      colors[config.channel][i] = common.colorwheel((offset + i) % 256);
+    }
+    offset = (offset + 1) % 256;
+    ws281x.render();
+  }, config.delay);
 
   this.RainbowPause = function(config) {
     interval[config.name].pause();
