@@ -9,7 +9,9 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
+  console.log(colors[config.channel]);
   colors[config.channel] = strip.FindStrip(config.channel);
+
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       colors[config.channel][i] = common.colorwheel((offset + i) % 256);
