@@ -24,7 +24,7 @@ function Strip() {
   //     return channels[1].array;
   //   };
 
-  this.colorsArray1 = () => {
+  function colorsArray1() {
     let ledCount = 300;
     let strips = ws281x.init({
       dma: 10,
@@ -47,7 +47,7 @@ function Strip() {
       ],
     });
     return strips[0].array;
-  };
+  }
 }
 module.exports = {
   Strip: Strip,
