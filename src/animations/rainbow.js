@@ -31,12 +31,11 @@ console.log(strip.colorsArray1());
 
 let offset = 0;
 //channel 1 strips on GPIO 18
-let channel1 = channels[0];
 let colorsArray1 = strip.colorsArray1();
 
 //channel 2 strips on GPIO 13
-let channel2 = channels[1];
-let colorsArray2 = channel2.array;
+// let channel2 = channels[1];
+// let colorsArray2 = channel2.array;
 
 let RecurringTimer = timers.RecurringTimer;
 

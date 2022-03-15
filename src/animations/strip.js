@@ -46,9 +46,6 @@ function strip() {
         },
       ],
     });
-
-    let offset = 0;
-    console.log(strips);
     return strips[0].array;
   };
 }
