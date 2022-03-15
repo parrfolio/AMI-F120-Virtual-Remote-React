@@ -12,7 +12,7 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
-  config.channelSetName = new Strip(config, function() {
+  let foo = new Strip(config, function() {
     console.log("In Channel Set Name");
     console.log(config);
     console.log(this.findStrip(config.channelSet));
@@ -20,7 +20,7 @@ function Rainbow(config) {
   });
 
   console.log("OUTESIDE CHANNEL SET NAME");
-  console.log(config.channelSetName);
+  console.log(foo);
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
