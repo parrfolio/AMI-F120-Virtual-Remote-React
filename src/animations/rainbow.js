@@ -7,11 +7,17 @@ let RecurringTimer = timers.RecurringTimer;
 let interval = {};
 let colors = {};
 
+// let channel1 = channels[0];
+// let colorsArray1 = channel1.array;
+
+// let channel2 = channels[1];
+// let colorsArray2 = channel2.array;
+
 function Rainbow(config) {
   let offset = 0;
 
-  colors[config.channel] = strip.FindStrip(config.channel.array);
-  console.log(colors[config.channel]);
+  colors[config.name] = strip.FindStrip(config.channel);
+
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       colors[config.channel][i] = common.colorwheel((offset + i) % 256);
