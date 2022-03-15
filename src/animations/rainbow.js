@@ -10,18 +10,10 @@ let RecurringTimer = timers.RecurringTimer;
 
 function Rainbow(config) {
   let offset = 0;
-  let interval = {};
-  let colors = {};
   let strip = new Strip(config).findStrip();
-
-  console.log("COlORS", colors[config.name]);
-  console.log("NEW STRIP", strip);
-
-  colors[config.name] = strip;
-
-  interval[config.name] = new RecurringTimer(function() {
+  let foo = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      colors[config.name][i] = common.colorwheel((offset + i) % 256);
+      strip[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
     ws281x.render();
