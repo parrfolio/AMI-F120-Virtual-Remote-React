@@ -27,7 +27,7 @@ function Strip(channel) {
   };
 
   this.findStrip = findStrip;
-  //this.findStrip(channel);
+  this.findStrip(channel);
 
   //   this.Render = () => {
   //     ws281x.render();
