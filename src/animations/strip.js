@@ -1,5 +1,5 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-function Strip(channelSet, callback) {
+function Strip(channelSet) {
   let findStrip = function(channelSet) {
     let channelCount = channelSet.channelSet;
 
@@ -24,7 +24,7 @@ function Strip(channelSet, callback) {
         },
       ],
     });
-    callback();
+
     console.log("Count", channelCount);
     console.log("array", strips[channelCount].array);
     return strips[channelCount].array;
