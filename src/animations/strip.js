@@ -23,6 +23,7 @@ function strip() {
         },
       ],
     });
+    console.log(channel);
     return strips[channel].array;
   };
 
