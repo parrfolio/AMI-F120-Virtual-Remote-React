@@ -274,6 +274,7 @@ io.sockets.on("connection", function(socket) {
       delay: 1000 / 30,
       start: 0,
       stop: 60,
+      channel: 0,
     };
 
     let strip2Config = {
@@ -281,6 +282,7 @@ io.sockets.on("connection", function(socket) {
       delay: 1000 / 30,
       start: 60,
       stop: 120,
+      channel: 0,
     };
 
     let strip3Config = {
@@ -288,6 +290,7 @@ io.sockets.on("connection", function(socket) {
       delay: 1000 / 30,
       start: 120,
       stop: 300,
+      channel: 0,
     };
 
     if (data.state === "on") {

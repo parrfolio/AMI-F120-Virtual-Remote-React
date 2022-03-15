@@ -1,6 +1,6 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
-function Strip() {
+function strip() {
   //channel 1 strips on GPIO 18
   //   let channel1 = channels[0];
   //   let colorsArray1 = channel1.array;
@@ -24,7 +24,7 @@ function Strip() {
   //     return channels[1].array;
   //   };
 
-  function colorsArray1() {
+  this.findStrip = (channel) => {
     let ledCount = 300;
     let strips = ws281x.init({
       dma: 10,
@@ -46,9 +46,7 @@ function Strip() {
         },
       ],
     });
-    return strips[0].array;
-  }
+    return strips[channel].array;
+  };
 }
-module.exports = {
-  Strip: Strip,
-};
+module.exports = new strip();
