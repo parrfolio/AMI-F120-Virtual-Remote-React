@@ -140,7 +140,8 @@ io.sockets.on("connection", function(socket) {
       delay: 1000 / 30,
       start: 0,
       stop: 60,
-      foo: 0,
+      channelSet: 0,
+      channelSetName: "set1",
     };
 
     let strip2Config = {
@@ -148,7 +149,8 @@ io.sockets.on("connection", function(socket) {
       delay: 1000 / 30,
       start: 60,
       stop: 120,
-      foo: 0,
+      channelSet: 0,
+      channelSetName: "set1",
     };
 
     let strip3Config = {
@@ -156,16 +158,18 @@ io.sockets.on("connection", function(socket) {
       delay: 1000 / 30,
       start: 120,
       stop: 300,
-      foo: 0,
+      channelSet: 0,
+      channelSetName: "set1",
     };
 
-    // let strip4Config = {
-    //   name: "strip4",
-    //   delay: 1000 / 30,
-    //   start: 0,
-    //   stop: 60,
-    //   channel: 1,
-    // };
+    let strip4Config = {
+      name: "strip4",
+      delay: 1000 / 30,
+      start: 0,
+      stop: 60,
+      channelSet: 1,
+      channelSetName: "set2",
+    };
 
     if (data.state === "on") {
       switch (data.animation) {
@@ -173,7 +177,7 @@ io.sockets.on("connection", function(socket) {
           rainbow.Rainbow(strip1Config);
           rainbow.Rainbow(strip2Config);
           rainbow.Rainbow(strip3Config);
-          // rainbow.Rainbow(strip4Config);
+          rainbow.Rainbow(strip4Config);
           // rainbow.Rainbow(strip5Config);
           // rainbow.Rainbow(strip6Config);
           break;
@@ -190,7 +194,7 @@ io.sockets.on("connection", function(socket) {
       rainbow.RainbowPause(strip1Config);
       rainbow.RainbowPause(strip2Config);
       rainbow.RainbowPause(strip3Config);
-      // rainbow.RainbowPause(strip4Config);
+      rainbow.RainbowPause(strip4Config);
       // rainbow.RainbowPause(strip5Config);
       // rainbow.RainbowPause(strip6Config);
     }
