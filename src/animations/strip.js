@@ -4,7 +4,6 @@ function Strip(config) {
   console.log("CHANNEL SET OUTSIDE", config.channelSet);
   let findStrip = function(config) {
     console.log("FULL CONFIG INSIDE FINDSTRIP", config);
-    console.log("CHANNEL SET INSIDE", config.channelSet);
 
     const channelConfig = config;
 
