@@ -6,6 +6,10 @@ function Strip(config) {
     console.log("FULL CONFIG INSIDE FINDSTRIP", config);
     console.log("CHANNEL SET INSIDE", config.channelSet);
 
+    const channelConfig = config;
+
+    console.log("FULL CONFIG INSIDE FINDSTRIP channelConfig", channelConfig);
+
     let ledCount = 300;
     let strips = ws281x.init({
       dma: 10,
@@ -28,9 +32,9 @@ function Strip(config) {
       ],
     });
 
-    console.log("COUNT", config.channelSet);
-    console.log("ARRAY", strips[config.channelSet].array);
-    return strips[config.channelSet].array;
+    console.log("COUNT", channelConfig.channelSet);
+    console.log("ARRAY", strips[channelConfig.channelSet].array);
+    return strips[channelConfig.channelSet].array;
   };
 
   this.findStrip = findStrip;
