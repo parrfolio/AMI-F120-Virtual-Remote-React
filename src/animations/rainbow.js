@@ -1,7 +1,7 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
 const timers = require("./timer");
-const { Strip, Render } = require("./strip");
+const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
 let interval = {};
@@ -24,7 +24,7 @@ function Rainbow(config) {
       }
       offset = (offset + 1) % 256;
 
-      Render();
+      new Strip().render();
     }, item.delay);
 
     this.RainbowPause = function(config) {

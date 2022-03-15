@@ -30,12 +30,14 @@ function Strip(config) {
   this.findStrip = findStrip;
   this.findStrip();
 
-  this.Render = () => {
+  let render = () => {
     return ws281x.render();
   };
+
+  this.render = render;
+  this.render();
 }
 
 module.exports = {
   Strip: Strip,
-  Render: this.Render,
 };
