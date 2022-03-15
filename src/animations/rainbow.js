@@ -14,9 +14,11 @@ function Rainbow(config) {
   let offset = 0;
   let strip = new Strip(config).findStrip();
 
+  console.log("COlORS", colors[config.name]);
+  console.log("NEW STRIP", strip);
+
   colors[config.name] = strip;
 
-  console.log(colors[config.name], strip);
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
       colors[config.name][i] = common.colorwheel((offset + i) % 256);
