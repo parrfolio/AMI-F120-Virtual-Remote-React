@@ -15,12 +15,12 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
-  console.log(colors[config.channel]);
-  colors[config.channel] = strip.FindStrip(config.channel);
+  console.log("Color Var Name", colors[config.channel]);
+  let colorsArray1 = strip.FindStrip(config.channel);
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      colors[config.channel][i] = common.colorwheel((offset + i) % 256);
+      colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
 
