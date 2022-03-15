@@ -20,7 +20,7 @@ function Rainbow(config) {
   });
 
   console.log("OUTESIDE CHANNEL SET NAME");
-  console.log(foo());
+  console.log(foo);
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
