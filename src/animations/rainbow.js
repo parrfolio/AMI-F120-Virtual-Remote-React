@@ -12,15 +12,19 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
-  let foo = new Strip(config, function() {
-    console.log("In Channel Set Name");
-    console.log(config);
-    console.log(this.findStrip(config.channelSet));
-    return this.findStrip(config);
-  });
+  // let foo = new Strip(config, function() {
+  //   console.log("In Channel Set Name");
+  //   console.log(config);
+  //   console.log(this.findStrip(config.channelSet));
+  //   return this.findStrip(config);
+  // });
 
   console.log("OUTESIDE CHANNEL SET NAME");
-  console.log(foo);
+  console.log(
+    new Strip(config, function() {
+      return this.findStrip(config);
+    })
+  );
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
