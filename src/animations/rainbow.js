@@ -5,13 +5,15 @@ const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
 let interval = {};
-let colors = {};
 
 // let channel2 = channels[1];
 // let colorsArray2 = channel2.array;
 
 function Rainbow(config) {
-  console.log(config.channelSet);
+  console.log("Channel Set from Config", config.channelSet);
+  let channelSet = config.channelSet;
+  let colors = {};
+  console.log("Channel Set from Color Object", color[channelSet]);
   let offset = 0;
   let strip = new Strip(config).findStrip();
 
