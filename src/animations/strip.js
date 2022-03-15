@@ -1,15 +1,9 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 function Strip(config) {
-  //   console.log("FULL CONFIG OUTSIDE FINDSTRIP", config);
-  //   console.log("CHANNEL SET OUTSIDE", config.channelSet);
-  let channelConfig = config;
-  let findStrip = (config) => {
-    console.log("FULL CONFIG INSIDE FINDSTRIP", config);
-
-    console.log("FULL CONFIG INSIDE FINDSTRIP channelConfig", channelConfig);
-
-    let ledCount = 300;
-    let strips = ws281x.init({
+  let channelConfig = config.channelSet;
+  const findStrip = () => {
+    const ledCount = 300;
+    const strips = ws281x.init({
       dma: 10,
       freq: 800000,
       channels: [
@@ -29,10 +23,7 @@ function Strip(config) {
         },
       ],
     });
-
-    console.log("COUNT", channelConfig.channelSet);
-    console.log("ARRAY", strips[channelConfig.channelSet].array);
-    return strips[channelConfig.channelSet].array;
+    return strips[channelConfig].array;
   };
 
   this.findStrip = findStrip;
@@ -42,7 +33,6 @@ function Strip(config) {
   //     ws281x.render();
   //   };
 }
-// module.exports = new strip();
 
 module.exports = {
   Strip: Strip,
