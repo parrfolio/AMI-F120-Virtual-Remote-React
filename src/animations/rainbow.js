@@ -13,14 +13,11 @@ let colors = {};
 function Rainbow(config) {
   let offset = 0;
   config.channelSetName = new Strip(config, function() {
+    console.log("In Channel Set Name");
     console.log(config);
-    console.log(config.channelSet);
+    console.log(this.findStrip(config.channelSet));
     return this.findStrip(config.channelSet);
   });
-
-  console.log("In Rainbow Config");
-  console.log(config);
-  console.log(config.channelSet);
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
