@@ -12,7 +12,7 @@ let colors = {};
 
 function Rainbow(config) {
   let offset = 0;
-  let foo = new Strip().findStrip(config);
+  let foo = new Strip(config).findStrip();
 
   console.log("OUTESIDE CHANNEL SET NAME");
   console.log(foo);
