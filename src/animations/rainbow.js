@@ -4,14 +4,14 @@ const timers = require("./timer");
 const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
-let interval = {};
-let colors = {};
 
 // let channel2 = channels[1];
 // let colorsArray2 = channel2.array;
 
 function Rainbow(config) {
   let offset = 0;
+  let interval = {};
+  let colors = {};
   let strip = new Strip(config).findStrip();
 
   console.log("COlORS", colors[config.name]);
