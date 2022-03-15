@@ -20,7 +20,7 @@ function Rainbow(config) {
   });
 
   console.log("OUTESIDE CHANNEL SET NAME");
-  console.log(foo.findStrip());
+  console.log(foo.findStrip(config.channelSet));
 
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
