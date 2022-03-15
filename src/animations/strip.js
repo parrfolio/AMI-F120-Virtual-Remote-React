@@ -2,7 +2,6 @@ const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
 function Strip() {
   let ledCount = 300;
-
   let channels = ws281x.init({
     dma: 10,
     freq: 800000,
@@ -24,21 +23,32 @@ function Strip() {
     ],
   });
 
-  // gpio: 19 works as well
-
-  this.offset = 0;
+  let offset = 0;
   //channel 1 strips on GPIO 18
+  let channel1 = channels[0];
+  let colorsArray1 = channel1.array;
 
-  var colorsArray1 = function(channels) {
-    return Channel.array;
-  };
-
-  var colorsArray2 = function(channels) {
-    return Channel.array;
-  };
+  //channel 2 strips on GPIO 13
+  let channel2 = channels[1];
+  let colorsArray2 = channel2.array;
 
   this.colorsArray1 = colorsArray1;
   this.colorsArray2 = colorsArray2;
+  // gpio: 19 works as well
+
+  //   this.offset = 0;
+  //channel 1 strips on GPIO 18
+
+  //   var colorsArray1 = function(channels) {
+  //     return Channel.array;
+  //   };
+
+  //   var colorsArray2 = function(channels) {
+  //     return Channel.array;
+  //   };
+
+  //   this.colorsArray1 = colorsArray1;
+  //   this.colorsArray2 = colorsArray2;
 }
 module.exports = {
   Strip: Strip,

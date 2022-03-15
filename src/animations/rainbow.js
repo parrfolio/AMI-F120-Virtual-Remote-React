@@ -1,8 +1,10 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-
 const common = require("./common");
-const { RecurringTimer } = require("./timer");
-const { Strip } = require("./strip");
+const timers = require("./timer");
+const strip = require("./strip");
+
+console.log(strip.Strip.colorsArray1);
+
 let ledCount = 300;
 let channels = ws281x.init({
   dma: 10,
@@ -25,24 +27,27 @@ let channels = ws281x.init({
   ],
 });
 
-var colorsArray1 = function(channels) {
-  console.log(channels[0].array);
-};
-console.log(colorsArray1());
+// gpio: 19 works as well
 
-console.log(...channels);
-console.log(channels);
+let offset = 0;
+//channel 1 strips on GPIO 18
+let channel1 = channels[0];
+let colorsArray1 = channel1.array;
 
-console.log(Strip.colorsArray1);
+//channel 2 strips on GPIO 13
+let channel2 = channels[1];
+let colorsArray2 = channel2.array;
+
+let RecurringTimer = timers.RecurringTimer;
 
 let interval = {};
 
 function Rainbow(config) {
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      Strip.colorsArray1[i] = common.colorwheel((Strip.offset + i) % 256);
+      colorsArray1[i] = common.colorwheel((offset + i) % 256);
     }
-    offset = (Strip.offset + 1) % 256;
+    offset = (offset + 1) % 256;
     ws281x.render();
   }, config.delay);
 
