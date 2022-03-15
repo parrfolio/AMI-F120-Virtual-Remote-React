@@ -37,4 +37,5 @@ function Strip(config) {
 
 module.exports = {
   Strip: Strip,
+  Render: this.Render,
 };
