@@ -178,6 +178,7 @@ io.sockets.on("connection", function(socket) {
         start: 0,
         stop: 60,
         channelSet: 0,
+        channelSetName: "set1",
       },
       {
         name: "strip2",
@@ -185,6 +186,7 @@ io.sockets.on("connection", function(socket) {
         start: 60,
         stop: 120,
         channelSet: 0,
+        channelSetName: "set1",
       },
       {
         name: "strip3",
@@ -192,16 +194,14 @@ io.sockets.on("connection", function(socket) {
         start: 120,
         stop: 300,
         channelSet: 0,
+        channelSetName: "set1",
       },
     ];
 
     if (data.state === "on") {
       switch (data.animation) {
         case "rainbow":
-          stripsConfig.forEach((strip) => {
-            rainbow.Rainbow(strip);
-          });
-
+          rainbow.Rainbow(stripsConfig);
           // rainbow.Rainbow(strip5Config);
           // rainbow.Rainbow(strip6Config);
           break;
