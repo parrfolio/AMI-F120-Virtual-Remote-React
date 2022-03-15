@@ -13,9 +13,9 @@ let colors = {};
 function Rainbow(config) {
   let offset = 0;
   let foo = new Strip(config, function() {
-    // console.log("In Channel Set Name");
-    // console.log(config);
-    // console.log(this.findStrip(config.channelSet));
+    console.log("In Channel Set Name");
+    console.log(config);
+    console.log(this.findStrip(config.channelSet));
     return this.findStrip(config);
   });
 
