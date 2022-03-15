@@ -52,5 +52,4 @@ function Strip() {
 }
 module.exports = {
   Strip: Strip,
-  colorsArray1: colorsArray1,
 };
