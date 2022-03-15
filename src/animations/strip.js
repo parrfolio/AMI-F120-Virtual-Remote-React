@@ -49,6 +49,7 @@ function strip() {
 
     let offset = 0;
     console.log(channels);
+    return channels[0].array;
   };
 }
 module.exports = new strip();
