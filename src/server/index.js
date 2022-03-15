@@ -173,9 +173,9 @@ io.sockets.on("connection", function(socket) {
           rainbow.Rainbow(strip1Config);
           rainbow.Rainbow(strip2Config);
           rainbow.Rainbow(strip3Config);
-          rainbow.Rainbow(strip4Config);
-          rainbow.Rainbow(strip5Config);
-          rainbow.Rainbow(strip6Config);
+          // rainbow.Rainbow(strip4Config);
+          // rainbow.Rainbow(strip5Config);
+          // rainbow.Rainbow(strip6Config);
           break;
         case "say_hi":
           let message = "hi";
@@ -190,9 +190,9 @@ io.sockets.on("connection", function(socket) {
       rainbow.RainbowPause(strip1Config);
       rainbow.RainbowPause(strip2Config);
       rainbow.RainbowPause(strip3Config);
-      rainbow.RainbowPause(strip4Config);
-      rainbow.RainbowPause(strip5Config);
-      rainbow.RainbowPause(strip6Config);
+      // rainbow.RainbowPause(strip4Config);
+      // rainbow.RainbowPause(strip5Config);
+      // rainbow.RainbowPause(strip6Config);
     }
   });
 });
