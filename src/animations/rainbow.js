@@ -7,16 +7,18 @@ let RecurringTimer = timers.RecurringTimer;
 let interval = {};
 let colors = {};
 
+let Strip = strip.Strip;
+
 // let channel2 = channels[1];
 // let colorsArray2 = channel2.array;
 
 function Rainbow(config) {
   let offset = 0;
-  config.channelSetName = strip.FindStrip(config.channelSet);
-  let test = config.channelSetName;
+  config.channelSetName = new Strip(config.channelSet);
+
   interval[config.name] = new RecurringTimer(function() {
     for (let i = config.start; i < config.stop; i++) {
-      test[i] = common.colorwheel((offset + i) % 256);
+      config.channelSetName[i] = common.colorwheel((offset + i) % 256);
     }
     offset = (offset + 1) % 256;
     ws281x.render();

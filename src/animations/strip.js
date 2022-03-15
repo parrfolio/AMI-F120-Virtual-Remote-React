@@ -1,7 +1,6 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-
-function strip() {
-  this.FindStrip = (channel) => {
+function Strip(channel) {
+  let findStrip = (channel) => {
     let ledCount = 300;
     let strips = ws281x.init({
       dma: 10,
@@ -23,12 +22,18 @@ function strip() {
         },
       ],
     });
-    console.log(channel);
+
     return strips[channel].array;
   };
+  this.findStrip = findStrip;
+  this.findStrip();
 
-  this.Render = () => {
-    ws281x.render();
-  };
+  //   this.Render = () => {
+  //     ws281x.render();
+  //   };
 }
-module.exports = new strip();
+// module.exports = new strip();
+
+module.exports = {
+  Strip: Strip,
+};
