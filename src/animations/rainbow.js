@@ -6,6 +6,7 @@ const { Strip } = require("./strip");
 let RecurringTimer = timers.RecurringTimer;
 
 function Rainbow(config) {
+  let foo = config;
   config.forEach((item) => {
     let offset = 0;
     item.name = new Strip(item).findStrip();
@@ -18,8 +19,8 @@ function Rainbow(config) {
       ws281x.render();
     }, item.delay);
 
-    this.RainbowPause = function(item) {
-      console.log(item);
+    this.RainbowPause = function(foo) {
+      console.log(foo);
 
       // ws281x.reset();
 
