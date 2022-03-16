@@ -210,8 +210,6 @@ io.sockets.on("connection", function(socket) {
       switch (data.animation) {
         case "rainbow":
           rainbow.Rainbow(stripsConfig);
-          // rainbow.Rainbow(strip5Config);
-          // rainbow.Rainbow(strip6Config);
           break;
         case "say_hi":
           let message = "hi";
@@ -223,11 +221,6 @@ io.sockets.on("connection", function(socket) {
       }
     } else {
       rainbow.RainbowPause(stripsConfig);
-      // rainbow.RainbowPause(strip2Config);
-      // rainbow.RainbowPause(strip3Config);
-      // rainbow.RainbowPause(strip4Config);
-      // rainbow.RainbowPause(strip5Config);
-      // rainbow.RainbowPause(strip6Config);
     }
   });
 });

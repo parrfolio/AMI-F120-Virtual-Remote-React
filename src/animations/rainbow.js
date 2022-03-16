@@ -5,9 +5,6 @@ const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
 
-// let channel2 = channels[1];
-// let colorsArray2 = channel2.array;
-
 function Rainbow(config) {
   config.forEach((item) => {
     let offset = 0;

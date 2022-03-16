@@ -24,19 +24,11 @@ function Strip(config) {
   let channelConfig = config.channelSet;
 
   const findStrip = () => {
-    console.log(strips[channelConfig].array);
     return strips[channelConfig].array;
   };
 
   this.findStrip = findStrip;
   this.findStrip();
-
-  //   let render = () => {
-  //     return ws281x.render();
-  //   };
-
-  //   this.render = render;
-  //   this.render();
 }
 
 module.exports = {
