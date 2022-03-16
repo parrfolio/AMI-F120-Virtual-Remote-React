@@ -21,8 +21,8 @@ function Rainbow(config) {
 
     this.RainbowPause = () => {
       console.log(item.channelSetName);
-      console.log(this);
-      console.log(foo);
+      // console.log(this);
+      // console.log(foo);
 
       // ws281x.reset();
 
