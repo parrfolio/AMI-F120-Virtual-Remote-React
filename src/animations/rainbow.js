@@ -4,8 +4,6 @@ const timers = require("./timer");
 const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
-let interval = {};
-let strip = {};
 
 // let channel2 = channels[1];
 // let colorsArray2 = channel2.array;
@@ -13,7 +11,6 @@ let strip = {};
 function Rainbow(config) {
   config.forEach((item) => {
     let offset = 0;
-    let channelSet = item.channelSet;
 
     console.log(item.name);
 
