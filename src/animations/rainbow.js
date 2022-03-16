@@ -18,14 +18,12 @@ function Rainbow(config) {
       offset = (offset + 1) % 256;
       ws281x.render();
     }, item.delay);
-  });
-  this.RainbowPause = function(config) {
-    console.log(config);
-    config.forEach((item) => {
+
+    this.RainbowPause = function(item) {
       ws281x.reset();
-      item.name.pause();
-    });
-  };
+      item.channelSetName.pause();
+    };
+  });
 }
 module.exports = {
   Rainbow: Rainbow,
