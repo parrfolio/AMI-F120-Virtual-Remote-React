@@ -11,6 +11,7 @@ import { PrivateRoute } from "./Routes/PrivateRoute";
 import LoginForm from "./Login/Login";
 import { useAuth } from "./AuthStateHandler";
 import jukebox_data from "../../data/jukebox";
+import animation_data from "../../data/animations";
 
 export const App = () => {
   //const url = window.location.pathname; //allows me to drop the app in any subdirectory
@@ -45,6 +46,7 @@ export const App = () => {
           path="/home"
           component={UserHome}
           {...jukebox_data}
+          {...animation_data}
           {...{ authed, user, admin }}
         />
 

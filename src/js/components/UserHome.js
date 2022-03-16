@@ -21,6 +21,10 @@ export const UserHome = (props, state) => {
   const [isActive, setActive] = useState(null);
   const [animation, setAnimation] = useState();
 
+  const { jukebox } = props;
+  const { animations } = props;
+  console.log(props);
+
   const toggleClass = () => {
     setActive(!isActive);
   };
@@ -57,7 +61,8 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "on",
-          animation: animation.animations[0],
+          animation: animation.type,
+          stripConf: animations[animation.type],
         },
         (data) => {}
       );
@@ -66,7 +71,8 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "off",
-          animation: animation.animations[1],
+          animation: animation.type,
+          stripConf: animations[animation.type],
         },
         (data) => {}
       );
@@ -81,9 +87,6 @@ export const UserHome = (props, state) => {
   //   }
   // };
 
-  const { jukebox } = props;
-
-  console.log(props);
   const jukebox_data = jukebox.map((selection, index) => {
     return (
       <div
@@ -136,7 +139,9 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           setAnimation({
-            animations: ["rainbow", "rainbow2"],
+            animations: {
+              type: "rainbow",
+            },
           });
           toggleClass();
         }}
@@ -147,7 +152,11 @@ export const UserHome = (props, state) => {
       <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
-          setAnimation("rainbow2");
+          setAnimation({
+            animations: {
+              type: "rainbow",
+            },
+          });
           toggleClass();
         }}
       >
