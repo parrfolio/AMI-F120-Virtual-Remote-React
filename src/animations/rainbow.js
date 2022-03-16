@@ -20,12 +20,13 @@ function Rainbow(config) {
       ws281x.render();
     }, item.delay);
   });
-  config.forEach((item) => {
-    this.RainbowPause = function(config) {
+
+  this.RainbowPause = function(pause) {
+    pause.forEach((item) => {
       ws281x.reset();
       item.channelSetName.pause();
-    };
-  });
+    });
+  };
 }
 module.exports = {
   Rainbow: Rainbow,
