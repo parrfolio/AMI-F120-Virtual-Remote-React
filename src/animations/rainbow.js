@@ -18,8 +18,8 @@ function Rainbow(config) {
       ws281x.render();
     }, item.delay);
 
-    this.RainbowPause = function(config) {
-      console.log(config);
+    this.RainbowPause = function(item) {
+      console.log(item);
 
       // ws281x.reset();
 
