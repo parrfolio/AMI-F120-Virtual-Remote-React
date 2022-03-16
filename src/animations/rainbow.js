@@ -24,7 +24,7 @@ function Rainbow(config) {
 
       ws281x.reset();
 
-      foo.channelSetName.pause.pause();
+      foo.channelSetName.RecurringTimer.pause();
     };
   });
 }
