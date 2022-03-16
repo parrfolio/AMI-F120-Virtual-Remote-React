@@ -4,13 +4,13 @@ const timers = require("./timer");
 const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
-let interval = {};
-let strip = {};
 
 // let channel2 = channels[1];
 // let colorsArray2 = channel2.array;
 
 function Rainbow(config) {
+  let interval = {};
+  let strip = {};
   config.forEach((item) => {
     let offset = 0;
     let channelSet = item.channelSet;
@@ -23,7 +23,9 @@ function Rainbow(config) {
 
     itemName = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        strip[itemName][i] = common.colorwheel((offset + i) % 256);
+        console.log(strip[itemName]);
+        let name = strip[itemName];
+        name[i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
 
