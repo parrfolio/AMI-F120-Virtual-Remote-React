@@ -4,7 +4,7 @@ function RecurringTimer(callback, delay) {
     remaining = delay;
 
   let pause = () => {
-    console.log("pause was called");
+    console.log("Animations Paused");
     clearTimeout(timerId);
     remaining -= new Date() - start;
   };

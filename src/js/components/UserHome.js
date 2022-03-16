@@ -59,9 +59,7 @@ export const UserHome = (props, state) => {
           state: "on",
           animation: animation.animations[0],
         },
-        (data) => {
-          console.log(data);
-        }
+        (data) => {}
       );
     } else if (isActive != null) {
       socket.emit(
@@ -70,9 +68,7 @@ export const UserHome = (props, state) => {
           state: "off",
           animation: animation.animations[1],
         },
-        (data) => {
-          console.log(data);
-        }
+        (data) => {}
       );
     }
   }, [isActive]);
