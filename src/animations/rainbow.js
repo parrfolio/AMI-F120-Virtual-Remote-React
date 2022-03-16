@@ -20,8 +20,8 @@ function Rainbow(config) {
     }, item.delay);
 
     this.RainbowPause = () => {
-      console.log(item.channelSetName);
-      // console.log(this);
+      // console.log(item.channelSetName);
+      console.log(this);
       // console.log(foo);
 
       // ws281x.reset();
