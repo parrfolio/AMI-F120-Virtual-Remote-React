@@ -21,10 +21,10 @@ function Rainbow(config) {
   });
   this.RainbowPause = function(config) {
     console.log(config);
-    // config.forEach((item) => {
-    //   ws281x.reset();
-    //   item.channelSetName.pause();
-    // });
+    config.forEach((item) => {
+      ws281x.reset();
+      item.name.pause();
+    });
   };
 }
 module.exports = {
