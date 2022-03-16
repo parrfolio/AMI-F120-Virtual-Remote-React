@@ -17,6 +17,7 @@ function Rainbow(config) {
     console.log(item.channelSet);
     console.log(item.name);
     strip[item.name] = new Strip(item).findStrip();
+    console.log(interval[item.name]);
 
     interval[item.name] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
