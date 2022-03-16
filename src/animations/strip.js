@@ -23,7 +23,8 @@ function Strip(config) {
     ],
   });
   const findStrip = () => {
-    //console.log("STRIPS ARRAY", strips[channelConfig].array);
+    console.log(channelConfig);
+    console.log(strips[channelConfig]);
     return strips[channelConfig].array;
   };
 
