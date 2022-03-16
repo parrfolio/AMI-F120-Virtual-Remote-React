@@ -20,12 +20,10 @@ function Rainbow(config) {
     }, item.delay);
 
     this.RainbowPause = () => {
-      console.log(strips);
-
       strips.forEach((item) => {
         console.log(item);
-        ws281x.reset();
-        strips[item].channelSetName.pause();
+        // ws281x.reset();
+        // strips[item].channelSetName.pause();
       });
     };
   });
