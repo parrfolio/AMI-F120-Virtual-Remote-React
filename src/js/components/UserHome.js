@@ -18,9 +18,7 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-
   const [isActive, setActive] = useState(null);
-
   const [animation, setAnimation] = useState();
 
   const toggleClass = () => {
