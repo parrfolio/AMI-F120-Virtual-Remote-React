@@ -4,7 +4,7 @@ const timers = require("./timer");
 const { Strip } = require("./strip");
 
 let RecurringTimer = timers.RecurringTimer;
-let interval = {};
+
 let strip = {};
 
 // let channel2 = channels[1];
@@ -17,9 +17,8 @@ function Rainbow(config) {
     console.log(item.channelSet);
     console.log(item.name);
     strip[item.name] = new Strip(item).findStrip();
-    console.log(interval[item.name]);
 
-    interval[item.name] = new RecurringTimer(function() {
+    item.name = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
         strip[item.name][i] = common.colorwheel((offset + i) % 256);
       }
@@ -29,7 +28,7 @@ function Rainbow(config) {
     }, item.delay);
 
     this.RainbowPause = function(config) {
-      interval[item.name].pause();
+      item.name.pause();
     };
   });
 }
