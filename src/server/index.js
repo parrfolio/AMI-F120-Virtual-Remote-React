@@ -223,6 +223,7 @@ io.sockets.on("connection", function(socket) {
     ];
 
     if (data.state === "on") {
+      console.log(data);
       switch (data.animation) {
         case "rainbow":
           rainbow.Rainbow(data.stripConf);
