@@ -18,11 +18,11 @@ function Rainbow(config) {
     console.log(item.name);
     console.log(strip[item.name]);
 
-    strip[item.name] = new Strip(item).findStrip();
-
+    item.name = new Strip(item).findStrip();
+    console.log(item.name);
     interval[item.name] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        strip[item.name][i] = common.colorwheel((offset + i) % 256);
+        item.name[i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
 
