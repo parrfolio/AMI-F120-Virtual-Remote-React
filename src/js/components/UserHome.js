@@ -140,9 +140,7 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           // setCount(count + 1);
-          {
-            toggleClass;
-          }
+          toggleClass();
         }}
       >
         Lights {isActive ? "On" : "Off"}
