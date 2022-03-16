@@ -14,10 +14,11 @@ function Rainbow(config) {
   config.forEach((item) => {
     let offset = 0;
     let channelSet = item.channelSet;
+    let itemName = item.name;
+    console.log(itemName);
     // console.log(item.channelSet);
     // console.log(item.name);
 
-    console.log(strip[item.name]);
     strip[item.name] = new Strip(item).findStrip();
 
     interval[item.name] = new RecurringTimer(function() {
