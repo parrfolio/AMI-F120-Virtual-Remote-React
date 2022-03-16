@@ -220,7 +220,6 @@ io.sockets.on("connection", function(socket) {
           break;
       }
     } else {
-      ws281x.reset();
       rainbow.RainbowPause(stripsConfig);
     }
   });
