@@ -22,8 +22,8 @@ function Rainbow(config) {
     this.RainbowPause = () => {
       strips.forEach((item) => {
         console.log(item);
-        // ws281x.reset();
-        // strips[item].channelSetName.pause();
+        ws281x.reset();
+        item.channelSetName.pause();
       });
     };
   });
