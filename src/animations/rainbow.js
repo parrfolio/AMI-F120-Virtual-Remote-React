@@ -19,11 +19,11 @@ function Rainbow(config) {
     // console.log(item.channelSet);
     // console.log(item.name);
 
-    strip[item.name] = new Strip(item).findStrip();
+    strip[itemName] = new Strip(item).findStrip();
 
-    interval[item.name] = new RecurringTimer(function() {
+    itemName = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        strip[item.name][i] = common.colorwheel((offset + i) % 256);
+        strip[itemName][i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
 
@@ -31,7 +31,7 @@ function Rainbow(config) {
     }, item.delay);
 
     this.RainbowPause = function(config) {
-      interval[item.name].pause();
+      itemName.pause();
     };
   });
 }
