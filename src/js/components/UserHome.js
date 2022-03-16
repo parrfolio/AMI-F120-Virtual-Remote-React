@@ -23,7 +23,6 @@ export const UserHome = (props, state) => {
 
   const toggleClass = () => {
     setActive(!isActive);
-    console.log(isActive);
   };
 
   // establish socket connection
@@ -139,7 +138,12 @@ export const UserHome = (props, state) => {
       </div>
       <button
         className={isActive ? "lightson" : "lightsoff"}
-        onClick={toggleClass}
+        onClick={() => {
+          // setCount(count + 1);
+          {
+            toggleClass;
+          }
+        }}
       >
         Lights {isActive ? "On" : "Off"}
       </button>

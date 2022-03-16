@@ -227,9 +227,9 @@ io.sockets.on("connection", function(socket) {
         case "rainbow":
           rainbow.Rainbow(stripsConfig);
           break;
-        case "say_hi":
+        case "rainbow2":
           let message = "hi";
-          console.log(message);
+          rainbow.Rainbow(stripsConfig);
           break;
         default:
           console.log("Empty action received.");
