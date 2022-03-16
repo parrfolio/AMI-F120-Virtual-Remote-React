@@ -24,7 +24,7 @@ function Rainbow(config) {
 
       ws281x.reset();
 
-      foo.channelSetName[0].pause();
+      foo[0].channelSetName.pause();
     };
   });
 }
