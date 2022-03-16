@@ -140,7 +140,7 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           setAnimation({
-            animations: [rainbow, rainbow2],
+            animations: ["rainbow", "rainbow2"],
           });
           toggleClass();
         }}
