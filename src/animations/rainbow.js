@@ -10,7 +10,7 @@ function Rainbow(config) {
   configStore.forEach((item) => {
     let offset = 0;
     item.name = new Strip(item).findStrip();
-
+    let csetname;
     item.channelSetName = csetname;
 
     csetname = new RecurringTimer(function() {
