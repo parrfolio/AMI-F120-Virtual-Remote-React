@@ -15,7 +15,7 @@ function Rainbow(config) {
         item.name[i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
-      stripRender();
+      Strip.stripRender();
     }, item.delay);
 
     this.RainbowPause = () => {

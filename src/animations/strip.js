@@ -35,6 +35,7 @@ function Strip(config) {
   };
 
   this.stripRender = stripRender;
+  this.stripRender();
 }
 
 module.exports = {
