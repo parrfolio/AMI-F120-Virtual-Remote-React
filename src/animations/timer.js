@@ -3,13 +3,13 @@ function RecurringTimer(callback, delay) {
     start,
     remaining = delay;
 
-  var pause = function() {
+  let pause = () => {
     console.log("pause was called");
     clearTimeout(timerId);
     remaining -= new Date() - start;
   };
 
-  let resume = function() {
+  let resume = () => {
     start = new Date();
     timerId = setTimeout(function() {
       remaining = delay;
