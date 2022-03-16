@@ -186,7 +186,7 @@ io.sockets.on("connection", function(socket) {
         start: 60,
         stop: 120,
         channelSet: 0,
-        channelSetName: "set2",
+        channelSetName: "set1",
       },
       {
         name: "strip3",
@@ -194,7 +194,7 @@ io.sockets.on("connection", function(socket) {
         start: 120,
         stop: 300,
         channelSet: 0,
-        channelSetName: "set3",
+        channelSetName: "set1",
       },
       {
         name: "strip4",
@@ -202,7 +202,7 @@ io.sockets.on("connection", function(socket) {
         start: 0,
         stop: 60,
         channelSet: 1,
-        channelSetName: "set4",
+        channelSetName: "set2",
       },
       {
         name: "strip5",
@@ -210,7 +210,7 @@ io.sockets.on("connection", function(socket) {
         start: 60,
         stop: 120,
         channelSet: 1,
-        channelSetName: "set5",
+        channelSetName: "set2",
       },
       {
         name: "strip6",
@@ -218,7 +218,7 @@ io.sockets.on("connection", function(socket) {
         start: 120,
         stop: 128,
         channelSet: 1,
-        channelSetName: "set6",
+        channelSetName: "set2",
       },
     ];
 
