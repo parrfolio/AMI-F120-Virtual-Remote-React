@@ -21,9 +21,8 @@ let strips = ws281x.init({
   ],
 });
 function Strip(config) {
-  console.log(config);
   let channelConfig = config.channelSet;
-  console.log(channelConfig);
+
   const findStrip = () => {
     return strips[channelConfig].array;
   };
