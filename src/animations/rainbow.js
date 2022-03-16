@@ -6,10 +6,12 @@ const { Strip } = require("./strip");
 let RecurringTimer = timers.RecurringTimer;
 
 function Rainbow(config) {
+  let foo;
   config.forEach((item) => {
     let offset = 0;
+    foo = item.channelSetName;
     item.name = new Strip(item).findStrip();
-    item.channelSetName = new RecurringTimer(function() {
+    foo = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
         item.name[i] = common.colorwheel((offset + i) % 256);
       }
@@ -23,7 +25,7 @@ function Rainbow(config) {
     pause.forEach((item) => {
       ws281x.reset();
       console.log(item);
-      item.channelSetName.pause();
+      foo.pause();
     });
   };
 }
