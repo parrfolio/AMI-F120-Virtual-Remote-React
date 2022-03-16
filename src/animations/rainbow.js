@@ -19,8 +19,10 @@ function Rainbow(config) {
     }, item.delay);
 
     this.RainbowPause = function(config) {
-      ws281x.reset();
-      config[item].channelSetName.pause();
+      for (let i = 0; i < config.length; i++) {
+        ws281x.reset();
+        return i.channelSetName.pause();
+      }
     };
   });
 }
