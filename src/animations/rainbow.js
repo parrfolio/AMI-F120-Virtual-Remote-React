@@ -4,6 +4,7 @@ const { RecurringTimer } = require("./timer");
 const { Strip } = require("./strip");
 
 function Rainbow(config) {
+  console.log(config);
   let strips = config;
   strips.forEach((item) => {
     let offset = 0;
