@@ -57,7 +57,7 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "on",
-          animation: animation,
+          animation: animation.animations[0],
         },
         (data) => {
           console.log(data);
@@ -68,7 +68,7 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "off",
-          animation: animation,
+          animation: animation.animations[1],
         },
         (data) => {
           console.log(data);
@@ -139,7 +139,9 @@ export const UserHome = (props, state) => {
       <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
-          setAnimation("rainbow");
+          setAnimation({
+            animations: [rainbow, rainbow2],
+          });
           toggleClass();
         }}
       >
