@@ -226,10 +226,11 @@ io.sockets.on("connection", function(socket) {
       console.log(data);
       switch (data.animation) {
         case "rainbow":
+          console.log("RAINBOW!!");
           rainbow.Rainbow(data.stripConf);
           break;
         case "rainbow2":
-          let message = "hi";
+          console.log("RAINBOW 2s!!");
           rainbow.Rainbow(data.stripConf);
           break;
         default:

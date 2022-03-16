@@ -61,7 +61,7 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "on",
-          animation: animation.type,
+          animation: animation,
           stripConf: animations.rainbow,
         },
         (data) => {}
@@ -71,7 +71,7 @@ export const UserHome = (props, state) => {
         "lights",
         {
           state: "off",
-          animation: animation.type,
+          animation: animation,
           stripConf: animations.rainbow,
         },
         (data) => {}
@@ -138,11 +138,7 @@ export const UserHome = (props, state) => {
       <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
-          setAnimation({
-            animations: {
-              type: "rainbow",
-            },
-          });
+          setAnimation("rainbow");
           toggleClass();
         }}
       >
@@ -152,11 +148,7 @@ export const UserHome = (props, state) => {
       <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
-          setAnimation({
-            animations: {
-              type: "rainbow",
-            },
-          });
+          setAnimation("rainbow");
           toggleClass();
         }}
       >
