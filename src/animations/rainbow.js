@@ -15,8 +15,7 @@ function Rainbow(config) {
     let offset = 0;
     let channelSet = item.channelSet;
 
-    console.log(item.name);
-    console.log(strip);
+    console.log(item);
     console.log(strip[item.name]);
     strip[item.name] = new Strip(item).findStrip();
 
