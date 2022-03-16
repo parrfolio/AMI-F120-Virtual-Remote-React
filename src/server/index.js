@@ -204,6 +204,14 @@ io.sockets.on("connection", function(socket) {
         channelSet: 1,
         channelSetName: "set2",
       },
+      {
+        name: "strip5",
+        delay: 1000 / 30,
+        start: 60,
+        stop: 120,
+        channel: 1,
+        channelSetName: "set2",
+      },
     ];
 
     if (data.state === "on") {
