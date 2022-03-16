@@ -62,7 +62,7 @@ export const UserHome = (props, state) => {
         {
           state: "on",
           animation: animation.type,
-          stripConf: animations[animation.type],
+          stripConf: animations.rainbow,
         },
         (data) => {}
       );
@@ -72,7 +72,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation.type,
-          stripConf: animations[animation.type],
+          stripConf: animations.rainbow,
         },
         (data) => {}
       );
