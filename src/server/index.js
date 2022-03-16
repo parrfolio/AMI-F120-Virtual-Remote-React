@@ -220,7 +220,7 @@ io.sockets.on("connection", function(socket) {
           break;
       }
     } else {
-      rainbow.RainbowPause();
+      rainbow.RainbowPause(stripsConfig);
     }
   });
 });
