@@ -1,15 +1,13 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
-const timers = require("./timer");
-const { Strip, findStrip } = require("./strip");
-
-let RecurringTimer = timers.RecurringTimer;
+const { RecurringTimer } = require("./timer");
+const { Strip } = require("./strip");
 
 function Rainbow(config) {
   let strips = config;
   strips.forEach((item) => {
     let offset = 0;
-    item.name = new Strip(item).findStrip;
+    item.name = new Strip(item).findStrip();
 
     item.channelSetName = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {

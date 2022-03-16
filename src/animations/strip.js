@@ -39,5 +39,4 @@ function Strip(config) {
 
 module.exports = {
   Strip: Strip,
-  findStrip: this.findStrip,
 };
