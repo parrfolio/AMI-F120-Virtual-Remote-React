@@ -7,23 +7,20 @@ function Rainbow(config) {
   let strips = config;
   strips.forEach((item) => {
     let offset = 0;
-    item.name = new Strip(item).findStrip();
-    console.log(item.name);
+    item[stripArray] = new Strip(item).findStrip();
 
-    item.channelSetName = new RecurringTimer(function() {
+    item[stripTimer] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        item.name[i] = common.colorwheel((offset + i) % 256);
+        item[stripArray][i] = common.colorwheel((offset + i) % 256);
       }
       offset = (offset + 1) % 256;
       ws281x.render();
     }, item.delay);
 
-    console.log(item.channelSetName);
-
     this.RainbowPause = () => {
       strips.forEach((item) => {
         ws281x.reset(); //reset strips
-        item.channelSetName.pause();
+        item[stripTimer].pause();
       });
     };
   });
