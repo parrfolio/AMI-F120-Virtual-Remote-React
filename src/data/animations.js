@@ -28,7 +28,7 @@ const animation_data = {
       {
         name: "Main Cab Light 2",
         delay: 1000 / 30,
-        start: 120,
+        start: 180,
         stop: 240,
         brightness: 255,
         channelSet: 0,
@@ -38,15 +38,6 @@ const animation_data = {
         delay: 1000 / 30,
         start: 240,
         stop: 300,
-        brightness: 155,
-        channelSet: 0,
-      },
-
-      {
-        name: "AMI Logo Light",
-        delay: 1000 / 30,
-        start: 300,
-        stop: 332,
         brightness: 155,
         channelSet: 0,
       },
@@ -66,13 +57,6 @@ const animation_data = {
         brightness: 155,
         channelSet: 1,
       },
-      // {
-      //   name: "Insert Coin Light",
-      //   delay: 1000 / 30,
-      //   start: 120,
-      //   stop: 128,
-      //   channelSet: 1,
-      // },
     ],
   },
 
