@@ -72,7 +72,9 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.find(animation),
+          stripConf: themes
+            .keys(themes)
+            .find((animation) => object[animation] === animation),
         },
         (data) => {}
       );
