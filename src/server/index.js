@@ -135,19 +135,20 @@ io.sockets.on("connection", function(socket) {
           break;
       }
     } else {
-      switch (data.animation) {
-        case "rainbow":
-          console.log("Rainbow Animation!");
-          rainbow.RainbowPause();
-          break;
-        case "twinkle":
-          console.log("Twinkle Animation!");
-          twinkle.TwinklePause();
-          break;
-        default:
-          console.log("Empty action received.");
-          break;
-      }
+      // switch (data.animation) {
+      //   case "rainbow":
+      //     console.log("Rainbow Animation!");
+      //     rainbow.RainbowPause();
+      //     break;
+      //   case "twinkle":
+      //     console.log("Twinkle Animation!");
+      //     twinkle.TwinklePause();
+      //     break;
+      //   default:
+      //     console.log("Empty action received.");
+      //     break;
+      // }
+      rainbow.RainbowPause();
     }
   });
 });
