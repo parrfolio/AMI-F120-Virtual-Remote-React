@@ -72,7 +72,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.filter((type) => type.name === animation)[0],
+          stripConf: themes.find((user) => (user.name = "rainbow")),
         },
         (data) => {}
       );
