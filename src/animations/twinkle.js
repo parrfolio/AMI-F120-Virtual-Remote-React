@@ -1,7 +1,9 @@
+const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
-const timers = require("./timer");
+const { RecurringTimer } = require("./timer");
+const { Strip } = require("./strip");
 
-function Twinkle() {
+function Twinkle(config) {
   let TwinkleColors = [
     0xffffff,
     0xfcfcfc,
@@ -36,37 +38,30 @@ function Twinkle() {
     0xb3b3b3,
     0xb0b0b0,
   ];
-
+  let strips = config;
   let WasTwinkling = false;
   let TwinkleSpeed = 250;
   let LastStates = [];
-
-  this.rainbowInterval2 = new this.common.RecurringTimer(() => {
-    if (!WasTwinkling) {
-      for (let i = 120; i < 300; i++) {
-        var init = getRandomInt(0, TwinkleColors.length - 1);
+  strips.forEach((item) => {
+    item["stripArray"] = new Strip(item).findStrip();
+    item["stripTimer"] = new RecurringTimer(function() {
+      for (let i = item.start; i < item.stop; i++) {
+        var init = commongetRandomInt(0, TwinkleColors.length - 1);
         LastStates[i] = TwinkleColors[init]; // default white color
-        colorsArray1[i] = LastStates[i];
+        item.stripArray[i] = LastStates[i];
       }
 
       ws281x.render();
-      WasTwinkling = true;
-    } else {
-      for (let i = 120; i < 240; i++) {
-        var shouldTwinkle = getRandomInt(0, 100);
-        if (shouldTwinkle > 10) {
-          // only a 50% chance of twinkling
-          var currentColor = LastStates[i];
-          var newColor = GetNextColor(currentColor);
-          LastStates[i] = newColor;
-          colorsArray1[i] = LastStates[i];
-        }
-      }
-      ws281x.render();
-    }
-  }, 1000 / 30);
+    }, item.delay);
+
+    this.TwinklePause = () => {
+      strips.forEach((item) => {
+        ws281x.reset(); //reset strips
+        item.stripTimer.pause();
+      });
+    };
+  });
 }
-
 module.exports = {
   Twinkle: Twinkle,
 };
