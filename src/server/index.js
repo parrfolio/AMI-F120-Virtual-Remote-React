@@ -121,6 +121,7 @@ io.sockets.on("connection", function(socket) {
     });
 
     if (data.state === "on") {
+      console.log(data.animation);
       switch (data.animation) {
         case "rainbow":
           console.log("Rainbow Animation!");
