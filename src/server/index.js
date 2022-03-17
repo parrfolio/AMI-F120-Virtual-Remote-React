@@ -124,7 +124,7 @@ io.sockets.on("connection", function(socket) {
       console.log(data.animation);
       switch (data.animation) {
         case "rainbow":
-          console.log("Rainbow Animation!");
+          console.log("Rainbow Animation!", data.stripConf);
           rainbow.Rainbow(data.stripConf.stripData);
           break;
         case "twinkle":
