@@ -1,5 +1,5 @@
 const animation_data = {
-  animations: {
+  themes: {
     rainbow: [
       {
         name: "Title Strip Light 1",

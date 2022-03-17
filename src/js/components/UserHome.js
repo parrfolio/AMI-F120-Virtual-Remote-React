@@ -22,7 +22,7 @@ export const UserHome = (props, state) => {
   const [animation, setAnimation] = useState();
 
   const { jukebox } = props;
-  const { animations } = props;
+  const { themes } = props;
   console.log(props);
 
   const toggleClass = () => {
@@ -62,7 +62,7 @@ export const UserHome = (props, state) => {
         {
           state: "on",
           animation: animation,
-          stripConf: animations.rainbow,
+          stripConf: themes.rainbow,
         },
         (data) => {}
       );
@@ -72,7 +72,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: animations.rainbow,
+          stripConf: themes.rainbow,
         },
         (data) => {}
       );
