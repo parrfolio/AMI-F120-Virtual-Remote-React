@@ -1,13 +1,8 @@
 const animation_data = {
   themes: [
-    { blinky: "blah" },
-    { classic: "blah" },
-    { modelx: "blah" },
-    { pacman: "blah" },
-    { xmas: "blah" },
-    { disco: "blah" },
     {
-      rainbow: [
+      name: "rainbow",
+      stripData: [
         {
           name: "Title Strip Light 1",
           delay: 1000 / 30,

@@ -125,11 +125,11 @@ io.sockets.on("connection", function(socket) {
       switch (data.animation) {
         case "rainbow":
           console.log("Rainbow Animation!");
-          rainbow.Rainbow(data.stripConf);
+          rainbow.Rainbow(data.stripConf.stripData);
           break;
         case "twinkle":
           console.log("Twinkle Animation!");
-          twinkle.Twinkle(data.stripConf);
+          twinkle.Twinkle(data.stripConf.stripData);
           break;
         default:
           console.log("Empty action received.");
