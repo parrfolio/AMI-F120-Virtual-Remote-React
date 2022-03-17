@@ -121,15 +121,15 @@ io.sockets.on("connection", function(socket) {
     });
 
     if (data.state === "on") {
-      console.log(data.animation);
+      console.log("Animation Type", data.animation);
       switch (data.animation) {
         case "rainbow":
-          console.log("Rainbow Animation!", data.stripConf);
-          rainbow.Rainbow(data.stripConf.stripData);
+          console.log("Rainbow Animation Data!", data.stripConf);
+          rainbow.Rainbow(data.stripConf);
           break;
         case "twinkle":
           console.log("Twinkle Animation!");
-          twinkle.Twinkle(data.stripConf.stripData);
+          twinkle.Twinkle(data.stripConf);
           break;
         default:
           console.log("Empty action received.");

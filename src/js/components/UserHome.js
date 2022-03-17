@@ -72,10 +72,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.find((user) => {
-            console.log(user);
-            return (user.name = "rainbow");
-          }),
+          stripConf: themes.rainbow,
         },
         (data) => {}
       );
