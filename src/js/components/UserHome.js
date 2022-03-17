@@ -72,7 +72,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.rainbow,
+          stripConf: themes.find(animation),
         },
         (data) => {}
       );
@@ -148,7 +148,7 @@ export const UserHome = (props, state) => {
       <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
-          setAnimation("rainbow");
+          setAnimation("twinkle");
           toggleClass();
         }}
       >
