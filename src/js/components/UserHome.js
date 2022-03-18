@@ -144,7 +144,15 @@ export const UserHome = (props, state) => {
         setAnimationName={"rainbow"}
         setAnimation={setAnimation}
       />
-      <button
+
+      <ToggleButton
+        className={isActive ? "lightson" : "lightsoff"}
+        setActive={setActive}
+        isActive={isActive}
+        setAnimationName={"twinkle"}
+        setAnimation={setAnimation}
+      />
+      {/* <button
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           setAnimation("rainbow");
@@ -162,7 +170,7 @@ export const UserHome = (props, state) => {
         }}
       >
         Twinkle {isActive ? "On" : "Off"}
-      </button>
+      </button> */}
       <Link
         to={{
           pathname: "/about",

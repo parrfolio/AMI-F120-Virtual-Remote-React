@@ -9,7 +9,7 @@ export const ToggleButton = (props) => {
         setActive(!isActive);
       }}
     >
-      New Rainbow {isActive ? "On" : "Off"}
+      {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );
 };
