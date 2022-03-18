@@ -121,10 +121,9 @@ io.sockets.on("connection", function(socket) {
     });
     let animationType = data.animation;
     if (data.state === "on") {
-      console.log("Animation Type", animationType);
       switch (animationType) {
         case "rainbow":
-          console.log("Rainbow Animation Data!", data.stripConf);
+          console.log("Rainbow Animation!");
           rainbow.Rainbow(data.stripConf);
           break;
         case "twinkle":
@@ -135,7 +134,7 @@ io.sockets.on("connection", function(socket) {
           console.log("Empty action received.");
           break;
       }
-    } else if (data.state === "off") {
+    } else {
       switch (animationType) {
         case "rainbow":
           console.log("Rainbow Animation!");
@@ -149,10 +148,6 @@ io.sockets.on("connection", function(socket) {
           console.log("Empty action received.");
           break;
       }
-      // rainbow.RainbowPause();
-      // twinkle.TwinklePause();
-    } else {
-      console.log("ERROR!");
     }
   });
 });
