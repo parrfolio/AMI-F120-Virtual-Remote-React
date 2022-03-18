@@ -122,7 +122,7 @@ io.sockets.on("connection", function(socket) {
     let animationType = data.animation;
     if (data.state === "on") {
       console.log("Animation Type", animationType);
-      switch (findAnimation) {
+      switch (animationType) {
         case "rainbow":
           console.log("Rainbow Animation Data!", data.stripConf);
           rainbow.Rainbow(data.stripConf);
