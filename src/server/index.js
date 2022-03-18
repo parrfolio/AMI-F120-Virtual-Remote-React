@@ -119,10 +119,10 @@ io.sockets.on("connection", function(socket) {
         process.exit(0);
       });
     });
-
+    let animationType = data.animation;
     if (data.state === "on") {
-      console.log("Animation Type", data.animation);
-      switch (data.animation) {
+      console.log("Animation Type", animationType);
+      switch (findAnimation) {
         case "rainbow":
           console.log("Rainbow Animation Data!", data.stripConf);
           rainbow.Rainbow(data.stripConf);
@@ -136,21 +136,21 @@ io.sockets.on("connection", function(socket) {
           break;
       }
     } else {
-      // switch (data.animation) {
-      //   case "rainbow":
-      //     console.log("Rainbow Animation!");
-      //     rainbow.RainbowPause();
-      //     break;
-      //   case "twinkle":
-      //     console.log("Twinkle Animation!");
-      //     twinkle.TwinklePause();
-      //     break;
-      //   default:
-      //     console.log("Empty action received.");
-      //     break;
-      // }
+      switch (animationType) {
+        case "rainbow":
+          console.log("Rainbow Animation!");
+          rainbow.RainbowPause();
+          break;
+        case "twinkle":
+          console.log("Twinkle Animation!");
+          twinkle.TwinklePause();
+          break;
+        default:
+          console.log("Empty action received.");
+          break;
+      }
       // rainbow.RainbowPause();
-      twinkle.TwinklePause();
+      // twinkle.TwinklePause();
     }
   });
 });
