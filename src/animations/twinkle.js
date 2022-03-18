@@ -46,7 +46,7 @@ function Twinkle(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        var init = commongetRandomInt(0, TwinkleColors.length - 1);
+        var init = common.getRandomInt(0, TwinkleColors.length - 1);
         LastStates[i] = TwinkleColors[init]; // default white color
         item.stripArray[i] = LastStates[i];
       }
