@@ -149,7 +149,7 @@ io.sockets.on("connection", function(socket) {
       //     console.log("Empty action received.");
       //     break;
       // }
-      rainbow.RainbowPause();
+      // rainbow.RainbowPause();
       twinkle.TwinklePause();
     }
   });
