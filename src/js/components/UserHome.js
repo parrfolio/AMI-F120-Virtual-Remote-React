@@ -26,10 +26,6 @@ export const UserHome = (props, state) => {
   const { themes } = props;
   console.log(props);
 
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
-
   // establish socket connection
   useEffect(() => {
     setLoading(false);
@@ -140,7 +136,6 @@ export const UserHome = (props, state) => {
       <ToggleButton
         className={isActive ? "lightson" : "lightsoff"}
         setActive={setActive}
-        toggleClass={toggleClass}
         setAnimationName={"rainbow"}
       />
       <button
