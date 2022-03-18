@@ -137,11 +137,9 @@ io.sockets.on("connection", function(socket) {
     } else {
       switch (animationType) {
         case "rainbow":
-          console.log("Rainbow Animation!");
           rainbow.RainbowPause();
           break;
         case "twinkle":
-          console.log("Twinkle Animation!");
           twinkle.TwinklePause();
           break;
         default:
