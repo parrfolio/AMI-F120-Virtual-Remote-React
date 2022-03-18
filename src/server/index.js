@@ -124,10 +124,12 @@ io.sockets.on("connection", function(socket) {
       switch (animationType) {
         case "rainbow":
           console.log("Rainbow Animation!");
+          twinkle.TwinklePause();
           rainbow.Rainbow(data.stripConf);
           break;
         case "twinkle":
           console.log("Twinkle Animation!");
+          rainbow.RainbowPause();
           twinkle.Twinkle(data.stripConf);
           break;
         default:
@@ -138,12 +140,10 @@ io.sockets.on("connection", function(socket) {
       switch (animationType) {
         case "rainbow":
           rainbow.RainbowPause();
-          ws281x.reset();
           console.log("Rainbow Animation OFF!");
           break;
         case "twinkle":
           twinkle.TwinklePause();
-          ws281x.reset();
           console.log("Twinkle Animation OFF!");
           break;
         default:
