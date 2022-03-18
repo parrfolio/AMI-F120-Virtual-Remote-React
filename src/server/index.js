@@ -137,10 +137,12 @@ io.sockets.on("connection", function(socket) {
     } else {
       switch (animationType) {
         case "rainbow":
+          ws281x.reset();
           rainbow.RainbowPause();
           console.log("Rainbow Animation OFF!");
           break;
         case "twinkle":
+          ws281x.reset();
           twinkle.TwinklePause();
           console.log("Twinkle Animation OFF!");
           break;
