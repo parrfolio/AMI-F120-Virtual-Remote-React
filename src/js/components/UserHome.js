@@ -26,10 +26,6 @@ export const UserHome = (props, state) => {
   const { themes } = props;
   console.log(props);
 
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
-
   // establish socket connection
   useEffect(() => {
     setLoading(false);
