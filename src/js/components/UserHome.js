@@ -152,7 +152,7 @@ export const UserHome = (props, state) => {
           toggleClass();
         }}
       >
-        Rainbow 2 {isActive ? "On" : "Off"}
+        Twinkle {isActive ? "On" : "Off"}
       </button>
       <Link
         to={{
