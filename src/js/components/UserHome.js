@@ -140,7 +140,8 @@ export const UserHome = (props, state) => {
       <ToggleButton
         className={isActive ? "lightson" : "lightsoff"}
         setActive={setActive}
-        setAnimation={setAnimation}
+        toggleClass={toggleClass}
+        setAnimationName={"rainbow"}
       />
       <button
         className={isActive ? "lightson" : "lightsoff"}
