@@ -150,6 +150,7 @@ io.sockets.on("connection", function(socket) {
       //     break;
       // }
       rainbow.RainbowPause();
+      twinkle.TwinklePause();
     }
   });
 });
