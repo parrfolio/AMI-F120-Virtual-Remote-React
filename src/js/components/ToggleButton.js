@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 export const ToggleButton = (props) => {
   const { isActive, setActive, setAnimation, setAnimationName } = props;
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
 
   return (
     <button
-      className={isActive}
       onClick={() => {
         setAnimation(setAnimationName);
-        toggleClass();
+        setActive(setActive === false ? true : false);
       }}
     >
       New Rainbow {isActive ? "On" : "Off"}
