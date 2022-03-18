@@ -18,16 +18,12 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-  const [isActive, setActive] = useState(null);
+  const [isActive, setActive] = useState(false);
   const [animation, setAnimation] = useState();
 
   const { jukebox } = props;
   const { themes } = props;
   console.log(props);
-
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
 
   // establish socket connection
   useEffect(() => {
@@ -139,7 +135,7 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           setAnimation("rainbow");
-          toggleClass();
+          setActive(!isActive);
         }}
       >
         Rainbow {isActive ? "On" : "Off"}
@@ -149,7 +145,7 @@ export const UserHome = (props, state) => {
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           setAnimation("twinkle");
-          toggleClass();
+          setActive(!isActive);
         }}
       >
         Twinkle {isActive ? "On" : "Off"}

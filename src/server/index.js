@@ -124,12 +124,10 @@ io.sockets.on("connection", function(socket) {
       switch (animationType) {
         case "rainbow":
           console.log("Rainbow Animation!");
-          if (!animationType === "rainbow") twinkle.TwinklePause();
           rainbow.Rainbow(data.stripConf);
           break;
         case "twinkle":
           console.log("Twinkle Animation!");
-          if (!animationType === "twinkle") rainbow.RainbowPause();
           twinkle.Twinkle(data.stripConf);
           break;
         default:
