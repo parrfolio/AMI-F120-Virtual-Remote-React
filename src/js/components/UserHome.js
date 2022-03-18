@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
+import { ToggleButton } from "./ToggleButton";
 
 // import Chevron from "../../fonts/chevron.js";
 
@@ -18,7 +19,7 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-  const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState(null);
   const [animation, setAnimation] = useState();
 
   const { jukebox } = props;
@@ -131,15 +132,17 @@ export const UserHome = (props, state) => {
       >
         Stop
       </div>
-      <button
+
+      <ToggleButton
         className={isActive ? "lightson" : "lightsoff"}
         onClick={() => {
           setAnimation("rainbow");
           setActive(!isActive);
         }}
-      >
+      />
+      {/* <button className={isActive ? "lightson" : "lightsoff"}>
         Rainbow {isActive ? "On" : "Off"}
-      </button>
+      </button> */}
 
       <button
         className={isActive ? "lightson" : "lightsoff"}
