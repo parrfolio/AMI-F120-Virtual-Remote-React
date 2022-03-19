@@ -127,13 +127,14 @@ export const UserHome = (props, state) => {
   // });
 
   const theme_selections = Object.entries(themes).map((selection, index) => {
-    console.log(selection);
     return (
       <ToggleButton
-        className={isActive ? "lightson" : "lightsoff"}
+        className={
+          isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
+        }
         setActive={setActive}
         isActive={isActive}
-        setAnimationName={"rainbow"}
+        setAnimationName={selection[0]}
         setAnimation={setAnimation}
       />
     );
