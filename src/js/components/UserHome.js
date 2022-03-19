@@ -57,6 +57,8 @@ export const UserHome = (props, state) => {
     //   setActive(true);
     // }
 
+    console.log(themes);
+
     const themeName = (theme) => {
       console.log("THEME", theme);
       console.log("THEME NAME", theme.name);
