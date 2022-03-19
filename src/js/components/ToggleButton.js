@@ -15,7 +15,7 @@ export const ToggleButton = (props) => {
       key={key}
       onClick={() => {
         setAnimation(setAnimationName);
-        setActive(`${condition === key ? !isActive : ""}`);
+        setActive(`${condition === key ? isActive : !isActive}`);
       }}
     >
       {setAnimationName} {isActive ? "On" : "Off"}
