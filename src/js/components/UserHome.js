@@ -67,7 +67,7 @@ export const UserHome = (props, state) => {
         {
           state: "on",
           animation: animation,
-          stripConf: themes.find(animation),
+          stripConf: themes.find(themeName),
         },
         (data) => {}
       );
@@ -77,7 +77,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.find(animation),
+          stripConf: themes.find(themeName),
         },
         (data) => {}
       );
