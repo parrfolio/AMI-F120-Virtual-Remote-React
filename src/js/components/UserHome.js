@@ -57,40 +57,26 @@ export const UserHome = (props, state) => {
     //   setActive(true);
     // }
 
-    switch (animation) {
-      case "rainbow":
-        socket.emit(
-          "lights",
-          {
-            state: "on",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {}
-        );
-        break;
-      case "twinkle":
-        socket.emit(
-          "lights",
-          {
-            state: "on",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {}
-        );
-        break;
-      default:
-        socket.emit(
-          "lights",
-          {
-            state: "off",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {}
-        );
-        break;
+    if (isActive) {
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    } else if (isActive != null) {
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
     }
   }, [isActive]);
 
