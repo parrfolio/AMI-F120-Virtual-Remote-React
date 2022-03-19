@@ -125,7 +125,7 @@ export const UserHome = (props, state) => {
   //   //   setAnimation={setAnimation}
   //   // />;
   // });
-  const [condition, setCondition] = React.useState(null);
+
   const theme_selections = Object.entries(themes).map((selection, index) => {
     console.log(index);
     console.log(selection);
@@ -139,8 +139,6 @@ export const UserHome = (props, state) => {
         isActive={isActive}
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
-        condition={condition}
-        setCondition={setCondition}
       />
     );
   });

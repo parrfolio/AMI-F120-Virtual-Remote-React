@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 export const ToggleButton = (props) => {
-  const {
-    isActive,
-    setActive,
-    setCondition,
-    condition,
-    setAnimation,
-    setAnimationName,
-    key,
-  } = props;
+  const { isActive, setActive, setAnimation, setAnimationName } = props;
 
   return (
     <button
-      key={key}
       onClick={() => {
         setAnimation(setAnimationName);
-        setActive(`${condition === key ? isActive : !isActive}`);
+        setActive(!isActive);
       }}
     >
       {setAnimationName} {isActive ? "On" : "Off"}
