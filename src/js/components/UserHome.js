@@ -58,7 +58,7 @@ export const UserHome = (props, state) => {
     // }
 
     console.log(themes);
-
+    //[0].name.rainbow
     const themeName = (theme) => {
       console.log("THEME", theme);
       console.log("THEME NAME", theme.name);
