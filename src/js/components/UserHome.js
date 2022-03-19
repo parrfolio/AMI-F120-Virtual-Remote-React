@@ -56,23 +56,14 @@ export const UserHome = (props, state) => {
     // if (props.location.state.lightsActive) {
     //   setActive(true);
     // }
-
-    const themeName = (theme) => {
-      console.log("THEME", theme);
-      console.log("THEME NAME", theme.name);
-      console.log("ANIMATION", animation);
-      return theme[animation];
-    };
-
-    console.log(themeName());
-
+    console.log(themes);
     if (isActive) {
       socket.emit(
         "lights",
         {
           state: "on",
           animation: animation,
-          stripConf: themes.find(themeName),
+          stripConf: themes.name[animation],
         },
         (data) => {}
       );
@@ -82,7 +73,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.find(themeName),
+          stripConf: themes.name[animation],
         },
         (data) => {}
       );
