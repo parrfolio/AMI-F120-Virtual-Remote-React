@@ -59,53 +59,37 @@ export const UserHome = (props, state) => {
 
     switch (animation) {
       case "rainbow":
-        if (isActive) {
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (data) => {}
-          );
-        } else if (isActive != null) {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (data) => {}
-          );
-        }
+        socket.emit(
+          "lights",
+          {
+            state: "on",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (data) => {}
+        );
         break;
       case "twinkle":
-        if (isActive) {
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (data) => {}
-          );
-        } else if (isActive != null) {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (data) => {}
-          );
-        }
+        socket.emit(
+          "lights",
+          {
+            state: "on",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (data) => {}
+        );
         break;
       default:
-        console.log("Empty action received.");
+        socket.emit(
+          "lights",
+          {
+            state: "off",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (data) => {}
+        );
         break;
     }
   }, [isActive]);
