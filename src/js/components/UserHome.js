@@ -57,13 +57,17 @@ export const UserHome = (props, state) => {
     //   setActive(true);
     // }
 
+    const themeName = (theme) => {
+      return theme.name === animation;
+    };
+
     if (isActive) {
       socket.emit(
         "lights",
         {
           state: "on",
           animation: animation,
-          stripConf: themes[animation],
+          stripConf: themes.find(animation),
         },
         (data) => {}
       );
@@ -73,7 +77,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes[animation],
+          stripConf: themes.find(animation),
         },
         (data) => {}
       );
@@ -112,6 +116,18 @@ export const UserHome = (props, state) => {
       </div>
     );
   });
+
+  // const theme_selections = themes.map((selection, index) => {
+  //   return (
+  //     <ToggleButton
+  //       className={isActive ? "lightson" : "lightsoff"}
+  //       setActive={setActive}
+  //       isActive={isActive}
+  //       setAnimationName={"rainbow"}
+  //       setAnimation={setAnimation}
+  //     />
+  //   );
+  // });
 
   return loading ? (
     <div>Loading....</div>
@@ -152,25 +168,6 @@ export const UserHome = (props, state) => {
         setAnimationName={"twinkle"}
         setAnimation={setAnimation}
       />
-      {/* <button
-        className={isActive ? "lightson" : "lightsoff"}
-        onClick={() => {
-          setAnimation("rainbow");
-          toggleClass();
-        }}
-      >
-        Rainbow {isActive ? "On" : "Off"}
-      </button>
-
-      <button
-        className={isActive ? "lightson" : "lightsoff"}
-        onClick={() => {
-          setAnimation("twinkle");
-          toggleClass();
-        }}
-      >
-        Twinkle {isActive ? "On" : "Off"}
-      </button> */}
       <Link
         to={{
           pathname: "/about",
