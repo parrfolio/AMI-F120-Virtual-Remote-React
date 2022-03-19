@@ -57,26 +57,56 @@ export const UserHome = (props, state) => {
     //   setActive(true);
     // }
 
-    if (isActive) {
-      socket.emit(
-        "lights",
-        {
-          state: "on",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    } else if (isActive != null) {
-      socket.emit(
-        "lights",
-        {
-          state: "off",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
+    switch (animation) {
+      case "rainbow":
+        if (isActive) {
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        } else if (isActive != null) {
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        }
+        break;
+      case "twinkle":
+        if (isActive) {
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        } else if (isActive != null) {
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        }
+        break;
+      default:
+        console.log("Empty action received.");
+        break;
     }
   }, [isActive]);
 
@@ -114,17 +144,6 @@ export const UserHome = (props, state) => {
   });
 
   console.log(themes);
-
-  // const theme_selections = themes.forEach((selection) => {
-  //   console.log(selection);
-  //   // <ToggleButton
-  //   //   className={isActive ? "lightson" : "lightsoff"}
-  //   //   setActive={setActive}
-  //   //   isActive={isActive}
-  //   //   setAnimationName={"rainbow"}
-  //   //   setAnimation={setAnimation}
-  //   // />;
-  // });
 
   const theme_selections = Object.entries(themes).map((selection, index) => {
     console.log(index);
