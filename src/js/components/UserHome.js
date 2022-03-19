@@ -58,8 +58,13 @@ export const UserHome = (props, state) => {
     // }
 
     const themeName = (theme) => {
+      console.log("THEME", theme);
+      console.log("THEME NAME", theme.name);
+      console.log("ANIMATION", animation);
       return theme.name === animation;
     };
+
+    console.log("Theme Function", themeName);
 
     if (isActive) {
       socket.emit(
