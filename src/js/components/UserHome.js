@@ -126,17 +126,17 @@ export const UserHome = (props, state) => {
   //   // />;
   // });
 
-  // const theme_selections = themes.map((selection, index) => {
-  //   return (
-  //     <ToggleButton
-  //       className={isActive ? "lightson" : "lightsoff"}
-  //       setActive={setActive}
-  //       isActive={isActive}
-  //       setAnimationName={"rainbow"}
-  //       setAnimation={setAnimation}
-  //     />
-  //   );
-  // });
+  const theme_selections = Object.entries(themes).map((selection, index) => {
+    return (
+      <ToggleButton
+        className={isActive ? "lightson" : "lightsoff"}
+        setActive={setActive}
+        isActive={isActive}
+        setAnimationName={"rainbow"}
+        setAnimation={setAnimation}
+      />
+    );
+  });
 
   return loading ? (
     <div>Loading....</div>
