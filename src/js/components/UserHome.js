@@ -61,7 +61,7 @@ export const UserHome = (props, state) => {
       console.log("THEME", theme);
       console.log("THEME NAME", theme.name);
       console.log("ANIMATION", animation);
-      return theme.name === animation;
+      return theme === animation;
     };
 
     console.log(themes.find(themeName));
