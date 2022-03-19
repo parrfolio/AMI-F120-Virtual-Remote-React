@@ -127,6 +127,7 @@ export const UserHome = (props, state) => {
   // });
 
   const theme_selections = Object.entries(themes).map((selection, index) => {
+    console.log(selection);
     return (
       <ToggleButton
         className={isActive ? "lightson" : "lightsoff"}
@@ -162,22 +163,6 @@ export const UserHome = (props, state) => {
         Stop
       </div>
       <Block>{theme_selections}</Block>
-
-      <ToggleButton
-        className={isActive ? "lightson" : "lightsoff"}
-        setActive={setActive}
-        isActive={isActive}
-        setAnimationName={"rainbow"}
-        setAnimation={setAnimation}
-      />
-
-      <ToggleButton
-        className={isActive ? "lightson" : "lightsoff"}
-        setActive={setActive}
-        isActive={isActive}
-        setAnimationName={"twinkle"}
-        setAnimation={setAnimation}
-      />
       <Link
         to={{
           pathname: "/about",
