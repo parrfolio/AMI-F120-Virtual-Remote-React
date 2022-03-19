@@ -161,6 +161,7 @@ export const UserHome = (props, state) => {
       >
         Stop
       </div>
+      <Block>{theme_selections}</Block>
 
       <ToggleButton
         className={isActive ? "lightson" : "lightsoff"}
