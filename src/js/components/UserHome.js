@@ -57,14 +57,16 @@ export const UserHome = (props, state) => {
     //   setActive(true);
     // }
 
-    const themeName = (theme) => {
-      console.log("THEME", theme);
-      console.log("THEME NAME", theme.name);
-      console.log("ANIMATION", animation);
-      return theme.name[animation] === animation;
-    };
+    // const themeName = (theme) => {
+    //   console.log("THEME", theme);
+    //   console.log("THEME NAME", theme.name);
+    //   console.log("ANIMATION", animation);
+    //   return theme.name[animation] === animation;
+    // };
 
-    console.log(themes.find(themeName));
+    let themeName = themes.find((t) => t.name === animation);
+
+    console.log(themeName);
 
     if (isActive) {
       socket.emit(
