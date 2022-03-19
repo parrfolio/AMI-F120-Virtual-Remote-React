@@ -56,14 +56,14 @@ export const UserHome = (props, state) => {
     // if (props.location.state.lightsActive) {
     //   setActive(true);
     // }
-    console.log(themes);
+
     if (isActive) {
       socket.emit(
         "lights",
         {
           state: "on",
           animation: animation,
-          stripConf: themes.name[animation],
+          stripConf: themes[animation],
         },
         (data) => {}
       );
@@ -73,7 +73,7 @@ export const UserHome = (props, state) => {
         {
           state: "off",
           animation: animation,
-          stripConf: themes.name[animation],
+          stripConf: themes[animation],
         },
         (data) => {}
       );
@@ -113,17 +113,17 @@ export const UserHome = (props, state) => {
     );
   });
 
-  // const theme_selections = themes.map((selection, index) => {
-  //   return (
-  //     <ToggleButton
-  //       className={isActive ? "lightson" : "lightsoff"}
-  //       setActive={setActive}
-  //       isActive={isActive}
-  //       setAnimationName={"rainbow"}
-  //       setAnimation={setAnimation}
-  //     />
-  //   );
-  // });
+  const theme_selections = themes.map((selection, index) => {
+    return (
+      <ToggleButton
+        className={isActive ? "lightson" : "lightsoff"}
+        setActive={setActive}
+        isActive={isActive}
+        setAnimationName={"rainbow"}
+        setAnimation={setAnimation}
+      />
+    );
+  });
 
   return loading ? (
     <div>Loading....</div>
