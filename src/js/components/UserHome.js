@@ -113,16 +113,18 @@ export const UserHome = (props, state) => {
     );
   });
 
-  const theme_selections = themes.forEach((selection) => {
-    console.log(selection);
-    // <ToggleButton
-    //   className={isActive ? "lightson" : "lightsoff"}
-    //   setActive={setActive}
-    //   isActive={isActive}
-    //   setAnimationName={"rainbow"}
-    //   setAnimation={setAnimation}
-    // />;
-  });
+  console.log(themes);
+
+  // const theme_selections = themes.forEach((selection) => {
+  //   console.log(selection);
+  //   // <ToggleButton
+  //   //   className={isActive ? "lightson" : "lightsoff"}
+  //   //   setActive={setActive}
+  //   //   isActive={isActive}
+  //   //   setAnimationName={"rainbow"}
+  //   //   setAnimation={setAnimation}
+  //   // />;
+  // });
 
   // const theme_selections = themes.map((selection, index) => {
   //   return (
