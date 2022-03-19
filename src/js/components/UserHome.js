@@ -64,7 +64,7 @@ export const UserHome = (props, state) => {
       return theme.name === animation;
     };
 
-    console.log("Theme Function", themeName);
+    console.log(themes.find(themeName));
 
     if (isActive) {
       socket.emit(
