@@ -9,8 +9,18 @@ export const ToggleButton = (props) => {
     toggledButtonId,
     setToggledButtonId,
   } = props;
+  console.log(key);
 
-  // const isToggled = key === toggledButtonId;
+  const toggleButton = useCallback(
+    (id) => {
+      console.log(id);
+      console.log(key);
+      setToggledButtonId((key) => key);
+    },
+    [toggledButtonId]
+  );
+
+  const isToggled = key === toggledButtonId;
 
   return (
     <button

@@ -28,14 +28,6 @@ export const UserHome = (props, state) => {
 
   const [toggledButtonId, setToggledButtonId] = useState(false);
 
-  function toggleButton(button) {
-    console.log(button);
-    setToggledButtonId(button);
-  }
-  // const toggleButton = useCallback((id) => setToggledButtonId((state) => id), [
-  //   toggledButtonId,
-  // ]);
-
   // establish socket connection
   useEffect(() => {
     setLoading(false);
