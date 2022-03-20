@@ -9,22 +9,21 @@ export const ToggleButton = (props) => {
     toggledButtonId,
     setToggledButtonId,
   } = props;
-  console.log(key);
 
-  const toggleButton = useCallback((id) => setToggledButtonId((key) => id), [
-    toggledButtonId,
-  ]);
+  console.log(key);
 
   const isToggled = key === toggledButtonId;
 
   return (
     <button
+      key={key}
       onClick={() => {
         setAnimation(setAnimationName);
         setActive(!isActive);
         toggleButton(key);
       }}
     >
+      {isToggled}
       {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );

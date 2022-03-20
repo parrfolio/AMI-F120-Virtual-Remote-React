@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
@@ -29,7 +29,7 @@ export const UserHome = (props, state) => {
   const [toggledButtonId, setToggledButtonId] = useState(false);
 
   function toggleButton(button) {
-    setToggledButtonId(button.id);
+    setToggledButtonId(button);
   }
 
   // establish socket connection
