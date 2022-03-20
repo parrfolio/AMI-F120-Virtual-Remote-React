@@ -26,8 +26,8 @@ export const UserHome = (props, state) => {
   const { themes } = props;
   console.log(props);
 
-  const toggleClass = (button) => {
-    setActive(button.id);
+  const toggleClass = () => {
+    setActive(!isActive);
   };
 
   // establish socket connection
