@@ -10,9 +10,7 @@ export const ToggleButton = (props) => {
     setToggledButtonId,
   } = props;
 
-  console.log(key);
-
-  const isToggled = key === toggledButtonId;
+  // const isToggled = key === toggledButtonId;
 
   return (
     <button
@@ -23,7 +21,6 @@ export const ToggleButton = (props) => {
         toggleButton(key);
       }}
     >
-      {isToggled}
       {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );
