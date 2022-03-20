@@ -11,7 +11,7 @@ export const ToggleButton = (props) => {
   } = props;
   console.log(key);
 
-  const toggleButton = useCallback((id) => setToggledButtonId((state) => id), [
+  const toggleButton = useCallback((id) => setToggledButtonId((key) => id), [
     toggledButtonId,
   ]);
 
