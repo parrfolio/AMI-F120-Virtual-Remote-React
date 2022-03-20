@@ -1,24 +1,6 @@
 import React, { useState, useCallback } from "react";
-export const ToggleButton = (state, props) => {
-  const {
-    isActive,
-    setActive,
-    setAnimation,
-    key,
-    setAnimationName,
-    toggledButtonId,
-    setToggledButtonId,
-  } = props;
-
-  const toggleButton = (keyId) => (e) => {
-    e.preventDefault();
-    setToggledButtonId((state) => ({
-      ...state,
-      [keyId]: !state[keyId],
-    }));
-  };
-
-  const isToggled = key === toggledButtonId;
+export const ToggleButton = (props) => {
+  const { isActive, setActive, setAnimation, key, setAnimationName } = props;
 
   return (
     <button
@@ -26,10 +8,9 @@ export const ToggleButton = (state, props) => {
       onClick={() => {
         setAnimation(setAnimationName);
         setActive(!isActive);
-        toggleButton(key);
       }}
     >
-      ButtonID: {key} {setAnimationName} {isActive ? "On" : "Off"}
+      {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );
 };
