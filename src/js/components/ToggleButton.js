@@ -3,9 +3,10 @@ export const ToggleButton = (props) => {
   const { isActive, setActive, setAnimation, key, setAnimationName } = props;
   const handleActive = (i) => {
     const temp = [...isActive];
-    console.log("Active State:", (temp[i] = !temp[i]));
     temp[i] = !temp[i];
-    setActive(temp);
+    console.log("Active State:", (temp[i] = !temp[i]));
+    console.log("TEMP", temp);
+    setActive((temp[i] = !temp[i]));
   };
   return (
     <button
