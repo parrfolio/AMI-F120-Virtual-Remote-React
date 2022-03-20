@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 export const ToggleButton = (props) => {
   const { isActive, setActive, setAnimation, key, AnimationName } = props;
   const handleActive = (key) => {
-    const name = [...isActive];
+    let name = [...isActive];
     name[key] = key;
 
     setActive(name);
