@@ -13,7 +13,7 @@ export const ToggleButton = (props) => {
     console.log("KEY", animationIndex);
     let name = [...isActive];
     console.log("NAME", name);
-    name[animationIndex] = animationIndex;
+    name[animationIndex] = AnimationName;
 
     console.log("NAME MATCH", (name[animationIndex] = animationIndex));
 
