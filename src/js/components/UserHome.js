@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useCallback } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
@@ -20,14 +20,13 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
   const [isActive, setActive] = useState(null);
-  const [animation, setAnimation] = useState();
 
   const { jukebox } = props;
   const { themes } = props;
   console.log(props);
 
-  const toggleClass = () => {
-    setActive(!isActive);
+  const toggleClass = (button) => {
+    setActive(button.id);
   };
 
   // establish socket connection
@@ -127,7 +126,6 @@ export const UserHome = (props, state) => {
         setActive={setActive}
         isActive={isActive}
         setAnimationName={selection[0]}
-        setAnimation={setAnimation}
       />
     );
   });
