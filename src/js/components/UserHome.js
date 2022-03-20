@@ -77,7 +77,7 @@ export const UserHome = (props, state) => {
 
   console.log(themes);
 
-  const [isActive, setActive] = useState([false, false]);
+  const [isActive, setActive] = useState(["rainbow", "twinkle"]);
 
   useEffect(() => {
     console.log(isActive);
@@ -115,7 +115,7 @@ export const UserHome = (props, state) => {
         }
         setActive={setActive}
         isActive={isActive}
-        setAnimationName={selection[0]}
+        AnimationName={selection[0]}
         setAnimation={setAnimation}
       />
     );
