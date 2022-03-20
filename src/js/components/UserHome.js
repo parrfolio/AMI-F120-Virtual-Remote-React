@@ -77,30 +77,31 @@ export const UserHome = (props, state) => {
 
   console.log(themes);
 
-  const [isActive, setActive] = useState(null);
+  const [isActive, setActive] = useState([false, false]);
 
   useEffect(() => {
-    if (isActive) {
-      socket.emit(
-        "lights",
-        {
-          state: "on",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    } else if (isActive != null) {
-      socket.emit(
-        "lights",
-        {
-          state: "off",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    }
+    console.log(isActive);
+    // if (isActive) {
+    //   socket.emit(
+    //     "lights",
+    //     {
+    //       state: "on",
+    //       animation: animation,
+    //       stripConf: themes[animation],
+    //     },
+    //     (data) => {}
+    //   );
+    // } else if (isActive != null) {
+    //   socket.emit(
+    //     "lights",
+    //     {
+    //       state: "off",
+    //       animation: animation,
+    //       stripConf: themes[animation],
+    //     },
+    //     (data) => {}
+    //   );
+    // }
   }, [isActive]);
 
   const theme_selections = Object.entries(themes).map((selection, index) => {
