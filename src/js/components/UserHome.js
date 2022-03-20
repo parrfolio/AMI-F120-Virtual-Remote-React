@@ -19,10 +19,13 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
+  const [isActive, setActive] = useState(null);
   const [animation, setAnimation] = useState();
 
   const { jukebox } = props;
   const { themes } = props;
+
+  const [toggledButtonId, setToggledButtonId] = useState(false);
 
   // establish socket connection
   useEffect(() => {
@@ -41,6 +44,42 @@ export const UserHome = (props, state) => {
       setSocketConnected(socket.connected);
     });
   }, [socket]);
+
+  useEffect(() => {
+    //console.log("Lights in View", isActive);
+    // setActive(props.location.state.lightsActive);
+    //console.log("From Route Light Active", props.location.state);
+
+    // if (props.location.state.lightsActive) {
+    //   setActive(true);
+    // }
+
+    if (isActive) {
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    } else if (isActive != null) {
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    }
+  }, [isActive]);
+
+  useEffect(() => {
+    console.log(toggledButtonId);
+  }, [toggledButtonId]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
@@ -77,45 +116,18 @@ export const UserHome = (props, state) => {
 
   console.log(themes);
 
-  const [isActive, setActive] = useState(["rainbow", "twinkle"]);
-
-  useEffect(() => {
-    console.log(isActive);
-    // if (isActive) {
-    //   socket.emit(
-    //     "lights",
-    //     {
-    //       state: "on",
-    //       animation: animation,
-    //       stripConf: themes[animation],
-    //     },
-    //     (data) => {}
-    //   );
-    // } else if (isActive != null) {
-    //   socket.emit(
-    //     "lights",
-    //     {
-    //       state: "off",
-    //       animation: animation,
-    //       stripConf: themes[animation],
-    //     },
-    //     (data) => {}
-    //   );
-    // }
-  }, [isActive]);
-
   const theme_selections = Object.entries(themes).map((selection, index) => {
     console.log(index);
     console.log(selection);
     return (
       <ToggleButton
-        animationIndex={index}
+        key={index}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
         setActive={setActive}
         isActive={isActive}
-        AnimationName={selection[0]}
+        setAnimationName={selection[0]}
         setAnimation={setAnimation}
       />
     );

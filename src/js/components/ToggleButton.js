@@ -1,33 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 export const ToggleButton = (props) => {
-  const {
-    isActive,
-    setActive,
-    setAnimation,
-    animationIndex,
-    AnimationName,
-  } = props;
+  const { isActive, setActive, setAnimation, key, setAnimationName } = props;
 
-  const handleActive = (animationIndex) => {
-    console.log("AnimationName", AnimationName);
-    console.log("KEY", animationIndex);
-    let name = [...isActive];
-    console.log("NAME", name);
-    name[animationIndex] = AnimationName;
-
-    console.log("NAME MATCH", (name[animationIndex] = animationIndex));
-
-    setActive(name);
-  };
   return (
     <button
-      key={animationIndex}
       onClick={() => {
-        setAnimation(AnimationName);
-        handleActive(animationIndex);
+        setAnimation(setAnimationName);
+        setActive(!isActive);
       }}
     >
-      {AnimationName} {isActive ? "On" : "Off"}
+      {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );
 };
