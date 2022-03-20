@@ -5,6 +5,8 @@ export const ToggleButton = (props) => {
     let name = [...isActive];
     name[key] = key;
 
+    console.log("NAME", (name[key] = key));
+
     setActive(name);
   };
   return (
