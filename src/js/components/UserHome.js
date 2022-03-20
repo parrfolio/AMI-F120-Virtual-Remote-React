@@ -26,9 +26,11 @@ export const UserHome = (props, state) => {
   const { themes } = props;
   console.log(props);
 
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
+  const [toggledButtonId, setToggledButtonId] = useState(false);
+
+  function toggleButton(button) {
+    setToggledButtonId(button.id);
+  }
 
   // establish socket connection
   useEffect(() => {
@@ -80,6 +82,10 @@ export const UserHome = (props, state) => {
     }
   }, [isActive]);
 
+  useEffect(() => {
+    console.log(toggledButtonId);
+  }, [toggledButtonId]);
+
   // // manage socket connection
   // const handleSocketConnection = () => {
   //   if (socketConnected) socket.disconnect();
@@ -128,6 +134,8 @@ export const UserHome = (props, state) => {
         isActive={isActive}
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
+        toggledButtonId={toggledButtonId}
+        setToggledButtonId={setToggledButtonId}
       />
     );
   });
