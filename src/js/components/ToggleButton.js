@@ -9,7 +9,7 @@ export const ToggleButton = (props) => {
         setActive(!isActive);
       }}
     >
-      {setAnimationName} {isActive ? "On" : "Off"}
+      Name: {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );
 };
