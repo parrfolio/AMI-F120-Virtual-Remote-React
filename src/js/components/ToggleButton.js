@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-export const ToggleButton = (props) => {
+export const ToggleButton = (state, props) => {
   const {
     isActive,
     setActive,
@@ -9,16 +9,14 @@ export const ToggleButton = (props) => {
     toggledButtonId,
     setToggledButtonId,
   } = props;
-  console.log(key);
 
-  const toggleButton = useCallback(
-    (id) => {
-      console.log(id);
-      console.log(key);
-      setToggledButtonId((key) => key);
-    },
-    [toggledButtonId]
-  );
+  const toggleButton = (keyId) => (e) => {
+    e.preventDefault();
+    setToggledButtonId((state) => ({
+      ...state,
+      [keyId]: !state[keyId],
+    }));
+  };
 
   const isToggled = key === toggledButtonId;
 
@@ -31,7 +29,7 @@ export const ToggleButton = (props) => {
         toggleButton(key);
       }}
     >
-      {setAnimationName} {isActive ? "On" : "Off"}
+      ButtonID: {key} {setAnimationName} {isActive ? "On" : "Off"}
     </button>
   );
 };
