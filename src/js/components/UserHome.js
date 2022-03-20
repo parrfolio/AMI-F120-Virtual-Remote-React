@@ -109,7 +109,7 @@ export const UserHome = (props, state) => {
     console.log(selection);
     return (
       <ToggleButton
-        key={index}
+        animationIndex={index}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
