@@ -30,12 +30,6 @@ export const UserHome = (props, state) => {
     setActive(!isActive);
   };
 
-  const [toggledButtonId, setToggledButtonId] = useState(false);
-
-  function toggleButton(button) {
-    setToggledButtonId(button.id);
-  }
-
   // establish socket connection
   useEffect(() => {
     setLoading(false);
@@ -61,6 +55,20 @@ export const UserHome = (props, state) => {
 
     // if (props.location.state.lightsActive) {
     //   setActive(true);
+    // }
+
+    // switch (animationType) {
+    //   case "rainbow":
+    //     console.log("Rainbow Animation!");
+    //     rainbow.Rainbow(data.stripConf);
+    //     break;
+    //   case "twinkle":
+    //     console.log("Twinkle Animation!");
+    //     twinkle.Twinkle(data.stripConf);
+    //     break;
+    //   default:
+    //     console.log("Empty action received.");
+    //     break;
     // }
 
     if (isActive) {
@@ -119,8 +127,6 @@ export const UserHome = (props, state) => {
     );
   });
 
-  console.log(themes);
-
   const theme_selections = Object.entries(themes).map((selection, index) => {
     console.log(index);
     console.log(selection);
@@ -134,8 +140,6 @@ export const UserHome = (props, state) => {
         isActive={isActive}
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
-        toggledButtonId={toggledButtonId}
-        setToggledButtonId={setToggledButtonId}
       />
     );
   });

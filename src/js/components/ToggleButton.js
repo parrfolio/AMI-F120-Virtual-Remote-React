@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 export const ToggleButton = (props) => {
-  const { isActive, setActive, setAnimation, key, setAnimationName } = props;
+  const { isActive, setActive, setAnimation, setAnimationName } = props;
 
   return (
     <button
