@@ -19,8 +19,6 @@ export const App = () => {
   const { authed, user, loading } = useAuth();
   const { admin } = user;
 
-  console.log(authed, user, loading);
-
   return loading ? (
     <div>Loading...</div>
   ) : (

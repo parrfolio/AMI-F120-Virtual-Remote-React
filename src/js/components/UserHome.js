@@ -73,6 +73,8 @@ export const UserHome = (props, state) => {
     //     break;
     // }
 
+    console.log(appState.activeObject);
+
     if (appState.activeObject) {
       socket.emit(
         "lights",
@@ -83,7 +85,7 @@ export const UserHome = (props, state) => {
         },
         (data) => {}
       );
-    } else if (isActive != null) {
+    } else if (appState.activeObject != null) {
       socket.emit(
         "lights",
         {
@@ -130,8 +132,8 @@ export const UserHome = (props, state) => {
   });
 
   const theme_selections = Object.entries(themes).map((selection, index) => {
-    console.log(index);
-    console.log(selection);
+    // console.log(index);
+    // console.log(selection);
     return (
       <ToggleButton
         key={index}
@@ -140,8 +142,6 @@ export const UserHome = (props, state) => {
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
-        setActive={setActive}
-        isActive={isActive}
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
       />
