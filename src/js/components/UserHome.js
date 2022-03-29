@@ -22,8 +22,8 @@ export const UserHome = (props, state) => {
   const [isActive, setActive] = useState(null);
 
   const [appState, changeState] = useState({
-    activeObject: 0,
-    currentIndex: 0,
+    activeObject: null,
+    currentIndex: null,
     objects: [{ id: 1 }, { id: 2 }, { id: 3 }],
   });
 
@@ -86,8 +86,8 @@ export const UserHome = (props, state) => {
 
     console.log(appState.currentIndex, appState.activeObject);
 
-    if ((appState.currentIndex === appState.activeObject) != null) {
-      this.socket.emit(
+    if (appState.currentIndex === appState.activeObject) {
+      socket.emit(
         "lights",
         {
           state: "on",
@@ -97,7 +97,7 @@ export const UserHome = (props, state) => {
         (data) => {}
       );
     } else if (appState.activeObject != null) {
-      this.socket.emit(
+      socket.emit(
         "lights",
         {
           state: "off",
@@ -107,7 +107,7 @@ export const UserHome = (props, state) => {
         (data) => {}
       );
     }
-  }, [appState.activeObject]);
+  }, [appState.activeObject != null]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
