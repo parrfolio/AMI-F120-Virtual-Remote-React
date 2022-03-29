@@ -20,6 +20,16 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
   const [isActive, setActive] = useState(null);
+
+  const [appState, changeState] = useState({
+    activeObject: null,
+    objects: [{ id: 1 }, { id: 2 }, { id: 3 }],
+  });
+
+  const toggleActive = (index) => {
+    changeState({ ...appState, activeObject: appState.objects[index] });
+  };
+
   const [animation, setAnimation] = useState();
 
   const { jukebox } = props;
@@ -49,14 +59,6 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
-    //console.log("Lights in View", isActive);
-    // setActive(props.location.state.lightsActive);
-    //console.log("From Route Light Active", props.location.state);
-
-    // if (props.location.state.lightsActive) {
-    //   setActive(true);
-    // }
-
     // switch (animationType) {
     //   case "rainbow":
     //     console.log("Rainbow Animation!");
@@ -133,6 +135,8 @@ export const UserHome = (props, state) => {
     return (
       <ToggleButton
         key={index}
+        index={index}
+        toggleActive={toggleActive}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
