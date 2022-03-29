@@ -22,8 +22,8 @@ export const UserHome = (props, state) => {
   const [isActive, setActive] = useState(null);
 
   const [appState, changeState] = useState({
-    activeObject: null,
-    currentIndex: null,
+    activeObject: 0,
+    currentIndex: 0,
     objects: [{ id: 1 }, { id: 2 }, { id: 3 }],
   });
 
