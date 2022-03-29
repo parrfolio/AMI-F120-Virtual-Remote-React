@@ -86,7 +86,7 @@ export const UserHome = (props, state) => {
 
     console.log(appState.currentIndex, appState.activeObject);
 
-    if (appState.currentIndex === appState.activeObject) {
+    if ((appState.currentIndex === appState.activeObject) != null) {
       socket.emit(
         "lights",
         {
