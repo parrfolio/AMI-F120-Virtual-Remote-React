@@ -23,21 +23,20 @@ export const UserHome = (props, state) => {
 
   const [appState, changeState] = useState({
     activeObject: null,
-    currentIndex: null,
     objects: [{ id: 1 }, { id: 2 }, { id: 3 }],
   });
 
   const toggleActive = (index) => {
-    changeState({
-      ...appState,
-      activeObject: appState.objects[index],
-      currentIndex: index,
-    });
+    changeState({ ...appState, activeObject: appState.objects[index] });
   };
 
-  const toggleActiveStates = (index) => {
-    if (appState.currentIndex === appState.activeObject) {
-      return;
+  const toggleActiveButton = (index) => {
+    changeState({ ...appState, activeObject: appState.objects[index] });
+
+    if (appState.objects[index] === appState.activeObject) {
+      return console.log("Active");
+    } else {
+      return console.log("Inactive");
     }
   };
 
@@ -45,7 +44,7 @@ export const UserHome = (props, state) => {
 
   const { jukebox } = props;
   const { themes } = props;
-  console.log(props);
+  // console.log(props);
 
   const toggleClass = () => {
     setActive(!isActive);
@@ -70,23 +69,9 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
-    // switch (animationType) {
-    //   case "rainbow":
-    //     console.log("Rainbow Animation!");
-    //     rainbow.Rainbow(data.stripConf);
-    //     break;
-    //   case "twinkle":
-    //     console.log("Twinkle Animation!");
-    //     twinkle.Twinkle(data.stripConf);
-    //     break;
-    //   default:
-    //     console.log("Empty action received.");
-    //     break;
-    // }
+    console.log(appState.activeObject);
 
-    console.log(appState.currentIndex, appState.activeObject);
-
-    if (appState.currentIndex === appState.activeObject) {
+    if (appState.activeObject) {
       socket.emit(
         "lights",
         {
@@ -107,7 +92,7 @@ export const UserHome = (props, state) => {
         (data) => {}
       );
     }
-  }, [appState.activeObject != null]);
+  }, [appState]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
@@ -150,6 +135,7 @@ export const UserHome = (props, state) => {
         key={index}
         index={index}
         toggleActive={toggleActive}
+        toggleActiveButton={toggleActiveButton}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
