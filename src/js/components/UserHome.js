@@ -41,7 +41,7 @@ export const UserHome = (props, state) => {
     console.log("Active OBJECT", appState.activeObject);
     console.log("Last OBJECT", appState.lastObject);
 
-    if (appState.objects[index].id === appState.activeObject) {
+    if (appState.objects[index] === appState.activeObject) {
       return console.log("Active");
     } else {
       return console.log("Inactive");

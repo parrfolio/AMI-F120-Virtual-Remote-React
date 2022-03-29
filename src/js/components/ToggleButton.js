@@ -5,6 +5,7 @@ export const ToggleButton = (props) => {
     setAnimationName,
     toggleActive,
     index,
+    key,
     toggleActiveButton,
   } = props;
 
@@ -12,6 +13,8 @@ export const ToggleButton = (props) => {
     <button
       key={index}
       onClick={() => {
+        console.log("TOGGLE BUTTON KEY", key);
+        console.log("TOGGLE BUTTON Index", index);
         setAnimation(setAnimationName);
         toggleActive(index);
         toggleActiveButton(index);
