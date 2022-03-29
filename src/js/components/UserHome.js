@@ -23,17 +23,24 @@ export const UserHome = (props, state) => {
 
   const [appState, changeState] = useState({
     activeObject: null,
-    objects: [{ id: 1 }, { id: 2 }, { id: 3 }],
+    lastObject: null,
+    objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
   const toggleActive = (index) => {
-    changeState({ ...appState, activeObject: appState.objects[index] });
+    changeState({
+      ...appState,
+      activeObject: appState.objects[index],
+      lastObject: index,
+    });
   };
 
   const toggleActiveButton = (index) => {
     console.log("INDEX FROM TOGGLE BUTTON", index);
     console.log("APP STATE OBJECT", appState.objects[index]);
     console.log("Active OBJECT", appState.activeObject);
+    console.log("Last OBJECT", appState.lastObject);
+
     if (appState.objects[index] === appState.activeObject) {
       return console.log("Active");
     } else {
@@ -70,8 +77,6 @@ export const UserHome = (props, state) => {
   }, [socket]);
 
   useEffect(() => {
-    console.log(appState.activeObject);
-
     if (appState.activeObject) {
       socket.emit(
         "lights",
