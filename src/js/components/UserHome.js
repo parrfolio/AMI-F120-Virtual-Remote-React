@@ -87,7 +87,7 @@ export const UserHome = (props, state) => {
     console.log(appState.currentIndex, appState.activeObject);
 
     if ((appState.currentIndex === appState.activeObject) != null) {
-      socket.emit(
+      this.socket.emit(
         "lights",
         {
           state: "on",
@@ -97,7 +97,7 @@ export const UserHome = (props, state) => {
         (data) => {}
       );
     } else if (appState.activeObject != null) {
-      socket.emit(
+      this.socket.emit(
         "lights",
         {
           state: "off",
