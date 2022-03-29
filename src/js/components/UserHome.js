@@ -73,7 +73,7 @@ export const UserHome = (props, state) => {
     //     break;
     // }
 
-    if (isActive) {
+    if (appState.activeObject) {
       socket.emit(
         "lights",
         {
@@ -94,7 +94,7 @@ export const UserHome = (props, state) => {
         (data) => {}
       );
     }
-  }, [isActive]);
+  }, [appState.activeObject]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
