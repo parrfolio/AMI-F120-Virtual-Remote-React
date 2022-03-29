@@ -23,11 +23,22 @@ export const UserHome = (props, state) => {
 
   const [appState, changeState] = useState({
     activeObject: null,
+    currentIndex: null,
     objects: [{ id: 1 }, { id: 2 }, { id: 3 }],
   });
 
   const toggleActive = (index) => {
-    changeState({ ...appState, activeObject: appState.objects[index] });
+    changeState({
+      ...appState,
+      activeObject: appState.objects[index],
+      currentIndex: index,
+    });
+  };
+
+  const toggleActiveStates = (index) => {
+    if (appState.currentIndex === appState.activeObject) {
+      return;
+    }
   };
 
   const [animation, setAnimation] = useState();
@@ -73,9 +84,9 @@ export const UserHome = (props, state) => {
     //     break;
     // }
 
-    console.log(appState.activeObject);
+    console.log(appState.currentIndex, appState.activeObject);
 
-    if (appState.activeObject) {
+    if (appState.currentIndex === appState.activeObject) {
       socket.emit(
         "lights",
         {
