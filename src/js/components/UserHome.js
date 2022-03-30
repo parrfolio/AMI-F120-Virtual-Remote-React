@@ -29,9 +29,9 @@ export const UserHome = (props, state) => {
 
   const toggleActive = (index) => {
     changeState({
+      ...appState,
       activeObject: appState.objects[index],
       lastObject: appState.objects[index] === appState.activeObject,
-      ...appState,
     });
   };
 
