@@ -145,7 +145,7 @@ export const UserHome = (props, state) => {
     return (
       <ToggleButton
         key={index}
-        index={index}
+        buttonIndex={index}
         toggleActive={toggleActive}
         toggleActiveButton={toggleActiveButton}
         className={
