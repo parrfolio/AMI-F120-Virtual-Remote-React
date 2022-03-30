@@ -28,6 +28,7 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index) => {
+    console.log(appState.objects[index], appState.activeObject);
     changeState({
       ...appState,
       activeObject: appState.objects[index],
@@ -36,11 +37,6 @@ export const UserHome = (props, state) => {
   };
 
   const toggleActiveButton = (index) => {
-    console.log("INDEX FROM TOGGLE BUTTON", index);
-    console.log("APP STATE OBJECT", appState.objects[index]);
-    console.log("Active OBJECT", appState.activeObject);
-    console.log("Last OBJECT", appState.lastObject);
-
     if (appState.objects[index] === appState.activeObject) {
       return console.log("Active");
     } else {
