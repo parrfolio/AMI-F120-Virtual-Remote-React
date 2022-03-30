@@ -28,6 +28,9 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index) => {
+    console.log(index);
+    console.log(appState);
+    console.log(appState.objects[index]);
     changeState({
       activeObject: appState.objects[index],
       lastObject: index,
