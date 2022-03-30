@@ -31,9 +31,11 @@ export const UserHome = (props, state) => {
     console.log(index);
     console.log(appState);
     console.log(appState.objects[index]);
+    let test = appState.objects[index];
+    let test2 = index;
     changeState({
-      activeObject: appState.objects[index],
-      lastObject: index,
+      activeObject: test,
+      lastObject: test2,
       ...appState,
     });
   };
