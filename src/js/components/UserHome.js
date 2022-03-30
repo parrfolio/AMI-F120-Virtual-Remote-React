@@ -32,7 +32,7 @@ export const UserHome = (props, state) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
-      lastObject: appState.objects[index] === appState.activeObject,
+      lastObject: appState.objects[index] != appState.activeObject,
     });
   };
 
