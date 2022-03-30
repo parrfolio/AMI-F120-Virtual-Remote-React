@@ -74,7 +74,7 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     console.log("APP STATE", appState);
-    if (appState.activeObject) {
+    if (!lastObject) {
       socket.emit(
         "lights",
         {
