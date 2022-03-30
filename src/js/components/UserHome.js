@@ -28,15 +28,10 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index) => {
-    console.log(index);
-    console.log(appState);
-    console.log(appState.objects[index]);
-    let test = appState.objects[index];
-    let test2 = index;
     changeState({
+      activeObject: appState.objects[index],
+      lastObject: appState.objects[index] === appState.activeObject,
       ...appState,
-      activeObject: test,
-      lastObject: test2,
     });
   };
 
@@ -145,7 +140,7 @@ export const UserHome = (props, state) => {
     return (
       <ToggleButton
         key={index}
-        buttonIndex={index}
+        index={index}
         toggleActive={toggleActive}
         toggleActiveButton={toggleActiveButton}
         className={
