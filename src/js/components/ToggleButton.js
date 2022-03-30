@@ -10,7 +10,7 @@ export const ToggleButton = (props) => {
 
   return (
     <button
-      key={index}
+      key={buttonIndex}
       onClick={() => {
         console.log("TOGGLE BUTTON Index", buttonIndex);
         setAnimation(setAnimationName);
