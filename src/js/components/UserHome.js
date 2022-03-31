@@ -63,7 +63,7 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     console.log(appState.activeObject, appState.previousObject);
-    if (appState.objects[index] === appState.activeObject) {
+    if (appState.activeObject === appState.previousObject) {
       socket.emit(
         "lights",
         {
@@ -73,7 +73,7 @@ export const UserHome = (props, state) => {
         },
         (data) => {}
       );
-    } else if (appState.lastObject != null) {
+    } else {
       socket.emit(
         "lights",
         {
