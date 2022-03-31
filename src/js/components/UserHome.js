@@ -64,31 +64,29 @@ export const UserHome = (props, state) => {
   useEffect(() => {
     console.log(appState.activeObject, appState.previousObject);
 
-    console.log(appState.activeObject != null);
-    console.log(typeof appState.activeObject === null);
+    if (appState.activeObject != null) return false;
 
-    // if (appState.activeObject != null) return;
-    // if (appState.activeObject === appState.previousObject) {
-    //   socket.emit(
-    //     "lights",
-    //     {
-    //       state: "on",
-    //       animation: animation,
-    //       stripConf: themes[animation],
-    //     },
-    //     (data) => {}
-    //   );
-    // } else {
-    //   socket.emit(
-    //     "lights",
-    //     {
-    //       state: "off",
-    //       animation: animation,
-    //       stripConf: themes[animation],
-    //     },
-    //     (data) => {}
-    //   );
-    // }
+    if (appState.activeObject === appState.previousObject) {
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    } else {
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    }
   }, [appState]);
 
   const toggleActiveStyle = (index) => {
