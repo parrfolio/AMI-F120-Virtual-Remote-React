@@ -23,7 +23,7 @@ export const UserHome = (props, state) => {
 
   const [appState, changeState] = useState({
     activeObject: null,
-    lastObject: null,
+    previousObject: null,
     objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
