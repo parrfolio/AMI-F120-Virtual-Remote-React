@@ -78,7 +78,7 @@ export const UserHome = (props, state) => {
           },
           (data) => {}
         );
-      } else {
+      } else if (appState.activeObject != null) {
         socket.emit(
           "lights",
           {
