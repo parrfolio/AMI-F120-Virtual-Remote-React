@@ -65,7 +65,7 @@ export const UserHome = (props, state) => {
     console.log(appState.activeObject, appState.previousObject);
 
     console.log(appState.activeObject != null);
-    console.log(typeof appState.activeObject != null);
+    console.log(typeof appState.activeObject === null);
 
     // if (appState.activeObject != null) return;
     // if (appState.activeObject === appState.previousObject) {
