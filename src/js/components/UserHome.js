@@ -36,13 +36,13 @@ export const UserHome = (props, state) => {
     });
   };
 
-  // const toggleActiveButton = (index) => {
-  //   if (appState.lastObject) {
-  //     return ""
-  //   } else {
-  //     return console.log("Inactive");
-  //   }
-  // };
+  const toggleActiveButton = (index) => {
+    if (appState.objects[index] === appState.activeObject) {
+      return "Active";
+    } else {
+      return "Inactive";
+    }
+  };
 
   const [animation, setAnimation] = useState();
 
@@ -138,12 +138,12 @@ export const UserHome = (props, state) => {
         key={index}
         index={index}
         toggleActive={toggleActive}
+        toggleActiveButton={toggleActiveButton}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
-        appState={appState}
       />
     );
   });
