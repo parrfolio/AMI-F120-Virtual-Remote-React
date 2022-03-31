@@ -37,7 +37,7 @@ export const UserHome = (props, state) => {
   };
 
   const toggleActiveButton = (index) => {
-    if (appState.objects[index] === appState.activeObject) {
+    if (appState.objects[index] != appState.activeObject) {
       socket.emit(
         "lights",
         {
@@ -57,6 +57,14 @@ export const UserHome = (props, state) => {
         },
         (data) => {}
       );
+    }
+  };
+
+  const toggleActiveStyle = (index) => {
+    if (appState.objects[index] === appState.activeObject) {
+      return "active";
+    } else {
+      return "inactive";
     }
   };
 
@@ -155,6 +163,7 @@ export const UserHome = (props, state) => {
         index={index}
         toggleActive={toggleActive}
         toggleActiveButton={toggleActiveButton}
+        toggleActiveStyle={toggleActiveStyle}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }

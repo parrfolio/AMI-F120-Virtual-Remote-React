@@ -6,6 +6,7 @@ export const ToggleButton = (props) => {
     toggleActive,
     index,
     toggleActiveButton,
+    toggleActiveStyle,
     appState,
   } = props;
 
@@ -19,7 +20,7 @@ export const ToggleButton = (props) => {
         toggleActiveButton(index);
       }}
     >
-      Name: {setAnimationName}
+      Name: {setAnimationName} {toggleActiveStyle(index)}
     </button>
   );
 };
