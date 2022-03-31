@@ -61,29 +61,30 @@ export const UserHome = (props, state) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (appState.objects[index] === appState.activeObject) {
-  //     socket.emit(
-  //       "lights",
-  //       {
-  //         state: "on",
-  //         animation: animation,
-  //         stripConf: themes[animation],
-  //       },
-  //       (data) => {}
-  //     );
-  //   } else if (appState.lastObject != null) {
-  //     socket.emit(
-  //       "lights",
-  //       {
-  //         state: "off",
-  //         animation: animation,
-  //         stripConf: themes[animation],
-  //       },
-  //       (data) => {}
-  //     );
-  //   }
-  // }, [appState]);
+  useEffect(() => {
+    console.log(appState.activeObject, appState.previousObject);
+    // if (appState.objects[index] === appState.activeObject) {
+    //   socket.emit(
+    //     "lights",
+    //     {
+    //       state: "on",
+    //       animation: animation,
+    //       stripConf: themes[animation],
+    //     },
+    //     (data) => {}
+    //   );
+    // } else if (appState.lastObject != null) {
+    //   socket.emit(
+    //     "lights",
+    //     {
+    //       state: "off",
+    //       animation: animation,
+    //       stripConf: themes[animation],
+    //     },
+    //     (data) => {}
+    //   );
+    // }
+  }, [appState]);
 
   const toggleActiveStyle = (index) => {
     if (appState.objects[index] === appState.activeObject) {
