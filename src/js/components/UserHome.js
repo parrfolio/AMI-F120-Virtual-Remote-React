@@ -27,6 +27,24 @@ export const UserHome = (props, state) => {
     objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
+  // establish socket connection
+  useEffect(() => {
+    setLoading(false);
+    setSocket(io());
+  }, []);
+
+  // subscribe to the socket event
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("connect", () => {
+      setSocketConnected(socket.connected);
+    });
+    socket.on("disconnect", () => {
+      setSocketConnected(socket.connected);
+    });
+  }, [socket]);
+
   const toggleActive = (index) => {
     // console.log(appState.objects[index], appState.activeObject);
     changeState({
@@ -107,24 +125,6 @@ export const UserHome = (props, state) => {
   const toggleClass = () => {
     setActive(!isActive);
   };
-
-  // establish socket connection
-  useEffect(() => {
-    setLoading(false);
-    setSocket(io());
-  }, []);
-
-  // subscribe to the socket event
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on("connect", () => {
-      setSocketConnected(socket.connected);
-    });
-    socket.on("disconnect", () => {
-      setSocketConnected(socket.connected);
-    });
-  }, [socket]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
