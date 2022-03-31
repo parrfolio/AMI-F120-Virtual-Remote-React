@@ -88,7 +88,7 @@ export const UserHome = (props, state) => {
         (data) => {}
       );
     }
-  }, [appState]);
+  }, [appState.activeObject]);
 
   const toggleActiveStyle = (index) => {
     if (appState.objects[index] === appState.activeObject) {
