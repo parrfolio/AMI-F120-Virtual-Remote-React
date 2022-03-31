@@ -76,7 +76,7 @@ export const UserHome = (props, state) => {
           },
           (data) => {}
         );
-      } else if (appState.previousObject != null) {
+      } else {
         socket.emit(
           "lights",
           {
