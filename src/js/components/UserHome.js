@@ -38,9 +38,25 @@ export const UserHome = (props, state) => {
 
   const toggleActiveButton = (index) => {
     if (appState.objects[index] === appState.activeObject) {
-      return "Active";
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
     } else {
-      return "Inactive";
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
     }
   };
 
@@ -72,30 +88,30 @@ export const UserHome = (props, state) => {
     });
   }, [socket]);
 
-  useEffect(() => {
-    console.log("APP STATE", appState);
-    if (appState.lastObject) {
-      socket.emit(
-        "lights",
-        {
-          state: "on",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    } else if (appState.lastObject != null) {
-      socket.emit(
-        "lights",
-        {
-          state: "off",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    }
-  }, [appState]);
+  // useEffect(() => {
+  //   console.log("APP STATE", appState);
+  //   if (appState.lastObject) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "on",
+  //         animation: animation,
+  //         stripConf: themes[animation],
+  //       },
+  //       (data) => {}
+  //     );
+  //   } else if (appState.lastObject != null) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "off",
+  //         animation: animation,
+  //         stripConf: themes[animation],
+  //       },
+  //       (data) => {}
+  //     );
+  //   }
+  // }, [appState]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
