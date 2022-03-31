@@ -56,7 +56,17 @@ export const UserHome = (props, state) => {
           animation: animation,
           stripConf: themes[animation],
         },
-        (data) => {}
+        (data) => {
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        }
       );
     }
   };
