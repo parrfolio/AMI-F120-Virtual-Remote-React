@@ -6,6 +6,7 @@ export const ToggleButton = (props) => {
     toggleActive,
     index,
     toggleActiveButton,
+    appState,
   } = props;
 
   return (
@@ -18,7 +19,7 @@ export const ToggleButton = (props) => {
         // toggleActiveButton(index);
       }}
     >
-      Name: {setAnimationName} {toggleActive ? "On" : "Off"}
+      Name: {setAnimationName} {appState.lastObject ? "On" : "Off"}
     </button>
   );
 };

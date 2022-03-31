@@ -36,13 +36,13 @@ export const UserHome = (props, state) => {
     });
   };
 
-  const toggleActiveButton = (index) => {
-    if (appState.objects[index] === appState.activeObject) {
-      return console.log("Active");
-    } else {
-      return console.log("Inactive");
-    }
-  };
+  // const toggleActiveButton = (index) => {
+  //   if (appState.lastObject) {
+  //     return ""
+  //   } else {
+  //     return console.log("Inactive");
+  //   }
+  // };
 
   const [animation, setAnimation] = useState();
 
@@ -144,6 +144,7 @@ export const UserHome = (props, state) => {
         }
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
+        appState={appState}
       />
     );
   });
