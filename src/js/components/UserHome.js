@@ -22,28 +22,10 @@ export const UserHome = (props, state) => {
   const [isActive, setActive] = useState(null);
 
   const [appState, changeState] = useState({
-    activeObject: { id: 0 },
-    previousObject: { id: 0 },
+    activeObject: null,
+    previousObject: null,
     objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
-
-  // establish socket connection
-  useEffect(() => {
-    setLoading(false);
-    setSocket(io());
-  }, []);
-
-  // subscribe to the socket event
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on("connect", () => {
-      setSocketConnected(socket.connected);
-    });
-    socket.on("disconnect", () => {
-      setSocketConnected(socket.connected);
-    });
-  }, [socket]);
 
   const toggleActive = (index) => {
     // console.log(appState.objects[index], appState.activeObject);
@@ -94,7 +76,7 @@ export const UserHome = (props, state) => {
           },
           (data) => {}
         );
-      } else if (appState.activeObject != null) {
+      } else if (appState.activeObject || appState.previousObject != null) {
         socket.emit(
           "lights",
           {
@@ -125,6 +107,24 @@ export const UserHome = (props, state) => {
   const toggleClass = () => {
     setActive(!isActive);
   };
+
+  // establish socket connection
+  useEffect(() => {
+    setLoading(false);
+    setSocket(io());
+  }, []);
+
+  // subscribe to the socket event
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("connect", () => {
+      setSocketConnected(socket.connected);
+    });
+    socket.on("disconnect", () => {
+      setSocketConnected(socket.connected);
+    });
+  }, [socket]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
