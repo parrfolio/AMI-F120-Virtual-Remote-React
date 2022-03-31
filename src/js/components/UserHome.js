@@ -32,8 +32,9 @@ export const UserHome = (props, state) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
-      lastObject: appState.objects[index] != appState.activeObject,
+      previousObject: appState.activeObject,
     });
+    console.log(appState.activeObject, appState.previousObject);
   };
 
   const toggleActiveButton = (index) => {
@@ -59,6 +60,30 @@ export const UserHome = (props, state) => {
       );
     }
   };
+
+  // useEffect(() => {
+  //   if (appState.objects[index] === appState.activeObject) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "on",
+  //         animation: animation,
+  //         stripConf: themes[animation],
+  //       },
+  //       (data) => {}
+  //     );
+  //   } else if (appState.lastObject != null) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "off",
+  //         animation: animation,
+  //         stripConf: themes[animation],
+  //       },
+  //       (data) => {}
+  //     );
+  //   }
+  // }, [appState]);
 
   const toggleActiveStyle = (index) => {
     if (appState.objects[index] === appState.activeObject) {
@@ -95,31 +120,6 @@ export const UserHome = (props, state) => {
       setSocketConnected(socket.connected);
     });
   }, [socket]);
-
-  // useEffect(() => {
-  //   console.log("APP STATE", appState);
-  //   if (appState.lastObject) {
-  //     socket.emit(
-  //       "lights",
-  //       {
-  //         state: "on",
-  //         animation: animation,
-  //         stripConf: themes[animation],
-  //       },
-  //       (data) => {}
-  //     );
-  //   } else if (appState.lastObject != null) {
-  //     socket.emit(
-  //       "lights",
-  //       {
-  //         state: "off",
-  //         animation: animation,
-  //         stripConf: themes[animation],
-  //       },
-  //       (data) => {}
-  //     );
-  //   }
-  // }, [appState]);
 
   // // manage socket connection
   // const handleSocketConnection = () => {
