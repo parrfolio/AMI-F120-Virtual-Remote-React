@@ -138,7 +138,6 @@ export const UserHome = (props, state) => {
         key={index}
         index={index}
         toggleActive={toggleActive}
-        toggleActiveButton={toggleActiveButton}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
