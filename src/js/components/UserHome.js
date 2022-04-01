@@ -82,7 +82,7 @@ export const UserHome = (props, state) => {
       let a = Object.entries(aState)
         .sort()
         .toString();
-
+      console.log(p === a);
       if (p === a) {
         socket.emit(
           "lights",
