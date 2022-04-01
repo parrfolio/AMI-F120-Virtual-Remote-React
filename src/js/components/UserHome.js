@@ -22,8 +22,8 @@ export const UserHome = (props, state) => {
   const [isActive, setActive] = useState(null);
 
   const [appState, changeState] = useState({
-    activeObject: { id: 0 },
-    previousObject: { id: 0 },
+    activeObject: null,
+    previousObject: null,
     objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
@@ -31,7 +31,8 @@ export const UserHome = (props, state) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
-      previousObject: appState.activeObject,
+      previousObject:
+        appState.previousObject != null ? appState.activeObject : { id: 0 },
     });
   };
 
