@@ -32,7 +32,7 @@ export const UserHome = (props, state) => {
       ...appState,
       activeObject: appState.objects[index],
       previousObject:
-        appState.previousObject != null ? appState.activeObject : { id: 0 },
+        appState.previousObject != null ? appState.activeObject : { id: index },
     });
   };
 
