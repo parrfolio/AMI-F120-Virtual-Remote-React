@@ -74,9 +74,16 @@ export const UserHome = (props, state) => {
     console.log(appState.activeObject != null);
 
     if (appState.activeObject != null) {
-      console.log(appState.activeObject === appState.previousObject);
-      console.log(appState.previousObject === appState.activeObject);
-      if (appState.previousObject.equals(appState.activeObject)) {
+      let pState = appState.previousObject;
+      let aState = appState.activeObject;
+      let p = Object.entries(pState)
+        .sort()
+        .toString();
+      let a = Object.entries(aState)
+        .sort()
+        .toString();
+
+      if (p === a) {
         socket.emit(
           "lights",
           {
