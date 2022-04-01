@@ -28,13 +28,11 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index) => {
-    console.log(appState.objects[index], appState.activeObject);
     changeState({
       ...appState,
       activeObject: appState.objects[index],
       previousObject: appState.activeObject,
     });
-    console.log(appState.activeObject, appState.previousObject);
   };
 
   const toggleActiveButton = (index) => {
@@ -71,9 +69,8 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     console.log(appState.activeObject, appState.previousObject);
-    console.log(appState.activeObject != null);
 
-    if (appState.activeObject != null) {
+    if (appState.previousObject != null) {
       let pState = appState.previousObject;
       let aState = appState.activeObject;
       let p = Object.entries(pState)
