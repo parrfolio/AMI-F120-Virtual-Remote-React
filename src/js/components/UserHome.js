@@ -32,7 +32,7 @@ export const UserHome = (props, state) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
-      previousObject: { id: index },
+      previousObject: appState.activeObject,
     });
     // console.log(appState.activeObject, appState.previousObject);
   };
@@ -83,7 +83,7 @@ export const UserHome = (props, state) => {
         .sort()
         .toString();
       console.log(p === a);
-      if (p === a) {
+      if (a === p) {
         socket.emit(
           "lights",
           {
