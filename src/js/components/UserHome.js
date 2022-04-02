@@ -38,14 +38,11 @@ export const UserHome = (props, state) => {
   };
 
   useEffect(() => {
-    console.log("Index", isActiveIndex);
-    console.log(
-      "State",
-      appState.objects[isActiveIndex],
-      appState.activeObject
-    );
+    console.log("clicked", appState.objects[isActiveIndex]);
+    console.log("active", appState.activeObject);
 
     if (appState.activeObject != null) {
+      let lights = false;
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         socket.emit(
           "lights",
@@ -54,10 +51,13 @@ export const UserHome = (props, state) => {
             animation: animation,
             stripConf: themes[animation],
           },
-          (data) => {}
+          (data) => {
+            console.log(data);
+            lights: true;
+            console.log("lights status", lights);
+          }
         );
       } else {
-        console.log("Running", isRunning, animation);
         socket.emit(
           "lights",
           {
