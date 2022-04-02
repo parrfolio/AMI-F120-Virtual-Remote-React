@@ -25,8 +25,8 @@ export const UserHome = (props, state) => {
   const [isActiveIndex, setActiveIndex] = useState(0);
 
   const [appState, changeState] = useState({
-    activeObject: null,
-    previousObject: null,
+    activeObject: { id: 0, on: false },
+    previousObject: { id: 0, on: false },
     objects: [
       { id: 0, on: false },
       { id: 1, on: false },
@@ -38,10 +38,6 @@ export const UserHome = (props, state) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
-      previousObject:
-        appState.previousObject != null
-          ? appState.activeObject
-          : { id: index, on: running },
     });
     setActiveIndex(index);
   };
@@ -86,7 +82,7 @@ export const UserHome = (props, state) => {
       "State",
       appState.objects[isActiveIndex] === appState.activeObject
     );
-    if (appState.previousObject != null) {
+    if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("Running", isRunning, animation);
         socket.emit(
