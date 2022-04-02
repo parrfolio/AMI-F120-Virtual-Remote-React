@@ -22,6 +22,7 @@ export const UserHome = (props, state) => {
   const [isActive, setActive] = useState(null);
 
   const [isRunning, setRunning] = useState(false);
+  const [isActiveIndex, setActiveIndex] = useState(0);
 
   const [appState, changeState] = useState({
     activeObject: null,
@@ -42,6 +43,7 @@ export const UserHome = (props, state) => {
           ? appState.activeObject
           : { id: index, on: running },
     });
+    setActiveIndex(index);
   };
 
   const toggleActiveButton = (index) => {
@@ -72,6 +74,42 @@ export const UserHome = (props, state) => {
       );
     }
   };
+
+  useEffect(() => {
+    console.log(
+      "State",
+      appState.objects[isActiveIndex],
+      appState.activeObject
+    );
+    console.log(
+      "State",
+      appState.objects[isActiveIndex] === appState.activeObject
+    );
+
+    if (appState.objects[isActiveIndex] === appState.activeObject) {
+      console.log("Running", isRunning, animation);
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    } else {
+      console.log("Running", isRunning, animation);
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    }
+  }, [isActiveIndex]);
 
   const toggleActiveStyle = (index) => {
     if (appState.objects[index] === appState.activeObject) {
