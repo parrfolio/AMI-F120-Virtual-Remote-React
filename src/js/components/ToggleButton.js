@@ -18,7 +18,6 @@ export const ToggleButton = (props) => {
         console.log("TOGGLE BUTTON Index", index);
         setAnimation(setAnimationName);
         toggleActive(index);
-        setRunning(isActiveIndex === index);
       }}
     >
       Name: {setAnimationName} {isActiveIndex === index ? "active" : "inactive"}

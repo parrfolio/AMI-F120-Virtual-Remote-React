@@ -34,6 +34,7 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
+    setRunning(appState.objects[index] === appState.activeObject);
   };
 
   useEffect(() => {
