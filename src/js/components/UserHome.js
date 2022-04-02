@@ -29,13 +29,10 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index) => {
-    setRunning(appState.objects[index] === index);
-    console.log(index, appState.objects[index] === index);
     changeState({
       ...appState,
       activeObject: appState.objects[index],
     });
-
     setActiveIndex(index);
   };
 
@@ -46,6 +43,8 @@ export const UserHome = (props, state) => {
       appState.objects[isActiveIndex],
       appState.activeObject
     );
+
+    setRunning(appState.objects[index] === index);
 
     if (appState.activeObject != null) {
       console.log("NOT NULL");
