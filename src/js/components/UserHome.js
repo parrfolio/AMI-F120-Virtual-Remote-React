@@ -56,11 +56,9 @@ export const UserHome = (props, state) => {
             animation: animation,
             stripConf: themes[animation],
           },
-          (data) => {
-            running = true;
-          }
+          (data) => {}
         );
-      } else if (running) {
+      } else {
         console.log("Running", isRunning, animation);
         socket.emit(
           "lights",
@@ -69,36 +67,11 @@ export const UserHome = (props, state) => {
             animation: animation,
             stripConf: themes[animation],
           },
-          (data) => {
-            running = false;
-          }
-        );
-        socket.emit(
-          "lights",
-          {
-            state: "on",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {
-            running = true;
-          }
-        );
-      } else {
-        socket.emit(
-          "lights",
-          {
-            state: "off",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {
-            running = false;
-          }
+          (data) => {}
         );
       }
     }
-  }, [isActiveIndex]);
+  }, [appState]);
 
   // useEffect(() => {
   //   console.log(appState.activeObject, appState.previousObject);
