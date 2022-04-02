@@ -45,8 +45,8 @@ export const UserHome = (props, state) => {
   };
 
   const toggleActiveButton = (index) => {
+    console.log("State", appState.objects[index] === appState.activeObject);
     if (appState.objects[index] === appState.activeObject) {
-      console.log("State", appState.objects[index] === appState.activeObject);
       console.log("Running", isRunning, animation);
       socket.emit(
         "lights",
