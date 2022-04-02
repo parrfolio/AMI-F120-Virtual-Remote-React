@@ -186,7 +186,6 @@ export const UserHome = (props, state) => {
         key={index}
         index={index}
         toggleActive={toggleActive}
-        toggleActiveButton={toggleActiveButton}
         toggleActiveStyle={toggleActiveStyle}
         setRunning={setRunning}
         isRunning={isRunning}
