@@ -24,11 +24,7 @@ export const UserHome = (props, state) => {
   const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
-    objects: [
-      { id: 0, on: false },
-      { id: 1, on: false },
-      { id: 2, on: false },
-    ],
+    objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
   const toggleActive = (index, running) => {
