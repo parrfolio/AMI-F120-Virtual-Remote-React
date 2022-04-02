@@ -29,8 +29,8 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index) => {
-    setRunning(appState.objects[index] === isYandex);
-    console.log(index, running);
+    setRunning(appState.objects[index] === index);
+    console.log(index, appState.objects[index] === index);
     changeState({
       ...appState,
       activeObject: appState.objects[index],
