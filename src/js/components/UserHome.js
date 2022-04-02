@@ -44,7 +44,8 @@ export const UserHome = (props, state) => {
     if (appState.activeObject != null) {
       let lights = false;
       if (appState.objects[isActiveIndex] === appState.activeObject) {
-        if (!lights) {
+        lights = true;
+        if (lights) {
           socket.emit(
             "lights",
             {
@@ -53,7 +54,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              lights = response.running;
+              lights = false;
               console.log("lights on", lights);
             }
           );
@@ -66,7 +67,6 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              lights = false;
               console.log("lights on", lights);
             }
           );
@@ -80,7 +80,6 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
-            lights = false;
             console.log("lights on", lights);
           }
         );
