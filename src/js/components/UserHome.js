@@ -44,20 +44,33 @@ export const UserHome = (props, state) => {
       appState.objects[isActiveIndex],
       appState.activeObject
     );
+    let running = false;
 
     if (appState.activeObject != null) {
       console.log("NOT NULL");
       if (appState.objects[isActiveIndex] === appState.activeObject) {
-        console.log("Running", isRunning, animation);
-        socket.emit(
-          "lights",
-          {
-            state: "on",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {}
-        );
+        if (!running) {
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        } else {
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (data) => {}
+          );
+        }
+        running = true;
       } else {
         console.log("Running", isRunning, animation);
         socket.emit(
