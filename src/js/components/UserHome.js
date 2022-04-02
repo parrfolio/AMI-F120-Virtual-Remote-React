@@ -44,7 +44,7 @@ export const UserHome = (props, state) => {
       appState.activeObject
     );
 
-    setRunning(appState.objects[index] === isActiveIndex);
+    setRunning(appState.objects[isActiveIndex] === isActiveIndex);
 
     if (appState.activeObject != null) {
       console.log("NOT NULL");
