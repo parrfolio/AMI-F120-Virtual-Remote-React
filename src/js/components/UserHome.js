@@ -152,13 +152,13 @@ export const UserHome = (props, state) => {
   const jukebox_data = jukebox.map((selection, index) => {
     return (
       <div
-        className={isActive ? "lightson" : "lightsoff"}
+        className={isRunning ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
           console.log("selection choose");
 
           //turn off lights before pulse trains starts (performance)
-          if (isActive) setActive(false);
+          if (isRunning) setActive(false);
 
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
@@ -184,7 +184,7 @@ export const UserHome = (props, state) => {
         isRunning={isRunning}
         isActiveIndex={isActiveIndex}
         className={
-          isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
+          isRunning ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
         setAnimationName={selection[0]}
         setAnimation={setAnimation}
@@ -220,7 +220,7 @@ export const UserHome = (props, state) => {
         to={{
           pathname: "/about",
           state: {
-            lightsActive: isActive,
+            lightsActive: isRunning,
           },
         }}
       >
