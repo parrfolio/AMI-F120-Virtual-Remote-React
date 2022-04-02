@@ -44,7 +44,7 @@ export const UserHome = (props, state) => {
     if (appState.activeObject != null) {
       let lights = false;
       if (
-        (appState.objects[isActiveIndex] === appState.activeObject) &
+        appState.objects[isActiveIndex] === appState.activeObject &&
         !lights
       ) {
         socket.emit(
