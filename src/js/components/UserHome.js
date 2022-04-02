@@ -51,9 +51,8 @@ export const UserHome = (props, state) => {
             animation: animation,
             stripConf: themes[animation],
           },
-          (data) => {
-            console.log(data);
-            lights: true;
+          (response) => {
+            lights: response.running;
             console.log("lights status", lights);
           }
         );
@@ -65,7 +64,10 @@ export const UserHome = (props, state) => {
             animation: animation,
             stripConf: themes[animation],
           },
-          (data) => {}
+          (response) => {
+            lights: response.running;
+            console.log("lights status", lights);
+          }
         );
       }
     }

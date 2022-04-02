@@ -109,7 +109,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   // LIGHT STRIPS FOR JUKE
-  socket.on("lights", function(data) {
+  socket.on("lights", (data, callback) => {
     console.log("Lights", data.state);
     process.on("SIGINT", function() {
       ws281x.reset();
@@ -125,10 +125,16 @@ io.sockets.on("connection", function(socket) {
         case "rainbow":
           console.log("Rainbow Animation!");
           rainbow.Rainbow(data.stripConf);
+          callback({
+            running: true,
+          });
           break;
         case "twinkle":
           console.log("Twinkle Animation!");
           twinkle.Twinkle(data.stripConf);
+          callback({
+            running: true,
+          });
           break;
         default:
           console.log("Empty action received.");
@@ -139,10 +145,16 @@ io.sockets.on("connection", function(socket) {
         case "rainbow":
           rainbow.RainbowPause();
           console.log("Rainbow Animation OFF!");
+          callback({
+            running: false,
+          });
           break;
         case "twinkle":
           twinkle.TwinklePause();
           console.log("Twinkle Animation OFF!");
+          callback({
+            running: false,
+          });
           break;
         default:
           console.log("Empty action received.");
