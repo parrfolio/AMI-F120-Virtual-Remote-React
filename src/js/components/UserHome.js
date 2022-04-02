@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
 import { ToggleButton } from "./ToggleButton";
+import { isYandex } from "react-device-detect";
 
 // import Chevron from "../../fonts/chevron.js";
 
@@ -27,7 +28,8 @@ export const UserHome = (props, state) => {
     objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
-  const toggleActive = (index, running) => {
+  const toggleActive = (index) => {
+    setRunning(appState.objects[index] === isYandex);
     console.log(index, running);
     changeState({
       ...appState,
