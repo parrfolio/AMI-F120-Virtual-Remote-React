@@ -158,13 +158,13 @@ export const UserHome = (props, state) => {
           console.log("selection choose");
 
           //turn off lights before pulse trains starts (performance)
-          if (isRunning) setActive(false);
+          if (isRunning) setRunning(false);
 
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
             console.log(response);
             if (response.done) {
-              setActive(response.done);
+              setRunning(response.done);
             }
           });
         }}
