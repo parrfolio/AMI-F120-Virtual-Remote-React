@@ -44,32 +44,32 @@ export const UserHome = (props, state) => {
     });
   };
 
-  const toggleActiveButton = (index) => {
-    if (appState.objects[index] === appState.activeObject) {
-      socket.emit(
-        "lights",
-        {
-          state: "on",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    } else {
-      socket.emit(
-        "lights",
-        {
-          state: "off",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    }
-  };
+  // const toggleActiveButton = (index) => {
+  //   if (appState.objects[index] === appState.activeObject) {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "on",
+  //         animation: animation,
+  //         stripConf: themes[animation],
+  //       },
+  //       (data) => {}
+  //     );
+  //   } else {
+  //     socket.emit(
+  //       "lights",
+  //       {
+  //         state: "off",
+  //         animation: animation,
+  //         stripConf: themes[animation],
+  //       },
+  //       (data) => {}
+  //     );
+  //   }
+  // };
 
   const toggleActiveStyle = (index) => {
-    if (appState.objects[index] === appState.activeObject) {
+    if (appState.previousObject.id === appState.activeObject.id) {
       return "active";
     } else {
       return "inactive";
@@ -92,25 +92,27 @@ export const UserHome = (props, state) => {
 
       if (appState.previousObject.id === appState.activeObject.id) {
         if (!isRunning) return;
-        socket.emit(
-          "lights",
-          {
-            state: "on",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {}
-        );
+        console.log("Socket ON", animation);
+        // socket.emit(
+        //   "lights",
+        //   {
+        //     state: "on",
+        //     animation: animation,
+        //     stripConf: themes[animation],
+        //   },
+        //   (data) => {}
+        // );
       } else {
-        socket.emit(
-          "lights",
-          {
-            state: "off",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (data) => {}
-        );
+        console.log("Socket OFF", animation);
+        // socket.emit(
+        //   "lights",
+        //   {
+        //     state: "off",
+        //     animation: animation,
+        //     stripConf: themes[animation],
+        //   },
+        //   (data) => {}
+        // );
       }
     }
   }, [appState.activeObject]);
