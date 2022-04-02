@@ -52,6 +52,7 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
+            console.log(response);
             lights: response.running;
             console.log("lights status", lights);
           }
