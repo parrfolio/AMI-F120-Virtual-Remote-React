@@ -25,8 +25,7 @@ export const UserHome = (props, state) => {
   const [isActiveIndex, setActiveIndex] = useState(0);
 
   const [appState, changeState] = useState({
-    activeObject: { id: 0, on: false },
-    previousObject: { id: 0, on: false },
+    activeObject: null,
     objects: [
       { id: 0, on: false },
       { id: 1, on: false },
