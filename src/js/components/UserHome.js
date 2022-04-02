@@ -21,7 +21,7 @@ export const UserHome = (props, state) => {
   const [socketConnected, setSocketConnected] = useState(false);
 
   const [isRunning, setRunning] = useState(false);
-  const [isActiveIndex, setActiveIndex] = useState(0);
+  const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
     objects: [
@@ -169,7 +169,7 @@ export const UserHome = (props, state) => {
           });
         }}
       >
-        Selection {selection.id} - {selection.songTitle}
+        s Selection {selection.id} - {selection.songTitle}
       </div>
     );
   });
