@@ -44,80 +44,80 @@ export const UserHome = (props, state) => {
     });
   };
 
-  // const toggleActiveButton = (index) => {
-  //   if (appState.objects[index] === appState.activeObject) {
-  //     socket.emit(
-  //       "lights",
-  //       {
-  //         state: "on",
-  //         animation: animation,
-  //         stripConf: themes[animation],
-  //       },
-  //       (data) => {}
-  //     );
-  //   } else {
-  //     socket.emit(
-  //       "lights",
-  //       {
-  //         state: "off",
-  //         animation: animation,
-  //         stripConf: themes[animation],
-  //       },
-  //       (data) => {}
-  //     );
-  //   }
-  // };
-
-  const toggleActiveStyle = (index) => {
-    if (appState.previousObject != null) {
-      if (appState.previousObject.id === appState.activeObject.id) {
-        return "active";
-      } else {
-        return "inactive";
-      }
+  const toggleActiveButton = (index) => {
+    if (appState.objects[index] === appState.activeObject) {
+      console.log("State", appState.objects[index] === appState.activeObject);
+      console.log("Running", isRunning, animation);
+      socket.emit(
+        "lights",
+        {
+          state: "on",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
+    } else {
+      console.log("Running", isRunning, animation);
+      socket.emit(
+        "lights",
+        {
+          state: "off",
+          animation: animation,
+          stripConf: themes[animation],
+        },
+        (data) => {}
+      );
     }
   };
 
-  useEffect(() => {
-    console.log(appState.activeObject, appState.previousObject);
-
-    if (appState.previousObject != null) {
-      // let pState = appState.previousObject.id;
-      // let aState = appState.activeObject.id;
-      // let p = Object.entries(pState)
-      //   .sort()
-      //   .toString();
-      // let a = Object.entries(aState)
-      //   .sort()
-      //   .toString();
-      console.log(appState.previousObject.id === appState.activeObject.id);
-
-      if (appState.previousObject.id === appState.activeObject.id) {
-        if (!isRunning) return;
-        console.log("Socket ON", animation);
-        // socket.emit(
-        //   "lights",
-        //   {
-        //     state: "on",
-        //     animation: animation,
-        //     stripConf: themes[animation],
-        //   },
-        //   (data) => {}
-        // );
-      } else {
-        console.log("Socket OFF", animation);
-        // socket.emit(
-        //   "lights",
-        //   {
-        //     state: "off",
-        //     animation: animation,
-        //     stripConf: themes[animation],
-        //   },
-        //   (data) => {}
-        // );
-      }
+  const toggleActiveStyle = (index) => {
+    if (appState.objects[index] === appState.activeObject) {
+      return "active";
+    } else {
+      return "inactive";
     }
-  }, [appState.activeObject]);
+  };
+
+  // useEffect(() => {
+  //   console.log(appState.activeObject, appState.previousObject);
+
+  //   if (appState.previousObject != null) {
+  //     // let pState = appState.previousObject.id;
+  //     // let aState = appState.activeObject.id;
+  //     // let p = Object.entries(pState)
+  //     //   .sort()
+  //     //   .toString();
+  //     // let a = Object.entries(aState)
+  //     //   .sort()
+  //     //   .toString();
+  //     console.log(appState.previousObject.id === appState.activeObject.id);
+
+  //     if (appState.previousObject.id === appState.activeObject.id) {
+  //       if (!isRunning) return;
+  //       console.log("Socket ON", animation)
+  //       // socket.emit(
+  //       //   "lights",
+  //       //   {
+  //       //     state: "on",
+  //       //     animation: animation,
+  //       //     stripConf: themes[animation],
+  //       //   },
+  //       //   (data) => {}
+  //       // );
+  //     } else {
+  //       // socket.emit(
+  //       //   "lights",
+  //       //   {
+  //       //     state: "off",
+  //       //     animation: animation,
+  //       //     stripConf: themes[animation],
+  //       //   },
+  //       //   (data) => {}
+  //       // );
+  //     }
+  //   }
+  // }, [appState.activeObject]);
 
   const [animation, setAnimation] = useState();
 
@@ -188,6 +188,7 @@ export const UserHome = (props, state) => {
         key={index}
         index={index}
         toggleActive={toggleActive}
+        toggleActiveButton={toggleActiveButton}
         toggleActiveStyle={toggleActiveStyle}
         setRunning={setRunning}
         isRunning={isRunning}
