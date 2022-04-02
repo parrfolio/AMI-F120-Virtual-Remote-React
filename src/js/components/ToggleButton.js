@@ -18,7 +18,7 @@ export const ToggleButton = (props) => {
       onClick={() => {
         console.log("TOGGLE BUTTON Index", index);
         setAnimation(setAnimationName);
-        toggleActive(index, setRunning(!isRunning));
+        toggleActive(index, setRunning(isRunning ? false : true));
         //toggleActiveButton(index, setRunning(!isRunning));
       }}
     >

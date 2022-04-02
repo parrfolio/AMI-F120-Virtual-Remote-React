@@ -34,10 +34,12 @@ export const UserHome = (props, state) => {
   });
 
   const toggleActive = (index, running) => {
+    console.log(index, running);
     changeState({
       ...appState,
       activeObject: appState.objects[index],
     });
+
     setActiveIndex(index);
   };
 
@@ -81,6 +83,7 @@ export const UserHome = (props, state) => {
       "State",
       appState.objects[isActiveIndex] === appState.activeObject
     );
+
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("Running", isRunning, animation);
