@@ -19,11 +19,9 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-  const [isActive, setActive] = useState(null);
 
   const [isRunning, setRunning] = useState(false);
   const [isActiveIndex, setActiveIndex] = useState(0);
-
   const [appState, changeState] = useState({
     activeObject: null,
     objects: [
@@ -43,43 +41,6 @@ export const UserHome = (props, state) => {
     setActiveIndex(index);
   };
 
-  const toggleActiveButton = (index) => {
-    console.log("State", appState.objects[index], appState.activeObject);
-    console.log("State", appState.objects[index] === appState.activeObject);
-
-    if (appState.objects[index] === appState.activeObject) {
-      console.log("Running", isRunning, animation);
-      socket.emit(
-        "lights",
-        {
-          state: "on",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    } else {
-      console.log("Running", isRunning, animation);
-      socket.emit(
-        "lights",
-        {
-          state: "off",
-          animation: animation,
-          stripConf: themes[animation],
-        },
-        (data) => {}
-      );
-    }
-  };
-
-  const toggleActiveStyle = (index) => {
-    if (appState.objects[index] === appState.activeObject) {
-      return "active";
-    } else {
-      return "inactive";
-    }
-  };
-
   useEffect(() => {
     console.log("Index", isActiveIndex);
     console.log(
@@ -87,12 +48,9 @@ export const UserHome = (props, state) => {
       appState.objects[isActiveIndex],
       appState.activeObject
     );
-    console.log(
-      "State",
-      appState.objects[isActiveIndex] === appState.activeObject
-    );
 
     if (appState.activeObject != null) {
+      console.log("NOT NULL");
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("Running", isRunning, animation);
         socket.emit(
@@ -165,10 +123,6 @@ export const UserHome = (props, state) => {
   const { themes } = props;
   // console.log(props);
 
-  const toggleClass = () => {
-    setActive(!isActive);
-  };
-
   // establish socket connection
   useEffect(() => {
     setLoading(false);
@@ -221,15 +175,11 @@ export const UserHome = (props, state) => {
   });
 
   const theme_selections = Object.entries(themes).map((selection, index) => {
-    // console.log(index);
-    // console.log(selection);
     return (
       <ToggleButton
         key={index}
         index={index}
         toggleActive={toggleActive}
-        toggleActiveButton={toggleActiveButton}
-        toggleActiveStyle={toggleActiveStyle}
         setRunning={setRunning}
         isRunning={isRunning}
         isActiveIndex={isActiveIndex}
