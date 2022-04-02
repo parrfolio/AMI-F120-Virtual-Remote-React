@@ -72,6 +72,14 @@ export const UserHome = (props, state) => {
     }
   };
 
+  const toggleActiveStyle = (index) => {
+    if (appState.objects[index] === appState.activeObject) {
+      return "active";
+    } else {
+      return "inactive";
+    }
+  };
+
   useEffect(() => {
     console.log("Index", isActiveIndex);
     console.log(
@@ -110,14 +118,6 @@ export const UserHome = (props, state) => {
       }
     }
   }, [isActiveIndex]);
-
-  const toggleActiveStyle = (index) => {
-    if (appState.objects[index] === appState.activeObject) {
-      return "active";
-    } else {
-      return "inactive";
-    }
-  };
 
   // useEffect(() => {
   //   console.log(appState.activeObject, appState.previousObject);
@@ -232,6 +232,7 @@ export const UserHome = (props, state) => {
         toggleActiveStyle={toggleActiveStyle}
         setRunning={setRunning}
         isRunning={isRunning}
+        isActiveIndex={isActiveIndex}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
