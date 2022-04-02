@@ -76,6 +76,7 @@ export const UserHome = (props, state) => {
   };
 
   useEffect(() => {
+    console.log("Index", isActiveIndex);
     console.log(
       "State",
       appState.objects[isActiveIndex],
