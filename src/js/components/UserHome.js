@@ -21,18 +21,26 @@ export const UserHome = (props, state) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [isActive, setActive] = useState(null);
 
+  const [isRunning, setRunning] = useState(false);
+
   const [appState, changeState] = useState({
     activeObject: null,
     previousObject: null,
-    objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
+    objects: [
+      { id: 0, on: false },
+      { id: 1, on: false },
+      { id: 2, on: false },
+    ],
   });
 
-  const toggleActive = (index) => {
+  const toggleActive = (index, running) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
       previousObject:
-        appState.previousObject != null ? appState.activeObject : { id: index },
+        appState.previousObject != null
+          ? appState.activeObject
+          : { id: index, on: running },
     });
   };
 
@@ -72,16 +80,18 @@ export const UserHome = (props, state) => {
     console.log(appState.activeObject, appState.previousObject);
 
     if (appState.previousObject != null) {
-      let pState = appState.previousObject;
-      let aState = appState.activeObject;
-      let p = Object.entries(pState)
-        .sort()
-        .toString();
-      let a = Object.entries(aState)
-        .sort()
-        .toString();
-      console.log(p === a);
-      if (p === a) {
+      // let pState = appState.previousObject.id;
+      // let aState = appState.activeObject.id;
+      // let p = Object.entries(pState)
+      //   .sort()
+      //   .toString();
+      // let a = Object.entries(aState)
+      //   .sort()
+      //   .toString();
+      console.log(appState.previousObject.id === appState.activeObject.id);
+
+      if (appState.previousObject.id === appState.activeObject.id) {
+        if (!isRunning) return;
         socket.emit(
           "lights",
           {
@@ -176,6 +186,8 @@ export const UserHome = (props, state) => {
         toggleActive={toggleActive}
         toggleActiveButton={toggleActiveButton}
         toggleActiveStyle={toggleActiveStyle}
+        setRunning={setRunning}
+        isRunning={isRunning}
         className={
           isActive ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
