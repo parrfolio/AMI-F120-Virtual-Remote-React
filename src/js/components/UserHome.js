@@ -36,11 +36,11 @@ export const UserHome = (props, state) => {
     setActiveIndex(index);
     setRunning(appState.objects[index] === appState.activeObject);
   };
-  let lights = true;
+
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
-
+    let lights = true;
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("LIGHTS!!!", lights);
