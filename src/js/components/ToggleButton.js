@@ -12,14 +12,16 @@ export const ToggleButton = (props) => {
   } = props;
 
   let running = isActiveIndex === index;
-  console.log("RUNNING STATE IN TOGGLE", isRunning);
+
+  console.log("IS RUNNING TOGGLE", isRunning);
+
   return (
     <button
       key={index}
       onClick={() => {
         setAnimation(setAnimationName);
         toggleActive(index);
-        setRunning(isRunning ? true : false);
+        setRunning(running === false ? true : false);
       }}
     >
       Name: {setAnimationName} {isRunning ? "active" : "inactive"}
