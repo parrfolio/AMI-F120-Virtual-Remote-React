@@ -24,7 +24,7 @@ export const ToggleButton = (props) => {
         setRunning(!isRunning);
       }}
     >
-      {setAnimationName} Lights {!running ? "off" : "on"}
+      {setAnimationName} Lights {running === isRunning ? "on" : "off"}
     </button>
   );
 };
