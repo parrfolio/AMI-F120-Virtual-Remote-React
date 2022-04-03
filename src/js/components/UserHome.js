@@ -33,24 +33,13 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
-    // setRunning(appState.objects[index] === appState.activeObject);
   };
 
-  let prevAnimation = animation;
-
-  console.log("Prev Animation", prevAnimation);
-
   useEffect(() => {
-    console.log("clicked", appState.objects[isActiveIndex]);
-    console.log("active", appState.activeObject);
-
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
-        console.log("RUNNING STATE IN EFFECT", isRunning);
-        console.log("----------------------------------------------");
-
         if (isRunning) {
-          console.log("Current Animation", animation);
+          console.log("Animation On", animation);
           socket.emit(
             "lights",
             {
@@ -63,7 +52,7 @@ export const UserHome = (props, state) => {
             }
           );
         } else {
-          console.log("Running False from OFF Statement");
+          console.log("Animation Off", animation);
           socket.emit(
             "lights",
             {
@@ -115,14 +104,12 @@ export const UserHome = (props, state) => {
         className={isRunning ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
-          console.log("selection choose");
-
           //turn off lights before pulse trains starts (performance)
           if (isRunning) setRunning(false);
 
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
-            console.log(response);
+
             if (response.done) {
               setRunning(response.done);
             }
@@ -159,7 +146,6 @@ export const UserHome = (props, state) => {
       <Block>{jukebox_data}</Block>
       <div
         onClick={(e: Event) => {
-          console.log("turn off selections");
           socket.emit(
             "direction",
             {
