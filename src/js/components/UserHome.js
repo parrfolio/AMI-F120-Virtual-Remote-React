@@ -44,6 +44,7 @@ export const UserHome = (props, state) => {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
+
         if (isRunning) {
           socket.emit(
             "lights",
