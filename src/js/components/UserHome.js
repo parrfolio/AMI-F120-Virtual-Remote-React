@@ -18,10 +18,11 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-  const [isRunning, setRunning] = useState(false);
   const [animation, setAnimation] = useState();
+
   const [activeAnimation, setActiveAnimation] = useState();
   const [isActiveIndex, setActiveIndex] = useState(null);
+  const [isRunning, setRunning] = useState(false);
   const [appState, changeState] = useState({
     activeObject: null,
     objects: [{ id: 0 }, { id: 1 }],
@@ -41,10 +42,7 @@ export const UserHome = (props, state) => {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         if (isRunning) {
           console.log("Animation On", animation);
-          console.log(
-            "ActiveAnimation",
-            setActiveAnimation(appState.animations[isActiveIndex])
-          );
+          console.log("ActiveAnimation", appState.animations[isActiveIndex]);
 
           socket.emit(
             "lights",
