@@ -12,6 +12,7 @@ export const ToggleButton = (props) => {
   } = props;
 
   let running = isActiveIndex === index;
+  setRunning(false);
 
   return (
     <button
