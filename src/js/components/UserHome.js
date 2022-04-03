@@ -39,52 +39,23 @@ export const UserHome = (props, state) => {
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
-    let started;
+
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
         if (isRunning) {
-          started = true;
-          if (started) {
-            socket.emit(
-              "lights",
-              {
-                state: "off",
-                animation: animation,
-                stripConf: themes[animation],
-              },
-              (response) => {
-                //setRunning(false);
-                started = true;
-                socket.emit(
-                  "lights",
-                  {
-                    state: "on",
-                    animation: animation,
-                    stripConf: themes[animation],
-                  },
-                  (response) => {
-                    //setRunning(false);
-                    started = false;
-                  }
-                );
-              }
-            );
-          } else {
-            socket.emit(
-              "lights",
-              {
-                state: "on",
-                animation: animation,
-                stripConf: themes[animation],
-              },
-              (response) => {
-                //setRunning(false);
-                started = false;
-              }
-            );
-          }
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (response) => {
+              // setRunning(true);
+            }
+          );
         } else {
           console.log("Running False from OFF Statement");
           socket.emit(
@@ -95,8 +66,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              //setRunning(true);
-              started = true;
+              // setRunning(false);
             }
           );
         }
@@ -109,7 +79,7 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
-            setRunning(true);
+            // setRunning(false);
           }
         );
       }
