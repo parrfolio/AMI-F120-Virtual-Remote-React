@@ -34,7 +34,6 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
-    setRunning(isActiveIndex === index);
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
@@ -190,7 +189,6 @@ export const UserHome = (props, state) => {
         index={index}
         toggleActive={toggleActive}
         setRunning={setRunning}
-        isRunning={isRunning}
         isActiveIndex={isActiveIndex}
         className={
           isRunning ? "lightson" + selection[0] : "lightsoff" + selection[0]
