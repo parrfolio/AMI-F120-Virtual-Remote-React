@@ -38,11 +38,9 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
-    console.log("active", appState.activeObject);
 
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
-        console.log("RUNNING STATE IN EFFECT", isRunning);
         if (isRunning) {
           socket.emit(
             "lights",
