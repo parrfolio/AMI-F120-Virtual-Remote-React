@@ -38,7 +38,7 @@ export const UserHome = (props, state) => {
 
   let prevAnimation = animation;
 
-  console.log("Prev Animation".prevAnimation);
+  console.log("Prev Animation", prevAnimation);
 
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
