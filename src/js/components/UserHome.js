@@ -44,48 +44,10 @@ export const UserHome = (props, state) => {
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING?", isRunning);
-        if (isRunning) {
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(response.running);
-            }
-          );
-        } else {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(false);
-            }
-          );
-        }
-      } else {
         if (!isRunning) {
           socket.emit(
             "lights",
             {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(false);
-            }
-          );
-        } else {
-          socket.emit(
-            "lights",
-            {
               state: "on",
               animation: animation,
               stripConf: themes[animation],
@@ -94,7 +56,31 @@ export const UserHome = (props, state) => {
               setRunning(response.running);
             }
           );
+        } else {
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (response) => {
+              setRunning(response.running);
+            }
+          );
         }
+      } else {
+        socket.emit(
+          "lights",
+          {
+            state: "off",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (response) => {
+            setRunning(response.running);
+          }
+        );
       }
     }
   }, [appState]);
