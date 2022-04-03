@@ -20,7 +20,7 @@ export const UserHome = (props, state) => {
   const [socketConnected, setSocketConnected] = useState(false);
 
   const [isRunning, setRunning] = useState(false);
-
+  const [animation, setAnimation] = useState();
   const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
@@ -36,6 +36,10 @@ export const UserHome = (props, state) => {
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
+  let prevAnimation = animation;
+
+  console.log("Prev Animation".prevAnimation);
+
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
@@ -44,7 +48,9 @@ export const UserHome = (props, state) => {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
+
         if (isRunning) {
+          console.log("Current Animation".animation);
           socket.emit(
             "lights",
             {
@@ -74,7 +80,6 @@ export const UserHome = (props, state) => {
     }
   }, [appState]);
 
-  const [animation, setAnimation] = useState();
   const { jukebox } = props;
   const { themes } = props;
 
