@@ -33,7 +33,7 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
-    // setRunning(appState.objects[index] === appState.activeObject);
+    setRunning(appState.objects[index] === appState.activeObject);
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              setRunning(true);
+              // setRunning(true);
             }
           );
         } else {
@@ -69,7 +69,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              setRunning(false);
+              // setRunning(false);
             }
           );
         }
