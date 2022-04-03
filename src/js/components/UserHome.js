@@ -33,56 +33,29 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
-    setRunning(appState.objects[index] === appState.activeObject);
+    // setRunning(appState.objects[index] === appState.activeObject);
   };
 
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
-    let started = false;
+
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
         if (isRunning) {
-          if (started) {
-            socket.emit(
-              "lights",
-              {
-                state: "off",
-                animation: animation,
-                stripConf: themes[animation],
-              },
-              (response) => {
-                // setRunning(true);
-                socket.emit(
-                  "lights",
-                  {
-                    state: "on",
-                    animation: animation,
-                    stripConf: themes[animation],
-                  },
-                  (response) => {
-                    // setRunning(true);
-                    started = true;
-                  }
-                );
-              }
-            );
-          } else {
-            socket.emit(
-              "lights",
-              {
-                state: "on",
-                animation: animation,
-                stripConf: themes[animation],
-              },
-              (response) => {
-                // setRunning(true);
-                started = false;
-              }
-            );
-          }
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (response) => {
+              setRunning(true);
+            }
+          );
         } else {
           console.log("Running False from OFF Statement");
           socket.emit(
@@ -93,22 +66,10 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              // setRunning(false);
+              setRunning(false);
             }
           );
         }
-      } else {
-        socket.emit(
-          "lights",
-          {
-            state: "off",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (response) => {
-            // setRunning(false);
-          }
-        );
       }
     }
   }, [appState]);
