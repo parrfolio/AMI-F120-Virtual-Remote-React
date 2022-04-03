@@ -19,7 +19,8 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
 
-  const [isRunning, setRunning] = useState(false);
+  const [isRunning, setRunning] = useState(null);
+
   const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
