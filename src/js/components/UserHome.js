@@ -42,6 +42,7 @@ export const UserHome = (props, state) => {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("Animation On", animation);
         console.log("ActiveAnimation", appState.animations[isActiveIndex]);
+        let foo = appState.animations[isActiveIndex].name;
         if (isRunning) {
           socket.emit(
             "lights",
@@ -60,7 +61,7 @@ export const UserHome = (props, state) => {
             "lights",
             {
               state: "off",
-              animation: appState.animations[isActiveIndex].name,
+              animation: foo,
               stripConf: themes[animation],
             },
             (response) => {
