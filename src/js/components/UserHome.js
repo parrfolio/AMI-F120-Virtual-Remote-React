@@ -25,6 +25,7 @@ export const UserHome = (props, state) => {
   const [isRunning, setRunning] = useState(false);
   const [appState, changeState] = useState({
     activeObject: null,
+    activeAnimation: null,
     objects: [{ id: 0 }, { id: 1 }],
     animations: [{ name: "rainbow" }, { name: "twinkle" }],
   });
@@ -33,6 +34,7 @@ export const UserHome = (props, state) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
+      activeAnimation: appState.animations[index],
     });
     setActiveIndex(index);
   };
@@ -41,8 +43,9 @@ export const UserHome = (props, state) => {
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("Animation On", animation);
-        console.log("ActiveAnimation", appState.animations[isActiveIndex]);
-        let foo = appState.animations[isActiveIndex].name;
+        console.log("ClickedAnimation", appState.animations[isActiveIndex]);
+        console.log("ActiveAnimation", appState.activeAnimation);
+
         if (isRunning) {
           socket.emit(
             "lights",
@@ -61,7 +64,7 @@ export const UserHome = (props, state) => {
             "lights",
             {
               state: "off",
-              animation: foo,
+              animation: appState.activeAnimation,
               stripConf: themes[animation],
             },
             (response) => {
