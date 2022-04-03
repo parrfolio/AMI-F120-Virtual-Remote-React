@@ -70,17 +70,31 @@ export const UserHome = (props, state) => {
           );
         }
       } else {
-        socket.emit(
-          "lights",
-          {
-            state: "off",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (response) => {
-            setRunning(false);
-          }
-        );
+        if (!isRunning) {
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (response) => {
+              setRunning(false);
+            }
+          );
+        } else {
+          socket.emit(
+            "lights",
+            {
+              state: "on",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (response) => {
+              setRunning(response.running);
+            }
+          );
+        }
       }
     }
   }, [appState]);
