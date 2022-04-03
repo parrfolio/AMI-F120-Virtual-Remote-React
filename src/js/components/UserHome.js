@@ -50,7 +50,7 @@ export const UserHome = (props, state) => {
         console.log("----------------------------------------------");
 
         if (isRunning) {
-          console.log("Current Animation".animation);
+          console.log("Current Animation", animation);
           socket.emit(
             "lights",
             {
