@@ -18,34 +18,32 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-  const [animation, setAnimation] = useState();
 
-  const [activeAnimation, setActiveAnimation] = useState();
-  const [isActiveIndex, setActiveIndex] = useState(null);
   const [isRunning, setRunning] = useState(false);
+
+  const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
-    activeAnimation: null,
-    objects: [{ id: 0 }, { id: 1 }],
-    animations: [{ name: "rainbow" }, { name: "twinkle" }],
+    objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
   });
 
   const toggleActive = (index) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index],
-      activeAnimation: appState.animations[index],
     });
     setActiveIndex(index);
+    // setRunning(appState.objects[index] === appState.activeObject);
   };
 
   useEffect(() => {
+    console.log("clicked", appState.objects[isActiveIndex]);
+    console.log("active", appState.activeObject);
+
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
-        console.log("Animation On", animation);
-        console.log("ClickedAnimation", appState.animations[isActiveIndex]);
-        console.log("ActiveAnimation", appState.activeAnimation);
-
+        console.log("RUNNING STATE IN EFFECT", isRunning);
+        console.log("----------------------------------------------");
         if (isRunning) {
           socket.emit(
             "lights",
@@ -59,12 +57,12 @@ export const UserHome = (props, state) => {
             }
           );
         } else {
-          console.log("Animation Off", appState.animations[isActiveIndex].name);
+          console.log("Running False from OFF Statement");
           socket.emit(
             "lights",
             {
               state: "off",
-              animation: appState.activeAnimation.name,
+              animation: animation,
               stripConf: themes[animation],
             },
             (response) => {
@@ -76,6 +74,7 @@ export const UserHome = (props, state) => {
     }
   }, [appState]);
 
+  const [animation, setAnimation] = useState();
   const { jukebox } = props;
   const { themes } = props;
 
@@ -111,12 +110,14 @@ export const UserHome = (props, state) => {
         className={isRunning ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
+          console.log("selection choose");
+
           //turn off lights before pulse trains starts (performance)
           if (isRunning) setRunning(false);
 
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
-
+            console.log(response);
             if (response.done) {
               setRunning(response.done);
             }
@@ -153,6 +154,7 @@ export const UserHome = (props, state) => {
       <Block>{jukebox_data}</Block>
       <div
         onClick={(e: Event) => {
+          console.log("turn off selections");
           socket.emit(
             "direction",
             {
