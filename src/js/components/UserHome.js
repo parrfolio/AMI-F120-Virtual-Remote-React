@@ -21,7 +21,7 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
 
-  const [isRunning, setRunning] = useState(null);
+  const [isRunning, setRunning] = useState(false);
   const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
@@ -34,42 +34,27 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
-    setRunning(appState.objects[index] === appState.activeObject);
+    // setRunning(appState.objects[index] === appState.activeObject);
   };
 
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
-    let lights = true;
+
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
-        console.log("LIGHTS!!!", lights);
-        if (lights) {
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              lights = false;
-              console.log("lights on", lights);
-            }
-          );
-        } else {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              console.log("lights on", lights);
-            }
-          );
-        }
+        console.log("RUNNING?", isRunning);
+        socket.emit(
+          "lights",
+          {
+            state: "on",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (response) => {
+            setRunning(response.running);
+          }
+        );
       } else {
         socket.emit(
           "lights",
@@ -79,7 +64,7 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
-            console.log("lights on", lights);
+            setRunning(false);
           }
         );
       }
@@ -190,7 +175,6 @@ export const UserHome = (props, state) => {
         index={index}
         toggleActive={toggleActive}
         setRunning={setRunning}
-        isRunning={isRunning}
         isActiveIndex={isActiveIndex}
         className={
           isRunning ? "lightson" + selection[0] : "lightsoff" + selection[0]
