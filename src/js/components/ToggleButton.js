@@ -7,6 +7,7 @@ export const ToggleButton = (props) => {
     index,
     setRunning,
     appState,
+    isRunning,
     isActiveIndex,
   } = props;
 
@@ -21,7 +22,7 @@ export const ToggleButton = (props) => {
         setRunning(!running);
       }}
     >
-      Name: {setAnimationName} {running ? "active" : "inactive"}
+      Name: {setAnimationName} {isRunning ? "active" : "inactive"}
     </button>
   );
 };
