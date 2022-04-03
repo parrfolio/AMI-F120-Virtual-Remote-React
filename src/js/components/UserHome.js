@@ -60,7 +60,7 @@ export const UserHome = (props, state) => {
             "lights",
             {
               state: "off",
-              animation: animation,
+              animation: appState.animations[isActiveIndex],
               stripConf: themes[animation],
             },
             (response) => {

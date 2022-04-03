@@ -13,8 +13,6 @@ export const ToggleButton = (props) => {
 
   let running = isActiveIndex === index;
 
-  console.log("IS RUNNING STATE IN TOGGLE", isRunning);
-
   return (
     <button
       key={index}
