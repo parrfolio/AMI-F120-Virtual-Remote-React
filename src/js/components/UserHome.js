@@ -55,7 +55,7 @@ export const UserHome = (props, state) => {
             }
           );
         } else {
-          console.log("Animation Off", animation);
+          console.log("Animation Off", appState.animations[isActiveIndex].name);
           socket.emit(
             "lights",
             {
