@@ -44,6 +44,7 @@ export const UserHome = (props, state) => {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
+
         if (isRunning) {
           socket.emit(
             "lights",
@@ -62,7 +63,7 @@ export const UserHome = (props, state) => {
             "lights",
             {
               state: "off",
-              animation: animation,
+              animation: "rainbow",
               stripConf: themes[animation],
             },
             (response) => {
