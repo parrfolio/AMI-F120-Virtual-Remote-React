@@ -44,10 +44,18 @@ export const UserHome = (props, state) => {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
-        if (
-          isRunning &&
-          appState.objects[isActiveIndex] === appState.activeObject
-        ) {
+        if (isRunning) {
+          socket.emit(
+            "lights",
+            {
+              state: "off",
+              animation: animation,
+              stripConf: themes[animation],
+            },
+            (response) => {
+              setRunning(true);
+            }
+          );
           socket.emit(
             "lights",
             {
@@ -56,7 +64,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              // setRunning(true);
+              setRunning(false);
             }
           );
         } else {
@@ -69,7 +77,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              // setRunning(false);
+              setRunning(true);
             }
           );
         }
@@ -82,7 +90,7 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
-            setRunning(false);
+            setRunning(true);
           }
         );
       }
