@@ -26,7 +26,7 @@ export const UserHome = (props, state) => {
   const [appState, changeState] = useState({
     activeObject: null,
     objects: [{ id: 0 }, { id: 1 }],
-    animations: [{ name: "rainbow" }, { twinkle: "twinkle" }],
+    animations: [{ name: "rainbow" }, { name: "twinkle" }],
   });
 
   const toggleActive = (index) => {
@@ -40,10 +40,9 @@ export const UserHome = (props, state) => {
   useEffect(() => {
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
+        console.log("Animation On", animation);
+        console.log("ActiveAnimation", appState.animations[isActiveIndex]);
         if (isRunning) {
-          console.log("Animation On", animation);
-          console.log("ActiveAnimation", appState.animations[isActiveIndex]);
-
           socket.emit(
             "lights",
             {
