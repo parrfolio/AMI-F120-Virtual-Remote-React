@@ -11,7 +11,7 @@ export const ToggleButton = (props) => {
     isActiveIndex,
   } = props;
 
-  let running = isActiveIndex === index;
+  let running = isActiveIndex === index && isRunning;
 
   return (
     <button
@@ -19,7 +19,7 @@ export const ToggleButton = (props) => {
       onClick={() => {
         setAnimation(setAnimationName);
         toggleActive(index);
-        // setRunning(running === false ? true : false);
+        setRunning(running ? false : true);
       }}
     >
       Name: {setAnimationName} {isRunning ? "active" : "inactive"}
