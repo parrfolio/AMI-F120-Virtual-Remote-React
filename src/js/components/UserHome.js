@@ -5,8 +5,6 @@ import io from "socket.io-client";
 import { ToggleButton } from "./ToggleButton";
 import { isYandex } from "react-device-detect";
 
-// import Chevron from "../../fonts/chevron.js";
-
 const Block = styled.div`
   order: 0;
   flex: 0 1 auto;
@@ -44,31 +42,17 @@ export const UserHome = (props, state) => {
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING?", isRunning);
-        if (isRunning) {
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(response.running);
-            }
-          );
-        } else {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(false);
-            }
-          );
-        }
+        socket.emit(
+          "lights",
+          {
+            state: "on",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (response) => {
+            setRunning(response.running);
+          }
+        );
       } else {
         socket.emit(
           "lights",
@@ -85,51 +69,9 @@ export const UserHome = (props, state) => {
     }
   }, [appState]);
 
-  // useEffect(() => {
-  //   console.log(appState.activeObject, appState.previousObject);
-
-  //   if (appState.previousObject != null) {
-  //     // let pState = appState.previousObject.id;
-  //     // let aState = appState.activeObject.id;
-  //     // let p = Object.entries(pState)
-  //     //   .sort()
-  //     //   .toString();
-  //     // let a = Object.entries(aState)
-  //     //   .sort()
-  //     //   .toString();
-  //     console.log(appState.previousObject.id === appState.activeObject.id);
-
-  //     if (appState.previousObject.id === appState.activeObject.id) {
-  //       if (!isRunning) return;
-  //       console.log("Socket ON", animation)
-  //       // socket.emit(
-  //       //   "lights",
-  //       //   {
-  //       //     state: "on",
-  //       //     animation: animation,
-  //       //     stripConf: themes[animation],
-  //       //   },
-  //       //   (data) => {}
-  //       // );
-  //     } else {
-  //       // socket.emit(
-  //       //   "lights",
-  //       //   {
-  //       //     state: "off",
-  //       //     animation: animation,
-  //       //     stripConf: themes[animation],
-  //       //   },
-  //       //   (data) => {}
-  //       // );
-  //     }
-  //   }
-  // }, [appState.activeObject]);
-
   const [animation, setAnimation] = useState();
-
   const { jukebox } = props;
   const { themes } = props;
-  // console.log(props);
 
   // establish socket connection
   useEffect(() => {
