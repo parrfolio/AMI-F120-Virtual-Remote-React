@@ -52,7 +52,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              setRunning(response.running);
+              setRunning(false);
             }
           );
         } else {
@@ -65,7 +65,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              setRunning(response.running);
+              setRunning(true);
             }
           );
         }
