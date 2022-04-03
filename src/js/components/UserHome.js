@@ -43,32 +43,18 @@ export const UserHome = (props, state) => {
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex] === appState.activeObject) {
         console.log("RUNNING?", isRunning);
-        if (isRunning) {
-          socket.emit(
-            "lights",
-            {
-              state: "on",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(false);
-            }
-          );
-        } else {
-          console.log("Running False from OFF Statement");
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: animation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(true);
-            }
-          );
-        }
+
+        socket.emit(
+          "lights",
+          {
+            state: "on",
+            animation: animation,
+            stripConf: themes[animation],
+          },
+          (response) => {
+            setRunning(false);
+          }
+        );
       } else {
         socket.emit(
           "lights",
@@ -78,7 +64,7 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
-            setRunning(false);
+            setRunning(true);
           }
         );
       }
