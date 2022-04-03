@@ -34,7 +34,7 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index],
     });
     setActiveIndex(index);
-    setRunning(!running);
+    setRunning(isActiveIndex === index);
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
