@@ -24,6 +24,7 @@ export const UserHome = (props, state) => {
   const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
+    activeAnimation: null,
     objects: [
       { id: 0, name: "rainbow" },
       { id: 1, name: "twinkle" },
@@ -34,28 +35,31 @@ export const UserHome = (props, state) => {
     const ref = useRef();
     useEffect(() => {
       ref.current = value;
-    });
+    }, []);
     return ref.current;
   }
 
   const prevAnimation = usePrevious(animation);
-  console.log("Prev Animation", prevAnimation);
+
+  console.log("Prev Animation useRef", prevAnimation);
 
   const toggleActive = (index) => {
     changeState({
       ...appState,
       activeObject: appState.objects[index].id,
+      activeAnimation: appState.objects[index].name,
     });
     setActiveIndex(index);
     setAnimation(appState.objects[index].name);
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
-  console.log("Active Animation", animation);
-
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
+
+    console.log("prev", appState.activeAnimation);
+    console.log("Active Animation", animation);
 
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex].id === appState.activeObject) {
