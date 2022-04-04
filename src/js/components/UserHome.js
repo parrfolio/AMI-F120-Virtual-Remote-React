@@ -40,8 +40,7 @@ export const UserHome = (props, state) => {
   }
 
   const prevAnimation = usePrevious(animation);
-
-  console.log("Prev Animation useRef", prevAnimation);
+  console.log("Prev Animation", prevAnimation);
 
   const toggleActive = (index) => {
     changeState({
@@ -54,12 +53,11 @@ export const UserHome = (props, state) => {
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
+  console.log("Active Animation", animation);
+
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
-
-    console.log("prev", appState.activeAnimation);
-    console.log("Active Animation", animation);
 
     if (appState.activeObject != null) {
       if (appState.objects[isActiveIndex].id === appState.activeObject) {
@@ -94,7 +92,7 @@ export const UserHome = (props, state) => {
         }
       }
     }
-  }, [appState]);
+  }, [appState.objects[isActiveIndex].id]);
 
   const { jukebox } = props;
   const { themes } = props;
