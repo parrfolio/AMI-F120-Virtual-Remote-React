@@ -37,7 +37,7 @@ export const UserHome = (props, state) => {
   };
 
   useEffect(() => {
-    console.log("clicked", appState.objects[isActiveIndex].id);
+    console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
 
     if (appState.activeObject != null) {
