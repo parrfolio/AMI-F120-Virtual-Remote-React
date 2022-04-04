@@ -39,7 +39,7 @@ export const UserHome = (props, state) => {
     return ref.current;
   }
 
-  let prevAnimation = undefined;
+  const prevAnimation = usePrevious(animation);
   console.log("Prev Animation", prevAnimation);
 
   const toggleActive = (index) => {
@@ -50,10 +50,10 @@ export const UserHome = (props, state) => {
     });
     setActiveIndex(index);
     setAnimation(appState.objects[index].name);
-    prevAnimation = usePrevious(appState.objects[index].name);
     // setRunning(appState.objects[index] === appState.activeObject);
   };
-  console.log("Previous After Toggle", prevAnimation);
+
+  console.log("Prev Animation After Toggle", prevAnimation);
 
   console.log("Active Animation", animation);
 
