@@ -106,7 +106,7 @@ export const UserHome = (props, state) => {
         }
       }
     }
-  }, [appState, isRunning]);
+  }, [appState]);
 
   // establish socket connection
   useEffect(() => {
