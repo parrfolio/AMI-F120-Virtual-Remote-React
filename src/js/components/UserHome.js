@@ -77,17 +77,42 @@ export const UserHome = (props, state) => {
           );
         } else {
           console.log("Running False from OFF Statement");
-          socket.emit(
-            "lights",
-            {
-              state: "off",
-              animation: "rainbow",
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(false);
-            }
-          );
+          if (prevAnimation != animation) {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+                animation: prevAnimation,
+                stripConf: themes[animation],
+              },
+              (response) => {
+                setRunning(false);
+                socket.emit(
+                  "lights",
+                  {
+                    state: "on",
+                    animation: animation,
+                    stripConf: themes[animation],
+                  },
+                  (response) => {
+                    setRunning(true);
+                  }
+                );
+              }
+            );
+          } else {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+                animation: animation,
+                stripConf: themes[animation],
+              },
+              (response) => {
+                setRunning(false);
+              }
+            );
+          }
         }
       }
     }
