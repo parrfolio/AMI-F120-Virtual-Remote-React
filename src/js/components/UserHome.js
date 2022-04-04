@@ -143,7 +143,7 @@ export const UserHome = (props, state) => {
           console.log("IS Running on choose selection", isRunning);
 
           //turn off lights before pulse trains starts (performance)
-          if (isRunning) setRunning(false);
+          if (isRunning) toggleActive(isActiveIndex);
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
             console.log(response);
