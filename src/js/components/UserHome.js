@@ -168,6 +168,7 @@ export const UserHome = (props, state) => {
         setRunning={setRunning}
         isRunning={isRunning}
         isActiveIndex={isActiveIndex}
+        setAnimationName={selection[0]}
         className={
           isRunning ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }

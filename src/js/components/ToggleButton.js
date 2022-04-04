@@ -5,7 +5,6 @@ export const ToggleButton = (props) => {
     toggleActive,
     index,
     setRunning,
-    appState,
     isRunning,
     isActiveIndex,
   } = props;
