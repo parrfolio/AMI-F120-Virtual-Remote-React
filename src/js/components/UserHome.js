@@ -20,49 +20,39 @@ export const UserHome = (props, state) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [animation, setAnimation] = useState();
   const [isRunning, setRunning] = useState(false);
-
   const [isActiveIndex, setActiveIndex] = useState(null);
+  const { jukebox } = props;
+  const { themes } = props;
   const [appState, changeState] = useState({
     activeObject: null,
-    activeAnimation: null,
-    objects: [
+    animations: [
       { id: 0, name: "rainbow" },
       { id: 1, name: "twinkle" },
     ],
   });
 
-  function usePrevious(value) {
+  const usePrevious = (value) => {
     const ref = useRef();
     useEffect(() => {
       ref.current = value;
     });
     return ref.current;
-  }
+  };
 
   const prevAnimation = usePrevious(animation);
 
   const toggleActive = (index) => {
     changeState({
       ...appState,
-      activeObject: appState.objects[index].id,
-      activeAnimation: appState.objects[index].name,
+      activeObject: appState.animations[index].id,
     });
     setActiveIndex(index);
-    setAnimation(appState.objects[index].name);
-    // setRunning(appState.objects[index] === appState.activeObject);
+    setAnimation(appState.animations[index].name);
   };
 
   useEffect(() => {
-    console.log("clicked", appState.objects[isActiveIndex]);
-    console.log("active", appState.activeObject);
-
     if (appState.activeObject != null) {
-      if (appState.objects[isActiveIndex].id === appState.activeObject) {
-        console.log("RUNNING STATE IN EFFECT", isRunning);
-        console.log("----------------------------------------------");
-
-        console.log("Prev Animation After Toggle", prevAnimation);
-        console.log("Active Animation", animation);
+      if (appState.animations[isActiveIndex].id === appState.activeObject) {
         if (isRunning) {
           socket.emit(
             "lights",
@@ -116,10 +106,7 @@ export const UserHome = (props, state) => {
         }
       }
     }
-  }, [appState]);
-
-  const { jukebox } = props;
-  const { themes } = props;
+  }, [isRunning]);
 
   // establish socket connection
   useEffect(() => {
@@ -184,7 +171,6 @@ export const UserHome = (props, state) => {
         className={
           isRunning ? "lightson" + selection[0] : "lightsoff" + selection[0]
         }
-        setAnimationName={selection[0]}
         setAnimation={setAnimation}
       />
     );
