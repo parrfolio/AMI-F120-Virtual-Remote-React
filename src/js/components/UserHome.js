@@ -40,7 +40,6 @@ export const UserHome = (props, state) => {
   }
 
   const prevAnimation = usePrevious(animation);
-  console.log("Prev Animation", prevAnimation);
 
   const toggleActive = (index) => {
     changeState({
@@ -53,10 +52,6 @@ export const UserHome = (props, state) => {
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
-  console.log("Prev Animation After Toggle", prevAnimation);
-
-  console.log("Active Animation", animation);
-
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
     console.log("active", appState.activeObject);
@@ -66,6 +61,8 @@ export const UserHome = (props, state) => {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
 
+        console.log("Prev Animation After Toggle", prevAnimation);
+        console.log("Active Animation", animation);
         if (isRunning) {
           socket.emit(
             "lights",
