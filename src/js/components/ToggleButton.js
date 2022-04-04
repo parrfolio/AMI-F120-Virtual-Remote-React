@@ -17,7 +17,7 @@ export const ToggleButton = (props) => {
     <button
       key={index}
       onClick={() => {
-        setAnimation(setAnimationName);
+        //setAnimation(setAnimationName);
         toggleActive(index);
         setRunning(!isRunning);
       }}

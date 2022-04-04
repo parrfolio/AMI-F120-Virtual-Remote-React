@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
@@ -18,14 +18,28 @@ export const UserHome = (props, state) => {
   const [loading, setLoading] = useState(false);
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
-
+  const [animation, setAnimation] = useState();
   const [isRunning, setRunning] = useState(false);
 
   const [isActiveIndex, setActiveIndex] = useState(null);
   const [appState, changeState] = useState({
     activeObject: null,
-    objects: [{ id: 0 }, { id: 1 }, { id: 2 }],
+    objects: [
+      { id: 0, name: "rainbow" },
+      { id: 1, name: "twinkle" },
+    ],
   });
+
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
+  const prevAnimation = usePrevious(animation);
+  console.log("Prev Animation", prevAnimation);
 
   const toggleActive = (index) => {
     changeState({
@@ -33,8 +47,11 @@ export const UserHome = (props, state) => {
       activeObject: appState.objects[index].id,
     });
     setActiveIndex(index);
+    setAnimation(appState.objects[index].name);
     // setRunning(appState.objects[index] === appState.activeObject);
   };
+
+  console.log("Active Animation", animation);
 
   useEffect(() => {
     console.log("clicked", appState.objects[isActiveIndex]);
@@ -75,7 +92,6 @@ export const UserHome = (props, state) => {
     }
   }, [appState]);
 
-  const [animation, setAnimation] = useState();
   const { jukebox } = props;
   const { themes } = props;
 
