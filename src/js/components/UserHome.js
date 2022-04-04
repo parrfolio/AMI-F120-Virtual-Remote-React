@@ -39,7 +39,7 @@ export const UserHome = (props, state) => {
     return ref.current;
   }
 
-  const prevAnimation = undefined;
+  let prevAnimation = undefined;
   console.log("Prev Animation", prevAnimation);
 
   const toggleActive = (index) => {
