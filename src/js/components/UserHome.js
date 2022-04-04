@@ -140,11 +140,10 @@ export const UserHome = (props, state) => {
         className={isRunning ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
-          console.log("selection choose");
+          console.log("IS Running on choose selection", isRunning);
 
           //turn off lights before pulse trains starts (performance)
           if (isRunning) setRunning(false);
-
           socket.emit("direction", selection.select, (response) => {
             //when pulse train is done, turn back on lights
             console.log(response);
