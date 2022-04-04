@@ -92,7 +92,7 @@ export const UserHome = (props, state) => {
         }
       }
     }
-  }, [appState.objects[isActiveIndex].id]);
+  }, [prevAnimation]);
 
   const { jukebox } = props;
   const { themes } = props;
