@@ -5,7 +5,7 @@ const { Strip } = require("./strip");
 
 function Rainbow(config) {
   let strips = config;
-  console.log(config);
+  // console.log(config);
   strips.forEach((item) => {
     let offset = 0;
     item["stripArray"] = new Strip(item).findStrip();

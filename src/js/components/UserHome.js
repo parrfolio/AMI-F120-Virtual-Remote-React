@@ -30,18 +30,18 @@ export const UserHome = (props, state) => {
   const toggleActive = (index) => {
     changeState({
       ...appState,
-      activeObject: appState.objects[index],
+      activeObject: appState.objects[index].id,
     });
     setActiveIndex(index);
     // setRunning(appState.objects[index] === appState.activeObject);
   };
 
   useEffect(() => {
-    console.log("clicked", appState.objects[isActiveIndex]);
+    console.log("clicked", appState.objects[isActiveIndex].id);
     console.log("active", appState.activeObject);
 
     if (appState.activeObject != null) {
-      if (appState.objects[isActiveIndex] === appState.activeObject) {
+      if (appState.objects[isActiveIndex].id === appState.activeObject) {
         console.log("RUNNING STATE IN EFFECT", isRunning);
         console.log("----------------------------------------------");
 
