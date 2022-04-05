@@ -225,6 +225,14 @@ export const UserHome = (props, state) => {
       >
         About
       </Link>
+      <Link
+        to={{
+          pathname: "/lights",
+          state: {},
+        }}
+      >
+        Lights
+      </Link>
     </Fragment>
   );
 };
