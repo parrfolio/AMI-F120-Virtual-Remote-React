@@ -66,7 +66,7 @@ export const UserHome = (props, state) => {
             stripConf: themes[animation],
           },
           (response) => {
-            setRunning(true);
+            setRunning(response.running);
           }
         );
       } else {
@@ -80,7 +80,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              setRunning(false);
+              setRunning(response.running);
               socket.emit(
                 "lights",
                 {
@@ -89,7 +89,7 @@ export const UserHome = (props, state) => {
                   stripConf: themes[animation],
                 },
                 (response) => {
-                  setRunning(true);
+                  setRunning(response.running);
                 }
               );
             }
@@ -103,7 +103,7 @@ export const UserHome = (props, state) => {
               stripConf: themes[animation],
             },
             (response) => {
-              setRunning(false);
+              setRunning(response.running);
             }
           );
         }
@@ -129,24 +129,13 @@ export const UserHome = (props, state) => {
     });
   }, [socket]);
 
-  // // manage socket connection
-  // const handleSocketConnection = () => {
-  //   if (socketConnected) socket.disconnect();
-  //   else {
-  //     socket.connect();
-  //   }
-  // };
-
   const jukebox_data = jukebox.map((selection, index) => {
     return (
       <div
         className={isRunning ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
-          console.log("IS Running on choose selection", isRunning);
-
-          //turn off lights before pulse trains starts (performance)
-          console.log;
+          //turn off lights before pulse trains starts (performance gain for pi)
           if (isRunning) {
             socket.emit(
               "lights",
@@ -156,12 +145,10 @@ export const UserHome = (props, state) => {
                 stripConf: themes[animation],
               },
               (response) => {
-                setRunning(false);
+                setRunning(response.running);
                 socket.emit("direction", selection.select, (response) => {
                   //when pulse train is done, turn back on lights
-                  console.log(response);
                   if (response.done) {
-                    setRunning(response.done);
                     socket.emit(
                       "lights",
                       {
@@ -170,7 +157,7 @@ export const UserHome = (props, state) => {
                         stripConf: themes[animation],
                       },
                       (response) => {
-                        setRunning(true);
+                        setRunning(response.running);
                       }
                     );
                   }
