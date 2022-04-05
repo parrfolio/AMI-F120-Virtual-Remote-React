@@ -57,48 +57,12 @@ export const UserHome = (props, state) => {
 
   useEffect(() => {
     if (appState.activeObject != null) {
-      if (isRunning) {
-        socket.emit(
-          "lights",
-          {
-            state: "on",
-            animation: animation,
-            stripConf: themes[animation],
-          },
-          (response) => {
-            setRunning(response.running);
-          }
-        );
-      } else {
-        console.log("Running False from OFF Statement");
-        if (prevAnimation != animation) {
+      if (appState.animations[isActiveIndex].id === appState.activeObject) {
+        if (isRunning) {
           socket.emit(
             "lights",
             {
-              state: "off",
-              animation: prevAnimation,
-              stripConf: themes[animation],
-            },
-            (response) => {
-              setRunning(response.running);
-              socket.emit(
-                "lights",
-                {
-                  state: "on",
-                  animation: animation,
-                  stripConf: themes[animation],
-                },
-                (response) => {
-                  setRunning(response.running);
-                }
-              );
-            }
-          );
-        } else {
-          socket.emit(
-            "lights",
-            {
-              state: "off",
+              state: "on",
               animation: animation,
               stripConf: themes[animation],
             },
@@ -106,6 +70,44 @@ export const UserHome = (props, state) => {
               setRunning(response.running);
             }
           );
+        } else {
+          console.log("Running False from OFF Statement");
+          if (prevAnimation != animation) {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+                animation: prevAnimation,
+                stripConf: themes[animation],
+              },
+              (response) => {
+                setRunning(response.running);
+                socket.emit(
+                  "lights",
+                  {
+                    state: "on",
+                    animation: animation,
+                    stripConf: themes[animation],
+                  },
+                  (response) => {
+                    setRunning(response.running);
+                  }
+                );
+              }
+            );
+          } else {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+                animation: animation,
+                stripConf: themes[animation],
+              },
+              (response) => {
+                setRunning(response.running);
+              }
+            );
+          }
         }
       }
     }
