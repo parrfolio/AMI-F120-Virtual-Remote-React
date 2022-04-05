@@ -132,7 +132,6 @@ export const UserHome = (props, state) => {
   const jukebox_data = jukebox.map((selection, index) => {
     return (
       <div
-        className={isRunning ? "lightson" : "lightsoff"}
         key={selection.id}
         onClick={(e: Event) => {
           //turn off lights before pulse trains starts (performance gain for pi)

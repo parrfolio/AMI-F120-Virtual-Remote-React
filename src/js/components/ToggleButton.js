@@ -14,12 +14,13 @@ export const ToggleButton = (props) => {
   return (
     <button
       key={index}
+      className={isRunning ? "on" : "off"}
       onClick={() => {
         toggleActive(index);
         setRunning(!isRunning);
       }}
     >
-      {setAnimationName} Lights {isRunning && running ? "on" : "off"}
+      {setAnimationName} Lights {isRunning ? "on" : "off"}
     </button>
   );
 };
