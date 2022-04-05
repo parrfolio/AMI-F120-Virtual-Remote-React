@@ -1,7 +1,7 @@
 import React from "react";
 import { Home } from "./Home";
 import { About } from "./About";
-import { About } from "./Lights";
+import { Lights } from "./Lights";
 import { UserHome } from "./UserHome";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalFonts from "../../fonts/fonts";
