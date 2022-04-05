@@ -143,17 +143,41 @@ export const UserHome = (props, state) => {
           console.log("IS Running on choose selection", isRunning);
 
           //turn off lights before pulse trains starts (performance)
-          if (isRunning) toggleActive(isActiveIndex);
-          socket.emit("direction", selection.select, (response) => {
-            //when pulse train is done, turn back on lights
-            console.log(response);
-            if (response.done) {
-              setRunning(response.done);
-            }
-          });
+          console.log;
+          if (isRunning) {
+            socket.emit(
+              "lights",
+              {
+                state: "off",
+                animation: animation,
+                stripConf: themes[animation],
+              },
+              (response) => {
+                setRunning(false);
+                socket.emit("direction", selection.select, (response) => {
+                  //when pulse train is done, turn back on lights
+                  console.log(response);
+                  if (response.done) {
+                    setRunning(response.done);
+                    socket.emit(
+                      "lights",
+                      {
+                        state: "on",
+                        animation: animation,
+                        stripConf: themes[animation],
+                      },
+                      (response) => {
+                        setRunning(true);
+                      }
+                    );
+                  }
+                });
+              }
+            );
+          }
         }}
       >
-        s Selection {selection.id} - {selection.songTitle}
+        Selection {selection.id} - {selection.songTitle}
       </div>
     );
   });
