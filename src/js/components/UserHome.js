@@ -163,6 +163,8 @@ export const UserHome = (props, state) => {
                 });
               }
             );
+          } else {
+            socket.emit("direction", selection.select);
           }
         }}
       >
