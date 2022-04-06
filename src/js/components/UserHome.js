@@ -56,6 +56,8 @@ export const UserHome = (props, state) => {
     setAnimation(appState.animations[index].name);
   };
 
+  console.log("USERHOME", props);
+
   useEffect(() => {
     if (appState.activeObject != null) {
       if (appState.animations[isActiveIndex].id === appState.activeObject) {

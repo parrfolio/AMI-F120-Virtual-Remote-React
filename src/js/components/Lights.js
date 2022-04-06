@@ -14,7 +14,7 @@ export const Lights = (props, state) => {
   //     return <div key={index}></div>;
   //   });
 
-  console.log(props);
+  console.log("LIGHTS", props);
   const location = useLocation();
   const { lights } = location.state;
 
