@@ -16,7 +16,7 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  const { jukebox, themes, location } = props;
+  const { jukebox, themes } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -57,27 +57,15 @@ export const UserHome = (props, state) => {
 
   console.log("USERHOME", props);
 
-  const lightProp = location.state
-    ? location.state.lights
-    : { lights: { animation: animation } };
-
-  const lightPropAnimation = lightProp.animation;
-
-  console.log("FROM ROUTE", lightPropAnimation);
-
   useEffect(() => {
     if (appState.activeObject != null) {
       if (appState.animations[isActiveIndex].id === appState.activeObject) {
         if (isRunning) {
-          console.log(
-            "Animation FEED",
-            !lightPropAnimation ? animation : lightPropAnimation
-          );
           socket.emit(
             "lights",
             {
               state: "on",
-              animation: !lightPropAnimation ? animation : lightPropAnimation,
+              animation: animation,
               stripConf: themes[animation],
             },
             (response) => {
@@ -100,9 +88,7 @@ export const UserHome = (props, state) => {
                   "lights",
                   {
                     state: "on",
-                    animation: !lightPropAnimation
-                      ? animation
-                      : lightPropAnimation,
+                    animation: animation,
                     stripConf: themes[animation],
                   },
                   (response) => {
@@ -116,7 +102,7 @@ export const UserHome = (props, state) => {
               "lights",
               {
                 state: "off",
-                animation: !lightPropAnimation ? animation : lightPropAnimation,
+                animation: animation,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -158,7 +144,7 @@ export const UserHome = (props, state) => {
               "lights",
               {
                 state: "off",
-                animation: !lightPropAnimation ? animation : lightPropAnimation,
+                animation: animation,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -170,9 +156,7 @@ export const UserHome = (props, state) => {
                       "lights",
                       {
                         state: "on",
-                        animation: !lightPropAnimation
-                          ? animation
-                          : lightPropAnimation,
+                        animation: animation,
                         stripConf: themes[animation],
                       },
                       (response) => {
