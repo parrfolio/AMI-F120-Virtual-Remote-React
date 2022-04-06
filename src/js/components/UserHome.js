@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import io from "socket.io-client";
 import { ToggleButton } from "./ToggleButton";
 import { isYandex } from "react-device-detect";
+import { call } from "file-loader";
 
 const Block = styled.div`
   order: 0;
@@ -166,7 +167,9 @@ export const UserHome = (props, state) => {
               }
             );
           } else {
-            socket.emit("direction", selection.select);
+            socket.emit("direction", selection.select, (callback) => {
+              console.log(callback);
+            });
           }
         }}
       >
