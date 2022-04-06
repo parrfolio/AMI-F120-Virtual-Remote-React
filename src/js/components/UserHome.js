@@ -46,7 +46,7 @@ export const UserHome = (props, state) => {
 
   const prevAnimation = usePrevious(animation);
 
-  const lightProp = !location.state
+  const lightProp = location.state
     ? location.state.lights
     : { lights: { animation: animation } };
   const lightPropAnimation = lightProp.animation;
