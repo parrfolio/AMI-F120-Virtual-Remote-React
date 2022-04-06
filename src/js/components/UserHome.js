@@ -238,9 +238,11 @@ export const UserHome = (props, state) => {
       <Link
         to={{
           pathname: "/lights",
-          lights: {
-            animation: animation,
-            running: isRunning,
+          state: {
+            lights: {
+              animation: animation,
+              running: isRunning,
+            },
           },
         }}
       >
