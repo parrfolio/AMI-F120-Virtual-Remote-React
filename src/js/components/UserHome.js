@@ -16,8 +16,9 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  const { jukebox } = props;
-  const { themes } = props;
+  const { jukebox, themes, location } = props;
+  const lightProp = location.state.lights;
+  const lightPropAnimation = lightProp.animation;
 
   const [loading, setLoading] = useState(false);
 
@@ -66,7 +67,7 @@ export const UserHome = (props, state) => {
             "lights",
             {
               state: "on",
-              animation: animation,
+              animation: !lightPropAnimation ? animation : lightPropAnimation,
               stripConf: themes[animation],
             },
             (response) => {
@@ -89,7 +90,9 @@ export const UserHome = (props, state) => {
                   "lights",
                   {
                     state: "on",
-                    animation: animation,
+                    animation: !lightPropAnimation
+                      ? animation
+                      : lightPropAnimation,
                     stripConf: themes[animation],
                   },
                   (response) => {
@@ -103,7 +106,7 @@ export const UserHome = (props, state) => {
               "lights",
               {
                 state: "off",
-                animation: animation,
+                animation: !lightPropAnimation ? animation : lightPropAnimation,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -145,7 +148,7 @@ export const UserHome = (props, state) => {
               "lights",
               {
                 state: "off",
-                animation: animation,
+                animation: !lightPropAnimation ? animation : lightPropAnimation,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -157,7 +160,9 @@ export const UserHome = (props, state) => {
                       "lights",
                       {
                         state: "on",
-                        animation: animation,
+                        animation: !lightPropAnimation
+                          ? animation
+                          : lightPropAnimation,
                         stripConf: themes[animation],
                       },
                       (response) => {
