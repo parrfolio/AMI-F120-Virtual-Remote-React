@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment, useLocation } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
@@ -23,6 +23,10 @@ export const About = (props, state) => {
   ) : (
     <Fragment>
       <div>About Page</div>
+      <div>
+        Light Running {lights.running}
+        Light Animation {lights.animation}
+      </div>
       <Link
         to={{
           pathname: "/home",
