@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, Fragment, useLocation } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const About = (props, state) => {
@@ -15,6 +15,8 @@ export const About = (props, state) => {
   //   });
 
   console.log(props);
+  const location = useLocation();
+  const { lights } = location.state;
 
   return loading ? (
     <div>Loading....</div>

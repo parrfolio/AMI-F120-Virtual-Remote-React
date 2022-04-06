@@ -224,7 +224,10 @@ export const UserHome = (props, state) => {
         to={{
           pathname: "/about",
           state: {
-            lightsActive: isRunning,
+            lights: {
+              animation: animation,
+              running: isRunning,
+            },
           },
         }}
       >
@@ -233,7 +236,10 @@ export const UserHome = (props, state) => {
       <Link
         to={{
           pathname: "/lights",
-          state: {},
+          lights: {
+            animation: animation,
+            running: isRunning,
+          },
         }}
       >
         Lights
