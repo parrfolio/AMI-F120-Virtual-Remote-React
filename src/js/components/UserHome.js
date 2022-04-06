@@ -147,9 +147,9 @@ export const UserHome = (props, state) => {
               },
               (response) => {
                 setRunning(response.running);
-                socket.emit("direction", selection.select, (response) => {
+                socket.emit("direction", selection.select, (callback) => {
                   //when pulse train is done, turn back on lights
-                  if (response.done) {
+                  if (callback.done) {
                     socket.emit(
                       "lights",
                       {
