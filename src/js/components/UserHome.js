@@ -46,11 +46,6 @@ export const UserHome = (props, state) => {
 
   const prevAnimation = usePrevious(animation);
 
-  const lightProp = location.state
-    ? location.state.lights
-    : { lights: { animation: animation } };
-  const lightPropAnimation = lightProp.animation;
-
   const toggleActive = (index) => {
     changeState({
       ...appState,
@@ -62,10 +57,22 @@ export const UserHome = (props, state) => {
 
   console.log("USERHOME", props);
 
+  const lightProp = location.state
+    ? location.state.lights
+    : { lights: { animation: animation } };
+
+  const lightPropAnimation = lightProp.animation;
+
+  console.log("FROM ROUTE", lightPropAnimation);
+
   useEffect(() => {
     if (appState.activeObject != null) {
       if (appState.animations[isActiveIndex].id === appState.activeObject) {
         if (isRunning) {
+          console.log(
+            "Animation FEED",
+            !lightPropAnimation ? animation : lightPropAnimation
+          );
           socket.emit(
             "lights",
             {
