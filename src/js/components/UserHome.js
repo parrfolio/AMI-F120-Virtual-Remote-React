@@ -58,9 +58,15 @@ export const UserHome = (props, state) => {
   let animationProp = location.state
     ? location.state.lights.animation
     : "undefined";
-  let animationPropRunning = animationProp ? animationProp : "undefined";
+  let animationPropActive = animationProp ? animationProp : "undefined";
 
-  console.log("USERHOME", animationPropRunning);
+  let runningProp = location.state
+    ? location.state.lights.running
+    : "undifined";
+
+  let animationPropRunning = runningProp;
+
+  console.log("USERHOME", animationPropActive, animationPropRunning);
 
   useEffect(() => {
     if (appState.activeObject != null) {
