@@ -60,7 +60,7 @@ export const UserHome = (props, state) => {
     : "undefined";
   let animationPropRunning = animationProp ? animationProp : "undefined";
 
-  console.log("USERHOME", animationProp);
+  console.log("USERHOME", animationPropRunning);
 
   useEffect(() => {
     if (appState.activeObject != null) {
