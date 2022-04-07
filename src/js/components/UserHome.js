@@ -55,10 +55,11 @@ export const UserHome = (props, state) => {
     setAnimation(appState.animations[index].name);
   };
 
-  let animationProp = !location.state
+  let animationProp = location.state
     ? location.state.lights.animation
     : "undefined";
-  let animationPropRunning = !animationProp ? animationProp : "undefined";
+  let animationPropRunning = animationProp ? animationProp : "undefined";
+
   console.log("USERHOME", animationProp);
 
   useEffect(() => {
