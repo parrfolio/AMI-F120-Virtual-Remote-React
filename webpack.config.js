@@ -98,7 +98,13 @@ module.exports = {
     ],
   },
   optimization: {
-    minimize: false, //remove when live
+    // minimize: false,
+    minimizer: {
+      new TerserPlugin({
+          //Turn multithreading off
+          parallel: false
+      })
+    },
     splitChunks: {
       cacheGroups: {
         commons: {
