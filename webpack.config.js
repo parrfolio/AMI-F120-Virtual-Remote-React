@@ -98,7 +98,7 @@ module.exports = {
     ],
   },
   optimization: {
-    minimize: false,
+    minimize: false, //remove when live
     splitChunks: {
       cacheGroups: {
         commons: {

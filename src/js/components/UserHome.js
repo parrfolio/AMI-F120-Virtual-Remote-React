@@ -55,7 +55,9 @@ export const UserHome = (props, state) => {
     setAnimation(appState.animations[index].name);
   };
 
-  console.log("USERHOME", props);
+  let { location } = props;
+  let animationProp = location.state;
+  console.log("USERHOME", animationProp);
 
   useEffect(() => {
     if (appState.activeObject != null) {
