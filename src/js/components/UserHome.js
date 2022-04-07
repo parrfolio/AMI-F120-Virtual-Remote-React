@@ -69,7 +69,7 @@ export const UserHome = (props, state) => {
   useEffect(() => {
     if (appState.activeObject != null) {
       if (appState.animations[isActiveIndex].id === appState.activeObject) {
-        if (isRunning) {
+        if (isRunning && runningProp) {
           socket.emit(
             "lights",
             {
@@ -88,7 +88,9 @@ export const UserHome = (props, state) => {
               "lights",
               {
                 state: "off",
-                animation: prevAnimation,
+                animation: !animationPropActive
+                  ? prevAnimation
+                  : animationPropActive,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -111,7 +113,9 @@ export const UserHome = (props, state) => {
               "lights",
               {
                 state: "off",
-                animation: animation,
+                animation: !animationPropActive
+                  ? animation
+                  : animationPropActive,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -148,12 +152,14 @@ export const UserHome = (props, state) => {
         key={selection.id}
         onClick={(e: Event) => {
           //turn off lights before pulse trains starts (performance gain for pi)
-          if (isRunning) {
+          if (isRunning && runningProp) {
             socket.emit(
               "lights",
               {
                 state: "off",
-                animation: animation,
+                animation: !animationPropActive
+                  ? animation
+                  : animationPropActive,
                 stripConf: themes[animation],
               },
               (response) => {
