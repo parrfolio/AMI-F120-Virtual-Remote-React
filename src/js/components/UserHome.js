@@ -16,7 +16,7 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  const { jukebox, themes } = props;
+  const { jukebox, themes, location } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -55,8 +55,9 @@ export const UserHome = (props, state) => {
     setAnimation(appState.animations[index].name);
   };
 
-  let { state } = props.location;
-  let animationProp = !state ? state.lights.animation : "undefined";
+  let animationProp = !location.state
+    ? location.state.lights.animation
+    : "undefined";
   let animationPropRunning = !animationProp ? animationProp : "undefined";
   console.log("USERHOME", animationProp);
 
