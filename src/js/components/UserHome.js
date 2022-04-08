@@ -23,8 +23,17 @@ export const UserHome = (props, state) => {
   const [socket, setSocket] = useState(null);
   const [socketConnected, setSocketConnected] = useState(false);
 
-  const [animation, setAnimation] = useState();
-  const [isRunning, setRunning] = useState(false);
+  let animationProp = location.state
+    ? location.state.lights.animation
+    : "undefined";
+  let animationPropActive = animationProp ? animationProp : "undefined";
+
+  let runningProp = location.state ? location.state.lights.running : false;
+
+  const [animation, setAnimation] = useState(
+    animationPropActive ? animationPropActive : "undefined"
+  );
+  const [isRunning, setRunning] = useState(runningProp ? runningProp : false);
 
   const [isActiveIndex, setActiveIndex] = useState(null);
 
@@ -54,15 +63,6 @@ export const UserHome = (props, state) => {
     setActiveIndex(index);
     setAnimation(appState.animations[index].name);
   };
-
-  let animationProp = location.state
-    ? location.state.lights.animation
-    : "undefined";
-  let animationPropActive = animationProp ? animationProp : "undefined";
-
-  let runningProp = location.state
-    ? location.state.lights.running
-    : "undifined";
 
   console.log("Light State", animation, isRunning);
   console.log("Light Props", animationPropActive, runningProp);
