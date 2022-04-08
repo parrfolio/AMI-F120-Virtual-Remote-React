@@ -30,6 +30,7 @@ export const Lights = (props, state) => {
       <Link
         to={{
           pathname: "/home",
+          state: props.location.state,
         }}
       >
         Home
