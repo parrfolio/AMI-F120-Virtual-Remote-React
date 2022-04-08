@@ -64,7 +64,8 @@ export const UserHome = (props, state) => {
     ? location.state.lights.running
     : "undifined";
 
-  console.log("USERHOME", animationPropActive, runningProp);
+  console.log("Light Props", animation, isRunning);
+  console.log("Light Props", animationPropActive, runningProp);
 
   useEffect(() => {
     if (appState.activeObject != null) {
@@ -84,14 +85,11 @@ export const UserHome = (props, state) => {
         } else {
           console.log("Running False from OFF Statement");
           if (prevAnimation != animation) {
-            console.log("Animation prop 1", animationPropActive);
             socket.emit(
               "lights",
               {
                 state: "off",
-                animation: !animationPropActive
-                  ? prevAnimation
-                  : animationPropActive,
+                animation: prevAnimation,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -110,14 +108,11 @@ export const UserHome = (props, state) => {
               }
             );
           } else {
-            console.log("Animation prop 2", animationPropActive);
             socket.emit(
               "lights",
               {
                 state: "off",
-                animation: !animationPropActive
-                  ? animation
-                  : animationPropActive,
+                animation: animation,
                 stripConf: themes[animation],
               },
               (response) => {
@@ -155,14 +150,11 @@ export const UserHome = (props, state) => {
         onClick={(e: Event) => {
           //turn off lights before pulse trains starts (performance gain for pi)
           if (isRunning) {
-            console.log("Animation prop", animationPropActive);
             socket.emit(
               "lights",
               {
                 state: "off",
-                animation: !animationPropActive
-                  ? animation
-                  : animationPropActive,
+                animation: animation,
                 stripConf: themes[animation],
               },
               (response) => {
