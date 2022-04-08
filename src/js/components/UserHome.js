@@ -26,8 +26,8 @@ export const UserHome = (props, state) => {
   let animationProp = location.state
     ? location.state.lights.animation
     : "undefined";
-  let animationPropActive = animationProp ? animationProp : "undefined";
 
+  let animationPropActive = animationProp ? animationProp : "undefined";
   let runningProp = location.state ? location.state.lights.running : false;
 
   const [animation, setAnimation] = useState(
@@ -36,7 +36,6 @@ export const UserHome = (props, state) => {
   const [isRunning, setRunning] = useState(runningProp ? runningProp : false);
 
   const [isActiveIndex, setActiveIndex] = useState(null);
-
   const [appState, changeState] = useState({
     activeObject: null,
     animations: [
