@@ -28,14 +28,18 @@ export const UserHome = (props, state) => {
     : "undefined";
 
   let animationPropActive = animationProp ? animationProp : "undefined";
-  let runningProp = location.state ? location.state.lights.running : false;
-
   const [animation, setAnimation] = useState(
     animationPropActive ? animationPropActive : "undefined"
   );
+
+  let runningProp = location.state ? location.state.lights.running : false;
   const [isRunning, setRunning] = useState(runningProp ? runningProp : false);
 
-  const [isActiveIndex, setActiveIndex] = useState(null);
+  let isActiveProp = location.state ? location.state.lights.active : null;
+  const [isActiveIndex, setActiveIndex] = useState(
+    isActiveProp ? isActiveProp : null
+  );
+
   const [appState, changeState] = useState({
     activeObject: null,
     animations: [
@@ -237,6 +241,7 @@ export const UserHome = (props, state) => {
             lights: {
               animation: animation,
               running: isRunning,
+              active: isActiveIndex,
             },
           },
         }}
@@ -250,6 +255,7 @@ export const UserHome = (props, state) => {
             lights: {
               animation: animation,
               running: isRunning,
+              active: isActiveIndex,
             },
           },
         }}
