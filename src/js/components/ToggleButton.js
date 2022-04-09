@@ -14,7 +14,7 @@ export const ToggleButton = (props) => {
   return (
     <button
       key={index}
-      className={isRunning && running ? "on" : "off"}
+      className={isRunning && isActiveIndex === isIndex ? "on" : "off"}
       onClick={() => {
         toggleActive(index);
         setRunning(!isRunning);
