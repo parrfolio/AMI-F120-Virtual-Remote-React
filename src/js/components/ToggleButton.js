@@ -7,22 +7,21 @@ export const ToggleButton = (props) => {
     setRunning,
     isRunning,
     isActiveIndex,
-    setIndex,
-    isIndex,
   } = props;
+
+  let running = isActiveIndex === index;
 
   return (
     <button
       key={index}
-      className={isRunning && isActiveIndex === isIndex ? "on" : "off"}
+      className={isRunning && running ? "on" : "off"}
       onClick={() => {
         toggleActive(index);
         setRunning(!isRunning);
-        setIndex(index);
       }}
     >
-      {setAnimationName} Lights{" "}
-      {isRunning && isActiveIndex === isIndex ? "on" : "off"}
+      {console.log("From Toogle", isRunning, running)}
+      {setAnimationName} Lights {isRunning && running ? "on" : "off"}
     </button>
   );
 };
