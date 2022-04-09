@@ -40,6 +40,9 @@ export const UserHome = (props, state) => {
     isActiveProp ? isActiveProp : null
   );
 
+  let isIndexProp = location.state ? location.state.lights.indexProp : null;
+  const [isIndex, setIndex] = useState(isIndexProp ? isIndexProp : null);
+
   const [appState, changeState] = useState({
     activeObject: null,
     animations: [
@@ -197,6 +200,8 @@ export const UserHome = (props, state) => {
       <ToggleButton
         key={index}
         index={index}
+        setIndex={setIndex}
+        isIndex={isIndex}
         toggleActive={toggleActive}
         setRunning={setRunning}
         isRunning={isRunning}
@@ -256,6 +261,7 @@ export const UserHome = (props, state) => {
               animation: animation,
               running: isRunning,
               active: isActiveIndex,
+              indexProp: isIndex,
             },
           },
         }}
