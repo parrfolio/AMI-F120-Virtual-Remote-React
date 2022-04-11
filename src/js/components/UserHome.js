@@ -37,6 +37,8 @@ export const UserHome = (props, state) => {
 
   let isActiveProp = location.state ? location.state.lights.active : null;
 
+  console.log("Location State", location.state);
+
   const [isActiveIndex, setActiveIndex] = useState(
     isActiveProp ? isActiveProp : null
   );
@@ -66,6 +68,8 @@ export const UserHome = (props, state) => {
       ...appState,
       activeObject: appState.animations[index].id,
     });
+
+    console.log("Index FROM Func", index);
     setActiveIndex(index);
     setAnimation(appState.animations[index].name);
   };
