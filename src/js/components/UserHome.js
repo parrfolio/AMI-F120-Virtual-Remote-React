@@ -41,6 +41,8 @@ export const UserHome = (props, state) => {
     isActiveProp ? isActiveProp : null
   );
 
+  console.log("HOME", props);
+
   const [appState, changeState] = useState({
     activeObject: null,
     animations: [
