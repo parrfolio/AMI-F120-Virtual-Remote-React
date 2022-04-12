@@ -16,7 +16,7 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  const { jukebox, themes, location } = props;
+  let { jukebox, themes, location } = props;
 
   const [loading, setLoading] = useState(false);
 
