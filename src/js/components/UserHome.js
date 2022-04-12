@@ -35,6 +35,8 @@ export const UserHome = (props, state) => {
   let runningProp = location.state ? location.state.lights.running : false;
   const [isRunning, setRunning] = useState(runningProp ? runningProp : false);
 
+  console.log(location);
+  console.log(props);
   let isActiveProp = location.state ? location.state.lights.active : null;
   const [isActiveIndex, setActiveIndex] = useState(
     isActiveProp ? isActiveProp : null
@@ -67,8 +69,8 @@ export const UserHome = (props, state) => {
     setAnimation(appState.animations[index].name);
   };
 
-  console.log("Light State", animation, isRunning);
-  console.log("Light Props", animationPropActive, runningProp);
+  // console.log("Light State", animation, isRunning);
+  // console.log("Light Props", animationPropActive, runningProp);
 
   useEffect(() => {
     if (appState.activeObject != null) {
@@ -86,7 +88,6 @@ export const UserHome = (props, state) => {
             }
           );
         } else {
-          console.log("Running False from OFF Statement");
           if (prevAnimation != animation) {
             socket.emit(
               "lights",
