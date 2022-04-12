@@ -28,15 +28,11 @@ export const UserHome = (props, state) => {
     : "undefined";
 
   let animationPropActive = animationProp ? animationProp : "";
-  const [animation, setAnimation] = useState(
-    animationPropActive ? animationPropActive : ""
-  );
+  const [animation, setAnimation] = useState(animationPropActive);
 
   let runningProp = location.state ? location.state.lights.running : false;
-  const [isRunning, setRunning] = useState(runningProp ? runningProp : false);
+  const [isRunning, setRunning] = useState(runningProp);
 
-  console.log("LOCATION", location);
-  console.log("PROPS HOME", props);
   let isActiveProp = location.state ? location.state.lights.active : null;
   const [isActiveIndex, setActiveIndex] = useState(isActiveProp);
 
