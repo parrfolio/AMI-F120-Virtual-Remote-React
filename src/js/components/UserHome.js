@@ -35,8 +35,8 @@ export const UserHome = (props, state) => {
   let runningProp = location.state ? location.state.lights.running : false;
   const [isRunning, setRunning] = useState(runningProp ? runningProp : false);
 
-  console.log(location);
-  console.log(props);
+  console.log("LOCATION", location);
+  console.log("PROPS HOME", props);
   let isActiveProp = location.state ? location.state.lights.active : null;
   const [isActiveIndex, setActiveIndex] = useState(
     isActiveProp ? isActiveProp : null
