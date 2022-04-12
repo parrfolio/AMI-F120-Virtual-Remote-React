@@ -16,7 +16,7 @@ const Block = styled.div`
 `;
 
 export const UserHome = (props, state) => {
-  let { jukebox, themes, location } = props;
+  const { jukebox, themes, location } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -37,10 +37,10 @@ export const UserHome = (props, state) => {
 
   console.log("LOCATION", location);
   console.log("PROPS HOME", props);
-  let isActiveProp = location.state ? location.state.lights.active : null;
-  const [isActiveIndex, setActiveIndex] = useState(
-    isActiveProp ? isActiveProp : null
-  );
+  let isActiveProp = props.location.state
+    ? props.location.state.lights.active
+    : null;
+  const [isActiveIndex, setActiveIndex] = useState(isActiveProp);
 
   const [appState, changeState] = useState({
     activeObject: null,
