@@ -39,8 +39,9 @@ export const UserHome = (props, state) => {
   const [appState, changeState] = useState({
     activeObject: null,
     animations: [
-      { id: 0, name: "rainbow" },
-      { id: 1, name: "twinkle" },
+      jukebox.map((selection, index) => {
+        { id: index, name: selection[0] }
+      })
     ],
   });
 
