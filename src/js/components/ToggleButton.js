@@ -22,7 +22,14 @@ export const ToggleButton = (props) => {
         setRunning(!isRunning);
       }}
     >
-      {console.log("From Toogle", isRunning, running)}
+      {console.log(
+        "is Running",
+        isRunning,
+        "is ActiveIndex",
+        isActiveIndex,
+        "is Index",
+        index
+      )}
       {setAnimationName} Lights {isRunning && running ? "on" : "off"}
     </button>
   );
