@@ -39,9 +39,11 @@ export const UserHome = (props, state) => {
 
   console.log("Location State", location.state);
 
-  const [isActiveIndex, setActiveIndex] = useState(
-    isActiveProp ? isActiveProp : null
-  );
+  // const [isActiveIndex, setActiveIndex] = useState(
+  //   isActiveProp ? isActiveProp : null
+  // );
+
+  const [isActiveIndex, setActiveIndex] = useState(null);
 
   console.log("HOME", props);
 
