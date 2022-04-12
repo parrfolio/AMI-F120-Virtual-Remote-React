@@ -70,8 +70,9 @@ export const UserHome = (props, state) => {
       ...appState,
       activeObject: appState.animations[index].id,
     });
-
+    console.log("INDEX", index);
     setActiveIndex(index);
+
     setAnimation(appState.animations[index].name);
   };
 
