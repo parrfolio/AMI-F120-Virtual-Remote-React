@@ -59,6 +59,7 @@ export const UserHome = (props, state) => {
   const prevAnimation = usePrevious(animation);
 
   const toggleActive = (index) => {
+    console.log(index, appState.animations[index].id);
     changeState({
       ...appState,
       activeObject: appState.animations[index].id,
