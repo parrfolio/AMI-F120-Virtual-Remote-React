@@ -45,6 +45,8 @@ export const UserHome = (props, state) => {
     ],
   });
 
+  console.log(appState.animations);
+
   const usePrevious = (value) => {
     const ref = useRef();
     useEffect(() => {
