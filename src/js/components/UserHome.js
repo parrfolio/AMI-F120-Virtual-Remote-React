@@ -17,6 +17,7 @@ const Block = styled.div`
 
 export const UserHome = (props, state) => {
   const { jukebox, themes, location } = props;
+  const animationThemes = Object.entries(themes);
 
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +40,7 @@ export const UserHome = (props, state) => {
   const [appState, changeState] = useState({
     activeObject: null,
     animations: [
-      jukebox.map((selection, index) => {
+      animationThemes.map((selection, index) => {
         return { id: index, name: selection[0] };
       }),
     ],
@@ -190,7 +191,7 @@ export const UserHome = (props, state) => {
     );
   });
 
-  const theme_selections = Object.entries(themes).map((selection, index) => {
+  const theme_selections = animationThemes.map((selection, index) => {
     return (
       <ToggleButton
         key={index}
