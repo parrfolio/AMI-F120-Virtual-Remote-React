@@ -17,7 +17,7 @@ const Block = styled.div`
 
 export const UserHome = (props, state) => {
   const { jukebox, themes, location } = props;
-  const animationThemes = Object.entries(themes);
+  const animationThemes = Object.entries(themes)[0];
 
   const [loading, setLoading] = useState(false);
 
