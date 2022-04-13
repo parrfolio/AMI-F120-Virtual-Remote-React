@@ -40,8 +40,8 @@ export const UserHome = (props, state) => {
     activeObject: null,
     animations: [
       jukebox.map((selection, index) => {
-        { id: index, name: selection[0] }
-      })
+        return { id: index, name: selection[0] };
+      }),
     ],
   });
 
