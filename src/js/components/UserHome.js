@@ -41,11 +41,9 @@ export const UserHome = (props, state) => {
 
   const [appState, changeState] = useState({
     activeObject: null,
-    animations: [
-      animationThemes.map((selection, index) => {
-        return { id: index, name: selection[0] };
-      }),
-    ],
+    animations: animationThemes.map((selection, index) => {
+      return { id: index, name: selection[0] };
+    }),
   });
 
   console.log(appState.animations);
