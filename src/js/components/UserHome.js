@@ -17,7 +17,9 @@ const Block = styled.div`
 
 export const UserHome = (props, state) => {
   const { jukebox, themes, location } = props;
-  const animationThemes = Object.entries(themes)[0];
+  const animationThemes = Object.entries(themes);
+
+  console.log(animationThemes);
 
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +61,6 @@ export const UserHome = (props, state) => {
   const prevAnimation = usePrevious(animation);
 
   const toggleActive = (index) => {
-    console.log(index, appState.animations[index].id);
     changeState({
       ...appState,
       activeObject: appState.animations[index].id,
