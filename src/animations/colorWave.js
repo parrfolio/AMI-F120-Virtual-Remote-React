@@ -3,7 +3,7 @@ const common = require("./common");
 const { RecurringTimer } = require("./timer");
 const { Strip } = require("./strip");
 
-function Rainbow(config) {
+function ColorWave(config) {
   let strips = config;
 
   strips.forEach((item) => {
@@ -33,7 +33,7 @@ function Rainbow(config) {
       ws281x.render();
     }, item.delay);
 
-    this.RainbowPause = () => {
+    this.ColorWavePause = () => {
       strips.forEach((item) => {
         ws281x.reset(); //reset strips
         item.stripTimer.pause();
