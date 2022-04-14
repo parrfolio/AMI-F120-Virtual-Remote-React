@@ -42,5 +42,5 @@ function ColorWave(config) {
   });
 }
 module.exports = {
-  Rainbow: Rainbow,
+  ColorWave: ColorWave,
 };
