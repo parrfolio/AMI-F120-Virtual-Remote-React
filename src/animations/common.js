@@ -13,6 +13,46 @@ function common() {
     }
   };
 
+  //color wave
+  const ledCount = 332;
+
+  this.map2PI = function(tick) {
+    return (Math.PI * 2 * tick) / ledCount;
+  };
+
+  this.scale = function(val) {
+    val += 1;
+    val *= 255 / 2;
+
+    return Math.floor(val);
+  };
+
+  this.wave = function(tick) {
+    var i,
+      j,
+      rsin,
+      gsin,
+      bsin,
+      size = ledCount,
+      offset = this.map2PI(tick);
+
+    if (Math.random() > 0.999) this.direction *= -1;
+
+    for (i = 0; i < size; i++) {
+      j = this.map2PI(i * this.direction) + offset;
+      rsin = Math.sin(j);
+      gsin = Math.sin((2 * j) / 3 + this.map2PI(size / 6));
+      bsin = Math.sin((4 * j) / 5 + this.map2PI(size / 3));
+
+      this.ledstrip.buffer[i] = [
+        this.scale(rsin),
+        this.scale(gsin),
+        this.scale(bsin),
+      ];
+    }
+  };
+
+  //rgb2Int
   this.rgb2Int = (r, g, b) => {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };

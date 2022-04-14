@@ -3,7 +3,7 @@ const common = require("./common");
 const { RecurringTimer } = require("./timer");
 const { Strip } = require("./strip");
 
-function Rainbow(config) {
+function ColorWave(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
@@ -11,13 +11,13 @@ function Rainbow(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = common.colorwheel((offset + i) % 256);
+        item.stripArray[i] = common.wave();
       }
-      offset = (offset + 1) % 256;
+
       ws281x.render();
     }, item.delay);
 
-    this.RainbowPause = () => {
+    this.ColorWavePause = () => {
       strips.forEach((item) => {
         ws281x.reset(); //reset strips
         item.stripTimer.pause();
@@ -26,5 +26,5 @@ function Rainbow(config) {
   });
 }
 module.exports = {
-  Rainbow: Rainbow,
+  ColorWave: ColorWave,
 };

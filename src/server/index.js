@@ -24,6 +24,7 @@ http.listen(PORT, () => {
 //Light animations
 const rainbow = require("../animations/rainbow");
 const twinkle = require("../animations/twinkle");
+const colorWave = require("../animations/colorWave");
 
 //Raspberry pi relay on pysical pin
 const relay = 7;
@@ -136,6 +137,13 @@ io.sockets.on("connection", function(socket) {
             running: true,
           });
           break;
+        case "colorWave":
+          console.log("colorWave Animation!");
+          colorWave.ColorWave(data.stripConf);
+          callback({
+            running: true,
+          });
+          break;
         default:
           console.log("Empty action received.");
           break;
@@ -152,6 +160,13 @@ io.sockets.on("connection", function(socket) {
         case "twinkle":
           twinkle.TwinklePause();
           console.log("Twinkle Animation OFF!");
+          callback({
+            running: false,
+          });
+          break;
+        case "colorWave":
+          colorWave.ColorWave();
+          console.log("colorWave Animation OFF!");
           callback({
             running: false,
           });
