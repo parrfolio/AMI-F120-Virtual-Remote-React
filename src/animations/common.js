@@ -16,9 +16,7 @@ function common() {
   //color wave
   const ledCount = 332;
 
-  this.ColorWave = (ledstrip) => {
-    this.ledstrip = ledstrip;
-
+  this.ColorWave = () => {
     this.direction = 1;
     // tick counter
     this.t = 0;
@@ -54,11 +52,7 @@ function common() {
       gsin = Math.sin((2 * j) / 3 + this.map2PI(size / 6));
       bsin = Math.sin((4 * j) / 5 + this.map2PI(size / 3));
 
-      this.ledstrip.buffer[i] = [
-        this.scale(rsin),
-        this.scale(gsin),
-        this.scale(bsin),
-      ];
+      return [this.scale(rsin), this.scale(gsin), this.scale(bsin)];
     }
   };
 
