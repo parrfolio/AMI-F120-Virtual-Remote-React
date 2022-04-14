@@ -27,6 +27,8 @@ function common() {
     return Math.floor(val);
   };
 
+  this.direction = 1;
+  this.t = 0;
   this.wave = function(tick) {
     var i,
       j,

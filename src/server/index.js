@@ -165,7 +165,7 @@ io.sockets.on("connection", function(socket) {
           });
           break;
         case "colorWave":
-          colorWave.ColorWave();
+          colorWave.ColorWavePause();
           console.log("colorWave Animation OFF!");
           callback({
             running: false,
