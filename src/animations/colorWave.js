@@ -16,22 +16,22 @@ function ColorWave(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       //item.stripArray[i]
 
-      if (iterationIndex < maxIterations) {
-        if (ledIndex < leds) {
-          item.stripArray[i] = common.colorwheel(
-            ((ledIndex * 256) / leds + iterationIndex) & 255
-          );
-
-          ledIndex++;
+      for (let i = item.start; i < item.stop; i++) {
+        if (iterationIndex < maxIterations) {
+          if (ledIndex < leds) {
+            item.stripArray[i] = common.colorwheel(
+              ((ledIndex * 256) / leds + iterationIndex) & 255
+            );
+            ledIndex++;
+          } else {
+            ledIndex = 0;
+            iterationIndex++;
+          }
         } else {
           ledIndex = 0;
-          iterationIndex++;
+          iterationIndex = 0;
         }
-      } else {
-        ledIndex = 0;
-        iterationIndex = 0;
       }
-
       ws281x.render();
     }, item.delay);
 

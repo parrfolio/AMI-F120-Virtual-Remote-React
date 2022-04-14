@@ -39,19 +39,51 @@ function Twinkle(config) {
     0xb0b0b0,
   ];
   let strips = config;
-  let WasTwinkling = false;
-  let TwinkleSpeed = 250;
-  let LastStates = [];
+
   strips.forEach((item) => {
+    let WasTwinkling = false;
+    let TwinkleSpeed = 250;
+    let LastStates = [];
+    let leds = common.num_leds();
+
+    const GetNextColor = (col, rand) => {
+      var ind = TwinkleColors.indexOf(col);
+      if (ind == TwinkleColors.length + 1) {
+        // choose the first
+        return TwinkleColors[0];
+      } else {
+        // choose the next
+        return TwinkleColors[ind + 1];
+      }
+    };
+
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        var init = common.getRandomInt(0, TwinkleColors.length - 1);
-        LastStates[i] = TwinkleColors[init]; // default white color
-        item.stripArray[i] = LastStates[i];
-      }
+        if (!WasTwinkling) {
+          for (var x = 0; x < leds; x++) {
+            // choose a random init point
+            var init = common.getRandomInt(0, TwinkleColors.length - 1);
+            LastStates[x] = TwinkleColors[init]; // default white color
+            item.stripArray[i] = LastStates[x];
+          }
 
-      ws281x.render();
+          ws281x.render();
+          WasTwinkling = true;
+        } else {
+          for (var x = 0; x < leds; x++) {
+            var shouldTwinkle = common.getRandomInt(0, 100);
+            if (shouldTwinkle > 10) {
+              // only a 50% chance of twinkling
+              var currentColor = LastStates[x];
+              var newColor = GetNextColor(currentColor);
+              LastStates[x] = newColor;
+              item.stripArray[i] = LastStates[x];
+            }
+          }
+        }
+        ws281x.render();
+      }
     }, item.delay);
 
     this.TwinklePause = () => {
