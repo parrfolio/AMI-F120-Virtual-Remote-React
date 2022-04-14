@@ -74,7 +74,7 @@ function Twinkle(config) {
           // runnning animation
           for (var x = 0; x < leds; x++) {
             var shouldTwinkle = common.getRandomInt(0, 100);
-            if (shouldTwinkle > leds) {
+            if (shouldTwinkle > 10) {
               // only a 50% chance of twinkling
               var currentColor = LastStates[x];
               var newColor = GetNextColor(currentColor);
