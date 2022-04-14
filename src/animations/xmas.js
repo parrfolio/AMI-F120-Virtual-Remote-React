@@ -8,10 +8,43 @@ function Xmas(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = 0;
+    let DanceWidth = 15;
+    let DanceArray = [];
+    let XmasIterateSpeed = 75;
+    let XmasIterateOffset = 0;
+    let leds = common.num_leds();
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = common.RandomXmasColor();
+        // item.stripArray[i] = common.RandomXmasColor();
+        for (var d = 0; d < DanceWidth; d++) {
+          DanceArray[d] = common.RandomXmasColor();
+        }
+
+        let DanceArrayIndex = 0;
+        let x = 0 + XmasIterateOffset;
+        for (x; x < leds; x++) {
+          if (DanceArrayIndex < DanceWidth) {
+            item.stripArray[x] = DanceArray[DanceArrayIndex];
+          }
+          DanceArrayIndex++;
+        }
+        DanceArrayIndex = 0;
+        let y = leds - XmasIterateOffset;
+        for (y; y > 0; y--) {
+          if (DanceArrayIndex < DanceWidth) {
+            item.stripArray[y] = DanceArray[DanceArrayIndex];
+          }
+          DanceArrayIndex++;
+        }
+
+        XmasIterateOffset++;
+        if (XmasIterateOffset > leds) {
+          XmasIterateOffset = 0;
+          for (let d = 0; d < DanceWidth; d++) {
+            DanceArray[d] = common.RandomXmasColor();
+          }
+        }
       }
 
       ws281x.render();
