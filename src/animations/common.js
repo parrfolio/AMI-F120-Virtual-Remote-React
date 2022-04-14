@@ -18,7 +18,7 @@ function common() {
 
   this.ColorWave = (ledstrip) => {
     this.ledstrip = ledstrip;
-    this.ledstrip.clear();
+
     this.direction = 1;
     // tick counter
     this.t = 0;
