@@ -16,6 +16,16 @@ function common() {
   //color wave
   const ledCount = 332;
 
+  this.ColorWave = (ledstrip) => {
+    this.ledstrip = ledstrip;
+    this.ledstrip.clear();
+    this.direction = 1;
+    // tick counter
+    this.t = 0;
+
+    return this;
+  };
+
   this.map2PI = function(tick) {
     return (Math.PI * 2 * tick) / ledCount;
   };
@@ -27,8 +37,6 @@ function common() {
     return Math.floor(val);
   };
 
-  this.direction = 1;
-  this.t = 0;
   this.wave = function(tick) {
     var i,
       j,
@@ -46,7 +54,11 @@ function common() {
       gsin = Math.sin((2 * j) / 3 + this.map2PI(size / 6));
       bsin = Math.sin((4 * j) / 5 + this.map2PI(size / 3));
 
-      return [this.scale(rsin), this.scale(gsin), this.scale(bsin)];
+      this.ledstrip.buffer[i] = [
+        this.scale(rsin),
+        this.scale(gsin),
+        this.scale(bsin),
+      ];
     }
   };
 

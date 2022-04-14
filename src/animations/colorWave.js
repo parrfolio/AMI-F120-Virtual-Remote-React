@@ -11,7 +11,7 @@ function ColorWave(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = common.wave(common.t++);
+        common.ColorWave(item.stripArray[i]);
       }
 
       ws281x.render();
