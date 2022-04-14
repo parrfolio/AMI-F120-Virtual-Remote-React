@@ -1,20 +1,18 @@
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
-
-console.log(common.num_leds);
 let strips = ws281x.init({
   dma: 10,
   freq: 800000,
   channels: [
     {
-      count: common.num_leds,
+      count: common.num_leds(),
       gpio: 18,
       invert: false,
       brightness: 255,
       stripType: "ws2812",
     },
     {
-      count: common.num_leds,
+      count: common.num_leds(),
       gpio: 13,
       invert: false,
       brightness: 255,

@@ -10,6 +10,7 @@ function ColorWave(config) {
     let ledIndex = 0;
     let iterationIndex = 0;
     let maxIterations = 256 * 5;
+    let leds = common.num_leds();
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
@@ -17,9 +18,9 @@ function ColorWave(config) {
 
       for (let i = item.start; i < item.stop; i++) {
         if (iterationIndex < maxIterations) {
-          if (ledIndex < common.num_leds) {
+          if (ledIndex < leds) {
             item.stripArray[i] = common.colorwheel(
-              ((ledIndex * 256) / common.num_leds + iterationIndex) & 255
+              ((ledIndex * 256) / leds + iterationIndex) & 255
             );
 
             ledIndex++;
