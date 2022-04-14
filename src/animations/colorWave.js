@@ -15,12 +15,11 @@ function ColorWave(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       //item.stripArray[i]
 
-      console.log(Strip.ledCount);
       for (let i = item.start; i < item.stop; i++) {
         if (iterationIndex < maxIterations) {
-          if (ledIndex < Strip.ledCount) {
+          if (ledIndex < 332) {
             item.stripArray[i] = common.colorwheel(
-              ((ledIndex * 256) / Strip.ledCount + iterationIndex) & 255
+              ((ledIndex * 256) / 332 + iterationIndex) & 255
             );
 
             ledIndex++;

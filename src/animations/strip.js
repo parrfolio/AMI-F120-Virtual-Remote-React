@@ -29,7 +29,6 @@ function Strip(config) {
 
   this.findStrip = findStrip;
   this.findStrip();
-  this.ledCount = ledCount;
 
   //   const stripRender = () => {
   //     return ws281x.render();
