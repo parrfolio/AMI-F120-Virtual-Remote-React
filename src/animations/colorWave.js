@@ -10,7 +10,10 @@ function ColorWave(config) {
     let offset = 0;
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
-      item.stripArray[i] = common.wave(common.t++);
+      for (let i = item.start; i < item.stop; i++) {
+        item.stripArray[i] = common.wave(common.t++);
+      }
+
       ws281x.render();
     }, item.delay);
 
