@@ -17,9 +17,9 @@ function ColorWave(config) {
 
       for (let i = item.start; i < item.stop; i++) {
         if (iterationIndex < maxIterations) {
-          if (ledIndex < 332) {
+          if (ledIndex < common.num_leds) {
             item.stripArray[i] = common.colorwheel(
-              ((ledIndex * 256) / 332 + iterationIndex) & 255
+              ((ledIndex * 256) / common.num_leds + iterationIndex) & 255
             );
 
             ledIndex++;

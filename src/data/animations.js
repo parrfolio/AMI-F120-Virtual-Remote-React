@@ -2,7 +2,7 @@ const animation_data = {
   themes: {
     rainbow: [
       {
-        name: "Title Strip Light 1",
+        name: "title_striplight_1",
         delay: 1000 / 30,
         start: 0,
         stop: 60,
@@ -10,7 +10,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Title Strip Light 2",
+        name: "title_striplight_2",
         delay: 1000 / 30,
         start: 60,
         stop: 120,
@@ -18,7 +18,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Main Cab Light 1",
+        name: "main_cablight_1",
         delay: 1000 / 30,
         start: 120,
         stop: 180,
@@ -26,7 +26,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Main Cab Light 2",
+        name: "main_cablight_2",
         delay: 1000 / 30,
         start: 180,
         stop: 240,
@@ -34,7 +34,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Back Mech Light",
+        name: "back_mech_light",
         delay: 1000 / 30,
         start: 240,
         stop: 300,
@@ -42,7 +42,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Front Mech Light",
+        name: "front_mech_light",
         delay: 1000 / 30,
         start: 0,
         stop: 60,
@@ -50,7 +50,7 @@ const animation_data = {
         channelSet: 1,
       },
       {
-        name: "Door Light",
+        name: "door_light",
         delay: 1000 / 30,
         start: 60,
         stop: 120,
@@ -60,56 +60,56 @@ const animation_data = {
     ],
     colorWave: [
       {
-        name: "Title Strip Light 1",
-        delay: 1000 / 30,
+        name: "title_striplight_1",
+        delay: 1000,
         start: 0,
         stop: 60,
         brightness: 255,
         channelSet: 0,
       },
       {
-        name: "Title Strip Light 2",
-        delay: 1000 / 30,
+        name: "title_striplight_2",
+        delay: 1000,
         start: 60,
         stop: 120,
         brightness: 255,
         channelSet: 0,
       },
       {
-        name: "Main Cab Light 1",
-        delay: 1000 / 30,
+        name: "main_cablight_1",
+        delay: 1000,
         start: 120,
         stop: 180,
         brightness: 255,
         channelSet: 0,
       },
       {
-        name: "Main Cab Light 2",
-        delay: 1000 / 30,
+        name: "main_cablight_2",
+        delay: 1000,
         start: 180,
         stop: 240,
         brightness: 255,
         channelSet: 0,
       },
       {
-        name: "Back Mech Light",
-        delay: 1000 / 30,
+        name: "back_mech_light",
+        delay: 1000,
         start: 240,
         stop: 300,
         brightness: 155,
         channelSet: 0,
       },
       {
-        name: "Front Mech Light",
-        delay: 1000 / 30,
+        name: "front_mech_light",
+        delay: 1000,
         start: 0,
         stop: 60,
         brightness: 155,
         channelSet: 1,
       },
       {
-        name: "Door Light",
-        delay: 1000 / 30,
+        name: "door_light",
+        delay: 1000,
         start: 60,
         stop: 120,
         brightness: 155,
@@ -118,7 +118,7 @@ const animation_data = {
     ],
     twinkle: [
       {
-        name: "Title Strip Light 1",
+        name: "title_striplight_1",
         delay: 1000 / 30,
         start: 0,
         stop: 60,
@@ -134,7 +134,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Main Cab Light 1",
+        name: "main_cablight_1",
         delay: 1000 / 30,
         start: 120,
         stop: 180,
@@ -142,7 +142,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Main Cab Light 2",
+        name: "main_cablight_2",
         delay: 1000 / 30,
         start: 180,
         stop: 240,
@@ -150,7 +150,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Back Mech Light",
+        name: "back_mech_light",
         delay: 1000 / 30,
         start: 240,
         stop: 300,
@@ -158,7 +158,7 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "Front Mech Light",
+        name: "front_mech_light",
         delay: 1000 / 30,
         start: 0,
         stop: 60,
@@ -166,7 +166,7 @@ const animation_data = {
         channelSet: 1,
       },
       {
-        name: "Door Light",
+        name: "door_light",
         delay: 1000 / 30,
         start: 60,
         stop: 120,

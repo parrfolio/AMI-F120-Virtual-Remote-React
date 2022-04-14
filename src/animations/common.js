@@ -1,4 +1,8 @@
 function common() {
+  //total leds
+  this.num_leds = () => {
+    return 332;
+  };
   //color wheel
   this.colorwheel = (pos) => {
     pos = 255 - pos;
