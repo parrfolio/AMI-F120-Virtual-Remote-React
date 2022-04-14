@@ -37,8 +37,34 @@ function common() {
   };
 
   this.componentToHex = (c) => {
-    var hex = c.toString(16);
+    let hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
+  };
+
+  //christmas
+  let XmasRed = 0xff0000;
+  let XmasGreen = 0x00ff00;
+  let XmasBlue = 0x0000ff;
+  let XmasWhite = 0xffffff;
+
+  this.RandomXmasColor = function() {
+    let xmasLight = this.getRandomInt(1, 4);
+    let xmasColor = XmasRed;
+    switch (xmasLight) {
+      case 1:
+        xmasColor = XmasRed;
+        break;
+      case 2:
+        xmasColor = XmasGreen;
+        break;
+      case 3:
+        xmasColor = XmasBlue;
+        break;
+      case 4:
+        xmasColor = XmasWhite;
+        break;
+    }
+    return xmasColor;
   };
 }
 
