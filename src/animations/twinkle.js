@@ -60,6 +60,7 @@ function Twinkle(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
+        // on start up animation
         if (!WasTwinkling) {
           for (var x = 0; x < leds; x++) {
             // choose a random init point
@@ -68,12 +69,12 @@ function Twinkle(config) {
             item.stripArray[i] = LastStates[x];
           }
 
-          ws281x.render();
           WasTwinkling = true;
         } else {
+          // runnning animation
           for (var x = 0; x < leds; x++) {
             var shouldTwinkle = common.getRandomInt(0, 100);
-            if (shouldTwinkle > 10) {
+            if (shouldTwinkle > leds) {
               // only a 50% chance of twinkling
               var currentColor = LastStates[x];
               var newColor = GetNextColor(currentColor);
@@ -82,8 +83,8 @@ function Twinkle(config) {
             }
           }
         }
-        ws281x.render();
       }
+      ws281x.render();
     }, item.delay);
 
     this.TwinklePause = () => {
