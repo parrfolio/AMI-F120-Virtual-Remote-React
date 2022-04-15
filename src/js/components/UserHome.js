@@ -94,6 +94,7 @@ export const UserHome = (props, state) => {
               },
               (response) => {
                 setRunning(response.running);
+                socket.removeAllListeners("lights");
                 socket.emit(
                   "lights",
                   {
@@ -117,6 +118,7 @@ export const UserHome = (props, state) => {
               },
               (response) => {
                 setRunning(response.running);
+                socket.removeAllListeners("lights");
               }
             );
           }
