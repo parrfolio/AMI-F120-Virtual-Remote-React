@@ -25,7 +25,7 @@ function Xmas(config) {
         let x = 0 + XmasIterateOffset;
         for (x; x < leds; x++) {
           if (DanceArrayIndex < DanceWidth) {
-            item.stripArray[x] = DanceArray[DanceArrayIndex];
+            item.stripArray[i] = DanceArray[DanceArrayIndex];
           }
           DanceArrayIndex++;
         }
@@ -33,7 +33,7 @@ function Xmas(config) {
         let y = leds - XmasIterateOffset;
         for (y; y > 0; y--) {
           if (DanceArrayIndex < DanceWidth) {
-            item.stripArray[y] = DanceArray[DanceArrayIndex];
+            item.stripArray[i] = DanceArray[DanceArrayIndex];
           }
           DanceArrayIndex++;
         }
