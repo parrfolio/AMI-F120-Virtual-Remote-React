@@ -113,14 +113,14 @@ io.sockets.on("connection", function(socket) {
   // LIGHT STRIPS FOR JUKE
   socket.on("lights", (data, callback) => {
     console.log("Lights", data.state);
-    process.on("SIGINT", function() {
-      ws281x.reset();
-      ws281x.finalize();
+    // process.on("SIGINT", function() {
+    //   ws281x.reset();
+    //   ws281x.finalize();
 
-      process.nextTick(function() {
-        process.exit(0);
-      });
-    });
+    //   process.nextTick(function() {
+    //     process.exit(0);
+    //   });
+    // });
     let animationType = data.animation;
     if (data.state === "on") {
       switch (animationType) {
