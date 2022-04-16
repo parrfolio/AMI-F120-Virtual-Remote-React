@@ -25,7 +25,6 @@ function Xmas(config) {
         let x = 0 + XmasIterateOffset;
         for (x; x < leds; x++) {
           if (DanceArrayIndex < DanceWidth) {
-            ws281x.setBrightness(i);
             item.stripArray[i] = DanceArray[DanceArrayIndex];
           }
           DanceArrayIndex++;
@@ -34,7 +33,6 @@ function Xmas(config) {
         let y = leds - XmasIterateOffset;
         for (y; y > 0; y--) {
           if (DanceArrayIndex < DanceWidth) {
-            ws281x.setBrightness(i);
             item.stripArray[i] = DanceArray[DanceArrayIndex];
           }
           DanceArrayIndex++;
@@ -50,6 +48,7 @@ function Xmas(config) {
       }
 
       ws281x.render();
+      ws281x.setBrightness(100);
     }, item.delay);
 
     this.XmasPause = () => {
