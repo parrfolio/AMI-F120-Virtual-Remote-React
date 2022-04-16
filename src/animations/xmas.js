@@ -48,7 +48,7 @@ function Xmas(config) {
       }
 
       ws281x.render();
-      ws281x.setBrightness(100);
+      ws281x.setBrightness(3);
     }, item.delay);
 
     this.XmasPause = () => {
