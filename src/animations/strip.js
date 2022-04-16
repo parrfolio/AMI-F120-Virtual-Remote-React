@@ -27,8 +27,15 @@ function Strip(config) {
     return strips[channelConfig].array;
   };
 
+  const brightness = (val) => {
+    return ws281x.setBrightness(val);
+  };
+
   this.findStrip = findStrip;
   this.findStrip();
+
+  this.brightness = brightness;
+  this.brightness(255);
 
   //   const stripRender = () => {
   //     return ws281x.render();
