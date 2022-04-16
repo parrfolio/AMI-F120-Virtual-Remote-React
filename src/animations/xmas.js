@@ -25,7 +25,7 @@ function Xmas(config) {
         let x = 0 + XmasIterateOffset;
         for (x; x < leds; x++) {
           if (DanceArrayIndex < DanceWidth) {
-            Strip.brightness(i);
+            ws281x.setBrightness(i);
             item.stripArray[i] = DanceArray[DanceArrayIndex];
           }
           DanceArrayIndex++;
@@ -34,7 +34,7 @@ function Xmas(config) {
         let y = leds - XmasIterateOffset;
         for (y; y > 0; y--) {
           if (DanceArrayIndex < DanceWidth) {
-            Strip.brightness(i);
+            ws281x.setBrightness(i);
             item.stripArray[i] = DanceArray[DanceArrayIndex];
           }
           DanceArrayIndex++;
