@@ -177,7 +177,7 @@ const animation_data = {
     xmas: [
       {
         name: "title_striplight_1",
-        delay: 250,
+        delay: 500,
         start: 0,
         stop: 60,
         brightness: 255,
@@ -185,7 +185,7 @@ const animation_data = {
       },
       {
         name: "title_striplight_2",
-        delay: 250,
+        delay: 500,
         start: 60,
         stop: 120,
         brightness: 255,
@@ -193,7 +193,7 @@ const animation_data = {
       },
       {
         name: "main_cablight_1",
-        delay: 250,
+        delay: 500,
         start: 120,
         stop: 180,
         brightness: 255,
@@ -209,7 +209,7 @@ const animation_data = {
       },
       {
         name: "back_mech_light",
-        delay: 250,
+        delay: 500,
         start: 240,
         stop: 300,
         brightness: 155,
@@ -217,7 +217,7 @@ const animation_data = {
       },
       {
         name: "front_mech_light",
-        delay: 250,
+        delay: 500,
         start: 0,
         stop: 60,
         brightness: 155,
@@ -225,7 +225,7 @@ const animation_data = {
       },
       {
         name: "door_light",
-        delay: 250,
+        delay: 500,
         start: 60,
         stop: 120,
         brightness: 155,
