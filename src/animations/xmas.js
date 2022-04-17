@@ -16,7 +16,8 @@ function Xmas(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        // item.stripArray[i] = common.RandomXmasColor();
+        // simplier xmas style that I need to break out into it's own animation
+        //item.stripArray[i] = common.RandomXmasColor();
         for (var d = 0; d < DanceWidth; d++) {
           DanceArray[d] = common.RandomXmasColor();
         }
