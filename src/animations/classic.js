@@ -15,6 +15,12 @@ function Classic(config) {
           case "title_striplight_1":
             item.stripArray[i] = 0xffcc22;
             break;
+          case "title_striplight_1a":
+            item.stripArray[i] = 0xfa0b7e;
+            break;
+          case "title_striplight_1b":
+            item.stripArray[i] = 0x10fa0b;
+            break;
           case "title_striplight_2":
             item.stripArray[i] = 0x990000;
             break;
