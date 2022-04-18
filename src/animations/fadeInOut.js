@@ -9,15 +9,14 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = 0;
-    let r, g, b;
-    let red = 0xff;
-    let green = 0x77;
-    let blue = 0x00;
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = 4569600;
+        console.log((offset + i) % 256);
+        //item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xcc9900);
       }
+
+      offset = (offset + 1) % 256;
       ws281x.render();
     }, item.delay);
 

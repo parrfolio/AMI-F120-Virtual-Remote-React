@@ -6,9 +6,6 @@ function common() {
   //color wheel
   this.colorwheel = (pos) => {
     pos = 255 - pos;
-    console.log("POS", pos);
-    console.log("POS < 85", 255 - pos * 3, 0, pos * 3);
-    console.log("POS < 170", 0, pos * 3, 255 - pos * 3);
     if (pos < 85) {
       return this.rgb2Int(255 - pos * 3, 0, pos * 3);
     } else if (pos < 170) {
@@ -21,18 +18,18 @@ function common() {
   };
 
   //fade in and out
-  this.fadeinout = (pos) => {
+  this.fadeinout = (pos, color) => {
     pos = 255 - pos;
 
-    // if (pos < 85) {
-    //   return this.rgb2Int(255 - pos * 3, 0, pos * 3);
-    // } else if (pos < 170) {
-    //   pos -= 85;
-    //   return this.rgb2Int(0, pos * 3, 255 - pos * 3);
-    // } else {
-    //   pos -= 170;
-    //   return this.rgb2Int(pos * 3, 255 - pos * 3, 0);
-    // }
+    if (pos < 85) {
+      return this.rgb2Int(255 - pos * 3, 0, pos * 3);
+    } else if (pos < 170) {
+      pos -= 85;
+      return this.rgb2Int(0, pos * 3, 255 - pos * 3);
+    } else {
+      pos -= 170;
+      return this.rgb2Int(pos * 3, 255 - pos * 3, 0);
+    }
   };
 
   this.rgb2Int = (r, g, b) => {
