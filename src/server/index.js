@@ -165,7 +165,7 @@ io.sockets.on("connection", function(socket) {
           break;
         case "fadeInOut":
           console.log("fadeInOut Animation!");
-          fadeInOut.fadeInOut(data.stripConf);
+          fadeInOut.FadeInOut(data.stripConf);
           callback({
             running: true,
           });
@@ -212,7 +212,7 @@ io.sockets.on("connection", function(socket) {
           });
           break;
         case "fadeInOut":
-          fadeInOut.fadeInOutPause();
+          fadeInOut.FadeInOutPause();
           console.log("fadeInOut Animation OFF!");
           callback({
             running: false,
