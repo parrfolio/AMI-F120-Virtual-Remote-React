@@ -2,6 +2,7 @@ const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const common = require("./common");
 const { RecurringTimer } = require("./timer");
 const { Strip } = require("./strip");
+const { fadeinout } = require("./common");
 
 function FadeInOut(config) {
   let strips = config;
@@ -15,52 +16,7 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        // item.stripArray[i] = common.fadeinout(0xff, 0x77, 0x00);
-
-        // for (let k = 0; k < 256; k = k + 1) {
-        //   r = (k / 256.0) * red;
-        //   g = (k / 256.0) * green;
-        //   b = (k / 256.0) * blue;
-        //   item.stripArray[i] = r + g + b;
-        // }
-
-        // for (let k = 255; k >= 0; k = k - 2) {
-        //   r = (k / 256.0) * red;
-        //   g = (k / 256.0) * green;
-        //   b = (k / 256.0) * blue;
-        //   item.stripArray[i] = r + g + b;
-        // }
-
-        for (let j = 0; j < 3; j++) {
-          // Fade IN
-          for (let k = 0; k < 256; k++) {
-            switch (j) {
-              case 0:
-                item.stripArray[i] = k + 0 + 0;
-                break;
-              case 1:
-                item.stripArray[i] = 0 + k + 0;
-                break;
-              case 2:
-                item.stripArray[i] = 0 + 0 + k;
-                break;
-            }
-          }
-          // Fade OUT
-          for (let k = 255; k >= 0; k--) {
-            switch (j) {
-              case 0:
-                item.stripArray[i] = k + 0 + 0;
-                break;
-              case 1:
-                item.stripArray[i] = 0 + k + 0;
-                break;
-              case 2:
-                item.stripArray[i] = 0 + 0 + k;
-                break;
-            }
-          }
-        }
+        item.stripArray[i] = common.fadeinout();
       }
       ws281x.render();
     }, item.delay);

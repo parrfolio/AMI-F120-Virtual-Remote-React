@@ -18,25 +18,25 @@ function common() {
   };
 
   //fade in and out
-  this.fadeinout = (red, green, blue) => {
-    let r, g, b;
+  this.fadeinout = (pos) => {
+    pos = 255 - pos;
+    console.log("POS", pos);
+    console.log("POS < 85", 255 - pos * 3, 0, pos * 3);
+    console.log("POS < 170", 0, pos * 3, 255 - pos * 3);
 
-    for (let k = 0; k < 256; k = k + 1) {
-      r = (k / 256.0) * red;
-      g = (k / 256.0) * green;
-      b = (k / 256.0) * blue;
-      return r + g + b;
-    }
-
-    for (let k = 255; k >= 0; k = k - 2) {
-      r = (k / 256.0) * red;
-      g = (k / 256.0) * green;
-      b = (k / 256.0) * blue;
-      return r + g + b;
-    }
+    // if (pos < 85) {
+    //   return this.rgb2Int(255 - pos * 3, 0, pos * 3);
+    // } else if (pos < 170) {
+    //   pos -= 85;
+    //   return this.rgb2Int(0, pos * 3, 255 - pos * 3);
+    // } else {
+    //   pos -= 170;
+    //   return this.rgb2Int(pos * 3, 255 - pos * 3, 0);
+    // }
   };
 
   this.rgb2Int = (r, g, b) => {
+    console.log("RGBInt", ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
