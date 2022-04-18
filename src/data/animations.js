@@ -309,7 +309,7 @@ const animation_data = {
     fadeInOut: [
       {
         name: "title_striplight_1",
-        delay: 500,
+        delay: 2000,
         start: 0,
         stop: 20,
         brightness: 255,
@@ -317,7 +317,7 @@ const animation_data = {
       },
       {
         name: "title_striplight_1a",
-        delay: 500,
+        delay: 2000,
         start: 20,
         stop: 40,
         brightness: 255,
@@ -325,7 +325,7 @@ const animation_data = {
       },
       {
         name: "title_striplight_1b",
-        delay: 500,
+        delay: 2000,
         start: 40,
         stop: 60,
         brightness: 255,
@@ -333,7 +333,7 @@ const animation_data = {
       },
       {
         name: "title_striplight_2",
-        delay: 500,
+        delay: 2000,
         start: 60,
         stop: 120,
         brightness: 255,
@@ -341,7 +341,7 @@ const animation_data = {
       },
       {
         name: "main_cablight_1",
-        delay: 500,
+        delay: 2000,
         start: 120,
         stop: 180,
         brightness: 255,
@@ -349,7 +349,7 @@ const animation_data = {
       },
       {
         name: "main_cablight_2",
-        delay: 75,
+        delay: 2000,
         start: 180,
         stop: 240,
         brightness: 255,
@@ -357,7 +357,7 @@ const animation_data = {
       },
       {
         name: "back_mech_light",
-        delay: 500,
+        delay: 2000,
         start: 240,
         stop: 300,
         brightness: 155,
@@ -373,7 +373,7 @@ const animation_data = {
       },
       {
         name: "door_light",
-        delay: 500,
+        delay: 2000,
         start: 60,
         stop: 120,
         brightness: 155,

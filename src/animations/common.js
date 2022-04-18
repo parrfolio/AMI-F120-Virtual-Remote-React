@@ -25,16 +25,14 @@ function common() {
       r = (k / 256.0) * red;
       g = (k / 256.0) * green;
       b = (k / 256.0) * blue;
-      setAll(r, g, b);
-      showStrip();
+      return r + g + b;
     }
 
     for (let k = 255; k >= 0; k = k - 2) {
       r = (k / 256.0) * red;
       g = (k / 256.0) * green;
       b = (k / 256.0) * blue;
-      setAll(r, g, b);
-      showStrip();
+      return r + g + b;
     }
   };
 
