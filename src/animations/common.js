@@ -17,6 +17,25 @@ function common() {
     }
   };
 
+  //fade in and out
+  this.fadeinout = (red, green, blue) => {
+    let r, g, b;
+
+    for (let k = 0; k < 256; k = k + 1) {
+      r = (k / 256.0) * red;
+      g = (k / 256.0) * green;
+      b = (k / 256.0) * blue;
+      return r, g, b;
+    }
+
+    for (let k = 255; k >= 0; k = k - 2) {
+      r = (k / 256.0) * red;
+      g = (k / 256.0) * green;
+      b = (k / 256.0) * blue;
+      return r, g, b;
+    }
+  };
+
   this.rgb2Int = (r, g, b) => {
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };

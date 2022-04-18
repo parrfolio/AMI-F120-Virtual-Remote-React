@@ -36,6 +36,7 @@ const twinkle = require("../animations/twinkle");
 const colorWave = require("../animations/colorWave");
 const xmas = require("../animations/xmas");
 const classic = require("../animations/classic");
+const fadeInOut = require("../animations/fadeInOut");
 
 //Raspberry pi relay on pysical pin
 const relay = 7;
@@ -162,6 +163,13 @@ io.sockets.on("connection", function(socket) {
             running: true,
           });
           break;
+        case "fadeInOut":
+          console.log("fadeInOut Animation!");
+          fadeInOut.fadeInOut(data.stripConf);
+          callback({
+            running: true,
+          });
+          break;
         default:
           console.log("Empty action received.");
           break;
@@ -199,6 +207,13 @@ io.sockets.on("connection", function(socket) {
         case "classic":
           classic.ClassicPause();
           console.log("Classic Animation OFF!");
+          callback({
+            running: false,
+          });
+          break;
+        case "fadeInOut":
+          fadeInOut.fadeInOutPause();
+          console.log("fadeInOut Animation OFF!");
           callback({
             running: false,
           });
