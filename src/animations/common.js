@@ -22,13 +22,13 @@ function common() {
     pos = 255 - pos;
 
     if (pos < 85) {
-      return this.rgb2Int(255 - pos * 3, 0, pos * 3);
+      return color;
     } else if (pos < 170) {
       pos -= 85;
-      return this.rgb2Int(0, pos * 3, 255 - pos * 3);
+      return 0x30cac1;
     } else {
       pos -= 170;
-      return this.rgb2Int(pos * 3, 255 - pos * 3, 0);
+      return 0x111f99;
     }
   };
 
