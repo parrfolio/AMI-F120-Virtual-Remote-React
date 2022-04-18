@@ -21,18 +21,14 @@ function FadeInOut(config) {
           r = (k / 256.0) * red;
           g = (k / 256.0) * green;
           b = (k / 256.0) * blue;
-          item.stripArray[i] = r;
-          item.stripArray[i] = g;
-          item.stripArray[i] = b;
+          item.stripArray[i] = r + g + b;
         }
 
         for (let k = 255; k >= 0; k = k - 2) {
           r = (k / 256.0) * red;
           g = (k / 256.0) * green;
           b = (k / 256.0) * blue;
-          item.stripArray[i] = r;
-          item.stripArray[i] = g;
-          item.stripArray[i] = b;
+          item.stripArray[i] = r + g + b;
         }
       }
       ws281x.render();

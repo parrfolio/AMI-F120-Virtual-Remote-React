@@ -47,7 +47,7 @@ function Twinkle(config) {
     let leds = common.num_leds();
 
     const GetNextColor = (col, rand) => {
-      var ind = TwinkleColors.indexOf(col);
+      let ind = TwinkleColors.indexOf(col);
       if (ind == TwinkleColors.length + 1) {
         // choose the first
         return TwinkleColors[0];
@@ -62,9 +62,9 @@ function Twinkle(config) {
       for (let i = item.start; i < item.stop; i++) {
         // on start up animation
         if (!WasTwinkling) {
-          for (var x = 0; x < leds; x++) {
+          for (let x = 0; x < leds; x++) {
             // choose a random init point
-            var init = common.getRandomInt(0, TwinkleColors.length - 1);
+            let init = common.getRandomInt(0, TwinkleColors.length - 1);
             LastStates[x] = TwinkleColors[init]; // default white color
             item.stripArray[i] = LastStates[x];
           }
@@ -72,12 +72,12 @@ function Twinkle(config) {
           WasTwinkling = true;
         } else {
           // runnning animation
-          for (var x = 0; x < leds; x++) {
-            var shouldTwinkle = common.getRandomInt(0, 100);
+          for (let x = 0; x < leds; x++) {
+            let shouldTwinkle = common.getRandomInt(0, 100);
             if (shouldTwinkle > 10) {
               // only a 50% chance of twinkling
-              var currentColor = LastStates[x];
-              var newColor = GetNextColor(currentColor);
+              let currentColor = LastStates[x];
+              let newColor = GetNextColor(currentColor);
               LastStates[x] = newColor;
               item.stripArray[i] = LastStates[x];
             }
