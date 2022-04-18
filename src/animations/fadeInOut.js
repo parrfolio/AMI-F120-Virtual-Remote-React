@@ -16,14 +16,15 @@ function FadeInOut(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
         // item.stripArray[i] = common.fadeinout(0xff, 0x77, 0x00);
-        for (let k = 0; k < 256; k = k + 1) {
+
+        for (let k = 0; k < 256; k + 1) {
           r = (k / 256.0) * red;
           g = (k / 256.0) * green;
           b = (k / 256.0) * blue;
           item.stripArray[i] = r + g + b;
         }
 
-        for (let k = 255; k >= 0; k = k - 2) {
+        for (let k = 255; k >= 0; k - 2) {
           r = (k / 256.0) * red;
           g = (k / 256.0) * green;
           b = (k / 256.0) * blue;
