@@ -16,7 +16,7 @@ function FadeInOut(config) {
         //item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xcc9900);
       }
 
-      offset = (offset + 1) % 256;
+      offset = (offset + 1) / 256;
       ws281x.render();
     }, item.delay);
 
