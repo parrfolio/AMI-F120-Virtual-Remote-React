@@ -21,14 +21,11 @@ function common() {
   this.fadeinout = (pos, color) => {
     pos = 255 - pos;
 
-    if (pos < 85) {
+    if (pos < 150) {
       return color;
-    } else if (pos < 170) {
-      pos -= 85;
-      return 0x30cac1;
     } else {
-      pos -= 170;
-      return 0x111f99;
+      pos -= 150;
+      return 0xff0f00;
     }
   };
 

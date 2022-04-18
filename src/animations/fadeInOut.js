@@ -13,7 +13,7 @@ function FadeInOut(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
         //console.log((offset + i) % 256);
-        item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xcc9900);
+        item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xf9f9f9);
       }
 
       offset = (offset + 1) % 256;
