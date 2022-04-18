@@ -18,7 +18,7 @@ function common() {
   };
 
   //fade in and out
-  this.FadeInOut = (red, green, blue) => {
+  this.fadeinout = (red, green, blue) => {
     let r, g, b;
 
     for (let k = 0; k < 256; k = k + 1) {
