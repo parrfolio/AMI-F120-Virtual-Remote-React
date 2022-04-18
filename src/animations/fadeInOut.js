@@ -16,7 +16,7 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = common.fadeinout();
+        item.stripArray[i] = 4569600;
       }
       ws281x.render();
     }, item.delay);
