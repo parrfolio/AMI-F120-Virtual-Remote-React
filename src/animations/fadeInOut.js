@@ -28,13 +28,12 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = 0x000000;
         for (x = 0; x < eyeSize; x++) {
           //   LastStates[x] = theEye[theEye.length - 1];
-          item.stripArray[i + x] = 0xcc0000;
+          item.stripArray[i + x] = 0x000000;
         }
 
-        item.stripArray[i + eyeSize + 1] = 0x000000;
+        item.stripArray[i + eyeSize + 1] = 0xcc0000;
 
         // for(int i = 0; i < NUM_LEDS-EyeSize-2; i++) {
         //     setAll(0,0,0);
