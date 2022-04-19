@@ -21,24 +21,24 @@ function FadeInOut(config) {
       //   offset = (offset + 1) % 256;
 
       for (let i = 0; i < leds - eyeSize - 2; i++) {
-        console.log(i);
-        for (let j = 1; j <= eyeSize; j++) {
-          LastStates[i + j] = eyeColor;
-          console.log(LastStates[i + j]);
-          item.stripArray[i] = LastStates[i + j];
-        }
-        item.stripArray[i] = LastStates[i + eyeSize + 1];
-      }
-      //add delay here
-
-      for (let i = leds - eyeSize - 2; i > 0; i--) {
         item.stripArray[i] = 0x000000;
         for (let j = 1; j <= eyeSize; j++) {
           LastStates[i + j] = eyeColor;
           item.stripArray[i] = LastStates[i + j];
         }
+
         item.stripArray[i] = LastStates[i + eyeSize + 1];
       }
+      //add delay here
+
+      //   for (let i = leds - eyeSize - 2; i > 0; i--) {
+      //     item.stripArray[i] = 0x000000;
+      //     for (let j = 1; j <= eyeSize; j++) {
+      //       LastStates[i + j] = eyeColor;
+      //       item.stripArray[i] = LastStates[i + j];
+      //     }
+      //     item.stripArray[i] = LastStates[i + eyeSize + 1];
+      //   }
 
       ws281x.render();
     }, item.delay);
