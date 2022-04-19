@@ -23,11 +23,11 @@ function FadeInOut(config) {
       for (let i = 0; i < leds - eyeSize - 2; i++) {
         item.stripArray[i] = 0x000000;
         for (let j = 1; j <= eyeSize; j++) {
-          LastStates[i + j] = eyeColor;
-          item.stripArray[i] = LastStates[i + j];
+          LastStates[j] = eyeColor;
+          item.stripArray[i] = LastStates[j];
         }
 
-        item.stripArray[i] = LastStates[i + eyeSize + 1];
+        // item.stripArray[i] = LastStates[i + eyeSize + 1];
       }
       //add delay here
 
