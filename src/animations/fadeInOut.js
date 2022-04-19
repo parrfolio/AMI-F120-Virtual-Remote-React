@@ -28,7 +28,7 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
-        for (let x = 0; x < leds; x++) {
+        for (let x = 0; x < eyeSize; x++) {
           LastStates[x] = theEye[theEye.length - 1];
           item.stripArray[i] = LastStates[x];
         }
