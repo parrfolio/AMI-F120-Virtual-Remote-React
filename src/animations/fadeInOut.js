@@ -29,9 +29,11 @@ function FadeInOut(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       for (let i = item.start; i < item.stop; i++) {
         for (let x = 0; x < eyeSize; x++) {
-          LastStates[x] = theEye[theEye.length - 1];
-          item.stripArray[i] = LastStates[x];
+          //   LastStates[x] = theEye[theEye.length - 1];
+          console.log(x);
+          item.stripArray[x] = 0xcc0000;
         }
+        console.log(i + x);
       }
 
       // some other animation
