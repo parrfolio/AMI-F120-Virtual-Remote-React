@@ -9,36 +9,36 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = 0;
-    let LastStates = [];
+    let theEye = [
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+    ];
     let leds = common.num_leds();
     let eyeSize = 10;
-    let eyeColor = 0xcc0000;
+    let LastStates = [];
+
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
+      for (let i = item.start; i < item.stop; i++) {
+        for (let x = 0; x < leds; x++) {
+          LastStates[x] = theEye[theEye.length - 1];
+          item.stripArray[i] = LastStates[x];
+        }
+      }
+
+      // some other animation
       //   for (let i = item.start; i < item.stop; i++) {
       //     item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xf9f9f9);
       //   }
       //   offset = (offset + 1) % 256;
-
-      for (let i = 0; i < leds - eyeSize - 2; i++) {
-        item.stripArray[i] = 0x000000;
-        for (let j = 1; j <= eyeSize; j++) {
-          LastStates[j] = eyeColor;
-          item.stripArray[i] = LastStates[j];
-        }
-
-        // item.stripArray[i] = LastStates[i + eyeSize + 1];
-      }
-      //add delay here
-
-      //   for (let i = leds - eyeSize - 2; i > 0; i--) {
-      //     item.stripArray[i] = 0x000000;
-      //     for (let j = 1; j <= eyeSize; j++) {
-      //       LastStates[i + j] = eyeColor;
-      //       item.stripArray[i] = LastStates[i + j];
-      //     }
-      //     item.stripArray[i] = LastStates[i + eyeSize + 1];
-      //   }
 
       ws281x.render();
     }, item.delay);
