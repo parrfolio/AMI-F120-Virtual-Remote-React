@@ -31,7 +31,6 @@ function FadeInOut(config) {
         item.stripArray[i] = 0xcc0000;
         for (x = 0; x < eyeSize; x++) {
           //   LastStates[x] = theEye[theEye.length - 1];
-          console.log(x);
           item.stripArray[i + x] = 0x000000;
         }
 
