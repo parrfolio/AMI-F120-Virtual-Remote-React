@@ -33,7 +33,6 @@ function FadeInOut(config) {
           console.log(x);
           item.stripArray[x] = 0xcc0000;
         }
-        console.log(i + x);
       }
 
       // some other animation
