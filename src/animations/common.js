@@ -30,7 +30,6 @@ function common() {
   };
 
   this.rgb2Int = (r, g, b) => {
-    console.log("RGBInt", ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
     return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
   };
 
