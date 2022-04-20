@@ -30,10 +30,8 @@ function FadeInOut(config) {
       for (i = item.start; i < item.stop; i++) {
         for (x = 0; x < eyeSize; x++) {
           //   LastStates[x] = theEye[theEye.length - 1];
-          item.stripArray[x] = 0xcc0000;
+          item.stripArray[(offset + i) % 256] = 0xcc0000;
         }
-
-        item.stripArray[x + ((offset + i) % 256)] = 0xcc0000;
 
         // for(int i = 0; i < NUM_LEDS-EyeSize-2; i++) {
         //     setAll(0,0,0);
@@ -51,7 +49,7 @@ function FadeInOut(config) {
       //   for (let i = item.start; i < item.stop; i++) {
       //     item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xf9f9f9);
       //   }
-      //   offset = (offset + 1) % 256;
+      offset = (offset + 1) % 256;
 
       ws281x.render();
     }, item.delay);
