@@ -25,15 +25,17 @@ function FadeInOut(config) {
     let eyeSize = 10;
     let LastStates = [];
 
+    let offset = 0;
+
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
         for (x = 0; x < eyeSize; x++) {
           //   LastStates[x] = theEye[theEye.length - 1];
-          item.stripArray[i + x] = 0x000000;
+          item.stripArray[x] = 0xcc0000;
         }
 
-        item.stripArray[i + eyeSize + 1] = 0xcc0000;
+        item.stripArray[x + ((offset + i) % 256)] = 0xcc0000;
 
         // for(int i = 0; i < NUM_LEDS-EyeSize-2; i++) {
         //     setAll(0,0,0);
