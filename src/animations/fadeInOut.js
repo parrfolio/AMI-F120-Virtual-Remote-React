@@ -22,31 +22,24 @@ function FadeInOut(config) {
       0xcc0000,
     ];
     let leds = common.num_leds();
-    let eyeSize = 10;
+    let eyeSize = 25;
     let LastStates = [];
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
-        item.stripArray[(offset + i) % 256] = 0xcc0000;
-
-        // for(int i = 0; i < NUM_LEDS-EyeSize-2; i++) {
-        //     setAll(0,0,0);
-        //     setPixel(i, red/10, green/10, blue/10);
-        //     for(int j = 1; j <= EyeSize; j++) {
-        //       setPixel(i+j, red, green, blue);
-        //     }
-        //     setPixel(i+EyeSize+1, red/10, green/10, blue/10);
-        //     showStrip();
-        //     delay(SpeedDelay);
-        //   }
+        for (let x = 0; x < leds - eyeSize - 2; x++) {
+          item.stripArray[x] = 0xcc0000 / 10;
+          //   setPixel(x, red / 10, green / 10, blue / 10);
+          for (let j = 1; j <= eyeSize; j++) {
+            item.stripArray[x + j] = 0xcc0000;
+          }
+          item.stripArray[x + eyeSize + 1] = 0xcc0000 / 10;
+          //   setPixel(x + EyeSize + 1, red / 10, green / 10, blue / 10);
+          //   showStrip();
+          //   delay(SpeedDelay);
+        }
       }
-
-      // some other animation
-      //   for (let i = item.start; i < item.stop; i++) {
-      //     item.stripArray[i] = common.fadeinout((offset + i) % 256, 0xf9f9f9);
-      //   }
-      offset = (offset + 1) % 256;
 
       ws281x.render();
     }, item.delay);

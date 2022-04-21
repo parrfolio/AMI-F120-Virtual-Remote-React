@@ -36,7 +36,7 @@ function Classic(config) {
           case "front_mech_light":
             item.stripArray[i] = 0x111f99;
             break;
-          case "title_striplight_1":
+          case "main_cablight_1":
             item.stripArray[i] = 0x5ce091;
             break;
         }
