@@ -28,10 +28,6 @@ function FadeInOut(config) {
       return new Promise((resolve) => setTimeout(resolve, milliseconds));
     };
 
-    const range = (n) =>
-      (Array.range = (start, end) =>
-        Array.from({ length: end - start }, (v, k) => k + start));
-
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
@@ -39,11 +35,9 @@ function FadeInOut(config) {
           item.stripArray[x] = 0xcc0000 / 10;
           //   setPixel(x, red / 10, green / 10, blue / 10);
           (async () => {
+            await sleep(500);
             for (let j = 1; j <= eyeSize; j++) {
-              await sleep(500);
-              let array = item.stripArray;
-              let range = array.range(x + 10, j);
-              range = 0xcc0000;
+              item.stripArray[x + j] = 0xcc0000;
             }
             item.stripArray[x + eyeSize + 1] = 0xcc0000 / 10;
             //   setPixel(x + EyeSize + 1, red / 10, green / 10, blue / 10);
