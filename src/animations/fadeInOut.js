@@ -9,22 +9,41 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = 0;
+    let theEye = [
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+      0xcc0000,
+    ];
     let leds = common.num_leds();
-    let eyeSize = 25;
+    let eyeSize = 20;
+    let LastStates = [];
+    const sleep = (milliseconds) => {
+      return new Promise((resolve) => setTimeout(resolve, milliseconds));
+    };
+
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
         for (let x = 0; x < leds - eyeSize - 2; x++) {
-          //item.stripArray[x] = 0xcc0000 / 10;
+          item.stripArray[x] = 0xcc0000 / 10;
           //   setPixel(x, red / 10, green / 10, blue / 10);
-          for (let j = 1; j <= eyeSize; j++) {
-            console.log(x + j);
-            item.stripArray[x + j] = 0xcc0000;
-          }
-          // item.stripArray[x + eyeSize + 1] = 0xcc0000 / 10;
-          //   setPixel(x + EyeSize + 1, red / 10, green / 10, blue / 10);
-          //   showStrip();
-          //   delay(SpeedDelay);
+          (async () => {
+            await sleep(500);
+            for (let j = 1; j <= eyeSize; j++) {
+              item.stripArray[x + j] = 0xcc0000;
+            }
+            item.stripArray[x + eyeSize + 1] = 0xcc0000 / 10;
+            //   setPixel(x + EyeSize + 1, red / 10, green / 10, blue / 10);
+            //   showStrip();
+            //   delay(SpeedDelay);
+          })();
         }
       }
 
