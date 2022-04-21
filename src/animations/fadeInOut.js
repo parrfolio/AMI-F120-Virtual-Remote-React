@@ -21,7 +21,7 @@ function FadeInOut(config) {
       0xcc0000,
       0xcc0000,
     ];
-    let totalLeds = common.num_leds();
+    let leds = common.num_leds();
     let eyeSize = 20;
     let LastStates = [];
     const sleep = (milliseconds) => {
@@ -33,11 +33,11 @@ function FadeInOut(config) {
       let stripLeds = item.start + item.stop;
       for (i = item.start; i < item.stop; i++) {
         if (item.name === "title_striplight_1") {
-          item.stripArray[i] = common.cylon((offset + i) % stripLeds, 0xcc0000);
+          item.stripArray[i] = common.cylon((offset + i) % 256, 0xcc0000);
         }
       }
 
-      offset = (offset + 1) % stripLeds;
+      offset = (offset + 1) % 256;
 
       ws281x.render();
     }, item.delay);
