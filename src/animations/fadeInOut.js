@@ -18,6 +18,7 @@ function FadeInOut(config) {
           //item.stripArray[x] = 0xcc0000 / 10;
           //   setPixel(x, red / 10, green / 10, blue / 10);
           for (let j = 1; j <= eyeSize; j++) {
+            console.log(x + j);
             item.stripArray[x + j] = 0xcc0000;
           }
           // item.stripArray[x + eyeSize + 1] = 0xcc0000 / 10;
