@@ -19,9 +19,9 @@ function common() {
 
   //cylon
   this.cylon = (pos, color) => {
-    //pos = 255 - pos;
+    pos = 255 - pos;
     if (pos < 20) {
-      return color;
+      return this.rgb2Int(255 - pos * 3, 0, pos * 3);
     }
   };
 
