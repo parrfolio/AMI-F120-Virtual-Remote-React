@@ -33,7 +33,7 @@ function FadeInOut(config) {
       for (i = item.start; i < item.stop; i++) {
         item.stripArray[i] = common.cylon((offset + i) % 256, 0xcc0000);
       }
-      offset = (offset + 1) % 256;
+
       ws281x.render();
     }, item.delay);
 
