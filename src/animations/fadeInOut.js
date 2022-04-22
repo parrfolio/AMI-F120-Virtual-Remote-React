@@ -9,31 +9,14 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = 0;
-    let theEye = [
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-      0xcc0000,
-    ];
     let leds = common.num_leds();
-    let eyeSize = 20;
-    let LastStates = [];
-    const sleep = (milliseconds) => {
-      return new Promise((resolve) => setTimeout(resolve, milliseconds));
-    };
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = common.cylon((offset + i) % 256, 0xcc0000);
+        item.stripArray[i] = common.cylon((offset + i) % leds, 0xcc0000);
       }
-
+      offset = (offset + 1) % leds;
       ws281x.render();
     }, item.delay);
 
