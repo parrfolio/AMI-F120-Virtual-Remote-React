@@ -19,7 +19,7 @@ function common() {
 
   //cylon
   this.cylon = (pos, color) => {
-    pos = 255 - pos;
+    pos = this.num_leds - pos;
     if (pos < 20) {
       return color;
     }
