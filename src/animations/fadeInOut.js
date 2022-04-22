@@ -14,9 +14,9 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       for (i = item.start; i < item.stop; i++) {
-        item.stripArray[i] = common.cylon((offset + i) % leds, 0xcc0000);
+        item.stripArray[i] = common.cylon((offset + i) % 256, 0xcc0000);
       }
-      offset = (offset + 1) % leds;
+      offset = (offset + 1) % 256;
       ws281x.render();
     }, item.delay);
 
