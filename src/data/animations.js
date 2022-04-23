@@ -316,22 +316,6 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "title_striplight_1a",
-        delay: 50,
-        start: 20,
-        stop: 40,
-        brightness: 255,
-        channelSet: 0,
-      },
-      {
-        name: "title_striplight_1b",
-        delay: 50,
-        start: 40,
-        stop: 60,
-        brightness: 255,
-        channelSet: 0,
-      },
-      {
         name: "title_striplight_2",
         delay: 50,
         start: 60,
