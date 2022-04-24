@@ -18,12 +18,12 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         for (i = item.start; i < item.stop; i++) {
           item.stripArray[i] = common.cylon(
-            (offset + i) % leds,
+            (offset + i) % item.stop,
             0xcc0000,
             leds
           );
         }
-        offset = (offset + 1) % leds;
+        offset = (offset + 1) % item.stop;
         ws281x.render();
       }
     }, item.delay);
