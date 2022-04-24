@@ -34,7 +34,7 @@ function FadeInOut(config) {
           );
         }
 
-        offset = (offset + 1) % leds;
+        offset = (offset - 1) % leds;
         //offset = (offset + 1) % leds;
         ws281x.render();
       }
