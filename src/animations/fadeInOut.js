@@ -26,18 +26,16 @@ function FadeInOut(config) {
         //   );
         // }
 
-        //offset = (offset + 1) % leds;
-
         for (i = item.stop; i > item.start; i--) {
           item.stripArray[i] = common.cylon(
-            (offset + i) % ledsOpp,
+            (offset - i) % leds,
             0xcc0000,
-            ledsOpp
+            leds
           );
         }
 
-        offset = (offset + 1) % ledsOpp;
-
+        offset = (offset - 1) % leds;
+        //offset = (offset + 1) % leds;
         ws281x.render();
       }
     }, item.delay);
