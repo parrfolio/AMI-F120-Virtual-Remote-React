@@ -28,13 +28,13 @@ function FadeInOut(config) {
 
         for (i = item.stop; i > item.start; i--) {
           item.stripArray[i] = common.cylon(
-            (offset - i) % leds,
+            (offset + i) % leds,
             0xcc0000,
             leds
           );
         }
 
-        offset = (offset - 1) % leds;
+        offset = (offset + 1) % leds;
         //offset = (offset + 1) % leds;
         ws281x.render();
       }
