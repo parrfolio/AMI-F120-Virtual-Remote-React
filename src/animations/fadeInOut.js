@@ -11,7 +11,7 @@ function FadeInOut(config) {
     let offset = item.start;
     // let leds = common.num_leds();
 
-    let leds = item.start + itme.stop;
+    let leds = item.start + item.stop;
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
