@@ -19,8 +19,8 @@ function common() {
 
   //cylon
   this.cylon = (pos, color, totalLeds) => {
-    pos = totalLeds + pos;
-    if (pos < 5) {
+    pos = totalLeds - pos;
+    if (5 > pos) {
       return color;
     }
   };
