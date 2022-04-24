@@ -24,7 +24,7 @@ function FadeInOut(config) {
         //   );
         // }
 
-        for (i = item.stop; i > item.start; i--) {
+        for (i = item.start; i > item.stop; i--) {
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
             0xcc0000,
