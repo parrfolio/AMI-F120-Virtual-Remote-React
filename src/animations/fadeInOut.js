@@ -11,19 +11,19 @@ function FadeInOut(config) {
     let offset = item.start;
     // let leds = common.num_leds();
 
-    let leds = item.start + item.stop;
+    let leds = item.stop - item.start;
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
         for (i = item.start; i < item.stop; i++) {
           item.stripArray[i] = common.cylon(
-            (offset + i) % item.stop,
+            (offset + i) % leds,
             0xcc0000,
             leds
           );
         }
-        offset = (offset + 1) % item.stop;
+        offset = (offset + 1) % leds;
         ws281x.render();
       }
     }, item.delay);
