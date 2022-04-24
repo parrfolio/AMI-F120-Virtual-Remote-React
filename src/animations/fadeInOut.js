@@ -8,8 +8,10 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    let offset = 0;
-    let leds = common.num_leds();
+    let offset = item.start;
+    // let leds = common.num_leds();
+
+    let leds = item.start + itme.stop;
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
