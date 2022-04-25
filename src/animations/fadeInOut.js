@@ -9,7 +9,7 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
-    let eyeSize = 10;
+    let eyeSize = 12;
     let reversing = false;
 
     let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
