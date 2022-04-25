@@ -9,17 +9,13 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
+    let leds = item.stop - item.start;
+    let ledsOpp = item.start - item.stop;
     let eyeSize = 10;
+    let eyeColor = 0xcc0000;
     let reversing = false;
 
-    let reverseAnimation = (
-      stop,
-      start,
-      stripArray,
-      eyeColor,
-      leds,
-      eyeSize
-    ) => {
+    let reverseAnimation = (stop, start, stripArray, offset) => {
       for (i = stop - 1; i > start; i--) {
         item.stripArray[i] = common.cylon(
           (offset + i) % leds,
@@ -31,14 +27,7 @@ function FadeInOut(config) {
       offset = (offset - 1) % leds;
     };
 
-    let forwardAnimation = (
-      stop,
-      start,
-      stripArray,
-      eyeColor,
-      leds,
-      eyeSize
-    ) => {
+    let forwardAnimation = (stop, start, stripArray) => {
       for (i = start; i < stop; i++) {
         item.stripArray[i] = common.cylon(
           (offset + i) % leds,
@@ -60,48 +49,16 @@ function FadeInOut(config) {
         if (!reversing) {
           if (offset === item.start - eyeSize) {
             reversing = true;
-            reverseAnimation(
-              item.stop,
-              item.start,
-              item.stripArray,
-              item.start,
-              0xcc0000,
-              item.stop - item.start,
-              eyeSize
-            );
+            reverseAnimation(item.stop, item.start, item.stripArray);
           } else {
-            forwardAnimation(
-              item.stop,
-              item.start,
-              item.stripArray,
-              item.start,
-              0xcc0000,
-              item.stop - item.start,
-              eyeSize
-            );
+            forwardAnimation(item.stop, item.start, item.stripArray);
           }
         } else {
           if (offset === 0) {
             reversing = false;
-            forwardAnimation(
-              item.stop,
-              item.start,
-              item.stripArray,
-              item.start,
-              0xcc0000,
-              item.stop - item.start,
-              eyeSize
-            );
+            forwardAnimation(item.stop, item.start, item.stripArray);
           } else {
-            reverseAnimation(
-              item.stop,
-              item.start,
-              item.stripArray,
-              item.start,
-              0xcc0000,
-              item.stop - item.start,
-              eyeSize
-            );
+            reverseAnimation(item.stop, item.start, item.stripArray);
           }
         }
         ws281x.render();
