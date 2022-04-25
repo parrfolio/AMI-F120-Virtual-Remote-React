@@ -21,7 +21,7 @@ function FadeInOut(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
         console.log(item);
-        item.brightness = randomIntFromInterval(0, 255);
+        item.brightness = 10;
         for (i = item.start; i < item.stop; i++) {
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
@@ -31,7 +31,7 @@ function FadeInOut(config) {
           );
 
           console.log(i);
-          if (i === item.stop - eyeSize) break;
+          if (item.stripArray[i] === item.stop - eyeSize) break;
         }
         offset = (offset + 1) % leds;
 
