@@ -27,6 +27,18 @@ function FadeInOut(config) {
       offset = (offset - 1) % leds;
     };
 
+    let forwardAnimation = (stop, start, stripArray) => {
+      for (i = start; i < stop; i++) {
+        item.stripArray[i] = common.cylon(
+          (offset + i) % leds,
+          eyeColor,
+          leds,
+          eyeSize
+        );
+      }
+      offset = (offset + 1) % leds;
+    };
+
     const randomIntFromInterval = (min, max) =>
       Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -39,28 +51,12 @@ function FadeInOut(config) {
             reversing = true;
             reverseAnimation(item.stop, item.start, item.stripArray);
           } else {
-            for (i = item.start; i < item.stop; i++) {
-              item.stripArray[i] = common.cylon(
-                (offset + i) % leds,
-                eyeColor,
-                leds,
-                eyeSize
-              );
-            }
-            offset = (offset + 1) % leds;
+            forwardAnimation(item.stop, item.start, item.stripArray);
           }
         } else {
           if (offset === 0) {
             reversing = false;
-            for (i = item.start; i < item.stop; i++) {
-              item.stripArray[i] = common.cylon(
-                (offset + i) % leds,
-                eyeColor,
-                leds,
-                eyeSize
-              );
-            }
-            offset = (offset + 1) % leds;
+            forwardAnimation(item.stop, item.start, item.stripArray);
           } else {
             reverseAnimation(item.stop, item.start, item.stripArray);
           }
