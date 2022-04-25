@@ -18,10 +18,10 @@ function common() {
   };
 
   //cylon
-  this.cylon = (pos, color, totalLeds) => {
+  this.cylon = (pos, color, totalLeds, eyeSize) => {
     pos = totalLeds - pos;
 
-    if (pos < 15) {
+    if (pos < eyeSize) {
       return color;
     }
   };

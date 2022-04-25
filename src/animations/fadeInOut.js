@@ -9,11 +9,10 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
-    // let leds = common.num_leds();
-
     let leds = item.stop - item.start;
-
     let ledsOpp = item.start - item.stop;
+    let eyeSize = 15;
+    let eyeColor = 0xcc0000;
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
@@ -21,17 +20,19 @@ function FadeInOut(config) {
         for (i = item.start; i < item.stop; i++) {
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
-            0xcc0000,
-            leds
+            eyeColor,
+            leds,
+            eyeSize
           );
         }
         offset = (offset + 1) % leds;
 
         // for (i = item.stop - 1; i > item.start; i--) {
         //   item.stripArray[i] = common.cylon(
-        //     (offset + i) % leds,
-        //     0xcc0000,
-        //     leds
+        // (offset + i) % leds,
+        // eyeColor,
+        // leds,
+        // eyeSize
         //   );
         // }
         // offset = (offset - 1) % leds;
