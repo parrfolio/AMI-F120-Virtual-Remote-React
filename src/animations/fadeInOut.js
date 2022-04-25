@@ -18,14 +18,13 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        console.log(item.start);
-        console.log(item.stop);
         for (i = item.start; i < item.stop; i++) {
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
             0xcc0000,
             leds
           );
+          if (i === item.stop) break;
         }
         offset = (offset + 1) % leds;
 
