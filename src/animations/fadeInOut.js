@@ -24,7 +24,7 @@ function FadeInOut(config) {
             0xcc0000,
             leds
           );
-          if (i === 10) break;
+          if (i === 40) break;
         }
         offset = (offset + 1) % leds;
 
