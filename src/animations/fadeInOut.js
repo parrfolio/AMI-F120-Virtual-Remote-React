@@ -20,8 +20,7 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        console.log(item);
-        item.brightness = 10;
+        //item.brightness = 10;
 
         let foo;
         for (i = item.start; i < item.stop; i++) {
