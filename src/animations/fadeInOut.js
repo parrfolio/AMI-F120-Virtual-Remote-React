@@ -29,6 +29,9 @@ function FadeInOut(config) {
             leds,
             eyeSize
           );
+
+          console.log(i);
+          if (i === item.stop - eyeSize) break;
         }
         offset = (offset + 1) % leds;
 
