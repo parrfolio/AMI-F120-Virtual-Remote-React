@@ -20,10 +20,11 @@ function common() {
   //cylon
   this.cylon = (pos, color, totalLeds, eyeSize) => {
     pos = totalLeds - pos;
-    if (pos < eyeSize / 3) {
+
+    if (pos < eyeSize) {
       return color;
-    } else if (pos < eyeSize) {
-      return 0xcc0000160;
+    } else if (pos > eyeSize) {
+      return 0x450000;
     }
   };
 
