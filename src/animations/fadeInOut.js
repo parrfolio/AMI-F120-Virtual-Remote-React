@@ -21,7 +21,10 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        item.brightness = 10;
+        //item.brightness = 10;
+
+        console.log("119", item == 119);
+        console.log("60", item == 60);
         if (!reversing) {
           if (item == 119) {
             reversing = true;
