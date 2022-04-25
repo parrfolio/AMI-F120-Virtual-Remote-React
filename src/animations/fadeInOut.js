@@ -13,6 +13,7 @@ function FadeInOut(config) {
     let ledsOpp = item.start - item.stop;
     let eyeSize = 15;
     let eyeColor = 0xcc0000;
+    let reversing = false;
 
     const randomIntFromInterval = (min, max) =>
       Math.floor(Math.random() * (max - min + 1) + min);
@@ -21,26 +22,38 @@ function FadeInOut(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
         item.brightness = 10;
+        if (!reversing) {
+          if (i == 119) {
+            reversing = true;
+          } else {
+            i++;
+          }
 
-        // for (i = item.start; i < item.stop; i++) {
-        //   item.stripArray[i] = common.cylon(
-        //     (offset + i) % leds,
-        //     eyeColor,
-        //     leds,
-        //     eyeSize
-        //   );
-        // }
-        // offset = (offset + 1) % leds;
-
-        for (i = item.stop - 1; i > item.start; i--) {
-          item.stripArray[i] = common.cylon(
-            (offset + i) % leds,
-            eyeColor,
-            leds,
-            eyeSize
-          );
+          for (i = item.start; i < item.stop; i++) {
+            item.stripArray[i] = common.cylon(
+              (offset + i) % leds,
+              eyeColor,
+              leds,
+              eyeSize
+            );
+          }
+          offset = (offset + 1) % leds;
+        } else {
+          if (i == 0) {
+            reversing = false;
+          } else {
+            i--;
+          }
+          for (i = item.stop - 1; i > item.start; i--) {
+            item.stripArray[i] = common.cylon(
+              (offset + i) % leds,
+              eyeColor,
+              leds,
+              eyeSize
+            );
+          }
+          offset = (offset - 1) % leds;
         }
-        offset = (offset - 1) % leds;
 
         ws281x.render();
       }
