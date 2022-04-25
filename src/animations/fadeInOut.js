@@ -17,12 +17,12 @@ function FadeInOut(config) {
 
     let reverseAnimation = (stop, start, stripArray) => {
       for (i = stop - 1; i > start; i--) {
-        return (stripArray[i] = common.cylon(
+        item.stripArray[i] = common.cylon(
           (offset + i) % leds,
           eyeColor,
           leds,
           eyeSize
-        ));
+        );
       }
       offset = (offset - 1) % leds;
     };
