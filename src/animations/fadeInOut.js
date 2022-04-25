@@ -14,12 +14,16 @@ function FadeInOut(config) {
     let eyeSize = 15;
     let eyeColor = 0xcc0000;
 
+    const randomIntFromInterval = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1) + min);
+
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
         console.log(item);
 
         for (i = item.start; i < item.stop; i++) {
+          item.brightness[i] = randomIntFromInterval(0, 255);
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
             eyeColor,
