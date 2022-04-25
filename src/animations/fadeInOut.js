@@ -24,14 +24,13 @@ function FadeInOut(config) {
         console.log(offset === 59);
 
         for (i = item.start; i < item.stop; i++) {
+          if (offset === 49) break;
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
             eyeColor,
             leds,
             eyeSize
           );
-
-          if (offset === 49) break;
         }
         offset = (offset + 1) % leds;
 
