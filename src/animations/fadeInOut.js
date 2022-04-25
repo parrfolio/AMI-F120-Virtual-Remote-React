@@ -23,8 +23,8 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
 
-        console.log("119", item == 119);
-        console.log("60", item == 60);
+        console.log(item, item === 119);
+        console.log(item, item === 60);
         if (!reversing) {
           if (item == 119) {
             reversing = true;
