@@ -23,8 +23,9 @@ function FadeInOut(config) {
         console.log(item);
         item.brightness = 10;
 
-        console.log(item.stripArray === 119);
+        let foo;
         for (i = item.start; i < item.stop; i++) {
+          foo = item.stripArray[i] === 119;
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
             eyeColor,
@@ -35,6 +36,8 @@ function FadeInOut(config) {
           if (item.stripArray[i] === item.stop - eyeSize) break;
         }
         offset = (offset + 1) % leds;
+
+        console.log(foo);
 
         // for (i = item.stop - 1; i > item.start; i--) {
         //   item.stripArray[i] = common.cylon(
