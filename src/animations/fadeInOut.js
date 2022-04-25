@@ -22,9 +22,7 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
 
-        let foo;
         for (i = item.start; i < item.stop; i++) {
-          foo = item.stripArray[i] === 119;
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
             eyeColor,
@@ -36,7 +34,7 @@ function FadeInOut(config) {
         }
         offset = (offset + 1) % leds;
 
-        console.log(foo);
+        console.log(offset === 119);
 
         // for (i = item.stop - 1; i > item.start; i--) {
         //   item.stripArray[i] = common.cylon(
