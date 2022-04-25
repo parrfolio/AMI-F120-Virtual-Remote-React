@@ -23,7 +23,7 @@ function common() {
     if (pos < eyeSize / 3) {
       return color;
     } else if (pos < eyeSize) {
-      return 0xffffff10;
+      return 0xcc0000160;
     }
   };
 
