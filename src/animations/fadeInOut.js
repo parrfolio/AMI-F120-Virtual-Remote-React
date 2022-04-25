@@ -9,13 +9,12 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
-    let leds = item.stop - item.start;
-    let ledsOpp = item.start - item.stop;
     let eyeSize = 10;
+
     let eyeColor = 0xcc0000;
     let reversing = false;
 
-    let reverseAnimation = (stop, start, stripArray) => {
+    let reverseAnimation = (stop, start, stripArray, leds) => {
       for (i = stop - 1; i > start; i--) {
         stripArray[i] = common.cylon(
           (offset + i) % leds,
@@ -27,7 +26,7 @@ function FadeInOut(config) {
       offset = (offset - 1) % leds;
     };
 
-    let forwardAnimation = (start, stop, stripArray) => {
+    let forwardAnimation = (start, stop, stripArray, leds) => {
       for (i = start; i < stop; i++) {
         stripArray[i] = common.cylon(
           (offset + i) % leds,
@@ -49,16 +48,36 @@ function FadeInOut(config) {
         if (!reversing) {
           if (offset === item.start - eyeSize) {
             reversing = true;
-            reverseAnimation(item.stop, item.start, item.stripArray);
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              item.stop - item.start
+            );
           } else {
-            forwardAnimation(item.start, item.stop, item.stripArray);
+            forwardAnimation(
+              item.start,
+              item.stop,
+              item.stripArray,
+              item.stop - item.start
+            );
           }
         } else {
           if (offset === 0) {
             reversing = false;
-            forwardAnimation(item.start, item.stop, item.stripArray);
+            forwardAnimation(
+              item.start,
+              item.stop,
+              item.stripArray,
+              item.stop - item.start
+            );
           } else {
-            reverseAnimation(item.stop, item.start, item.stripArray);
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              item.stop - item.start
+            );
           }
         }
         ws281x.render();
