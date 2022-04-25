@@ -24,7 +24,7 @@ function FadeInOut(config) {
         //item.brightness = 10;
 
         console.log(offset, offset === 59);
-        console.log(offset, offset >= 0);
+        console.log(offset, offset === 0);
         if (!reversing) {
           if (offset === 59) {
             reversing = true;
@@ -49,7 +49,7 @@ function FadeInOut(config) {
             offset = (offset + 1) % leds;
           }
         } else {
-          if (offset >= 0) {
+          if (offset === 0) {
             reversing = false;
             for (i = item.start; i < item.stop; i++) {
               item.stripArray[i] = common.cylon(
