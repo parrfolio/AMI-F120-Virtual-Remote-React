@@ -11,7 +11,7 @@ function FadeInOut(config) {
     let offset = item.start;
     let leds = item.stop - item.start;
     let ledsOpp = item.start - item.stop;
-    let eyeSize = 10;
+    let eyeSize = 15;
     let eyeColor = 0xcc0000;
 
     const randomIntFromInterval = (min, max) =>
@@ -20,17 +20,14 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        //item.brightness = 10;
+        item.brightness = 10;
         for (i = item.start; i < item.stop; i++) {
-          if (i === 109) {
-            item.stripArray[i] = common.cylon(
-              (offset + i) % leds,
-              eyeColor,
-              leds,
-              eyeSize
-            );
-            break;
-          }
+          item.stripArray[i] = common.cylon(
+            (offset + i) % leds,
+            eyeColor,
+            leds,
+            eyeSize
+          );
         }
         offset = (offset + 1) % leds;
 
