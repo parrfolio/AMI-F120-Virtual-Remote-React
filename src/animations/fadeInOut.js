@@ -21,7 +21,7 @@ function FadeInOut(config) {
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
-        console.log();
+        console.log(offset === 0, offset === 59);
 
         if (offset === 0) {
           for (i = item.start; i < item.stop; i++) {
