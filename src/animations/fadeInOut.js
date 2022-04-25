@@ -23,7 +23,7 @@ function FadeInOut(config) {
         console.log(item);
         item.brightness = 10;
 
-        console.log(offset === 119);
+        console.log(item.stripArray === 119);
         for (i = item.start; i < item.stop; i++) {
           item.stripArray[i] = common.cylon(
             (offset + i) % leds,
