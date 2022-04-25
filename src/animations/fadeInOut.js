@@ -15,9 +15,17 @@ function FadeInOut(config) {
     let eyeColor = 0xcc0000;
     let reversing = false;
 
-    let reverseAnimation = (stop, start, stripArray) => {
+    let reverseAnimation = (
+      stop,
+      start,
+      stripArray,
+      offset,
+      eyeColor,
+      leds,
+      eyeSize
+    ) => {
       for (i = stop - 1; i > start; i--) {
-        item.stripArray[i] = common.cylon(
+        stripArray[i] = common.cylon(
           (offset + i) % leds,
           eyeColor,
           leds,
@@ -25,6 +33,26 @@ function FadeInOut(config) {
         );
       }
       offset = (offset - 1) % leds;
+    };
+
+    let forwardAnimation = (
+      stop,
+      start,
+      stripArray,
+      offset,
+      eyeColor,
+      leds,
+      eyeSize
+    ) => {
+      for (i = start; i < stop; i++) {
+        stripArray[i] = common.cylon(
+          (offset + i) % leds,
+          eyeColor,
+          leds,
+          eyeSize
+        );
+      }
+      offset = (offset + 1) % leds;
     };
 
     const randomIntFromInterval = (min, max) =>
@@ -37,32 +65,48 @@ function FadeInOut(config) {
         if (!reversing) {
           if (offset === item.start - eyeSize) {
             reversing = true;
-            reverseAnimation(item.stop, item.start, item.stripArray);
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              offset,
+              eyeColor,
+              leds,
+              eyeSize
+            );
           } else {
-            for (i = item.start; i < item.stop; i++) {
-              item.stripArray[i] = common.cylon(
-                (offset + i) % leds,
-                eyeColor,
-                leds,
-                eyeSize
-              );
-            }
-            offset = (offset + 1) % leds;
+            forwardAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              offset,
+              eyeColor,
+              leds,
+              eyeSize
+            );
           }
         } else {
           if (offset === 0) {
             reversing = false;
-            for (i = item.start; i < item.stop; i++) {
-              item.stripArray[i] = common.cylon(
-                (offset + i) % leds,
-                eyeColor,
-                leds,
-                eyeSize
-              );
-            }
-            offset = (offset + 1) % leds;
+            forwardAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              offset,
+              eyeColor,
+              leds,
+              eyeSize
+            );
           } else {
-            reverseAnimation(item.stop, item.start, item.stripArray);
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              offset,
+              eyeColor,
+              leds,
+              eyeSize
+            );
           }
         }
         ws281x.render();
