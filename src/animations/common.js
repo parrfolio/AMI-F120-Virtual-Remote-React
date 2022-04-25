@@ -22,7 +22,7 @@ function common() {
     pos = totalLeds - pos;
 
     if (pos < eyeSize) {
-      return color;
+      return this.rgb2Int(255 - pos * 3, 0, pos * 3);
     }
   };
 
