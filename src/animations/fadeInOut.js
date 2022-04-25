@@ -23,10 +23,10 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
 
-        console.log(item, item === 119);
-        console.log(item, item === 60);
+        console.log(offset, offset === 59);
+        console.log(offset, offset >= 0);
         if (!reversing) {
-          if (item == 119) {
+          if (offset === 59) {
             reversing = true;
             for (i = item.stop - 1; i > item.start; i--) {
               item.stripArray[i] = common.cylon(
@@ -49,7 +49,7 @@ function FadeInOut(config) {
             offset = (offset + 1) % leds;
           }
         } else {
-          if (item == 60) {
+          if (offset >= 0) {
             reversing = false;
             for (i = item.start; i < item.stop; i++) {
               item.stripArray[i] = common.cylon(
