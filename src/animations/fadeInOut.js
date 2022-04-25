@@ -18,25 +18,23 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        if (offset === item.start + 1) {
-          for (i = item.start; i < item.stop; i++) {
-            item.stripArray[i] = common.cylon(
-              (offset + i) % leds,
-              0xcc0000,
-              leds
-            );
-          }
-          offset = (offset + 1) % leds;
-        } else if (offset === item.stop - 1) {
-          for (i = item.stop - 1; i > item.start; i--) {
-            item.stripArray[i] = common.cylon(
-              (offset + i) % leds,
-              0xcc0000,
-              leds
-            );
-          }
-          offset = (offset - 1) % leds;
+        // for (i = item.start; i < item.stop; i++) {
+        //   item.stripArray[i] = common.cylon(
+        //     (offset + i) % leds,
+        //     0xcc0000,
+        //     leds
+        //   );
+        // }
+        //offset = (offset + 1) % leds;
+
+        for (i = item.stop - 1; i > item.start; i--) {
+          item.stripArray[i] = common.cylon(
+            (offset + i) % leds,
+            0xcc0000,
+            leds
+          );
         }
+        offset = (offset - 1) % leds;
 
         ws281x.render();
       }
