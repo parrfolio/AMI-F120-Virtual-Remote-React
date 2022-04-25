@@ -10,7 +10,8 @@ function FadeInOut(config) {
   strips.forEach((item) => {
     let offset = item.start;
     let leds = item.stop - item.start;
-    let eyeSize = 15;
+    let ledsOpp = item.start - item.stop;
+    let eyeSize = 10;
     let eyeColor = 0xcc0000;
     let reversing = false;
 
@@ -22,10 +23,10 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
 
-        console.log(offset, offset === leds - eyeSize);
-        console.log(offset, offset === item.start);
+        console.log(offset, offset === 59);
+        console.log(offset, offset === 0);
         if (!reversing) {
-          if (offset === 59) {
+          if (offset === 49) {
             reversing = true;
             for (i = item.stop - 1; i > item.start; i--) {
               item.stripArray[i] = common.cylon(
@@ -48,7 +49,7 @@ function FadeInOut(config) {
             offset = (offset + 1) % leds;
           }
         } else {
-          if (offset === item.start) {
+          if (offset === 0) {
             reversing = false;
             for (i = item.start; i < item.stop; i++) {
               item.stripArray[i] = common.cylon(
