@@ -9,7 +9,7 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
-    let ledSet = item.stop - item.start;
+    let leds = item.stop - item.start;
     let eyeSize = 15;
     let eyeColor = 0xcc0000;
     let reversing = false;
@@ -22,7 +22,7 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
 
-        console.log(offset, offset === ledSet - eyeSize);
+        console.log(offset, offset === leds - eyeSize);
         console.log(offset, offset === item.start);
         if (!reversing) {
           if (offset === 59) {
