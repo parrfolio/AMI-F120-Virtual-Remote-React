@@ -9,6 +9,7 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
+    let eyeSize = 10;
     let reversing = false;
 
     let reverseAnimation = (
@@ -66,7 +67,7 @@ function FadeInOut(config) {
               item.start,
               0xcc0000,
               item.stop - item.start,
-              10
+              eyeSize
             );
           } else {
             forwardAnimation(
@@ -75,7 +76,8 @@ function FadeInOut(config) {
               item.stripArray,
               item.start,
               0xcc0000,
-              item.stop - item.start
+              item.stop - item.start,
+              eyeSize
             );
           }
         } else {
@@ -87,7 +89,8 @@ function FadeInOut(config) {
               item.stripArray,
               item.start,
               0xcc0000,
-              item.stop - item.start
+              item.stop - item.start,
+              eyeSize
             );
           } else {
             reverseAnimation(
@@ -96,7 +99,8 @@ function FadeInOut(config) {
               item.stripArray,
               item.start,
               0xcc0000,
-              item.stop - item.start
+              item.stop - item.start,
+              eyeSize
             );
           }
         }
