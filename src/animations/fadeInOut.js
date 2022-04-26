@@ -8,7 +8,6 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    console.log("Starting Offset", offset);
     let eyeSize = 12;
     let reversing = false;
 
