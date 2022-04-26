@@ -83,7 +83,7 @@ function FadeInOut(config) {
           }
         }
         ws281x.render();
-      } else if (item.name === "title_striplight_1") {
+      } else if (item.name === "back_mech_light") {
         //item.brightness = 10;
         if (!reversing) {
           if (offset === item.start - eyeSize) {
