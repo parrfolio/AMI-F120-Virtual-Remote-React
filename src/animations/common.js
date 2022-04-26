@@ -49,6 +49,10 @@ function common() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  //random number from range
+  this.randomIntFromInterval = (min, max) =>
+    Math.floor(Math.random() * (max - min + 1) + min);
+
   //RGBtoHex
   this.rgbToHex = function(r, g, b) {
     return parseInt(

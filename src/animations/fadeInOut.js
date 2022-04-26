@@ -8,17 +8,7 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    let eyeSize = 12;
-    let reversing = false;
-
-    let reverseAnimation = (
-      stop,
-      start,
-      stripArray,
-      leds,
-      eyeColor,
-      offset
-    ) => {
+    let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
       for (i = stop - 1; i > start; i--) {
         stripArray[i] = common.cylon(
           (offset + i) % leds,
@@ -30,14 +20,7 @@ function FadeInOut(config) {
       offset = (offset - 1) % leds;
     };
 
-    let forwardAnimation = (
-      start,
-      stop,
-      stripArray,
-      leds,
-      eyeColor,
-      offset
-    ) => {
+    let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
       for (i = start; i < stop; i++) {
         stripArray[i] = common.cylon(
           (offset + i) % leds,
@@ -49,14 +32,12 @@ function FadeInOut(config) {
       offset = (offset + 1) % leds;
     };
 
-    let offset = item.start;
-
-    const randomIntFromInterval = (min, max) =>
-      Math.floor(Math.random() * (max - min + 1) + min);
-
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
+        let offset = item.start;
+        let eyeSize = 12;
+        let reversing = false;
         //item.brightness = 10;
         if (!reversing) {
           if (offset === item.start - eyeSize) {
@@ -66,8 +47,7 @@ function FadeInOut(config) {
               item.start,
               item.stripArray,
               item.stop - item.start,
-              0xff0000,
-              offset
+              0xff0000
             );
           } else {
             forwardAnimation(
@@ -75,8 +55,7 @@ function FadeInOut(config) {
               item.stop,
               item.stripArray,
               item.stop - item.start,
-              0xff0000,
-              offset
+              0xff0000
             );
           }
         } else {
@@ -87,8 +66,7 @@ function FadeInOut(config) {
               item.stop,
               item.stripArray,
               item.stop - item.start,
-              0xff0000,
-              offset
+              0xff0000
             );
           } else {
             reverseAnimation(
@@ -96,8 +74,7 @@ function FadeInOut(config) {
               item.start,
               item.stripArray,
               item.stop - item.start,
-              0xff0000,
-              offset
+              0xff0000
             );
           }
         }
