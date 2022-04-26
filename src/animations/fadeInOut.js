@@ -9,7 +9,7 @@ function FadeInOut(config) {
   // console.log(config);
   strips.forEach((item) => {
     let offset = item.start;
-    let eyeSize = 12;
+    let eyeSize = 30;
     let reversing = false;
 
     let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
@@ -41,49 +41,47 @@ function FadeInOut(config) {
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
-      if (item.name === "title_striplight_2") {
-        //item.brightness = 10;
-        if (!reversing) {
-          if (offset === item.start - eyeSize) {
-            reversing = true;
-            reverseAnimation(
-              item.stop,
-              item.start,
-              item.stripArray,
-              item.stop - item.start,
-              0xff0000
-            );
-          } else {
-            forwardAnimation(
-              item.start,
-              item.stop,
-              item.stripArray,
-              item.stop - item.start,
-              0xff0000
-            );
-          }
+      //item.brightness = 10;
+      if (!reversing) {
+        if (offset === item.start - eyeSize) {
+          reversing = true;
+          reverseAnimation(
+            item.stop,
+            item.start,
+            item.stripArray,
+            item.stop - item.start,
+            0xff0000
+          );
         } else {
-          if (offset === 0) {
-            reversing = false;
-            forwardAnimation(
-              item.start,
-              item.stop,
-              item.stripArray,
-              item.stop - item.start,
-              0xff0000
-            );
-          } else {
-            reverseAnimation(
-              item.stop,
-              item.start,
-              item.stripArray,
-              item.stop - item.start,
-              0xff0000
-            );
-          }
+          forwardAnimation(
+            item.start,
+            item.stop,
+            item.stripArray,
+            item.stop - item.start,
+            0xff0000
+          );
         }
-        ws281x.render();
+      } else {
+        if (offset === 0) {
+          reversing = false;
+          forwardAnimation(
+            item.start,
+            item.stop,
+            item.stripArray,
+            item.stop - item.start,
+            0xff0000
+          );
+        } else {
+          reverseAnimation(
+            item.stop,
+            item.start,
+            item.stripArray,
+            item.stop - item.start,
+            0xff0000
+          );
+        }
       }
+      ws281x.render();
     }, item.delay);
 
     this.FadeInOutPause = () => {
