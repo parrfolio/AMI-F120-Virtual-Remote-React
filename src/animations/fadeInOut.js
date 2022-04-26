@@ -8,11 +8,8 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    let offset = [];
-
-    offset[item] = item.start;
-
-    console.log(offset[item]);
+    let offset = 60;
+    let offset2 = 180;
 
     let eyeSize = 12;
     let reversing = false;
@@ -23,29 +20,29 @@ function FadeInOut(config) {
         let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
           for (i = stop - 1; i > start; i--) {
             stripArray[i] = common.cylon(
-              (offset[item] + i) % leds,
+              (offset + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset[item] = (offset[item] - 1) % leds;
+          offset = (offset - 1) % leds;
         };
 
         let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
           for (i = start; i < stop; i++) {
             stripArray[i] = common.cylon(
-              (offset[item] + i) % leds,
+              (offset + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset[item] = (offset[item] + 1) % leds;
+          offset = (offset + 1) % leds;
         };
         //item.brightness = 10;
         if (!reversing) {
-          if (offset[item] === item.start - eyeSize) {
+          if (offset === item.start - eyeSize) {
             reversing = true;
             reverseAnimation(
               item.stop,
@@ -88,29 +85,29 @@ function FadeInOut(config) {
         let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
           for (i = stop - 1; i > start; i--) {
             stripArray[i] = common.cylon(
-              (offset[item] + i) % leds,
+              (offset2 + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset[item] = (offset[item] - 1) % leds;
+          offset2 = (offset2 - 1) % leds;
         };
 
         let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
           for (i = start; i < stop; i++) {
             stripArray[i] = common.cylon(
-              (offset[item] + i) % leds,
+              (offset2 + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset[item] = (offset[item] + 1) % leds;
+          offset2 = (offset2 + 1) % leds;
         };
         //item.brightness = 10;
         if (!reversing) {
-          if (offset[item] === item.start - eyeSize) {
+          if (offset2 === item.start - eyeSize) {
             reversing = true;
             reverseAnimation(
               item.stop,
@@ -129,7 +126,7 @@ function FadeInOut(config) {
             );
           }
         } else {
-          if (offset[item] === 0) {
+          if (offset2 === 0) {
             reversing = false;
             forwardAnimation(
               item.start,
