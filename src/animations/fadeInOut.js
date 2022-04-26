@@ -12,33 +12,32 @@ function FadeInOut(config) {
     let eyeSize = 12;
     let reversing = false;
 
-    let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
-      for (i = stop - 1; i > start; i--) {
-        stripArray[i] = common.cylon(
-          (offset + i) % leds,
-          eyeColor,
-          leds,
-          eyeSize
-        );
-      }
-      offset = (offset - 1) % leds;
-    };
-
-    let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
-      for (i = start; i < stop; i++) {
-        stripArray[i] = common.cylon(
-          (offset + i) % leds,
-          eyeColor,
-          leds,
-          eyeSize
-        );
-      }
-      offset = (offset + 1) % leds;
-    };
-
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
+        let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
+          for (i = stop - 1; i > start; i--) {
+            stripArray[i] = common.cylon(
+              (offset + i) % leds,
+              eyeColor,
+              leds,
+              eyeSize
+            );
+          }
+          offset = (offset - 1) % leds;
+        };
+
+        let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
+          for (i = start; i < stop; i++) {
+            stripArray[i] = common.cylon(
+              (offset + i) % leds,
+              eyeColor,
+              leds,
+              eyeSize
+            );
+          }
+          offset = (offset + 1) % leds;
+        };
         //item.brightness = 10;
         if (!reversing) {
           if (offset === item.start - eyeSize) {
