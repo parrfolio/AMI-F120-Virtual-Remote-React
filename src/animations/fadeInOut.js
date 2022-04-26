@@ -52,7 +52,7 @@ function FadeInOut(config) {
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "main_cablight_2") {
-        let stripOffset = item.start;
+        const stripOffset = item.start;
         //item.brightness = 10;
         if (!reversing) {
           if (stripOffset === item.start - eyeSize) {
