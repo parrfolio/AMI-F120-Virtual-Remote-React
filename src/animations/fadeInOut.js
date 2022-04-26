@@ -8,7 +8,7 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    let offset = item.start;
+    let offset = 180;
     console.log("Starting Offset", offset);
     let eyeSize = 12;
     let reversing = false;
@@ -39,7 +39,7 @@ function FadeInOut(config) {
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
-      if (item.name === "title_striplight_2") {
+      if (item.name === "main_cablight_2") {
         console.log(offset);
         //item.brightness = 10;
         if (!reversing) {
