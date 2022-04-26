@@ -82,8 +82,8 @@ function FadeInOut(config) {
             );
           }
         }
+        ws281x.render();
       }
-      ws281x.render();
     }, item.delay);
 
     this.FadeInOutPause = () => {
