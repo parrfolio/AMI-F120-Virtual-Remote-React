@@ -83,6 +83,48 @@ function FadeInOut(config) {
           }
         }
         ws281x.render();
+      } else if (item.name === "title_striplight_1") {
+        //item.brightness = 10;
+        if (!reversing) {
+          if (offset === item.start - eyeSize) {
+            reversing = true;
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          } else {
+            forwardAnimation(
+              item.start,
+              item.stop,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          }
+        } else {
+          if (offset === 0) {
+            reversing = false;
+            forwardAnimation(
+              item.start,
+              item.stop,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          } else {
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          }
+        }
+        ws281x.render();
       }
     }, item.delay);
 
