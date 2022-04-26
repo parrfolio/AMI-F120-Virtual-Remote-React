@@ -8,32 +8,31 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    let offset = item.start;
     let eyeSize = 12;
     let reversing = false;
 
     let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
       for (i = stop - 1; i > start; i--) {
         stripArray[i] = common.cylon(
-          (offset + i) % leds,
+          (start + i) % leds,
           eyeColor,
           leds,
           eyeSize
         );
       }
-      offset = (offset - 1) % leds;
+      offset = (start - 1) % leds;
     };
 
     let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
       for (i = start; i < stop; i++) {
         stripArray[i] = common.cylon(
-          (offset + i) % leds,
+          (start + i) % leds,
           eyeColor,
           leds,
           eyeSize
         );
       }
-      offset = (offset + 1) % leds;
+      start = (start + 1) % leds;
     };
 
     const randomIntFromInterval = (min, max) =>
@@ -44,7 +43,7 @@ function FadeInOut(config) {
       if (item.name === "title_striplight_2") {
         //item.brightness = 10;
         if (!reversing) {
-          if (offset === item.start - eyeSize) {
+          if (item.start === item.start - eyeSize) {
             reversing = true;
             reverseAnimation(
               item.stop,
@@ -63,7 +62,7 @@ function FadeInOut(config) {
             );
           }
         } else {
-          if (offset === 0) {
+          if (item.start === 0) {
             reversing = false;
             forwardAnimation(
               item.start,
