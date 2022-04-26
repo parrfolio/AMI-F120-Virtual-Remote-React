@@ -8,13 +8,16 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
+    let offset = item.start;
+
+    console.log(offset);
+    console.log(item);
     let eyeSize = 12;
     let reversing = false;
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        let offset = item.start;
         let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
           for (i = stop - 1; i > start; i--) {
             stripArray[i] = common.cylon(
@@ -80,7 +83,6 @@ function FadeInOut(config) {
         }
         ws281x.render();
       } else if (item.name === "main_cablight_2") {
-        let offset = item.start;
         let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
           for (i = stop - 1; i > start; i--) {
             stripArray[i] = common.cylon(
