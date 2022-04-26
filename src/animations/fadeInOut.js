@@ -79,6 +79,71 @@ function FadeInOut(config) {
           }
         }
         ws281x.render();
+      } else if (item.name === "main_cablight_2") {
+        let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
+          for (i = stop - 1; i > start; i--) {
+            stripArray[i] = common.cylon(
+              (offset + i) % leds,
+              eyeColor,
+              leds,
+              eyeSize
+            );
+          }
+          offset = (offset - 1) % leds;
+        };
+
+        let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
+          for (i = start; i < stop; i++) {
+            stripArray[i] = common.cylon(
+              (offset + i) % leds,
+              eyeColor,
+              leds,
+              eyeSize
+            );
+          }
+          offset = (offset + 1) % leds;
+        };
+        //item.brightness = 10;
+        if (!reversing) {
+          if (offset === item.start - eyeSize) {
+            reversing = true;
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          } else {
+            forwardAnimation(
+              item.start,
+              item.stop,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          }
+        } else {
+          if (offset === 0) {
+            reversing = false;
+            forwardAnimation(
+              item.start,
+              item.stop,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          } else {
+            reverseAnimation(
+              item.stop,
+              item.start,
+              item.stripArray,
+              item.stop - item.start,
+              0xff0000
+            );
+          }
+        }
+        ws281x.render();
       }
     }, item.delay);
 
