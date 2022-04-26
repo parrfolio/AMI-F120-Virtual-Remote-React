@@ -49,13 +49,14 @@ function FadeInOut(config) {
       offset = (offset + 1) % leds;
     };
 
+    let offset = item.start;
+
     const randomIntFromInterval = (min, max) =>
       Math.floor(Math.random() * (max - min + 1) + min);
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        let offset = item.start;
         //item.brightness = 10;
         if (!reversing) {
           if (offset === item.start - eyeSize) {
