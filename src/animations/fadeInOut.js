@@ -14,7 +14,6 @@ function FadeInOut(config) {
 
     let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
       for (i = stop - 1; i > start; i--) {
-        stripArray[i] = 0x450000;
         stripArray[i] = common.cylon(
           (offset + i) % leds,
           eyeColor,
@@ -27,7 +26,6 @@ function FadeInOut(config) {
 
     let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
       for (i = start; i < stop; i++) {
-        stripArray[i] = 0x450000;
         stripArray[i] = common.cylon(
           (offset + i) % leds,
           eyeColor,
