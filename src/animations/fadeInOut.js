@@ -8,7 +8,7 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
-    let offset;
+    let offset = [];
 
     offset[item] = item.start;
 
