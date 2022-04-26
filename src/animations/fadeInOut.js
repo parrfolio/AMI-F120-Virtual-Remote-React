@@ -8,39 +8,44 @@ function FadeInOut(config) {
   let strips = config;
   // console.log(config);
   strips.forEach((item) => {
+    let offset;
+
+    offset[item] = item.start;
+
+    console.log(offset[item]);
+
     let eyeSize = 12;
     let reversing = false;
 
     item["stripArray"] = new Strip(item).findStrip();
     item["stripTimer"] = new RecurringTimer(function() {
       if (item.name === "title_striplight_2") {
-        var offset = item.start;
         let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
           for (i = stop - 1; i > start; i--) {
             stripArray[i] = common.cylon(
-              (offset + i) % leds,
+              (offset[item] + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset = (offset - 1) % leds;
+          offset[item] = (offset[item] - 1) % leds;
         };
 
         let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
           for (i = start; i < stop; i++) {
             stripArray[i] = common.cylon(
-              (offset + i) % leds,
+              (offset[item] + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset = (offset + 1) % leds;
+          offset[item] = (offset[item] + 1) % leds;
         };
         //item.brightness = 10;
         if (!reversing) {
-          if (offset === item.start - eyeSize) {
+          if (offset[item] === item.start - eyeSize) {
             reversing = true;
             reverseAnimation(
               item.stop,
@@ -80,33 +85,32 @@ function FadeInOut(config) {
         }
         ws281x.render();
       } else if (item.name === "main_cablight_2") {
-        var offset = item.start;
         let reverseAnimation = (stop, start, stripArray, leds, eyeColor) => {
           for (i = stop - 1; i > start; i--) {
             stripArray[i] = common.cylon(
-              (offset + i) % leds,
+              (offset[item] + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset = (offset - 1) % leds;
+          offset[item] = (offset[item] - 1) % leds;
         };
 
         let forwardAnimation = (start, stop, stripArray, leds, eyeColor) => {
           for (i = start; i < stop; i++) {
             stripArray[i] = common.cylon(
-              (offset + i) % leds,
+              (offset[item] + i) % leds,
               eyeColor,
               leds,
               eyeSize
             );
           }
-          offset = (offset + 1) % leds;
+          offset[item] = (offset[item] + 1) % leds;
         };
         //item.brightness = 10;
         if (!reversing) {
-          if (offset === item.start - eyeSize) {
+          if (offset[item] === item.start - eyeSize) {
             reversing = true;
             reverseAnimation(
               item.stop,
@@ -125,7 +129,7 @@ function FadeInOut(config) {
             );
           }
         } else {
-          if (offset === 0) {
+          if (offset[item] === 0) {
             reversing = false;
             forwardAnimation(
               item.start,
