@@ -3,6 +3,17 @@ function common() {
   this.num_leds = () => {
     return 332;
   };
+
+  //cylon
+  this.cylon = (pos, color, totalLeds, eyeSize) => {
+    pos = totalLeds - pos;
+    if (pos < eyeSize) {
+      return color;
+    } else if (pos > eyeSize) {
+      return 0x150000;
+    }
+  };
+
   //color wheel
   this.colorwheel = (pos) => {
     pos = 255 - pos;
@@ -14,29 +25,6 @@ function common() {
     } else {
       pos -= 170;
       return this.rgb2Int(pos * 3, 255 - pos * 3, 0);
-    }
-  };
-
-  //cylon
-  this.cylon = (pos, color, totalLeds, eyeSize) => {
-    pos = totalLeds - pos;
-
-    if (pos < eyeSize) {
-      return color;
-    } else if (pos > eyeSize) {
-      return 0x150000;
-    }
-  };
-
-  //fade in and out
-  this.fadeinout = (pos, color) => {
-    pos = 255 - pos;
-
-    if (pos < 150) {
-      return color;
-    } else {
-      pos -= 150;
-      return 0xff0f00;
     }
   };
 
