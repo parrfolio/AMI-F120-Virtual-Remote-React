@@ -16,6 +16,10 @@ app.get("*", function(req, res) {
   });
 });
 const PORT = process.env.PORT || 8080;
+const requestListener = function(req, res) {
+  res.end("Your IP Addresss is: " + req.socket.localAddress);
+};
+
 http.listen(PORT, () => {
   console.log(webroot);
   console.log(`Server listening on ${PORT}`);
