@@ -30,7 +30,7 @@ app.get("*", function(req, res) {
 });
 const PORT = process.env.PORT || 8080;
 http.listen(PORT, () => {
-  console.log(`Running at ${addresses}:${PORT} from ${webroot}`);
+  console.log(`Running on ${addresses}:${PORT} from ${webroot}`);
 });
 
 process.on("SIGINT", function() {
