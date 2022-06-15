@@ -11,15 +11,14 @@ app.use(express.static(webroot));
 
 //for routing
 app.get("*", function(req, res) {
+  console.log(req.socket.remoteAddress);
+  console.log(req.ip);
+
   res.sendFile("index.html", {
     root: webroot,
   });
 });
 const PORT = process.env.PORT || 8080;
-const requestListener = function(req, res) {
-  res.end("Your IP Addresss is: " + req.socket.localAddress);
-};
-
 http.listen(PORT, () => {
   console.log(webroot);
   console.log(`Server listening on ${PORT}`);
