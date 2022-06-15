@@ -11,9 +11,6 @@ app.use(express.static(webroot));
 
 //for routing
 app.get("*", function(req, res) {
-  console.log(req.socket.remoteAddress);
-  console.log(req.ip);
-
   res.sendFile("index.html", {
     root: webroot,
   });
