@@ -20,8 +20,6 @@ for (var k in interfaces) {
   }
 }
 
-console.log(addresses);
-
 app.use(express.static(webroot));
 
 //for routing
@@ -32,8 +30,9 @@ app.get("*", function(req, res) {
 });
 const PORT = process.env.PORT || 8080;
 http.listen(PORT, () => {
-  console.log(webroot);
-  console.log(`Server listening on ${PORT}`);
+  console.log("Webroot", webroot);
+
+  console.log(`${addresses}: ${PORT}`);
 });
 
 process.on("SIGINT", function() {
