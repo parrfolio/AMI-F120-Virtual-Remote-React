@@ -23,7 +23,7 @@ for (var k in interfaces) {
 app.use(express.static(webroot));
 
 //for routing
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile("index.html", {
     root: webroot,
   });
@@ -33,11 +33,11 @@ http.listen(PORT, () => {
   console.log(`Running at ${addresses}:${PORT} from ${webroot}`);
 });
 
-process.on("SIGINT", function() {
+process.on("SIGINT", function () {
   ws281x.reset();
   ws281x.finalize();
 
-  process.nextTick(function() {
+  process.nextTick(function () {
     process.exit(0);
   });
 });
@@ -68,7 +68,7 @@ gpio.setup(relay, gpio.DIR_OUT);
 // const pulseDelay = 30;
 
 //PULSE TRAINS FOR STEPPER
-io.sockets.on("connection", function(socket) {
+io.sockets.on("connection", function (socket) {
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
@@ -89,7 +89,7 @@ io.sockets.on("connection", function(socket) {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.ptrains[0]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(relay, true, function(err) {
+          gpio.write(relay, true, function (err) {
             console.log("on");
             if (err) throw err;
             (async () => {
@@ -107,7 +107,7 @@ io.sockets.on("connection", function(socket) {
         console.log("=======-- Train 2 START --=======");
         for (let i = 0; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(relay, true, function(err) {
+          gpio.write(relay, true, function (err) {
             console.log("on");
             if (err) throw err;
             (async () => {
