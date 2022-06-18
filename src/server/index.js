@@ -94,7 +94,7 @@ io.sockets.on("connection", function (socket) {
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("Bitches!");
+    writeStringToLCD("fooBitches!");
   });
 
   const handleI2CError = (err, bytesWritten, buffer) => {
