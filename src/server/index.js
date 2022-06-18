@@ -90,7 +90,6 @@ io.sockets.on("connection", function (socket) {
     }
 
     initializeLCD();
-
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
@@ -119,6 +118,7 @@ io.sockets.on("connection", function (socket) {
       Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
       handleI2CError
     );
+    sleepMore.msleep(2);
     IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
@@ -129,7 +129,7 @@ io.sockets.on("connection", function (socket) {
     // (async () => {
     //   await sleep(200);
     // })();
-    sleepMore.msleep(5);
+    sleepMore.msleep(2);
   };
 
   const initializeLCD = () => {
