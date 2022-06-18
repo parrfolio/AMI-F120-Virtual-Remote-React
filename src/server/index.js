@@ -6,6 +6,8 @@ const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+const i2c = require("i2c-bus");
+const sleep = require("sleep");
 
 var os = require("os");
 
@@ -41,6 +43,38 @@ process.on("SIGINT", function () {
     process.exit(0);
   });
 });
+
+//lcd readout
+const LCD_IC2_ADDRESS = 0x27;
+const IC2_BUS_NUMBER = 1;
+const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
+  if (err) {
+    console.log("Error opening I2C bus", err);
+    process.exit(1);
+  }
+});
+
+const handleI2CError = (err, bytesWritten, buffer) => {
+  if (err) {
+    console.log("Error writing to I2C bus", err);
+  }
+};
+
+const backlightControl = (onoff) => {
+  if (onoff) {
+    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1 Buffer.from([LCD_BACKLIGHT]), handleI2CError);
+  } else {
+    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1 Buffer.from(0), handleI2CError);
+  }
+}
+
+let backlightCondition = true;
+
+setInterval(() => {
+backlightCondition = !backlightCondition;
+backlightControl(backlightCondition)
+},1000);
+
 
 //Light animations
 const rainbow = require("../animations/rainbow");
