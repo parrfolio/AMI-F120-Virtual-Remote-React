@@ -90,10 +90,6 @@ io.sockets.on("connection", function (socket) {
     }
 
     initializeLCD();
-    positionCursor(LCD_LINE1, 5);
-    writeStringToLCD("Hello");
-    positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("Bitches!");
   });
 
   const handleI2CError = (err, bytesWritten, buffer) => {
@@ -157,6 +153,11 @@ io.sockets.on("connection", function (socket) {
     rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
     sleepMore.usleep(100);
     rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
+    sleepMore.usleep(100);
+    positionCursor(LCD_LINE1, 5);
+    writeStringToLCD("Hello");
+    positionCursor(LCD_LINE2, 5);
+    writeStringToLCD("Bitches!");
   };
 
   const LCD_LINE1 = 0;
