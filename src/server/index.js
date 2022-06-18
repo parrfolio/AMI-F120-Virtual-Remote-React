@@ -127,7 +127,7 @@ io.sockets.on("connection", function (socket) {
     );
 
     (async () => {
-      await sleep(20);
+      await sleep(50);
     })();
   };
 
