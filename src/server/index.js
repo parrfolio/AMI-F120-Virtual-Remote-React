@@ -7,7 +7,7 @@ const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const i2c = require("i2c-bus");
-// const sleep = require("sleep");
+const sleepMore = require("sleep");
 
 var os = require("os");
 
@@ -126,18 +126,22 @@ io.sockets.on("connection", function (socket) {
       handleI2CError
     );
 
-    (async () => {
-      await sleep(50);
-    })();
+    // (async () => {
+    //   await sleep(200);
+    // })();
+    sleepMore.msleep(2);
   };
 
   const initializeLCD = () => {
     (async () => {
-      await sleep(15);
+      // await sleep(150);
+      sleepMore.msleep(15);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(4);
+      //await sleep(4100);
+      sleepMore.usleep(4100);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(10);
+      //await sleep(100);
+      sleepMore.usleep(100);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
       rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
       rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
