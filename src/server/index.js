@@ -108,21 +108,21 @@ io.sockets.on("connection", function (socket) {
     IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
-      Buffer.find([cleanData | LCD_BACKLIGHT | cleanRS]),
+      Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
       handleI2CError
     );
 
     IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
-      Buffer.find([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
+      Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
       handleI2CError
     );
 
     IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
-      Buffer.find([cleanData | LCD_BACKLIGHT | cleanRS]),
+      Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
       handleI2CError
     );
 
