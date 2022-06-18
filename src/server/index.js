@@ -90,7 +90,7 @@ io.sockets.on("connection", function (socket) {
     }
 
     initializeLCD();
-    sleepMore.msleep(5);
+
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
