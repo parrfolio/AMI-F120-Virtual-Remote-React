@@ -93,7 +93,7 @@ io.sockets.on("connection", function (socket) {
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("Bitches!");
+    writeStringToLCD("world!");
   });
 
   const handleI2CError = (err, bytesWritten, buffer) => {
@@ -111,14 +111,14 @@ io.sockets.on("connection", function (socket) {
       Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
       handleI2CError
     );
-    sleepMore.msleep(5);
+    sleepMore.msleep(10);
     IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
       Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
       handleI2CError
     );
-    sleepMore.msleep(2);
+    sleepMore.msleep(10);
     IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
