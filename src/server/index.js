@@ -86,7 +86,7 @@ io.sockets.on("connection", function (socket) {
   const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
     if (err) {
       console.log("Error opening I2C bus", err);
-      process.exit(1);
+      process.exit(0);
     }
 
     initializeLCD();
