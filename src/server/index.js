@@ -89,7 +89,7 @@ io.sockets.on("connection", function (socket) {
       process.exit(1);
     }
 
-    //initializeLCD();
+    initializeLCD();
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
@@ -135,19 +135,6 @@ io.sockets.on("connection", function (socket) {
     (async () => {
       await sleep(15);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(4100);
-      rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(100);
-      rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x80, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0xc0, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x10, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-      rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
     })();
   };
 
