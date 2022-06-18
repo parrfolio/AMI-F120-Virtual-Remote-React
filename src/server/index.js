@@ -147,7 +147,7 @@ io.sockets.on("connection", function (socket) {
       // rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
       // rawTimedWrite(0x10, LCD_REGISTER_SELECT_CMND);
       // rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-      //rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
+      rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
     })();
   };
 
