@@ -69,7 +69,7 @@ function backlightControl(onoff) {
       handleI2CError
     );
   } else {
-    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from(0), handleI2CError);
+    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from([0]), handleI2CError);
   }
 }
 
