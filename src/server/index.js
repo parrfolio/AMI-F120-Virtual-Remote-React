@@ -133,9 +133,9 @@ io.sockets.on("connection", function (socket) {
 
   const initializeLCD = () => {
     (async () => {
-      await sleep(15);
+      await sleep(150);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(40);
+      await sleep(4100);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
       await sleep(100);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
