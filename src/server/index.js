@@ -47,6 +47,7 @@ process.on("SIGINT", function () {
 //lcd readout
 const LCD_IC2_ADDRESS = 0x27;
 const IC2_BUS_NUMBER = 1;
+const LCD_BACKLIGHT = 0x08;
 const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
   if (err) {
     console.log("Error opening I2C bus", err);
