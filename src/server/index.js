@@ -83,19 +83,6 @@ io.sockets.on("connection", function (socket) {
   const LCD_REGISTER_SELECT_CHAR = 0x01;
   const LCD_ENABLE = 0x04;
 
-  const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
-    if (err) {
-      console.log("Error opening I2C bus", err);
-      process.exit(1);
-    }
-
-    initializeLCD();
-    positionCursor(LCD_LINE1, 5);
-    writeStringToLCD("Hello");
-    positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("Bitches!");
-  });
-
   const handleI2CError = (err, bytesWritten, buffer) => {
     if (err) {
       console.log("Error writing to I2C bus", err);
@@ -250,7 +237,18 @@ io.sockets.on("connection", function (socket) {
   // LIGHT STRIPS FOR JUKE
   socket.on("lights", (data, callback) => {
     console.log("Lights", data.state);
+    const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
+      if (err) {
+        console.log("Error opening I2C bus", err);
+        process.exit(1);
+      }
 
+      initializeLCD();
+      positionCursor(LCD_LINE1, 5);
+      writeStringToLCD("Hello");
+      positionCursor(LCD_LINE2, 5);
+      writeStringToLCD("Bitches!");
+    });
     let animationType = data.animation;
     if (data.state === "on") {
       switch (animationType) {
