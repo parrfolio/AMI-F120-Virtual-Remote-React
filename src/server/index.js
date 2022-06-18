@@ -60,7 +60,7 @@ const handleI2CError = (err, bytesWritten, buffer) => {
   }
 };
 
-const backlightControl = (onoff) => {
+function backlightControl(onoff) {
   if (onoff) {
     i2c.bus.i2cWrite(
       LCD_IC2_ADDRESS,
@@ -71,7 +71,7 @@ const backlightControl = (onoff) => {
   } else {
     i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from(0), handleI2CError);
   }
-};
+}
 
 let backlightCondition = true;
 
