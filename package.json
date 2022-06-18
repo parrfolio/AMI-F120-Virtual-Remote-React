@@ -9,6 +9,7 @@
     "firebase": "^7.14.1",
     "flow-typed": "^3.5.0",
     "fs": "0.0.1-security",
+    "i2c-bus": "^5.2.2",
     "python-shell": "^1.0.8",
     "react": "^16.8.6",
     "react-device-detect": "^1.11.14",
