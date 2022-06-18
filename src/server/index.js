@@ -93,7 +93,7 @@ io.sockets.on("connection", function (socket) {
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("Worldte!");
+    writeStringToLCD("Bitches!");
   });
 
   const handleI2CError = (err, bytesWritten, buffer) => {
@@ -139,25 +139,24 @@ io.sockets.on("connection", function (socket) {
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
     sleepMore.usleep(100);
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x80, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0xc0, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x10, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
+    sleepMore.usleep(15);
     rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
     sleepMore.usleep(100);
     rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
   };
 
   const LCD_LINE1 = 0;
