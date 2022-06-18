@@ -90,11 +90,11 @@ io.sockets.on("connection", function (socket) {
     }
 
     initializeLCD();
-    sleepMore.usleep(4000);
+
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("fooBitches!");
+    writeStringToLCD("Bitches!");
   });
 
   const handleI2CError = (err, bytesWritten, buffer) => {
@@ -130,7 +130,7 @@ io.sockets.on("connection", function (socket) {
     // (async () => {
     //   await sleep(200);
     // })();
-    //sleepMore.msleep(2);
+    sleepMore.msleep(2);
   };
 
   const initializeLCD = () => {
