@@ -136,19 +136,19 @@ io.sockets.on("connection", function (socket) {
   const initializeLCD = () => {
     sleepMore.msleep(15);
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(4100);
-    rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(100);
-    rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x80, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0xc0, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x10, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
-    rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
+    // sleepMore.usleep(4100);
+    // rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
+    // sleepMore.usleep(100);
+    // rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x80, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0xc0, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x10, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
+    // rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
   };
 
   const LCD_LINE1 = 0;
