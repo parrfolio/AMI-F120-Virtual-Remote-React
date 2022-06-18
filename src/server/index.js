@@ -135,7 +135,7 @@ io.sockets.on("connection", function (socket) {
     (async () => {
       await sleep(15);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(4);
+      await sleep(40);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
       await sleep(100);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
