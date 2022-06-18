@@ -137,7 +137,7 @@ io.sockets.on("connection", function (socket) {
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
     sleepMore.usleep(4100);
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-    sleepMore.usleep(300);
+    sleepMore.usleep(100);
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
     rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
     rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
