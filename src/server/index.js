@@ -136,8 +136,8 @@ io.sockets.on("connection", function (socket) {
   const initializeLCD = () => {
     sleepMore.msleep(15);
     rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-    // sleepMore.usleep(4100);
-    // rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
+    sleepMore.usleep(4100);
+    rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
     // sleepMore.usleep(100);
     // rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
     // rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
