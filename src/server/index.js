@@ -103,31 +103,31 @@ io.sockets.on("connection", function (socket) {
   };
 
   const rawTimedWrite = (dataInUpperNibble, cmndOrChar) => {
-    let cleanData = dataInUpperNibble & 0xf0;
-    let cleanRS = cmndOrChar & 0x1;
-    IC2_bus.i2cWrite(
-      LCD_IC2_ADDRESS,
-      1,
-      Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
-      handleI2CError
-    );
-
-    IC2_bus.i2cWrite(
-      LCD_IC2_ADDRESS,
-      1,
-      Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
-      handleI2CError
-    );
-
-    IC2_bus.i2cWrite(
-      LCD_IC2_ADDRESS,
-      1,
-      Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
-      handleI2CError
-    );
-
     (async () => {
-      await sleep(20);
+      let cleanData = dataInUpperNibble & 0xf0;
+      let cleanRS = cmndOrChar & 0x1;
+      IC2_bus.i2cWrite(
+        LCD_IC2_ADDRESS,
+        1,
+        Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
+        handleI2CError
+      );
+
+      IC2_bus.i2cWrite(
+        LCD_IC2_ADDRESS,
+        1,
+        Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
+        handleI2CError
+      );
+
+      IC2_bus.i2cWrite(
+        LCD_IC2_ADDRESS,
+        1,
+        Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
+        handleI2CError
+      );
+
+      await sleep(200);
     })();
   };
 
