@@ -62,19 +62,23 @@ const handleI2CError = (err, bytesWritten, buffer) => {
 
 const backlightControl = (onoff) => {
   if (onoff) {
-    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1 Buffer.from([LCD_BACKLIGHT]), handleI2CError);
+    i2c.bus.i2cWrite(
+      LCD_IC2_ADDRESS,
+      1,
+      Buffer.from([LCD_BACKLIGHT]),
+      handleI2CError
+    );
   } else {
-    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1 Buffer.from(0), handleI2CError);
+    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from(0), handleI2CError);
   }
-}
+};
 
 let backlightCondition = true;
 
 setInterval(() => {
-backlightCondition = !backlightCondition;
-backlightControl(backlightCondition)
-},1000);
-
+  backlightCondition = !backlightCondition;
+  backlightControl(backlightCondition);
+}, 1000);
 
 //Light animations
 const rainbow = require("../animations/rainbow");
