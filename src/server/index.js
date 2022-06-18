@@ -129,7 +129,7 @@ io.sockets.on("connection", function (socket) {
     // (async () => {
     //   await sleep(200);
     // })();
-    sleepMore.msleep(20);
+    sleepMore.msleep(2);
   };
 
   const initializeLCD = () => {
