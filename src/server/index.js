@@ -127,17 +127,17 @@ io.sockets.on("connection", function (socket) {
     );
 
     (async () => {
-      await sleep(2);
+      await sleep(200);
     })();
   };
 
   const initializeLCD = () => {
     (async () => {
-      await sleep(15);
+      await sleep(150);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
       await sleep(4100);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-      await sleep(100);
+      await sleep(1000);
       rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
       rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
       rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
@@ -157,8 +157,8 @@ io.sockets.on("connection", function (socket) {
   const positionCursor = (line, column) => {
     let cleanLine = line & 1;
     let cleanColumn = column & 0xf;
-    rawTimedWrite((0x80 | (cleanLine << 6), LCD_REGISTER_SELECT_CMND));
-    rawTimedWrite((cleanColumn << 4, LCD_REGISTER_SELECT_CMND));
+    rawTimedWrite(0x80 | (cleanLine << 6), LCD_REGISTER_SELECT_CMND);
+    rawTimedWrite(cleanColumn << 4, LCD_REGISTER_SELECT_CMND);
   };
 
   const writeStringToLCD = (stringToDisplay) => {
@@ -170,18 +170,18 @@ io.sockets.on("connection", function (socket) {
   };
 
   // backlight blinking
-  const backlightControl = (onoff) => {
-    if (onoff) {
-      IC2_bus.i2cWrite(
-        LCD_IC2_ADDRESS,
-        1,
-        Buffer.from([LCD_BACKLIGHT]),
-        handleI2CError
-      );
-    } else {
-      IC2_bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from([0]), handleI2CError);
-    }
-  };
+  // const backlightControl = (onoff) => {
+  //   if (onoff) {
+  //     IC2_bus.i2cWrite(
+  //       LCD_IC2_ADDRESS,
+  //       1,
+  //       Buffer.from([LCD_BACKLIGHT]),
+  //       handleI2CError
+  //     );
+  //   } else {
+  //     IC2_bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from([0]), handleI2CError);
+  //   }
+  // };
   // let backlightCondition = true;
   // setInterval(() => {
   //   backlightCondition = !backlightCondition;
