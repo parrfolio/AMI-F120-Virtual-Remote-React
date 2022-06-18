@@ -46,7 +46,7 @@ process.on("SIGINT", function () {
 
 //lcd readout
 const LCD_IC2_ADDRESS = 0x27;
-const IC2_BUS_NUMBER = 0x0c;
+const IC2_BUS_NUMBER = 1;
 const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
   if (err) {
     console.log("Error opening I2C bus", err);
@@ -62,14 +62,14 @@ const handleI2CError = (err, bytesWritten, buffer) => {
 
 function backlightControl(onoff) {
   if (onoff) {
-    i2c.bus.i2cWrite(
+    IC2_bus.i2cWrite(
       LCD_IC2_ADDRESS,
       1,
       Buffer.from([LCD_BACKLIGHT]),
       handleI2CError
     );
   } else {
-    i2c.bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from([0]), handleI2CError);
+    IC2_bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from([0]), handleI2CError);
   }
 }
 
