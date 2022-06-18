@@ -89,7 +89,7 @@ io.sockets.on("connection", function (socket) {
       process.exit(1);
     }
 
-    initializeLCD();
+    //initializeLCD();
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Hello");
     positionCursor(LCD_LINE2, 5);
