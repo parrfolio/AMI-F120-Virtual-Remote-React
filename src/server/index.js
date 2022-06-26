@@ -146,7 +146,7 @@ io.sockets.on("connection", function (socket) {
           writeStringToLCD(data.songTitle);
           positionCursor(LCD_LINE2, 0);
           writeStringToLCD(
-            "Track" + data.select.selection.toString() + "Side " + data.side
+            "Track" + data.select.selection.toString() + " - Side " + data.side
           );
         });
 
