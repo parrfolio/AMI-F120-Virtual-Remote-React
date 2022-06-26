@@ -77,19 +77,19 @@ io.sockets.on("connection", function (socket) {
 
   socket.on("direction", (data, callback) => {
     console.log("DATA: ", data);
-    console.log("Selection", data.selection);
-    console.log("===-- SELECTION --===", data.selection);
+    console.log("Selection", data.select.selection);
+    console.log("===-- SELECTION --===", data.select.selection);
     console.log(
       "===-- Pulse Train Rel --===",
-      data.ptrains[0],
-      data.ptrains[1]
+      data.select.ptrains[0],
+      data.select.ptrains[1]
     );
 
-    if (data.state === "on") {
+    if (data.select.state === "on") {
       //pulse train 1
       (async () => {
         console.log("=======-- Train 1 START --=======");
-        for (let i = 0; i < data.ptrains[0]; i++) {
+        for (let i = 0; i < data.select.ptrains[0]; i++) {
           await sleep(pulseSpeed);
           gpio.write(relay, true, function (err) {
             console.log("on");
@@ -105,9 +105,9 @@ io.sockets.on("connection", function (socket) {
 
       // pulse train 2
       (async () => {
-        await sleep(data.ptrainDelay);
+        await sleep(data.select.ptrainDelay);
         console.log("=======-- Train 2 START --=======");
-        for (let i = 0; i < data.ptrains[1]; i++) {
+        for (let i = 0; i < data.select.ptrains[1]; i++) {
           await sleep(pulseSpeed);
           gpio.write(relay, true, function (err) {
             console.log("on");
@@ -143,10 +143,10 @@ io.sockets.on("connection", function (socket) {
 
           initializeLCD();
           positionCursor(LCD_LINE1, 0);
-          writeStringToLCD(data.songTitle.toString());
+          writeStringToLCD(data.songTitle);
           positionCursor(LCD_LINE2, 0);
           writeStringToLCD(
-            "Track" + data.selection.toString() + "Side " + data.side.toString()
+            "Track" + data.select.selection.toString() + "Side " + data.side
           );
         });
 
@@ -243,7 +243,7 @@ io.sockets.on("connection", function (socket) {
         //   backlightControl(backlightCondition);
         // }, 1000);
       })();
-    } else if (data.state === "off") {
+    } else if (data.select.state === "off") {
       gpio.write(relay, false);
     } else {
       // By default we turn off the motors
