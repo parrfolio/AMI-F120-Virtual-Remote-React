@@ -143,10 +143,10 @@ io.sockets.on("connection", function (socket) {
 
           initializeLCD();
           positionCursor(LCD_LINE1, 0);
-          writeStringToLCD(data.songTitle);
+          writeStringToLCD(data.songTitle.toString());
           positionCursor(LCD_LINE2, 0);
           writeStringToLCD(
-            "Track" + data.selection.toString() + "Side " + data.side
+            "Track" + data.selection.toString() + "Side " + data.side.toString()
           );
         });
 
