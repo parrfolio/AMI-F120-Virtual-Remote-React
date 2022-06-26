@@ -143,9 +143,9 @@ io.sockets.on("connection", function (socket) {
 
           initializeLCD();
           positionCursor(LCD_LINE1, 5);
-          writeStringToLCD("Track");
+          writeStringToLCD("Track Listing");
           positionCursor(LCD_LINE2, 5);
-          writeStringToLCD("100");
+          writeStringToLCD("200");
         });
 
         const handleI2CError = (err, bytesWritten, buffer) => {
