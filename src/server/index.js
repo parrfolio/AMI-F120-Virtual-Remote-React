@@ -93,7 +93,7 @@ io.sockets.on("connection", function (socket) {
     positionCursor(LCD_LINE1, 5);
     writeStringToLCD("Track");
     positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("59");
+    writeStringToLCD("100");
   });
 
   const handleI2CError = (err, bytesWritten, buffer) => {
