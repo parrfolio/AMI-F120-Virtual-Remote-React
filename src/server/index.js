@@ -142,10 +142,10 @@ io.sockets.on("connection", function (socket) {
           }
 
           initializeLCD();
-          positionCursor(LCD_LINE1, 5);
-          writeStringToLCD("Track Listing");
-          positionCursor(LCD_LINE2, 5);
-          writeStringToLCD("200");
+          positionCursor(LCD_LINE1, 0);
+          writeStringToLCD("Track");
+          positionCursor(LCD_LINE2, 0);
+          writeStringToLCD(data.selection);
         });
 
         const handleI2CError = (err, bytesWritten, buffer) => {
