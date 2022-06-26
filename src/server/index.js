@@ -83,19 +83,6 @@ io.sockets.on("connection", function (socket) {
   const LCD_REGISTER_SELECT_CHAR = 0x01;
   const LCD_ENABLE = 0x04;
 
-  const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
-    if (err) {
-      console.log("Error opening I2C bus", err);
-      process.exit(1);
-    }
-
-    initializeLCD();
-    positionCursor(LCD_LINE1, 5);
-    writeStringToLCD("Track");
-    positionCursor(LCD_LINE2, 5);
-    writeStringToLCD("59");
-  });
-
   const handleI2CError = (err, bytesWritten, buffer) => {
     if (err) {
       console.log("Error writing to I2C bus", err);
@@ -170,28 +157,21 @@ io.sockets.on("connection", function (socket) {
     });
   };
 
-  // backlight blinking
-  // const backlightControl = (onoff) => {
-  //   if (onoff) {
-  //     IC2_bus.i2cWrite(
-  //       LCD_IC2_ADDRESS,
-  //       1,
-  //       Buffer.from([LCD_BACKLIGHT]),
-  //       handleI2CError
-  //     );
-  //   } else {
-  //     IC2_bus.i2cWrite(LCD_IC2_ADDRESS, 1, Buffer.from([0]), handleI2CError);
-  //   }
-  // };
-  // let backlightCondition = true;
-  // setInterval(() => {
-  //   backlightCondition = !backlightCondition;
-  //   backlightControl(backlightCondition);
-  // }, 1000);
-
   socket.on("direction", (data, callback) => {
     console.log("DATA: ", data);
     console.log("Selection", data.selection);
+    const IC2_bus = i2c.open(IC2_BUS_NUMBER, (err) => {
+      if (err) {
+        console.log("Error opening I2C bus", err);
+        process.exit(1);
+      }
+
+      initializeLCD();
+      positionCursor(LCD_LINE1, 5);
+      writeStringToLCD("Slection");
+      positionCursor(LCD_LINE2, 5);
+      writeStringToLCD(data.selection);
+    });
     console.log("===-- SELECTION --===", data.selection);
     console.log(
       "===-- Pulse Train Rel --===",
