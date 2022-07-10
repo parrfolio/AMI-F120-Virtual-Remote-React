@@ -165,14 +165,14 @@ io.sockets.on("connection", function (socket) {
             Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
             handleI2CError
           );
-          sleepMore.msleep(10);
+          sleepMore.msleep(100);
           IC2_bus.i2cWrite(
             LCD_IC2_ADDRESS,
             1,
             Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
             handleI2CError
           );
-          sleepMore.msleep(10);
+
           IC2_bus.i2cWrite(
             LCD_IC2_ADDRESS,
             1,
