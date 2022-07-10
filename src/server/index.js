@@ -165,14 +165,14 @@ io.sockets.on("connection", function (socket) {
             Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
             handleI2CError
           );
-          sleepMore.msleep(100);
+
           IC2_bus.i2cWrite(
             LCD_IC2_ADDRESS,
             1,
             Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
             handleI2CError
           );
-          sleepMore.msleep(100);
+
           IC2_bus.i2cWrite(
             LCD_IC2_ADDRESS,
             1,
@@ -183,25 +183,34 @@ io.sockets.on("connection", function (socket) {
           // (async () => {
           //   await sleep(200);
           // })();
-          sleepMore.msleep(2);
+          sleepMore.msleep(100);
         };
 
         const initializeLCD = () => {
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x80, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0xc0, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x10, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x00, LCD_REGISTER_SELECT_CMND);
+          sleepMore.usleep(100);
           rawTimedWrite(0x60, LCD_REGISTER_SELECT_CMND);
         };
 
