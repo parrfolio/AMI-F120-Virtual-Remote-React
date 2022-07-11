@@ -183,17 +183,17 @@ io.sockets.on("connection", function (socket) {
           // (async () => {
           //   await sleep(200);
           // })();
-          sleepMore.msleep(20);
+          sleepMore.msleep(2);
         };
 
         const initializeLCD = () => {
-          sleepMore.msleep(80);
+          sleepMore.msleep(200);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(60);
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(60);
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(30);
+          sleepMore.usleep(10);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
           rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
           rawTimedWrite(0x20, LCD_REGISTER_SELECT_CMND);
