@@ -187,7 +187,7 @@ io.sockets.on("connection", function (socket) {
         };
 
         const initializeLCD = () => {
-          sleepMore.msleep(20);
+          sleepMore.msleep(200);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
           sleepMore.usleep(10);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
