@@ -165,14 +165,14 @@ io.sockets.on("connection", function (socket) {
             Buffer.from([cleanData | LCD_BACKLIGHT | cleanRS]),
             handleI2CError
           );
-          sleepMore.msleep(100);
+          sleepMore.msleep(1);
           IC2_bus.i2cWrite(
             LCD_IC2_ADDRESS,
             1,
             Buffer.from([cleanData | LCD_BACKLIGHT | LCD_ENABLE | cleanRS]),
             handleI2CError
           );
-          sleepMore.msleep(100);
+          sleepMore.msleep(1);
           IC2_bus.i2cWrite(
             LCD_IC2_ADDRESS,
             1,
@@ -187,11 +187,11 @@ io.sockets.on("connection", function (socket) {
         };
 
         const initializeLCD = () => {
-          sleepMore.msleep(200);
+          sleepMore.msleep(20);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(100);
+          sleepMore.usleep(10);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(100);
+          sleepMore.usleep(10);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
           sleepMore.usleep(10);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
