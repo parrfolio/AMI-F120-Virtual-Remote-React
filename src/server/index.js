@@ -157,6 +157,7 @@ io.sockets.on("connection", function (socket) {
         };
 
         const rawTimedWrite = (dataInUpperNibble, cmndOrChar) => {
+          sleepMore.msleep(200);
           let cleanData = dataInUpperNibble & 0xf0;
           let cleanRS = cmndOrChar & 0x1;
           IC2_bus.i2cWrite(
@@ -187,11 +188,10 @@ io.sockets.on("connection", function (socket) {
         };
 
         const initializeLCD = () => {
-          sleepMore.msleep(200);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(10);
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
-          sleepMore.usleep(10);
+          sleepMore.usleep(100);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
           sleepMore.usleep(10);
           rawTimedWrite(0x30, LCD_REGISTER_SELECT_CMND);
