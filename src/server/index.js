@@ -7,7 +7,7 @@ const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const i2c = require("i2c-bus");
-const sleepMore = require("sleep");
+// const sleepMore = require("sleep");
 
 var os = require("os");
 
