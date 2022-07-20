@@ -75,8 +75,6 @@ io.sockets.on("connection", function (socket) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
-  gpio.write(relay, GPIO.LOW);
-
   socket.on("direction", (data, callback) => {
     console.log("DATA: ", data);
     console.log("Selection", data.select.selection);
