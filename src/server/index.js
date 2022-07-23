@@ -122,9 +122,9 @@ io.sockets.on("connection", function (socket) {
         console.log("FOR LOOP FINISHED!");
         // await sleep(1000);
         //once trains are finished then turn on lights
-        // callback({
-        //   done: true,
-        // });
+        callback({
+          done: true,
+        });
         // console.log("CALLBACK FIRED!");
 
         //i2c bus LCD readout
