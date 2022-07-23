@@ -7,7 +7,7 @@ const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 const i2c = require("i2c-bus");
-// const sleepMore = require("sleep");
+const sleepMore = require("sleep");
 
 var os = require("os");
 
@@ -122,10 +122,10 @@ io.sockets.on("connection", function (socket) {
         console.log("FOR LOOP FINISHED!");
         // await sleep(1000);
         //once trains are finished then turn on lights
-        // callback({
-        //   done: true,
-        // });
-        // console.log("CALLBACK FIRED!");
+        callback({
+          done: true,
+        });
+        console.log("CALLBACK FIRED!");
 
         //i2c bus LCD readout
         // const LCD_IC2_ADDRESS = 0x27;
