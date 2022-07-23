@@ -1,7 +1,7 @@
 function common() {
   //total leds
   this.num_leds = () => {
-    return 420;
+    return 360;
   };
 
   //cylon

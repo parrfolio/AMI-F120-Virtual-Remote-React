@@ -34,14 +34,6 @@ const animation_data = {
         channelSet: 0,
       },
       {
-        name: "back_mech_light",
-        delay: 1000 / 30,
-        start: 240,
-        stop: 300,
-        brightness: 155,
-        channelSet: 0,
-      },
-      {
         name: "front_mech_light",
         delay: 1000 / 30,
         start: 0,
