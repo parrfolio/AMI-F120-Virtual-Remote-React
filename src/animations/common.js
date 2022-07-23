@@ -1,7 +1,7 @@
 function common() {
   //total leds
   this.num_leds = () => {
-    return 332;
+    return 420;
   };
 
   //cylon
@@ -42,7 +42,7 @@ function common() {
     Math.floor(Math.random() * (max - min + 1) + min);
 
   //RGBtoHex
-  this.rgbToHex = function(r, g, b) {
+  this.rgbToHex = function (r, g, b) {
     return parseInt(
       "0x" +
         this.componentToHex(r) +
@@ -62,7 +62,7 @@ function common() {
   let XmasBlue = 0x0000ff;
   let XmasWhite = 0xffffff;
 
-  this.RandomXmasColor = function() {
+  this.RandomXmasColor = function () {
     let xmasLight = this.getRandomInt(1, 4);
     let xmasColor = XmasRed;
     switch (xmasLight) {
