@@ -12,8 +12,8 @@ const Block = styled.div`
   align-self: auto;
   position: relative;
   width: 100%;
-  font-size: 1.5rem;
-  margin: 20px;
+  font-size: 1.4rem;
+  padding: 20px;
   ${({ theme }) => theme.mamabear`margin-left:-5%`}
 `;
 

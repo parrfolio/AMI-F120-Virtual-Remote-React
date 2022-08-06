@@ -19,7 +19,7 @@ export const Home = (props, state) => {
     <div>Loading....</div>
   ) : (
     <Fragment>
-      <div>RSD HOME!</div>
+      <div>Not Logged in HOME!</div>
       <Link to="/login">Login</Link>
     </Fragment>
   );
