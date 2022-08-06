@@ -9,6 +9,7 @@ const Theme = ({ children }) => (
       textColor: "#fff",
       backgroundColor: "#111",
       borderColor: "#fff",
+      margin:"20px"
       ...media,
     }}
   >

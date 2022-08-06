@@ -38,6 +38,7 @@ http.listen(PORT, () => {
 process.on("SIGINT", function () {
   ws281x.reset();
   ws281x.finalize();
+  gpio.destroy();
 
   process.nextTick(function () {
     process.exit(0);
