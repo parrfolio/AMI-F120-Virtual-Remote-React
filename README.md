@@ -1,4 +1,6 @@
 # AMI F 120 Jukebox Virtual Remote in React
+## How To Run
+```npm start```
 
 ## Project
 
