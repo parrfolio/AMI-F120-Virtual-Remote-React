@@ -1,6 +1,22 @@
 # AMI F 120 Jukebox Virtual Remote in React
-## How To Run
-```npm start```
+### To Run Dev on Mac
+```npm run dev```
+Will auto reload on changes. Ligths will not work
+### To Run Build on Raspi
+```npm run build && npm start```
+
+## SHH to Raspi
+```shh pi@raspberrypi```
+## Temp Notes
+Need test SSL HTTPS on Raspi
+
+```const ws281x = require("@gbkwiatt/node-rpi-ws281x-native")```
+
+I turned off for mac dev
+Note: I have a custom version of ws281x on Raspi. Do not rebuild package on pi
+
+For mac dev this dependency was removed from package under "dependencies"
+```"@gbkwiatt/node-rpi-ws281x-native": "^1.0.1",```
 
 ## Project
 
@@ -27,10 +43,12 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(32,GPIO.OUT)
 GPIO.output(32,GPIO.LOW)
 GPIO.output(32,GPIO.HIGH)
-### Rasperry pi configs
+
+## Set up Raspi
+### Configs
 Disable Firewall: 
 ```systemctl stop firewalld```
-### What ports are open
+### Check port
 sudo netstat -tlnp
 ### HD Allocation
  df -h
@@ -46,6 +64,7 @@ sudo rpi-clone sdb
 sudo chown -R $USER <directory>
 Most likely: sudo chown -R pi /home/pi/
 
+## LED Light Setup
 ### Lights
 https://github.com/meg768/rpi-ws281x
 Only works with node 10.21.0
@@ -61,77 +80,6 @@ https://github.com/FeBe95/node-rpi-ws281x-native/tree/a705e6826663bf29e18bb6f55e
 Tutorial 
 https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/
 
-### NPM Commands & Cleaning when building between Node Versions
-npm cache clean --force
-npm cache verify
-
-
-### Installing Node 
-https://www.instructables.com/Install-Nodejs-and-Npm-on-Raspberry-Pi/
-https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps
-
-### NVM Commands
-https://heynode.com/tutorial/install-nodejs-locally-nvm/
-// check version
-node -v || node --version
-
-// list installed versions of node (via nvm)
-nvm ls
-
-// install specific version of node
-nvm install 6.9.2
-
-// set default version of node
-nvm alias default 6.9.2
-
-// switch version of node
-nvm use 6.9.1
-
-// to list available remote versions of node (via nvm)
-nvm ls-remote
-
-Install Node
-nvm install <node_version>      // Install a specific Node version
-nvm install node                // Install latest Node release (Current)
-nvm install --lts               // Install latest LTS release of NodeJS
-nvm install-latest-npm          // Install latest NPM release only
-
-List Available Node Releases
-nvm ls-remote
-nvm ls-remote | grep -i "latest"        
-nvm ls-remote | grep -i "<node_version>"
-
-List Installed Nodes
-nvm list node                   // Lists installed Node versions
-nvm list  (or)  nvm ls          // Lists installed Node versions with additional release info
-
-Switch To Another Node Version
-nvm use node                      // Switch to the latest available Node version
-nvm use <node_version_or_alias>  // Switch to a specific version
-nvm use --lts                    // Switch to the latest LTS Node version
-
-Verifying Node Version
-node -v  (or)  node --version
-npm -v   (or)  npm --version
-nvm -v   (or)  nvm --version
-
-Set Alias
-nvm alias default node                  // Always defaults to the latest available node version on a shell
-nvm alias default <node_version>        // Set default node version on a shell
-nvm alias <alias_name> <node_version>   // Set user-defined alias to Node versions 
-
-nvm unalias <alias_name>                // Deletes the alias named <alias_name>
-
-Path to Node Executable
-nvm which <installed_node_version>      // path to the executable where a specific Node version is installed
-
-Uninstall Specific Node Version
-nvm uninstall <node_version>    // Uninstall a specific Node version
-nvm uninstall --lts             // Uninstall the latest LTS release of Node
-nvm uninstall node              // Uninstall latest (Current) release of Node
-
-Uninstall NVM
- To remove, delete, or uninstall nvm, just remove the $NVM_DIR folder (usually ~/.nvm)
 
 ### Troublshooting Lights
 The leds do not light up as expected?
@@ -202,3 +150,79 @@ More info here: https://github.com/beyondscreen/node-rpi-ws281x-native/commit/49
 
      PWM1 which can be set to use GPIOs 13, 19, 41, 45 and 53.
         Only 13 is available on the B+/2B/PiZero/3B, on pin 33
+
+
+### NPM Commands & Cleaning when building between Node Versions
+npm cache clean --force
+npm cache verify
+
+## Installing Node 
+https://www.instructables.com/Install-Nodejs-and-Npm-on-Raspberry-Pi/
+https://www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps
+
+### NVM Commands
+https://heynode.com/tutorial/install-nodejs-locally-nvm/
+// check version
+node -v || node --version
+
+// list installed versions of node (via nvm)
+nvm ls
+
+// install specific version of node
+nvm install 6.9.2
+
+// set default version of node
+nvm alias default 6.9.2
+
+// switch version of node
+nvm use 6.9.1
+
+// to list available remote versions of node (via nvm)
+nvm ls-remote
+
+Install Node
+nvm install <node_version>      // Install a specific Node version
+nvm install node                // Install latest Node release (Current)
+nvm install --lts               // Install latest LTS release of NodeJS
+nvm install-latest-npm          // Install latest NPM release only
+
+List Available Node Releases
+nvm ls-remote
+nvm ls-remote | grep -i "latest"        
+nvm ls-remote | grep -i "<node_version>"
+
+List Installed Nodes
+nvm list node                   // Lists installed Node versions
+nvm list  (or)  nvm ls          // Lists installed Node versions with additional release info
+
+Switch To Another Node Version
+nvm use node                      // Switch to the latest available Node version
+nvm use <node_version_or_alias>  // Switch to a specific version
+nvm use --lts                    // Switch to the latest LTS Node version
+
+Verifying Node Version
+node -v  (or)  node --version
+npm -v   (or)  npm --version
+nvm -v   (or)  nvm --version
+
+Set Alias
+nvm alias default node                  // Always defaults to the latest available node version on a shell
+nvm alias default <node_version>        // Set default node version on a shell
+nvm alias <alias_name> <node_version>   // Set user-defined alias to Node versions 
+
+nvm unalias <alias_name>                // Deletes the alias named <alias_name>
+
+Path to Node Executable
+nvm which <installed_node_version>      // path to the executable where a specific Node version is installed
+
+Uninstall Specific Node Version
+nvm uninstall <node_version>    // Uninstall a specific Node version
+nvm uninstall --lts             // Uninstall the latest LTS release of Node
+nvm uninstall node              // Uninstall latest (Current) release of Node
+
+Uninstall NVM
+ To remove, delete, or uninstall nvm, just remove the $NVM_DIR folder (usually ~/.nvm)
+
+
+
+
