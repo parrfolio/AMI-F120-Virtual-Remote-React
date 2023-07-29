@@ -13,6 +13,7 @@ import LoginForm from "./Login/Login";
 import { useAuth } from "./AuthStateHandler";
 import jukebox_data from "../../data/jukebox";
 import animation_data from "../../data/animations";
+import { Loading } from "./Loading";
 
 export const App = () => {
   //const url = window.location.pathname; //allows me to drop the app in any subdirectory
@@ -21,7 +22,7 @@ export const App = () => {
   const { admin } = user;
 
   return loading ? (
-    <div>Loading...</div>
+    <Loading />
   ) : (
     <BrowserRouter>
       <Helmet>

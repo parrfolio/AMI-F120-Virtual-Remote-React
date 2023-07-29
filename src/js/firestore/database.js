@@ -34,6 +34,7 @@ export const firebaseAuth = firebase.auth;
 export const twitterAuthProvider = new firebaseAuth.TwitterAuthProvider();
 export const googleAuthProvider = new firebaseAuth.GoogleAuthProvider();
 export const facebookAuthProvider = new firebaseAuth.FacebookAuthProvider();
+export const appleAuthProvider = new firebaseAuth.OAuthProvider("apple.com");
 
 export const storageKey = "KEY_FOR_LOCAL_STORAGE";
 

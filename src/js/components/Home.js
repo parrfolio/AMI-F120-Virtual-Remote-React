@@ -1,8 +1,18 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import { Header } from "./Header";
+import { Loading } from "./Loading";
+import { LoginForm } from "./Login/Login";
 // import Chevron from "../../fonts/chevron.js";
-
+const FlexBox = styled.div`
+  display: grid;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+`;
 export const Home = (props, state) => {
   const [loading, setLoading] = useState(false);
 
@@ -16,11 +26,14 @@ export const Home = (props, state) => {
   //   });
 
   return loading ? (
-    <div>Loading....</div>
+    <Loading />
   ) : (
     <Fragment>
-      <div>Not Logged in homepage!</div>
-      <Link to="/login">Login</Link>
+      <Header />
+      <FlexBox>
+        <LoginForm />
+      </FlexBox>
+      {/* <Link to="/login">Login</Link> */}
     </Fragment>
   );
 };

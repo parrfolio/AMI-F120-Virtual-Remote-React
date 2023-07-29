@@ -1,12 +1,23 @@
 const express = require("express");
+var fs = require("fs");
+
 const app = express();
 const path = require("path");
 const http = require("http").Server(app);
+
+const privateKey = fs.readFileSync(__dirname + "/server.key", "utf8");
+const certificate = fs.readFileSync(__dirname + "/server.crt", "utf8");
+const credentials = { key: privateKey, cert: certificate };
+const https = require("https").Server(credentials, app);
 const io = require("socket.io")(http);
 const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
-const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
-const i2c = require("i2c-bus");
+
+//turned off for mac dev, need back in package to run on rasp
+//const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+
+//not being used
+//const i2c = require("i2c-bus");
 // const sleepMore = require("sleep");
 
 var os = require("os");
@@ -25,33 +36,40 @@ for (var k in interfaces) {
 app.use(express.static(webroot));
 
 //for routing
-app.get("*", function (req, res) {
+app.get("*", function(req, res) {
   res.sendFile("index.html", {
     root: webroot,
   });
 });
-const PORT = process.env.PORT || 8080;
-http.listen(PORT, () => {
-  console.log(`Running at ${addresses}:${PORT} from ${webroot}`);
+const httpPORT = process.env.PORT || 8080;
+http.listen(httpPORT, () => {
+  console.log(`Running at http://${addresses}:${httpPORT} from ${webroot}`);
 });
 
-process.on("SIGINT", function () {
+const httpsPORT = process.env.PORT || 8443;
+
+https.listen(httpsPORT, () => {
+  console.log(`Running at https://${addresses}:${httpsPORT} from ${webroot}`);
+});
+
+process.on("SIGINT", function() {
   ws281x.reset();
   ws281x.finalize();
   gpio.destroy();
 
-  process.nextTick(function () {
+  process.nextTick(function() {
     process.exit(0);
   });
 });
 
+//turned off for mac dev, need back in package to run on rasp
 //Light animations
-const rainbow = require("../animations/rainbow");
-const twinkle = require("../animations/twinkle");
-const colorWave = require("../animations/colorWave");
-const xmas = require("../animations/xmas");
-const classic = require("../animations/classic");
-const fadeInOut = require("../animations/fadeInOut");
+// const rainbow = require("../animations/rainbow");
+// const twinkle = require("../animations/twinkle");
+// const colorWave = require("../animations/colorWave");
+// const xmas = require("../animations/xmas");
+// const classic = require("../animations/classic");
+// const fadeInOut = require("../animations/fadeInOut");
 
 //Raspberry pi relay on pysical pin
 const relay = 7;
@@ -71,7 +89,7 @@ gpio.setup(relay, gpio.DIR_OUT);
 // const pulseDelay = 30;
 
 //PULSE TRAINS FOR STEPPER
-io.sockets.on("connection", function (socket) {
+io.sockets.on("connection", function(socket) {
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
@@ -92,7 +110,7 @@ io.sockets.on("connection", function (socket) {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.select.ptrains[0]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(relay, true, function (err) {
+          gpio.write(relay, true, function(err) {
             console.log("on");
             if (err) throw err;
             (async () => {
@@ -110,7 +128,7 @@ io.sockets.on("connection", function (socket) {
         console.log("=======-- Train 2 START --=======");
         for (let i = 0; i < data.select.ptrains[1]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(relay, true, function (err) {
+          gpio.write(relay, true, function(err) {
             console.log("on");
             if (err) throw err;
             (async () => {

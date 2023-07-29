@@ -1,24 +1,24 @@
 import { createGlobalStyle } from "styled-components";
 
-import SFProDisplayBoldWoff from "./SFProDisplayBold.woff";
-import SFProDisplayBoldWoff2 from "./SFProDisplayBold.woff2";
-import SFProDisplayRegularWoff from "./SFProDisplayRegular.woff";
-import SFProDisplayRegularWoff2 from "./SFProDisplayRegular.woff2";
+import MetropolisBoldWoff from "./MetropolisBold.woff";
+import MetropolisBoldWoff2 from "./MetropolisBold.woff2";
+import MetropolisRegularWoff from "./MetropolisRegular.woff";
+import MetropolisRegularWoff2 from "./MetropolisRegular.woff2";
 
 export default createGlobalStyle`
     @font-face {
-        font-family: 'SFProDisplayBold';
-        src: local('SFProDisplayBold'), local('SFProDisplayBold'),
-        url(${SFProDisplayBoldWoff2}) format('woff2'),
-        url(${SFProDisplayBoldWoff}) format('woff');
+        font-family: 'MetropolisBold';
+        src: local('MetropolisBold'), local('MetropolisBold'),
+        url(${MetropolisBoldWoff2}) format('woff2'),
+        url(${MetropolisBoldWoff}) format('woff');
         font-weight: 300;
         font-style: normal;
     }
     @font-face {
-        font-family: 'SFProDisplayRegular';
-        src: local('SFProDisplayRegular'), local('SFProDisplayRegular'),
-        url(${SFProDisplayRegularWoff2}) format('woff2'),
-        url(${SFProDisplayRegularWoff}) format('woff');
+        font-family: 'MetropolisRegular';
+        src: local('MetropolisRegular'), local('MetropolisRegular'),
+        url(${MetropolisRegularWoff2}) format('woff2'),
+        url(${MetropolisRegularWoff}) format('woff');
         font-weight: 300;
         font-style: normal;
     }

@@ -1,6 +1,7 @@
 const dev = process.env.NODE_ENV !== "production";
 const webpack = require("webpack");
 const path = require("path");
+const fs = require("fs");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const plugins = [new FriendlyErrorsWebpackPlugin()];
@@ -35,7 +36,9 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    port: 3000,
+    port: 8443,
+    key: fs.readFileSync(__dirname + "/src/server/server.key", "utf8"),
+    cert: fs.readFileSync(__dirname + "/src/server/server.crt", "utf8"),
   },
   module: {
     rules: [

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import { Loading } from "./Loading";
 
 export const About = (props, state) => {
   const [loading, setLoading] = useState(false);
@@ -19,10 +20,10 @@ export const About = (props, state) => {
   const { lights } = location.state;
 
   return loading ? (
-    <div>Loading....</div>
+    <Loading />
   ) : (
     <Fragment>
-      <div>About Page</div>
+      <div>About Page Is awesome!</div>
       <div>
         Light Running {lights.running}
         Light Animation {lights.animation}

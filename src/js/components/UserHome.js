@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
-import { Link } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import { Link, RouterLink } from "react-router-dom";
+//import styled, { createGlobalStyle } from "styled-components";
+import styled, { ThemeContext } from "styled-components";
+import { logout } from "../components/Login/AuthFunctions";
+
 import io from "socket.io-client";
 import { ToggleButton } from "./ToggleButton";
 import { isYandex } from "react-device-detect";
 import { call } from "file-loader";
+import { Loading } from "./Loading";
 
 const Block = styled.div`
   order: 0;
@@ -15,6 +19,18 @@ const Block = styled.div`
   font-size: 1.4rem;
   padding: 20px;
   ${({ theme }) => theme.mamabear`margin-left:-5%`}
+`;
+
+const StyledFlex = styled.div`
+  align-items: top;
+  justify-content: top;
+  color: ${(props) => props.theme.nav};
+  text-decoration: none;
+  text-transform: uppercase;
+  display: block;
+  font-family: ${(props) => props.theme.fonts.nav};
+  font-size: ${(props) => props.theme.fontSizes.md};
+  ${({ theme }) => theme.mamabear`display:inline-block`}
 `;
 
 export const UserHome = (props, state) => {
@@ -212,10 +228,10 @@ export const UserHome = (props, state) => {
   });
 
   return loading ? (
-    <div>Loading....</div>
+    <Loading />
   ) : (
     <Fragment>
-      <Block>{jukebox_data}</Block>
+      <StyledFlex>{jukebox_data}</StyledFlex>
       <div
         onClick={(e: Event) => {
           console.log("turn off selections");
@@ -235,6 +251,7 @@ export const UserHome = (props, state) => {
         Stop
       </div>
       <Block>{theme_selections}</Block>
+
       <Link
         to={{
           pathname: "/about",
@@ -248,6 +265,9 @@ export const UserHome = (props, state) => {
         }}
       >
         About
+      </Link>
+      <Link as={RouterLink} to="/home" onClick={logout}>
+        Logout
       </Link>
       <Link
         to={{
