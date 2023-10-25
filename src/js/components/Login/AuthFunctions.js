@@ -244,6 +244,7 @@ export function logout() {
 }
 
 export function login(email, pw) {
+  console.log(email, pw);
   return firebaseAuth().signInWithEmailAndPassword(email, pw);
 }
 

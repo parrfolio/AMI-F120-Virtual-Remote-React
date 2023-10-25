@@ -14,7 +14,7 @@ const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 
 //turned off for mac dev, need back in package to run on rasp
-const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+// const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
 
 //not being used at this time (digital display)
 //const i2c = require("i2c-bus");
@@ -64,12 +64,12 @@ process.on("SIGINT", function() {
 
 //turned off for mac dev, need back in package to run on rasp
 //Light animations
-const rainbow = require("../animations/rainbow");
-const twinkle = require("../animations/twinkle");
-const colorWave = require("../animations/colorWave");
-const xmas = require("../animations/xmas");
-const classic = require("../animations/classic");
-const fadeInOut = require("../animations/fadeInOut");
+// const rainbow = require("../animations/rainbow");
+// const twinkle = require("../animations/twinkle");
+// const colorWave = require("../animations/colorWave");
+// const xmas = require("../animations/xmas");
+// const classic = require("../animations/classic");
+// const fadeInOut = require("../animations/fadeInOut");
 
 //Raspberry pi relay on pysical pin
 const relay = 7;

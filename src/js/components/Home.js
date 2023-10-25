@@ -4,7 +4,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Header } from "./Header";
 import { Loading } from "./Loading";
 import { LoginForm } from "./Login/Login";
-// import Chevron from "../../fonts/chevron.js";
+
+const FlexMainContainer = styled.div``;
+
 const FlexBox = styled.div`
   display: grid;
   flex-direction: row;
@@ -13,6 +15,7 @@ const FlexBox = styled.div`
   align-content: center;
   align-items: flex-start;
 `;
+
 export const Home = (props, state) => {
   const [loading, setLoading] = useState(false);
 
@@ -28,12 +31,12 @@ export const Home = (props, state) => {
   return loading ? (
     <Loading />
   ) : (
-    <Fragment>
+    <FlexMainContainer>
       <Header />
       <FlexBox>
         <LoginForm />
       </FlexBox>
       {/* <Link to="/login">Login</Link> */}
-    </Fragment>
+    </FlexMainContainer>
   );
 };

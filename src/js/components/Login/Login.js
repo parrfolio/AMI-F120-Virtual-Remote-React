@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
+
 import {
   login,
   resetPassword,
@@ -13,6 +14,7 @@ import {
 import FacebookIcon from "../SVG/facebook";
 import GoogleIcon from "../SVG/google";
 import AppleIcon from "../SVG/apple";
+import HrOrIcon from "../SVG/hror";
 
 const FlexBlockInner = styled.div`
   order: 0;
@@ -20,9 +22,8 @@ const FlexBlockInner = styled.div`
   align-self: stretch;
 `;
 const FormFlexBlock = styled(FlexBlockInner)`
-  align-self: auto;
-  place-content: center;
-  display: grid;
+  max-width: 80%;
+  margin: 0 auto;
 `;
 
 const H1 = styled.h1`
@@ -36,39 +37,64 @@ const H1 = styled.h1`
   margin-bottom: 20px;
 `;
 
-const Form = styled.form`
-  width: ${(props) => props.theme.infantbear};
-`;
-
-const Label = styled.label`
-  color: ${(props) => props.theme.colors.h1};
-  display: block;
-  padding: 0.5rem;
-  font-family: ${(props) => props.theme.fonts.reg};
-  font-size: ${(props) => props.theme.fontSizes.mdlg};
-`;
-
-const Input = styled.input`
-  color: ${(props) => props.theme.colors.h1};
-  padding: 0.5rem;
-  font-family: ${(props) => props.theme.fonts.reg};
-  font-size: ${(props) => props.theme.fontSizes.sm};
-  border-radius: 4px;
-  border: 1px solid var(--neutral-almost-white, #eee);
-  background: var(--i-osbg, rgba(249, 249, 249, 0.8));
-  border-radius: 3px;
-  display: flex;
-  height: 46px;
-  padding: 8px;
-  justify-content: center;
-  align-items: center;
-  align-self: stretch;
+//hr
+const StyledHrOrContainer = styled.div`
+  height: 20px;
+  margin-top: 20px;
   width: 100%;
+`;
+
+const before = css`
+  &::before {
+    content: "";
+    height: 1px;
+    background-color: #000;
+    display: block;
+    margin-top: 5%;
+  }
+`;
+
+const StyledOr = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: ". . .";
+  line-height: 0.9;
+  text-align: center;
+  width: 100%;
+  font-size: ${(props) => props.theme.fontSizes.md};
+  font-family: ${(props) => props.theme.fonts.reg};
+  ${(props) => props.hasBefore && before}
+  ${(props) => props.hasAfter && after}
+`;
+
+const after = css`
+  &::after {
+    content: "";
+    height: 1px;
+    background-color: #000;
+    margin-top: 5%;
+  }
+`;
+
+//social buttons
+const SocialButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  height: 170px;
+  margin-top: 10px;
 `;
 
 const Button = styled.button`
   display: flex;
-  width: 272px;
+  width: 100%;
   height: 48px;
   padding: 13.372px;
   align-items: flex-start;
@@ -81,31 +107,21 @@ const Button = styled.button`
   border: 0 none;
 `;
 
-const StyledFacebookIcon = styled(FacebookIcon)`
-  width: 21.395px;
-  height: 21.395px;
-  flex-shrink: 0;
-`;
+const StyledHrOr = styled(HrOrIcon)``;
+
+const StyledFacebookIcon = styled(FacebookIcon)``;
 
 const FacebookButton = styled(Button)`
   background: #1877f2;
 `;
 
-const StyledAppleIcon = styled(AppleIcon)`
-  width: 21.395px;
-  height: 21.395px;
-  flex-shrink: 0;
-`;
+const StyledAppleIcon = styled(AppleIcon)``;
 
 const AppleButton = styled(Button)`
   background: #000;
 `;
 
-const StyledGoogleIcon = styled(GoogleIcon)`
-  width: 21.395px;
-  height: 21.395px;
-  flex-shrink: 0;
-`;
+const StyledGoogleIcon = styled(GoogleIcon)``;
 
 const GoogleButton = styled(Button)`
   background: #fff;
@@ -117,75 +133,166 @@ const GoogleButton = styled(Button)`
     0px 0px 2.674342155456543px 0px rgba(0, 0, 0, 0.08);
 `;
 
+//Login Form
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const StyledLabel = styled.label`
+  display: block;
+  font-weight: bold;
+  color: ${(props) =>
+    props.invalid ? props.theme.colors.invalid : props.theme.colors.h1};
+  display: block;
+  padding: 0.5rem 0;
+  font-family: ${(props) => props.theme.fonts.reg};
+  font-size: ${(props) => props.theme.fontSizes.sm};
+  align-self: stretch;
+  width: 100%;
+`;
+
+const StyledInput = styled.input`
+  color: ${(props) => props.theme.colors.h1};
+  padding: 0.5rem;
+  font-family: ${(props) => props.theme.fonts.reg};
+  font-size: ${(props) => props.theme.fontSizes.sm};
+  border-radius: 4px;
+  border: ${(props) =>
+    props.invalid
+      ? "1px solid" + props.theme.colors.invalid
+      : "1px solid" + props.theme.colors.lightgray};
+
+  background: var(--i-osbg, rgba(249, 249, 249, 0.8));
+  border-radius: 3px;
+  display: flex;
+  height: 46px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+`;
+
+const LoginButton = styled(Button)`
+  font-weight: bold;
+  background-color: #bc2a31;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:enabled {
+    opacity: 1;
+  }
+  margin-top: 20px;
+  opacity: ${(props) => (!props.enabled ? 0.5 : 1)};
+`;
+
+const StyledAlert = styled.div`
+  color: ${(props) => props.theme.colors.invalid};
+  padding: 0.5rem;
+  font-family: ${(props) => props.theme.fonts.reg};
+  font-size: ${(props) => props.theme.fontSizes.sm};
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 250px;
+`;
+
 export const LoginForm = (props, state) => {
-  const [loginMessage, setloginMessage] = useState();
-  const setErrorMsg = (error) => {
-    setloginMessage(error);
-  };
+  const [email, setUseremail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordInvalid, setPasswordInvalid] = useState(false);
+  const [emailInvalid, setemaildInvalid] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [ErrorMsg, setErrorMsg] = useState();
+
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    login(this.email.value, this.pw.value).catch((error) => {
-      this.setState(setErrorMsg("Invalid username/password."));
+    e.preventDefault();
+    login(email, password).catch((error) => {
+      setErrorMsg(error.message);
+
+      if (
+        error.code == "auth/wrong-password" ||
+        error.code == "auth/invalid-email" ||
+        error.code == "auth/user-not-found"
+      ) {
+        setPasswordInvalid(true);
+      } else {
+        setPasswordInvalid(false);
+      }
     });
   };
-  const resetPassword = () => {
-    resetPassword(this.email.value)
-      .then(() =>
-        this.setState(
-          setErrorMsg(`Password reset email sent to ${this.email.value}.`)
-        )
-      )
-      .catch((error) => this.setState(setErrorMsg(`Email address not found.`)));
+
+  const usernameEntered = (e) => {
+    setUseremail(e.target.value);
+    // buttonEnabled(username, password)
+  };
+
+  const passwordEntered = (e) => {
+    setPassword(e.target.value);
+    // buttonEnabled(username, password)
+  };
+
+  const buttonEnabled = (username, pw) => {
+    if (username.length > 0 && password.length > 0) {
+      setEnabled(true);
+    } else {
+      setEnabled(false);
+    }
   };
   return (
     <FlexBlockInner>
       <H1>Jukebox Remote Login</H1>
       <FormFlexBlock>
-        <form onSubmit={handleSubmit.bind(this)}>
-          <div className="form-group">
-            <Label>Email</Label>
-            <Input
-              type="text"
-              className="form-control"
-              ref={(email) => (email = email)}
-              placeholder="Email"
-            />
-          </div>
-          <div className="form-group">
-            <Label>Password</Label>
-            <Input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              ref={(pw) => (pw = pw)}
-            />
-          </div>
-          {loginMessage && (
-            <div className="alert alert-danger" role="alert">
-              <span
-                className="glyphicon glyphicon-exclamation-sign"
-                aria-hidden="true"
-              />
-              <span className="sr-only">Error:</span>
-              &nbsp;{loginMessage}{" "}
-              <a href="#" onClick={this.resetPassword} className="alert-link">
-                Forgot Password?
-              </a>
-            </div>
-          )}
-          <button type="submit" className="btn btn-primary">
+        <StyledForm onSubmit={handleSubmit}>
+          <StyledLabel invalid={emailInvalid}>Email:</StyledLabel>
+          <StyledInput
+            invalid={emailInvalid}
+            type="text"
+            value={email}
+            onChange={(e) => usernameEntered(e)}
+          />
+          <StyledLabel invalid={passwordInvalid}>Password:</StyledLabel>
+          <StyledInput
+            invalid={passwordInvalid}
+            type="password"
+            value={password}
+            onChange={(e) => passwordEntered(e)}
+          />
+          {ErrorMsg && <StyledAlert>{ErrorMsg}</StyledAlert>}
+          <LoginButton type="submit" disabled={!email || !password}>
             Login
-          </button>
-        </form>
-        {/* <AppleButton onClick={appleAuth}>
-          <StyledAppleIcon fill="#fff" /> Apple
-        </AppleButton> */}
-        <GoogleButton onClick={googleAuth}>
-          <StyledGoogleIcon fill="" width="21.395px" /> Google
-        </GoogleButton>
-        <FacebookButton onClick={fbAuth}>
-          <StyledFacebookIcon fill="#fff" /> Facebook
-        </FacebookButton>
+          </LoginButton>
+        </StyledForm>
+        <StyledHrOrContainer>
+          <StyledOr hasBefore hasAfter>
+            Or log in with
+          </StyledOr>
+        </StyledHrOrContainer>
+        <SocialButtons>
+          <AppleButton onClick={appleAuth}>
+            <StyledAppleIcon fill="#fff" /> Apple
+          </AppleButton>
+          <GoogleButton onClick={googleAuth}>
+            <StyledGoogleIcon fill="" width="21.395px" /> Google
+          </GoogleButton>
+          <FacebookButton onClick={fbAuth}>
+            <StyledFacebookIcon fill="#fff" /> Facebook
+          </FacebookButton>
+        </SocialButtons>
       </FormFlexBlock>
     </FlexBlockInner>
   );

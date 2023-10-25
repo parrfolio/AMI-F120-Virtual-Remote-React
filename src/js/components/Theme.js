@@ -10,11 +10,10 @@ const Theme = ({ children }) => (
         reg: "MetropolisRegular",
       },
       fontSizes: {
-        sm: "1rem",
-        md: "1.2rem",
-        mdlg: "1.4rem",
-        lg: "2.3rem",
-        xl: "4.8rem",
+        sm: ".875rem",
+        md: "1.0rem",
+        lg: "1.4rem",
+        xl: "2rem",
       },
       colors: {
         body: "#fff",
@@ -24,6 +23,8 @@ const Theme = ({ children }) => (
         pink: colors[1],
         header: "#CA3A49",
         h1: "#333",
+        lightgray: "#ccc",
+        invalid: "#c00",
       },
       nav: {
         color: colors[0],

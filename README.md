@@ -4,7 +4,8 @@
 Will auto reload on changes. Ligths will not work
 ### To Run Build on Raspi
 ```npm run build && npm start```
-
+## SSH Keys setup for Github
+https://stackoverflow.com/questions/38556096/github-permission-denied-publickey-fatal-could-not-read-from-remote-reposit
 ## SHH to Raspi
 ```shh pi@raspberrypi```
 ## Temp Notes
