@@ -4,11 +4,11 @@ import styled, { createGlobalStyle } from "styled-components";
 import { Header } from "./Header";
 import { Loading } from "./Loading";
 import { LoginForm } from "./Login/Login";
+import { Turntable } from "./Turntable";
 
-const FlexMainContainer = styled.div``;
-
+const Block = styled.div``;
 const FlexBox = styled.div`
-  display: grid;
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
@@ -31,12 +31,14 @@ export const Home = (props, state) => {
   return loading ? (
     <Loading />
   ) : (
-    <FlexMainContainer>
-      <Header />
+    <Block>
+      <Header {...{ nav: false }} />
       <FlexBox>
         <LoginForm />
       </FlexBox>
-      {/* <Link to="/login">Login</Link> */}
-    </FlexMainContainer>
+      <FlexBox>
+        <Turntable />
+      </FlexBox>
+    </Block>
   );
 };

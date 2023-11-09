@@ -22,7 +22,6 @@ const FlexBlockInner = styled.div`
   align-self: stretch;
 `;
 const FormFlexBlock = styled(FlexBlockInner)`
-  max-width: 80%;
   margin: 0 auto;
 `;
 
@@ -50,7 +49,8 @@ const before = css`
     height: 1px;
     background-color: #000;
     display: block;
-    margin-top: 5%;
+    margin-top: 6.5%;
+    margin-right: 5%;
   }
 `;
 
@@ -75,7 +75,8 @@ const after = css`
     content: "";
     height: 1px;
     background-color: #000;
-    margin-top: 5%;
+    margin-top: 6.5%;
+    margin-left: 5%;
   }
 `;
 

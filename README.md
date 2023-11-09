@@ -1,5 +1,5 @@
 # AMI F 120 Jukebox Virtual Remote in React
-### To Run Dev on Mac
+### To Run Dev on Mac (run latest node -v)
 ```npm run dev```
 Will auto reload on changes. Ligths will not work
 ### To Run Build on Raspi

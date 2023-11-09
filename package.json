@@ -67,7 +67,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --progress",
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --progress --host 192.168.124.201 --content-base dist --colors --inline --https --cert=src/server/server.crt --key=src/server/server.key",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --progress --host 192.168.124.179 --content-base dist --colors --inline --https --cert=src/server/server.crt --key=src/server/server.key",
     "start": "sudo node src/server/index.js",
     "flow": "flow",
     "linter": "eslint src",

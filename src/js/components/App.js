@@ -2,6 +2,7 @@ import React from "react";
 import { Home } from "./Home";
 import { About } from "./About";
 import { Lights } from "./Lights";
+import { Songs } from "./Songs";
 import { UserHome } from "./UserHome";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalFonts from "../../fonts/fonts";
@@ -47,7 +48,7 @@ export const App = () => {
           path="/"
           exact
           component={Home}
-          {...{ authed, user, admin: false }}
+          {...{ authed, user, admin: false, nav: false }}
         />
 
         <PrivateRoute
@@ -55,7 +56,7 @@ export const App = () => {
           component={UserHome}
           {...jukebox_data}
           {...animation_data}
-          {...{ authed, user, admin }}
+          {...{ authed, user, admin, nav: true }}
         />
 
         <PrivateRoute
@@ -67,6 +68,11 @@ export const App = () => {
         <PrivateRoute
           path="/lights"
           component={Lights}
+          {...{ authed, user, admin }}
+        />
+        <PrivateRoute
+          path="/songs"
+          component={Songs}
           {...{ authed, user, admin }}
         />
 

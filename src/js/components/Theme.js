@@ -23,6 +23,7 @@ const Theme = ({ children }) => (
         pink: colors[1],
         header: "#CA3A49",
         h1: "#333",
+        h2: "#FCF3E3",
         lightgray: "#ccc",
         invalid: "#c00",
       },

@@ -6,7 +6,7 @@ const SVG = ({
   width = "21.395px",
   height = "100%",
   className = "",
-  viewBox = "0 0 100% 100%",
+  viewBox = "0 0 21 21",
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

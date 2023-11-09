@@ -9,16 +9,17 @@ import { ToggleButton } from "./ToggleButton";
 import { isYandex } from "react-device-detect";
 import { call } from "file-loader";
 import { Loading } from "./Loading";
+import { Turntable } from "./Turntable";
+import { Header } from "./Header";
 
-const Block = styled.div`
-  order: 0;
-  flex: 0 1 auto;
-  align-self: auto;
-  position: relative;
-  width: 100%;
-  font-size: 1.4rem;
-  padding: 20px;
-  ${({ theme }) => theme.mamabear`margin-left:-5%`}
+const Block = styled.div``;
+const FlexBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
 `;
 
 const StyledFlex = styled.div`
@@ -230,59 +231,35 @@ export const UserHome = (props, state) => {
   return loading ? (
     <Loading />
   ) : (
-    <Fragment>
-      <StyledFlex>{jukebox_data}</StyledFlex>
-      <div
-        onClick={(e: Event) => {
-          console.log("turn off selections");
-          socket.emit(
-            "direction",
-            {
-              state: "off",
-              selection: 0,
-              ptrains: [0, 0],
-            },
-            (data) => {
-              //console.log(data);
-            }
-          );
-        }}
-      >
-        Stop
-      </div>
-      <Block>{theme_selections}</Block>
-
-      <Link
-        to={{
-          pathname: "/about",
-          state: {
-            lights: {
-              animation: animation,
-              running: isRunning,
-              active: isActiveIndex,
-            },
-          },
-        }}
-      >
-        About
-      </Link>
-      <Link as={RouterLink} to="/home" onClick={logout}>
-        Logout
-      </Link>
-      <Link
-        to={{
-          pathname: "/lights",
-          state: {
-            lights: {
-              animation: animation,
-              running: isRunning,
-              active: isActiveIndex,
-            },
-          },
-        }}
-      >
-        Lights
-      </Link>
-    </Fragment>
+    <Block>
+      <Header
+        {...{ animation, running: isRunning, active: isActiveIndex, nav: true }}
+      />
+      <FlexBox>
+        {jukebox_data}
+        <div
+          onClick={(e: Event) => {
+            console.log("turn off selections");
+            socket.emit(
+              "direction",
+              {
+                state: "off",
+                selection: 0,
+                ptrains: [0, 0],
+              },
+              (data) => {
+                //console.log(data);
+              }
+            );
+          }}
+        >
+          Stop
+        </div>
+        <Block>{theme_selections}</Block>
+      </FlexBox>
+      <FlexBox>
+        <Turntable />
+      </FlexBox>
+    </Block>
   );
 };
