@@ -1,20 +1,28 @@
 import React from "react";
-import { Home } from "./Home";
-import { About } from "./About";
-import { Lights } from "./Lights";
-import { Songs } from "./Songs";
-import { UserHome } from "./UserHome";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalFonts from "../../fonts/fonts";
 import Helmet from "react-helmet";
 import ResetGlobalStyles from "./ResetGlobalStyles";
 import { PublicRoute } from "./Routes/PublicRoute";
 import { PrivateRoute } from "./Routes/PrivateRoute";
-import LoginForm from "./Login/Login";
 import { useAuth } from "./AuthStateHandler";
+import styled, { ThemeContext } from "styled-components";
+
 import jukebox_data from "../../data/jukebox";
 import animation_data from "../../data/animations";
+
 import { Loading } from "./Loading";
+
+import { About } from "./About";
+import { Lights } from "./Lights";
+import { Songs } from "./Songs";
+import { Login } from "./Login";
+
+const Block = styled.div`
+  margin-top: 15%;
+  width: 100%;
+  height: 100%;
+`;
 
 export const App = () => {
   //const url = window.location.pathname; //allows me to drop the app in any subdirectory
@@ -47,16 +55,15 @@ export const App = () => {
         <PublicRoute
           path="/"
           exact
-          component={Home}
+          component={Login}
           {...{ authed, user, admin: false, nav: false }}
         />
 
         <PrivateRoute
-          path="/home"
-          component={UserHome}
+          path="/songs"
+          component={Songs}
           {...jukebox_data}
-          {...animation_data}
-          {...{ authed, user, admin, nav: true }}
+          {...{ authed, user, admin: true, nav: true }}
         />
 
         <PrivateRoute
@@ -68,18 +75,8 @@ export const App = () => {
         <PrivateRoute
           path="/lights"
           component={Lights}
-          {...{ authed, user, admin }}
-        />
-        <PrivateRoute
-          path="/songs"
-          component={Songs}
-          {...{ authed, user, admin }}
-        />
-
-        <PublicRoute
-          path="/login"
-          component={LoginForm}
-          {...{ authed, user, admin: false }}
+          {...animation_data}
+          {...{ authed, user, admin, nav: true }}
         />
       </Switch>
       <GlobalFonts />

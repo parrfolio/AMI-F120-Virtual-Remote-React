@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled, { createGlobalStyle, css } from "styled-components";
 import JukeboxGraphic from "./SVG/jukebox";
+import { Portal } from "react-is";
 
 const H2 = styled.h2`
   color: ${(props) => props.theme.colors.h2};
@@ -18,20 +19,25 @@ const H2 = styled.h2`
   top: -25px;
 `;
 
-const Block = styled.div`
-  display: block;
-  position: absolute;
-  bottom: -168px;
-  margin: 0 auto;
-  transition: bottom 0.25s ease-in-out;
-  &:hover {
-    bottom: -20px;
-  }
-`;
-
 const StyledJukeboxGraphic = styled(JukeboxGraphic)``;
 
 export const Turntable = (props, state) => {
+  const { playing } = props;
+  const Block = styled.div`
+    display: block;
+    position: fixed;
+    bottom: -168px;
+    margin: 0 auto;
+    transition: bottom 0.25s ease-in-out;
+
+    ${(props) =>
+      playing &&
+      css`
+        &:hover {
+          bottom: -20px;
+        }
+      `};
+  `;
   return (
     <Block>
       <H2>1954 AMi F 120</H2>

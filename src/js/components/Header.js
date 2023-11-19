@@ -11,6 +11,11 @@ const Block = styled.div`
   align-content: stretch;
   align-items: flex-end;
   height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
   background-color: ${(props) => props.theme.colors.header};
 `;
 export const Header = (props, state) => {
@@ -36,7 +41,7 @@ export const Header = (props, state) => {
           >
             Songs
           </Link>
-          <Link as={RouterLink} to="/home" onClick={logout}>
+          <Link as={RouterLink} to="/" onClick={logout}>
             Logout
           </Link>
           <Link

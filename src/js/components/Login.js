@@ -21,7 +21,7 @@ const FlexBox = styled.div`
   margin-top: 90px;
 `;
 
-export const Home = (props, state) => {
+export const Login = (props, state) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

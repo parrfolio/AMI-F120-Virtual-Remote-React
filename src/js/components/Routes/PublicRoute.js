@@ -15,7 +15,7 @@ export const PublicRoute = ({
         authed === false ? (
           <Component {...{ authed, user, ...rest }} />
         ) : (
-          <Redirect to="/home" />
+          <Redirect to="/songs" />
         )
       }
     />

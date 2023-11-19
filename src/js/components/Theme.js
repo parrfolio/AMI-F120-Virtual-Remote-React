@@ -26,6 +26,9 @@ const Theme = ({ children }) => (
         h2: "#FCF3E3",
         lightgray: "#ccc",
         invalid: "#c00",
+        titleStripBg: "#F5C2CB",
+        titleStripNumber: "#000",
+        titleStripTitle: "#000",
       },
       nav: {
         color: colors[0],

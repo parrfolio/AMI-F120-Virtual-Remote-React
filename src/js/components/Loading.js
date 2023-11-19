@@ -21,15 +21,17 @@ const Block = styled.div`
   align-content: center;
   align-items: center;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  height: 100%;
+  width: 100%;
   background-color: ${(props) => props.theme.colors.header};
 `;
 const Throbber = styled.img`
-  max-height: 25%;
+  max-height: 18%;
   order: 0;
   flex: 0 1 auto;
   align-self: auto;
@@ -37,6 +39,7 @@ const Throbber = styled.img`
   animation-duration: 5000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+  display: block;
 `;
 export const Loading = (props, state) => {
   return (

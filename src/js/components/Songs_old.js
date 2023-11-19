@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import { Loading } from "./Loading";
 
-export const About = (props, state) => {
+export const Songs = (props, state) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const About = (props, state) => {
   //     return <div key={index}></div>;
   //   });
 
-  console.log("ABOUT", props);
+  console.log("Songs", props);
   const location = useLocation();
   const { lights } = location.state;
 
@@ -23,14 +23,14 @@ export const About = (props, state) => {
     <Loading />
   ) : (
     <Fragment>
-      <div>About Page Is awesome!</div>
+      <div>Songs Page Is awesome!</div>
       <div>
         Light Running {lights.running}
         Light Animation {lights.animation}
       </div>
       <Link
         to={{
-          pathname: "/",
+          pathname: "/home",
           state: props.location.state,
         }}
       >
