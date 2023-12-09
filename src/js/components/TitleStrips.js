@@ -16,6 +16,10 @@ const Grid = styled.div`
   padding-top: 100px;
   padding-bottom: 100px;
   margin: 0 2.5%;
+  justify-items: end;
+  & div:nth-child(even) {
+    justify-self: start;
+  }
 `;
 export const TitleStrips = (props, state) => {
   const { jukebox } = props;

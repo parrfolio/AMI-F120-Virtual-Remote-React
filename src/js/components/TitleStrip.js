@@ -5,6 +5,7 @@ import io from "socket.io-client";
 
 const Block = styled.div`
   width: 100%;
+  max-width: 100%;
   height: 74px;
   color: black;
   border-radius: 13px;
@@ -16,14 +17,18 @@ const Block = styled.div`
   background-image: url('data:image/svg+xml,<svg width="277" height="24" viewBox="0 0 277 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M45.5 11L57 1H220L231.5 12.5L220 22.5L57 21.5L45.5 11Z" fill="white"/><path d="M45.5 11L57 1H220L231.5 12.5M45.5 11H0M45.5 11L57 21.5L220 22.5L231.5 12.5M231.5 12.5H276.5" stroke="%23CA3A49" stroke-width="2"/></svg>');
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size: 135%;
+  background-size: contain;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-evenly;
   align-content: center;
   align-items: center;
-  ${({ theme }) => theme.babybear`background-size: contain;`}
+  ${({ theme }) => theme.infantbear` background-size: 135%;`}
+  ${({ theme }) => theme.babybear`max-width: 80%;`}
+  ${({ theme }) => theme.mamabear`max-width: 70%;`}
+  ${({ theme }) => theme.brotherbear`max-width: 50%;`}
+  ${({ theme }) => theme.papabear`max-width: 40%;`}
 `;
 
 const SelectionNumber = styled.h2`
@@ -36,7 +41,6 @@ const SelectionNumber = styled.h2`
   order: 0;
   flex: 0 1 auto;
   align-self: stretch;
-  margin: 0 0 5px 0;
 `;
 
 const SelectionTitle = styled.h2`
@@ -49,7 +53,6 @@ const SelectionTitle = styled.h2`
   order: 0;
   flex: 0 1 auto;
   align-self: stretch;
-  margin: 0 0 5px 0;
 `;
 
 const SelectionArtist = styled.h2`
