@@ -23,11 +23,14 @@ export interface SongSelection {
 }
 
 export interface Song {
+    id?: string;
     songTitle: string;
     side: 'A Side' | 'B Side';
     artist: string;
     albumCover?: string;
+    albumArt?: string; // Discogs image URL - overrides Last.fm lookup
     select: SongSelection;
+    favorite?: boolean;
 }
 
 export interface Disc {

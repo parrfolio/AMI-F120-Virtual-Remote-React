@@ -6,7 +6,7 @@ export const jukeboxData: JukeboxData = [
             {
                 songTitle: 'Killing Me Softly',
                 side: 'A Side',
-                artist: 'R Flack',
+                artist: 'roberta flack',
                 select: {
                     state: 'on',
                     selection: 1,
@@ -15,9 +15,9 @@ export const jukeboxData: JukeboxData = [
                 },
             },
             {
-                songTitle: 'Something Else',
+                songTitle: 'Killing Me Softly Live',
                 side: 'B Side',
-                artist: 'R Flack',
+                artist: 'roberta flack',
                 select: {
                     state: 'on',
                     selection: 2,

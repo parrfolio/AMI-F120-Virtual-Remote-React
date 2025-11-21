@@ -36,7 +36,7 @@ for (var k in interfaces) {
 app.use(express.static(webroot));
 
 //for routing
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.sendFile("index.html", {
     root: webroot,
   });
@@ -52,12 +52,12 @@ https.listen(httpsPORT, () => {
   console.log(`Running at https://${addresses}:${httpsPORT} from ${webroot}`);
 });
 
-process.on("SIGINT", function() {
+process.on("SIGINT", function () {
   ws281x.reset();
   ws281x.finalize();
   gpio.destroy();
 
-  process.nextTick(function() {
+  process.nextTick(function () {
     process.exit(0);
   });
 });
@@ -89,7 +89,7 @@ gpio.setup(relay, gpio.DIR_OUT);
 // const pulseDelay = 30;
 
 //PULSE TRAINS FOR STEPPER
-io.sockets.on("connection", function(socket) {
+io.sockets.on("connection", function (socket) {
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
@@ -110,7 +110,7 @@ io.sockets.on("connection", function(socket) {
         console.log("=======-- Train 1 START --=======");
         for (let i = 0; i < data.select.ptrains[0]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(relay, true, function(err) {
+          gpio.write(relay, true, function (err) {
             console.log("on");
             if (err) throw err;
             (async () => {
@@ -128,7 +128,7 @@ io.sockets.on("connection", function(socket) {
         console.log("=======-- Train 2 START --=======");
         for (let i = 0; i < data.select.ptrains[1]; i++) {
           await sleep(pulseSpeed);
-          gpio.write(relay, true, function(err) {
+          gpio.write(relay, true, function (err) {
             console.log("on");
             if (err) throw err;
             (async () => {
@@ -245,6 +245,13 @@ io.sockets.on("connection", function(socket) {
       // By default we turn off the motors
       gpio.write(relay, false);
     }
+  });
+
+  // FAVORITE SONG UPDATE - Broadcast to all clients
+  socket.on("favorite-update", (data) => {
+    console.log("Favorite update:", data.songId, data.favorite);
+    // Broadcast to all other connected clients
+    socket.broadcast.emit("favorite-changed", data);
   });
 
   // LIGHT STRIPS FOR JUKE

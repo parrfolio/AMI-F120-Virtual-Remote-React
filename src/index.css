@@ -5,16 +5,16 @@
 /* Font Face Declarations */
 @font-face {
   font-family: "MetropolisBold";
-  src: url("./fonts/Metropolis-Bold.woff2") format("woff2"),
-    url("./fonts/Metropolis-Bold.woff") format("woff");
-  font-weight: 700;
+  src: url("./fonts/MetropolisBold.woff2") format("woff2"),
+    url("./fonts/MetropolisBold.woff") format("woff");
+  font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "MetropolisRegular";
-  src: url("./fonts/Metropolis-Regular.woff2") format("woff2"),
-    url("./fonts/Metropolis-Regular.woff") format("woff");
+  src: url("./fonts/MetropolisRegular.woff2") format("woff2"),
+    url("./fonts/MetropolisRegular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -52,4 +52,26 @@ body {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* Heart Animation - Twitter-style sprite */
+.heart-button {
+  width: 50px;
+  height: 50px;
+  background: url("/src/js/components/Assets/heart.png") no-repeat;
+  background-position: left center;
+  background-size: 2900% 100%;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+  display: block;
+  pointer-events: none;
+}
+
+.heart-button.is-active {
+  transition-duration: 1s;
+  background-position: right center;
+}
+
+.heart-button.is-favorited {
+  background-position: right center;
 }

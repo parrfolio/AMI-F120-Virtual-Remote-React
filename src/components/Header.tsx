@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Disc3, Sun } from "lucide-react";
+import { Icon45 } from "@/components/icons/Icon45";
+import { LightsIcon } from "@/components/icons/LightsIcon";
 import { logout } from "@/lib/auth";
 import { useAuthStore } from "@/stores/authStore";
 import AmiLogo from "@/js/components/Assets/AmiLogo.png";
@@ -27,10 +28,10 @@ export const Header = ({ nav = false }: HeaderProps) => {
             to="/songs"
             className="flex flex-col items-center gap-2 text-center transition-transform hover:-translate-y-0.5"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-jukebox-red shadow-[0_6px_16px_rgba(0,0,0,0.25)]">
-              <Disc3 className="h-7 w-7" />
+            <div className="flex h-14 w-14 items-center justify-center">
+              <Icon45 className="h-auto w-full" color="#FFFFFF" />
             </div>
-            <span className="text-[0.65rem] font-metropolis-bold uppercase tracking-[0.3em]">
+            <span className="font-metropolis-bold uppercase text-fluid-base">
               120 Songs
             </span>
           </Link>
@@ -38,23 +39,26 @@ export const Header = ({ nav = false }: HeaderProps) => {
           <span className="h-14 w-14" />
         )}
 
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Link
+          to="/"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
           <img
             src={AmiLogo}
             alt="AMi Logo"
             className="h-20 w-auto object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.32)]"
           />
-        </div>
+        </Link>
 
         {nav ? (
           <Link
             to="/lights"
             className="flex flex-col items-center gap-2 text-center transition-transform hover:-translate-y-0.5"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-jukebox-red shadow-[0_6px_16px_rgba(0,0,0,0.25)]">
-              <Sun className="h-7 w-7" />
+            <div className="flex h-7 w-7 items-center justify-center">
+              <LightsIcon className="h-auto w-full" color="#FFFFFF" />
             </div>
-            <span className="text-[0.65rem] font-metropolis-bold uppercase tracking-[0.3em]">
+            <span className="font-metropolis-bold uppercase text-fluid-base">
               Lights
             </span>
           </Link>
@@ -69,12 +73,17 @@ export const Header = ({ nav = false }: HeaderProps) => {
             <span className="font-metropolis">
               {user.firstName} {user.lastName}
             </span>
-            <button
-              onClick={handleLogout}
-              className="font-metropolis hover:underline"
-            >
-              Logout
-            </button>
+            <div className="flex items-center gap-4">
+              <Link to="/manage" className="font-metropolis hover:underline">
+                Manage
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="font-metropolis hover:underline"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -19,11 +19,18 @@ subjectAltName = @alt_names
 
 [v3_ca]
 subjectAltName = @alt_names
-basicConstraints = critical,CA:false
+basicConstraints = critical,CA:true
+keyUsage = critical, digitalSignature, keyEncipherment, keyCertSign
+extendedKeyUsage = serverAuth
+
+[v3_server]
+subjectAltName = @alt_names
+basicConstraints = critical,CA:FALSE
 keyUsage = critical, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
 
 [alt_names]
 IP.1 = 192.168.124.202
-IP.2 = 127.0.0.1
+IP.2 = 192.168.124.143
+IP.3 = 127.0.0.1
 DNS.1 = localhost

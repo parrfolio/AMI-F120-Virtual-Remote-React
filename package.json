@@ -4,7 +4,7 @@
   "description": "AMI F 120 Jukebox Virtual Wallbox - Modernized",
   "type": "module",
   "scripts": {
-    "dev": "vite --host 192.168.124.202",
+    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "node src/server/index.js",
@@ -12,6 +12,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
+    "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^2.1.2",
+    "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll": "^2.0.1",
     "firebase": "^10.14.0",
     "lucide-react": "^0.552.0",
     "react": "^18.3.1",
