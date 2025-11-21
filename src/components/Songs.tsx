@@ -4,6 +4,7 @@ import { TitleStrip } from "@/components/TitleStrip";
 import { VinylPlayer } from "@/components/VinylPlayer";
 import { HeartButton } from "@/components/HeartButton";
 import { useJukeboxStore } from "@/stores/jukeboxStore";
+import { usePlayerStore } from "@/stores/playerStore";
 import { Song } from "@/types";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -13,6 +14,17 @@ export const Songs = () => {
   );
 
   const { jukeboxData, loading, fetchSongs } = useJukeboxStore();
+  const { setNowPlaying, setIsPlayerExpanded } = usePlayerStore();
+
+  const handleSongClick = (song: Song) => {
+    setNowPlaying({
+      id: song.id,
+      title: song.songTitle,
+      artist: song.artist,
+      favorite: song.favorite,
+    });
+    setIsPlayerExpanded(true);
+  };
 
   useEffect(() => {
     fetchSongs();
@@ -112,7 +124,8 @@ export const Songs = () => {
                     {sectionDiscs.map((disc) => (
                       <div
                         key={disc.discIndex}
-                        className="relative group hover:scale-[1.02] transition-transform"
+                        className="relative group hover:scale-[1.02] transition-transform cursor-pointer"
+                        onClick={() => handleSongClick(disc.aSide)}
                       >
                         <TitleStrip
                           title={disc.aSide.songTitle}

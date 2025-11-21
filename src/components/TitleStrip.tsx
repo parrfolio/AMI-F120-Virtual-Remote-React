@@ -15,7 +15,7 @@ export const TitleStrip = ({
 }: TitleStripProps) => {
   return (
     <div
-      className={`w-full max-w-[330px] py-2 rounded-[12px] bg-[#f6ccd6] text-center ${className}`}
+      className={`w-full py-2 rounded-[12px] bg-[#f6ccd6] text-center ${className}`}
     >
       <p className="font-metropolis-bold text-xl sm:text-2xl tracking-tight font-bold">
         {title}

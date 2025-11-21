@@ -5,6 +5,7 @@ import vinylImage from "@/js/components/Assets/vinyl.png";
 import tonearmImage from "@/js/components/Assets/tonearm.png";
 import jukeboxBg from "@/js/components/Assets/jukebox.svg";
 import { Music4, Pause, Play, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export const VinylPlayer = () => {
   const {
@@ -13,7 +14,63 @@ export const VinylPlayer = () => {
     isPlayerExpanded,
     togglePlayback,
     setIsPlayerExpanded,
+    setIsPlaying,
   } = usePlayerStore();
+
+  const [tonearmReady, setTonearmReady] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [previousSongId, setPreviousSongId] = useState<string | undefined>();
+
+  // Handle song transitions - close player if song changes while playing
+  useEffect(() => {
+    if (
+      nowPlaying?.id &&
+      previousSongId &&
+      nowPlaying.id !== previousSongId &&
+      isPlayerExpanded
+    ) {
+      // A different song was selected while player is open
+      setIsTransitioning(true);
+      setIsPlayerExpanded(false);
+
+      // Wait for close animation, then reopen with new song
+      const reopenTimer = setTimeout(() => {
+        setIsPlayerExpanded(true);
+        setIsTransitioning(false);
+      }, 700); // Match the player close animation duration
+
+      return () => clearTimeout(reopenTimer);
+    }
+
+    setPreviousSongId(nowPlaying?.id);
+  }, [nowPlaying?.id]);
+
+  // Animation sequence when player opens with a song
+  useEffect(() => {
+    if (isPlayerExpanded && nowPlaying && !isTransitioning) {
+      // Reset states
+      setTonearmReady(false);
+      setIsPlaying(false);
+
+      // Step 1: Player opens (handled by isPlayerExpanded)
+      // Step 2: After 700ms, move tonearm into position
+      const tonearmTimer = setTimeout(() => {
+        setTonearmReady(true);
+      }, 700);
+
+      // Step 3: After 1400ms total, start playing
+      const playTimer = setTimeout(() => {
+        setIsPlaying(true);
+      }, 1400);
+
+      return () => {
+        clearTimeout(tonearmTimer);
+        clearTimeout(playTimer);
+      };
+    } else if (!isPlayerExpanded) {
+      setTonearmReady(false);
+    }
+  }, [isPlayerExpanded, nowPlaying?.id, isTransitioning]);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50">
@@ -34,12 +91,14 @@ export const VinylPlayer = () => {
             <img
               src={tonearmImage}
               alt="Tonearm"
-              className={`pointer-events-none absolute -left-20 bottom-0 z-20 w-36 origin-bottom-right transition-all duration-700 sm:-left-32 sm:top-20 sm:w-40 ${
+              className={`pointer-events-none absolute -left-20 bottom-0 z-20 w-36 origin-bottom-right transition-all sm:-left-32 sm:top-20 sm:w-40 ${
                 isPlayerExpanded
                   ? "translate-y-0 opacity-100"
                   : "translate-y-6 opacity-0"
               } ${
-                isPlayerExpanded && isPlaying ? "rotate-[16deg]" : "rotate-0"
+                tonearmReady
+                  ? "rotate-[16deg] duration-700"
+                  : "rotate-0 duration-300"
               }`}
             />
             <img
