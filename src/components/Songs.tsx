@@ -5,7 +5,14 @@ import { VinylPlayer } from "@/components/VinylPlayer";
 import { HeartButton } from "@/components/HeartButton";
 import { useJukeboxStore } from "@/stores/jukeboxStore";
 import { usePlayerStore } from "@/stores/playerStore";
-import { Song } from "@/types";
+import { useLightsStore } from "@/stores/lightsStore";
+import { animationThemes } from "@/data/animations.ts";
+import {
+  Song,
+  SongSelection,
+  SocketLightsData,
+  SocketDirectionResponse,
+} from "@/types";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export const Songs = () => {
@@ -14,16 +21,72 @@ export const Songs = () => {
   );
 
   const { jukeboxData, loading, fetchSongs } = useJukeboxStore();
-  const { setNowPlaying, setIsPlayerExpanded } = usePlayerStore();
+  const {
+    socket,
+    socketConnected,
+    setNowPlaying,
+    setIsPlayerExpanded,
+    setIsPlaying,
+  } = usePlayerStore();
+  const { running: lightsRunning, animation } = useLightsStore();
 
-  const handleSongClick = (song: Song) => {
+  const handleSongSelect = (selection: SongSelection, song: Song) => {
+    console.log("=== handleSongSelect called ===");
+    console.log("Song:", song);
+    console.log("Selection:", selection);
+    console.log("Socket:", socket ? "connected" : "not connected");
+    console.log("Socket connected state:", socketConnected);
+
     setNowPlaying({
       id: song.id,
       title: song.songTitle,
       artist: song.artist,
       favorite: song.favorite,
     });
+    setIsPlaying(true);
     setIsPlayerExpanded(true);
+
+    if (socket && socketConnected) {
+      console.log("Socket is available - sending direction event");
+      // If lights are running, turn them off before sending pulse train
+      if (lightsRunning && animation) {
+        const lightData: SocketLightsData = {
+          state: "off",
+          animation: animation,
+          stripConf: animationThemes[animation],
+        };
+
+        socket.emit("lights", lightData, () => {
+          // Send pulse train to jukebox hardware
+          socket.emit(
+            "direction",
+            selection,
+            (callback: SocketDirectionResponse) => {
+              if (callback.done) {
+                // Turn lights back on after pulse train completes
+                const lightDataOn: SocketLightsData = {
+                  state: "on",
+                  animation: animation,
+                  stripConf: animationThemes[animation],
+                };
+                socket.emit("lights", lightDataOn);
+              }
+            }
+          );
+        });
+      } else {
+        // No lights running, just send the pulse train
+        socket.emit(
+          "direction",
+          selection,
+          (response: SocketDirectionResponse) => {
+            console.log("Selection response:", response);
+          }
+        );
+      }
+    } else {
+      console.log("Socket not connected - song will play locally only");
+    }
   };
 
   useEffect(() => {
@@ -122,15 +185,16 @@ export const Songs = () => {
                 {expandedSections.has(sectionIndex) && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {sectionDiscs.map((disc) => (
-                      <div
-                        key={disc.discIndex}
-                        className="relative group hover:scale-[1.02] transition-transform cursor-pointer"
-                        onClick={() => handleSongClick(disc.aSide)}
-                      >
+                      <div key={disc.discIndex} className="relative group">
                         <TitleStrip
                           title={disc.aSide.songTitle}
                           artist={disc.aSide.artist}
                           titleBottom={disc.bSide?.songTitle}
+                          song={disc.aSide}
+                          onSelect={(selection) =>
+                            handleSongSelect(selection, disc.aSide)
+                          }
+                          clickable={true}
                           className="w-full max-w-full shadow-[0_4px_12px_rgba(0,0,0,0.15)] border-2 border-jukebox-red group-hover:shadow-[0_6px_20px_rgba(231,64,83,0.4)] transition-shadow"
                         />
 
@@ -138,7 +202,7 @@ export const Songs = () => {
                         <HeartButton
                           songId={disc.aSide.id}
                           isFavorited={disc.aSide.favorite}
-                          className="absolute top-2 right-2"
+                          className="absolute top-2 right-2 z-10"
                         />
                       </div>
                     ))}

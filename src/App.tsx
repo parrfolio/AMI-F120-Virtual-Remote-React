@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useAuthListener } from "@/hooks/useAuthListener";
+import { useSocketConnection } from "@/hooks/useSocketConnection";
 import { useAuthStore } from "@/stores/authStore";
 import { Loading } from "@/components/Loading";
 import { Login } from "@/components/Login";
@@ -12,6 +13,7 @@ import { About } from "@/components/About";
 
 function App() {
   useAuthListener();
+  useSocketConnection(); // Initialize socket globally
   const { authed, loading } = useAuthStore();
 
   if (loading) {

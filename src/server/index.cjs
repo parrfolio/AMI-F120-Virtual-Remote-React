@@ -10,11 +10,46 @@ const certificate = fs.readFileSync(__dirname + "/server.crt", "utf8");
 const credentials = { key: privateKey, cert: certificate };
 const https = require("https").Server(credentials, app);
 const io = require("socket.io")(http);
-const gpio = require("rpi-gpio");
 const webroot = path.resolve(__dirname, "../../dist");
 
 //turned off for mac dev, need back in package to run on rasp
 // const ws281x = require("@gbkwiatt/node-rpi-ws281x-native");
+
+// Platform detection
+const isRaspberryPi =
+  process.platform === "linux" && require("os").arch() === "arm";
+
+// GPIO stub for development
+const createGpioStub = () => ({
+  DIR_OUT: "out",
+  setup: (pin, direction, callback) => {
+    console.log(`[DEV MODE] GPIO setup: pin ${pin}, direction ${direction}`);
+    if (callback) callback();
+  },
+  write: (pin, value, callback) => {
+    console.log(`[DEV MODE] GPIO write: pin ${pin}, value ${value}`);
+    if (callback) callback();
+  },
+  destroy: (callback) => {
+    console.log("[DEV MODE] GPIO cleanup");
+    if (callback) callback();
+  },
+});
+
+// Load real GPIO on Pi, use stub on dev machines
+let gpio;
+if (isRaspberryPi) {
+  try {
+    gpio = require("rpi-gpio");
+    console.log("✓ GPIO module loaded (Raspberry Pi mode)");
+  } catch (err) {
+    console.log("⚠ GPIO failed to load:", err.message);
+    gpio = createGpioStub();
+  }
+} else {
+  console.log("⚠ Development mode: GPIO stubbed (not running on Raspberry Pi)");
+  gpio = createGpioStub();
+}
 
 //not being used at this time (digital display)
 //const i2c = require("i2c-bus");
@@ -35,12 +70,6 @@ for (var k in interfaces) {
 
 app.use(express.static(webroot));
 
-//for routing
-app.get("*", function (req, res) {
-  res.sendFile("index.html", {
-    root: webroot,
-  });
-});
 const httpPORT = process.env.PORT || 8080;
 http.listen(httpPORT, () => {
   console.log(`Running at http://${addresses}:${httpPORT} from ${webroot}`);
@@ -53,23 +82,65 @@ https.listen(httpsPORT, () => {
 });
 
 process.on("SIGINT", function () {
+  // Cleanup - ws281x is only available on Raspberry Pi
   ws281x.reset();
   ws281x.finalize();
-  gpio.destroy();
+
+  gpio.destroy(function () {
+    console.log("GPIO cleanup complete");
+  });
 
   process.nextTick(function () {
     process.exit(0);
   });
 });
 
-//turned off for mac dev, need back in package to run on rasp
 //Light animations
-// const rainbow = require("../animations/rainbow");
-// const twinkle = require("../animations/twinkle");
-// const colorWave = require("../animations/colorWave");
-// const xmas = require("../animations/xmas");
-// const classic = require("../animations/classic");
-// const fadeInOut = require("../animations/fadeInOut");
+// Create stub objects for development (LED animations require Raspberry Pi hardware)
+const createAnimationStub = (name) => ({
+  [name]: (stripConf) => {
+    console.log(
+      `[DEV MODE] ${name} animation triggered with config:`,
+      stripConf ? `${stripConf.length} strips` : "default"
+    );
+  },
+  [`${name}Pause`]: () => {
+    console.log(`[DEV MODE] ${name} animation paused`);
+  },
+});
+
+// Try to load real animations on Raspberry Pi, use stubs on development machines
+let rainbow, twinkle, colorWave, xmas, classic, fadeInOut;
+
+if (isRaspberryPi) {
+  try {
+    rainbow = require("../animations/rainbow");
+    twinkle = require("../animations/twinkle");
+    colorWave = require("../animations/colorWave");
+    xmas = require("../animations/xmas");
+    classic = require("../animations/classic");
+    fadeInOut = require("../animations/fadeInOut");
+    console.log("✓ LED animation modules loaded (Raspberry Pi mode)");
+  } catch (err) {
+    console.log("⚠ LED animations failed to load:", err.message);
+    rainbow = createAnimationStub("Rainbow");
+    twinkle = createAnimationStub("Twinkle");
+    colorWave = createAnimationStub("ColorWave");
+    xmas = createAnimationStub("Xmas");
+    classic = createAnimationStub("Classic");
+    fadeInOut = createAnimationStub("FadeInOut");
+  }
+} else {
+  console.log(
+    "⚠ Development mode: LED animations stubbed (not running on Raspberry Pi)"
+  );
+  rainbow = createAnimationStub("Rainbow");
+  twinkle = createAnimationStub("Twinkle");
+  colorWave = createAnimationStub("ColorWave");
+  xmas = createAnimationStub("Xmas");
+  classic = createAnimationStub("Classic");
+  fadeInOut = createAnimationStub("FadeInOut");
+}
 
 //Raspberry pi relay on pysical pin
 const relay = 7;
@@ -95,20 +166,20 @@ io.sockets.on("connection", function (socket) {
   };
 
   socket.on("direction", (data, callback) => {
-    console.log("DATA: ", data);
-    console.log("Selection", data.select.selection);
-    console.log("===-- SELECTION --===", data.select.selection);
+    console.log("DATA: ", data); //select.selection
+
+    console.log("===-- SELECTION --===", data.selection);
     console.log(
       "===-- Pulse Train Rel --===",
-      data.select.ptrains[0],
-      data.select.ptrains[1]
+      data.ptrains[0],
+      data.ptrains[1]
     );
 
-    if (data.select.state === "on") {
+    if (data.state === "on") {
       //pulse train 1
       (async () => {
         console.log("=======-- Train 1 START --=======");
-        for (let i = 0; i < data.select.ptrains[0]; i++) {
+        for (let i = 0; i < data.ptrains[0]; i++) {
           await sleep(pulseSpeed);
           gpio.write(relay, true, function (err) {
             console.log("on");
@@ -124,9 +195,9 @@ io.sockets.on("connection", function (socket) {
 
       // pulse train 2
       (async () => {
-        await sleep(data.select.ptrainDelay);
+        await sleep(data.ptrainDelay);
         console.log("=======-- Train 2 START --=======");
-        for (let i = 0; i < data.select.ptrains[1]; i++) {
+        for (let i = 0; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
           gpio.write(relay, true, function (err) {
             console.log("on");
@@ -239,7 +310,7 @@ io.sockets.on("connection", function (socket) {
         //   });
         // };
       })();
-    } else if (data.select.state === "off") {
+    } else if (data.state === "off") {
       gpio.write(relay, false);
     } else {
       // By default we turn off the motors
@@ -256,7 +327,7 @@ io.sockets.on("connection", function (socket) {
 
   // LIGHT STRIPS FOR JUKE
   socket.on("lights", (data, callback) => {
-    console.log("Lights", data.state);
+    console.log("Lights DATA State =========>", data);
 
     let animationType = data.animation;
     if (data.state === "on") {
@@ -357,4 +428,9 @@ io.sockets.on("connection", function (socket) {
       }
     }
   });
+});
+
+// SPA fallback - serve index.html for all routes (must be last)
+app.use((req, res) => {
+  res.sendFile(path.join(webroot, "index.html"));
 });

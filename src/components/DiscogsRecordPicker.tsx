@@ -37,7 +37,7 @@ export const DiscogsRecordPicker: React.FC<DiscogsRecordPickerProps> = ({
   const [loadingDetails, setLoadingDetails] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [totalRecords, setTotalRecords] = useState(0);
+  const [, setTotalRecords] = useState(0);
 
   const observerTarget = useRef<HTMLDivElement>(null);
 
@@ -100,11 +100,6 @@ export const DiscogsRecordPicker: React.FC<DiscogsRecordPickerProps> = ({
   // Check if a record is already in the jukebox
   const isRecordInJukebox = (coverImage: string): boolean => {
     return existingSongs.some((song) => song.albumArt === coverImage);
-  };
-
-  // Find songs by album art for deletion
-  const getSongsByAlbumArt = (albumArt: string): Song[] => {
-    return existingSongs.filter((song) => song.albumArt === albumArt);
   };
 
   const handleSelectRecord = async (record: DiscogsRelease) => {

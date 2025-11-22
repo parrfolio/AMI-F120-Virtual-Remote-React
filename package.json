@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "node src/server/index.js",
+    "start": "node src/server/index.cjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "type-check": "tsc --noEmit"
   },
@@ -15,6 +15,7 @@
     "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
     "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^2.1.2",
     "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll": "^2.0.1",
+    "express": "^5.1.0",
     "firebase": "^10.14.0",
     "lucide-react": "^0.552.0",
     "react": "^18.3.1",
@@ -22,10 +23,13 @@
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.27.0",
+    "rpi-gpio": "^2.1.7",
+    "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@gbkwiatt/node-rpi-ws281x-native": "^1.0.1",
     "@types/node": "^22.8.4",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",

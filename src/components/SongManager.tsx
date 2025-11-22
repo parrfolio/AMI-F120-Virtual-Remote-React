@@ -8,7 +8,6 @@ import {
   saveSong,
   deleteSong,
   saveDisc,
-  getAllDiscs,
   deleteDisc,
 } from "@/lib/firebase";
 import { useJukeboxStore } from "@/stores/jukeboxStore";

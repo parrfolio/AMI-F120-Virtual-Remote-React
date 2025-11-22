@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { useEffect } from "react";
 import { Header } from "@/components/Header";
 import { VinylPlayer } from "@/components/VinylPlayer";
 import { AlbumArt } from "@/components/AlbumArt";
 import { HeartButton } from "@/components/HeartButton";
 import { usePlayerStore } from "@/stores/playerStore";
 import { useJukeboxStore } from "@/stores/jukeboxStore";
-import { Disc, Song } from "@/types";
+import { useLightsStore } from "@/stores/lightsStore";
+import { animationThemes } from "@/data/animations.ts";
+import { Disc, SocketLightsData, SocketDirectionResponse } from "@/types";
 
 export const Home = () => {
   const {
     socket,
     socketConnected,
-    setSocket,
-    setSocketConnected,
     setNowPlaying,
     setIsPlaying,
     setIsPlayerExpanded,
@@ -25,40 +24,12 @@ export const Home = () => {
     fetchSongs,
   } = useJukeboxStore();
 
+  const { running: lightsRunning, animation } = useLightsStore();
+
   useEffect(() => {
     // Fetch jukebox data
     fetchSongs();
   }, [fetchSongs]);
-
-  useEffect(() => {
-    // Only connect to socket if backend server is available
-    const newSocket = io({
-      autoConnect: true,
-      reconnection: true,
-      reconnectionDelay: 1000,
-      reconnectionAttempts: 5,
-    });
-    setSocket(newSocket);
-
-    newSocket.on("connect", () => {
-      console.log("Socket connected");
-      setSocketConnected(true);
-    });
-
-    newSocket.on("disconnect", () => {
-      console.log("Socket disconnected");
-      setSocketConnected(false);
-    });
-
-    newSocket.on("connect_error", (error) => {
-      console.log("Socket connection error:", error.message);
-      setSocketConnected(false);
-    });
-
-    return () => {
-      newSocket.close();
-    };
-  }, []);
 
   const handleSongSelect = (disc: Disc, songIndex: number) => {
     const song = disc.disc[songIndex];
@@ -75,9 +46,54 @@ export const Home = () => {
     setIsPlayerExpanded(true);
 
     if (socket && socketConnected) {
-      socket.emit("direction", song.select, (response: any) => {
-        console.log("Selection response:", response);
-      });
+      // If lights are running, turn them off before sending pulse train
+      // This improves performance on Raspberry Pi
+      if (lightsRunning && animation) {
+        const lightData: SocketLightsData = {
+          state: "off",
+          animation: animation,
+          stripConf: animationThemes[animation],
+        };
+
+        socket.emit("lights", lightData, (response: { running: boolean }) => {
+          console.log("Lights turned off:", response);
+
+          // Send pulse train to jukebox hardware
+          socket.emit(
+            "direction",
+            song.select,
+            (callback: SocketDirectionResponse) => {
+              console.log("Pulse train complete:", callback);
+
+              // Turn lights back on after pulse train completes
+              if (callback.done) {
+                const lightDataOn: SocketLightsData = {
+                  state: "on",
+                  animation: animation,
+                  stripConf: animationThemes[animation],
+                };
+
+                socket.emit(
+                  "lights",
+                  lightDataOn,
+                  (response: { running: boolean }) => {
+                    console.log("Lights turned back on:", response);
+                  }
+                );
+              }
+            }
+          );
+        });
+      } else {
+        // No lights running, just send the pulse train
+        socket.emit(
+          "direction",
+          song.select,
+          (response: SocketDirectionResponse) => {
+            console.log("Selection response:", response);
+          }
+        );
+      }
     } else {
       console.log("Socket not connected - song will play locally only");
     }
