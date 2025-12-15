@@ -10,7 +10,10 @@ const clampByte = (value, fallback) => {
 // Default to a conservative brightness to avoid brownouts/resets when many LEDs are white.
 // Can be overridden per-machine with LED_BRIGHTNESS=0..255.
 const DEFAULT_BRIGHTNESS = 96;
-const CHANNEL_BRIGHTNESS = clampByte(process.env.LED_BRIGHTNESS, DEFAULT_BRIGHTNESS);
+const CHANNEL_BRIGHTNESS = clampByte(
+  process.env.LED_BRIGHTNESS,
+  DEFAULT_BRIGHTNESS
+);
 
 // Initialize ws281x at module load time - this runs once when first required
 let strips = ws281x.init({

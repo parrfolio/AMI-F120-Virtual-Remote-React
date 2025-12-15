@@ -32,6 +32,9 @@ function Classic(config) {
         case "cabinet_ami_logo":
           color = 0xff2400; // red
           break;
+        case "door_light":
+          color = 0xff0000; // red
+          break;
       }
       for (let i = item.start; i < item.stop; i++) {
         item.stripArray[i] = color;
