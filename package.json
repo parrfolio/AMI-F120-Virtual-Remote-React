@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "sudo env \"PATH=$PATH\" node src/server/index.cjs",
+    "start": "NODE_BIN=\"$(command -v node)\"; if ls -1 /home/pi/.nvm/versions/node/*/bin/node >/dev/null 2>&1; then NODE_BIN=\"$(ls -1 /home/pi/.nvm/versions/node/*/bin/node | sort -V | tail -1)\"; fi; sudo env \"PATH=$PATH\" \"$NODE_BIN\" src/server/index.cjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "type-check": "tsc --noEmit"
   },
