@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font Face Declarations */
+@font-face {
+  font-family: "MetropolisBold";
+  src: url("./fonts/MetropolisBold.woff2") format("woff2"),
+    url("./fonts/MetropolisBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MetropolisRegular";
+  src: url("./fonts/MetropolisRegular.woff2") format("woff2"),
+    url("./fonts/MetropolisRegular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Reset & Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "MetropolisRegular", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #e74053 !important;
+  background-color: #e74053 !important;
+  /* Prevent iOS Safari bottom bar transparency */
+  padding-bottom: env(safe-area-inset-bottom);
+  /* Force background on iOS */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e74053;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ensure background extends to iOS safe areas */
+html {
+  background: #e74053 !important;
+  background-color: #e74053 !important;
+  height: 100%;
+  /* iOS specific fixes */
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  /* Support for iOS safe areas */
+  min-height: -webkit-fill-available;
+  background: #e74053 !important;
+  background-color: #e74053 !important;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Scrolling text animation for minimized player */
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-text {
+  display: inline-block;
+  animation: scroll-text 15s linear infinite;
+  white-space: nowrap;
+}
+
+/* Heart Animation - Twitter-style sprite */
+.heart-button {
+  width: 50px;
+  height: 50px;
+  background: url("/src/js/components/Assets/heart.png") no-repeat;
+  background-position: left center;
+  background-size: 2900% 100%;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+  display: block;
+  pointer-events: none;
+}
+
+.heart-button.is-active {
+  transition-duration: 1s;
+  background-position: right center;
+}
+
+.heart-button.is-favorited {
+  background-position: right center;
+}

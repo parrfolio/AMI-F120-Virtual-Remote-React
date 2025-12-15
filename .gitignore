@@ -1,0 +1,14 @@
+# Dependency directories
+node_modules/
+dist/js
+dist/webpack-report.html
+dist/
+.DS_Store
+
+# SSL/TLS certificates and private keys
+src/server/*.key
+src/server/*.crt
+src/server/*.csr
+src/server/*.srl
+src/server/*.key.bak
+src/server/*.crt.bak
