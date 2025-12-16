@@ -31,7 +31,6 @@ export const animationThemes: AnimationTheme = {
     twinkle: createStripConfig(1000 / 30),
     xmas: createStripConfig(500),
     classic: createStripConfig(1000 / 30),
-    original: createStripConfig(1000 / 30),
     fadeInOut: createStripConfig(25),
     cylonEye: createStripConfig(25),
     pacman: createStripConfig(30),

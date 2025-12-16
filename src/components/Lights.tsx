@@ -41,10 +41,6 @@ const animationConfig: Record<
     icon: Zap,
     gradient: "bg-gradient-to-br from-amber-500 via-orange-500 to-red-500",
   },
-  original: {
-    icon: SunMedium,
-    gradient: "bg-gradient-to-br from-yellow-100 via-white to-yellow-200",
-  },
   fadeInOut: {
     icon: SunMedium,
     gradient: "bg-gradient-to-br from-yellow-400 via-orange-400 to-pink-400",

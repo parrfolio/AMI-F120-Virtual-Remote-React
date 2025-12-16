@@ -146,15 +146,7 @@ const createAnimationStub = (name) => ({
 });
 
 // Try to load real animations on Raspberry Pi, use stubs on development machines
-let rainbow,
-  twinkle,
-  colorWave,
-  xmas,
-  classic,
-  original,
-  fadeInOut,
-  cylonEye,
-  pacman;
+let rainbow, twinkle, colorWave, xmas, classic, fadeInOut, cylonEye, pacman;
 
 if (IS_RASPBERRY_PI) {
   try {
@@ -163,7 +155,6 @@ if (IS_RASPBERRY_PI) {
     colorWave = require("../animations/colorWave.cjs");
     xmas = require("../animations/xmas.cjs");
     classic = require("../animations/classic.cjs");
-    original = require("../animations/original.cjs");
     fadeInOut = require("../animations/fadeInOut.cjs");
     cylonEye = require("../animations/cylonEye.cjs");
     pacman = require("../animations/pacman.cjs");
@@ -175,7 +166,6 @@ if (IS_RASPBERRY_PI) {
     colorWave = createAnimationStub("ColorWave");
     xmas = createAnimationStub("Xmas");
     classic = createAnimationStub("Classic");
-    original = createAnimationStub("Original");
     fadeInOut = createAnimationStub("FadeInOut");
     cylonEye = createAnimationStub("CylonEye");
     pacman = createAnimationStub("Pacman");
@@ -189,7 +179,6 @@ if (IS_RASPBERRY_PI) {
   colorWave = createAnimationStub("ColorWave");
   xmas = createAnimationStub("Xmas");
   classic = createAnimationStub("Classic");
-  original = createAnimationStub("Original");
   fadeInOut = createAnimationStub("FadeInOut");
   cylonEye = createAnimationStub("CylonEye");
   pacman = createAnimationStub("Pacman");
@@ -245,9 +234,6 @@ const stopAllAnimations = () => {
         break;
       case "classic":
         classic.ClassicPause();
-        break;
-      case "original":
-        original.OriginalPause();
         break;
       case "fadeInOut":
         fadeInOut.FadeInOutPause();
@@ -347,7 +333,7 @@ io.sockets.on("connection", function (socket) {
 
       // pulse train 2
       (async () => {
-        await sleep(ptrainDelay);
+        await sleep(data.ptrainDelay);
         console.log("=======-- Train 2 START --=======");
         for (let i = 0; i < data.ptrains[1]; i++) {
           await sleep(pulseSpeed);
@@ -532,16 +518,6 @@ io.sockets.on("connection", function (socket) {
           console.log("Classic Animation!");
           classic.Classic(data.stripConf);
           currentAnimation = "classic";
-          if (callback && typeof callback === "function") {
-            callback({
-              running: true,
-            });
-          }
-          break;
-        case "original":
-          console.log("Original Animation!");
-          original.Original(data.stripConf);
-          currentAnimation = "original";
           if (callback && typeof callback === "function") {
             callback({
               running: true,
