@@ -11,7 +11,16 @@ Remote into machine: `ssh pi@raspberrypi`
 ### To Run Build on Raspi
 
 Build: `npm run build`
-Start Server: `npm run start`
+Start Server: `npm run start` or `pm2 restart ami-f120-virtual-remote`
+
+Stop Server: `pm2 start ami-f120-virtual-remote`
+Restar Server: `pm2 restart ami-f120-virtual-remote`
+
+### To adjust brightness
+
+`LED_BRIGHTNESS=192 pm2 restart ami-f120-virtual-remote --update-env`
+`LED_BRIGHTNESS=224 pm2 restart ami-f120-virtual-remote --update-env`
+`LED_BRIGHTNESS=255 pm2 restart ami-f120-virtual-remote --update-env`
 
 ## CRITICAL Power On Sequence
 
