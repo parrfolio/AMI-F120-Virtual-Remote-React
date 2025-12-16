@@ -1,15 +1,16 @@
 import { AnimationTheme } from '@/types';
 
 const baseStripConfig = {
-    record_rack: { start: 0, stop: 48, channelSet: 0 },
-    cabinet_accent: { start: 48, stop: 96, channelSet: 0 },
+    record_rack_top: { start: 0, stop: 48, channelSet: 0 },
+    cabinet_accent_top: { start: 48, stop: 96, channelSet: 0 },
     titlestrips_bottom: { start: 96, stop: 144, channelSet: 0 },
     titlestrips_top: { start: 144, stop: 192, channelSet: 0 },
     extra_leds: { start: 192, stop: 204, channelSet: 0 },
     cabinet_ami_logo: { start: 204, stop: 236, channelSet: 0 },
-    door_light: { start: 0, stop: 23, channelSet: 1 },
-    coin_light: { start: 23, stop: 31, channelSet: 1 },
-    //cabinet_accent_mech: { start: 23, stop: 31, channelSet: 1 },
+    cabinet_accent_bottom_front: { start: 0, stop: 60, channelSet: 1 },
+    record_rack_bottom: { start: 60, stop: 120, channelSet: 1 },
+    door_light: { start: 120, stop: 143, channelSet: 1 },
+    coin_light: { start: 143, stop: 174, channelSet: 1 },
 };
 
 // record_rack - facing down on the records in cabinet

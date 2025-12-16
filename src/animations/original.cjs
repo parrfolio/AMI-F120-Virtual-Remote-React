@@ -13,10 +13,10 @@ function Original(config) {
     let color = 0x000000;
 
     switch (item.name) {
-      case "record_rack":
+      case "record_rack_top":
         color = 0xffffff; // light yellow
         break;
-      case "cabinet_accent":
+      case "cabinet_accent_top":
         color = 0xffffff; // light yellow
         break;
       case "titlestrips_bottom":
