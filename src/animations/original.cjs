@@ -14,10 +14,10 @@ function Original(config) {
 
     switch (item.name) {
       case "record_rack":
-        color = 0xffffe0; // light yellow
+        color = 0xffffff; // light yellow
         break;
       case "cabinet_accent":
-        color = 0xffffe0; // light yellow
+        color = 0xffffff; // light yellow
         break;
       case "titlestrips_bottom":
         color = 0xffffff; // bright white
@@ -32,7 +32,7 @@ function Original(config) {
         color = 0xffffff; // bright white
         break;
       case "door_light":
-        color = 0xff0000; // red
+        color = 0xffffff; // red
         break;
     }
 
