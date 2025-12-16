@@ -15,25 +15,25 @@ function Classic(config) {
       let color = 0x000000; // default black
       switch (item.name) {
         case "record_rack":
-          color = 0xffffff; // white
+          color = 0xffffff;
           break;
         case "cabinet_accent":
-          color = 0xffffff; // green
+          color = 0xffffff;
           break;
         case "titlestrips_bottom":
-          color = 0xffffff; // yellow
+          color = 0xffffff;
           break;
         case "titlestrips_top":
-          color = 0xffffff; // dodger blue
+          color = 0xffffff;
           break;
         case "extra_leds":
-          color = 0xffffff; // off
+          color = 0x000000; // off
           break;
         case "cabinet_ami_logo":
-          color = 0xffffff; // red
+          color = 0xffffff;
           break;
         case "door_light":
-          color = 0xffffff; // red
+          color = 0xffffff;
           break;
       }
       for (let i = item.start; i < item.stop; i++) {
