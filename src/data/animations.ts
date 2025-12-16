@@ -1,13 +1,18 @@
 import { AnimationTheme } from '@/types';
 
+// Note: `brightness` here is currently informational/legacy.
+// Actual LED brightness on the Raspberry Pi is controlled server-side in
+// `src/animations/strip.cjs` via `LED_BRIGHTNESS` (or its default).
+const DEFAULT_STRIP_BRIGHTNESS = 192;
+
 const baseStripConfig = {
-    record_rack: { start: 0, stop: 48, channelSet: 0, brightness: 255 },
-    cabinet_accent: { start: 48, stop: 96, channelSet: 0, brightness: 255 },
-    titlestrips_bottom: { start: 96, stop: 144, channelSet: 0, brightness: 255 },
-    titlestrips_top: { start: 144, stop: 192, channelSet: 0, brightness: 255 },
-    extra_leds: { start: 192, stop: 204, channelSet: 0, brightness: 255 },
-    cabinet_ami_logo: { start: 204, stop: 236, channelSet: 0, brightness: 255 },
-    door_light: { start: 0, stop: 60, channelSet: 1, brightness: 255 },
+    record_rack: { start: 0, stop: 48, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    cabinet_accent: { start: 48, stop: 96, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    titlestrips_bottom: { start: 96, stop: 144, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    titlestrips_top: { start: 144, stop: 192, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    extra_leds: { start: 192, stop: 204, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    cabinet_ami_logo: { start: 204, stop: 236, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    door_light: { start: 0, stop: 60, channelSet: 1, brightness: DEFAULT_STRIP_BRIGHTNESS },
 };
 
 // record_rack - facing down on the records in cabinet
