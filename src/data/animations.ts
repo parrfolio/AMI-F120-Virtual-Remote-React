@@ -7,8 +7,8 @@ const baseStripConfig = {
     titlestrips_top: { start: 144, stop: 192, channelSet: 0 },
     extra_leds: { start: 192, stop: 204, channelSet: 0 },
     cabinet_ami_logo: { start: 204, stop: 236, channelSet: 0 },
-    door_light: { start: 0, stop: 60, channelSet: 1 },
-    cabinet_accent_mech: { start: 60, stop: 120, channelSet: 1 },
+    door_light: { start: 0, stop: 24, channelSet: 1 },
+    // cabinet_accent_mech: { start: 60, stop: 120, channelSet: 1 },
 };
 
 // record_rack - facing down on the records in cabinet
