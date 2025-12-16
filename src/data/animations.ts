@@ -1,18 +1,13 @@
 import { AnimationTheme } from '@/types';
 
-// Note: `brightness` here is currently informational/legacy.
-// Actual LED brightness on the Raspberry Pi is controlled server-side in
-// `src/animations/strip.cjs` via `LED_BRIGHTNESS` (or its default).
-const DEFAULT_STRIP_BRIGHTNESS = 192;
-
 const baseStripConfig = {
-    record_rack: { start: 0, stop: 48, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
-    cabinet_accent: { start: 48, stop: 96, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
-    titlestrips_bottom: { start: 96, stop: 144, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
-    titlestrips_top: { start: 144, stop: 192, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
-    extra_leds: { start: 192, stop: 204, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
-    cabinet_ami_logo: { start: 204, stop: 236, channelSet: 0, brightness: DEFAULT_STRIP_BRIGHTNESS },
-    door_light: { start: 0, stop: 60, channelSet: 1, brightness: DEFAULT_STRIP_BRIGHTNESS },
+    record_rack: { start: 0, stop: 48, channelSet: 0 },
+    cabinet_accent: { start: 48, stop: 96, channelSet: 0 },
+    titlestrips_bottom: { start: 96, stop: 144, channelSet: 0 },
+    titlestrips_top: { start: 144, stop: 192, channelSet: 0 },
+    extra_leds: { start: 192, stop: 204, channelSet: 0 },
+    cabinet_ami_logo: { start: 204, stop: 236, channelSet: 0 },
+    door_light: { start: 0, stop: 60, channelSet: 1 },
 };
 
 // record_rack - facing down on the records in cabinet
@@ -22,23 +17,30 @@ const baseStripConfig = {
 // extra_leds - extra needs to be off
 // cabinet_ami_logo - cabinet outside logo top middle
 
-const createStripConfig = (delay: number) => {
+// `brightness` is applied on the Raspberry Pi when starting the theme.
+// Lower values are recommended for all-white themes to avoid brownouts/voltage-drop color shifting.
+const createStripConfig = (delay: number, brightness: number) => {
     return Object.entries(baseStripConfig).map(([name, config]) => ({
         name,
         delay,
+        brightness,
         ...config,
     }));
 };
 
 export const animationThemes: AnimationTheme = {
-    rainbow: createStripConfig(1000 / 30),
-    colorWave: createStripConfig(1000),
-    twinkle: createStripConfig(1000 / 30),
-    xmas: createStripConfig(500),
-    classic: createStripConfig(1000 / 30),
-    fadeInOut: createStripConfig(25),
-    cylonEye: createStripConfig(25),
-    pacman: createStripConfig(30),
+    // Color themes can generally run brighter
+    rainbow: createStripConfig(1000 / 30, 192),
+    colorWave: createStripConfig(1000, 192),
+    twinkle: createStripConfig(1000 / 30, 192),
+    xmas: createStripConfig(500, 192),
+
+    // White theme: keep lower by default
+    classic: createStripConfig(1000 / 30, 128),
+
+    fadeInOut: createStripConfig(25, 192),
+    cylonEye: createStripConfig(25, 192),
+    pacman: createStripConfig(30, 192),
 };
 
 export const animationNames = Object.keys(animationThemes);

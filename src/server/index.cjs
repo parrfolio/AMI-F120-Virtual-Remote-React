@@ -24,6 +24,29 @@ const safeReset = () => {
   }
 };
 
+const clampByte = (value) => {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return null;
+  return Math.max(0, Math.min(255, Math.round(parsed)));
+};
+
+// Apply brightness at runtime (used for per-theme brightness).
+const safeSetBrightness = (value) => {
+  const brightness = clampByte(value);
+  if (brightness === null) return;
+
+  if (typeof ws281x.setBrightness !== "function") {
+    console.warn("⚠ ws281x.setBrightness unavailable; skipping brightness");
+    return;
+  }
+
+  try {
+    ws281x.setBrightness(brightness);
+  } catch (err) {
+    console.warn("⚠ LED brightness set skipped:", err.message);
+  }
+};
+
 // Platform detection - check for ARM architecture (includes arm, arm64, aarch64)
 const isRaspberryPi = () => {
   if (process.platform !== "linux") return false;
@@ -471,6 +494,9 @@ io.sockets.on("connection", function (socket) {
     if (data.state === "on") {
       // Stop any currently running animation first
       stopAllAnimations();
+
+      // Apply per-theme brightness (sent from UI as part of stripConf)
+      safeSetBrightness(data?.stripConf?.[0]?.brightness);
 
       // Start the new animation
       switch (animationType) {
