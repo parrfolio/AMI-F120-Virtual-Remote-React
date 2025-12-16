@@ -7,14 +7,9 @@ const clampByte = (value, fallback) => {
   return Math.max(0, Math.min(255, Math.round(parsed)));
 };
 
-// Default to a balanced brightness to reduce voltage-drop color shifting on long runs.
-// Override per-machine with LED_BRIGHTNESS=0..255.
-// Examples:
-//   LED_BRIGHTNESS=192 pm2 restart ami-f120-virtual-remote --update-env
-//   LED_BRIGHTNESS=224 pm2 restart ami-f120-virtual-remote --update-env
-//   LED_BRIGHTNESS=255 pm2 restart ami-f120-virtual-remote --update-env
-
-const DEFAULT_BRIGHTNESS = 192;
+// Default to a conservative brightness to avoid brownouts/resets when many LEDs are white.
+// Can be overridden per-machine with LED_BRIGHTNESS=0..255.
+const DEFAULT_BRIGHTNESS = 96;
 const CHANNEL_BRIGHTNESS = clampByte(
   process.env.LED_BRIGHTNESS,
   DEFAULT_BRIGHTNESS
