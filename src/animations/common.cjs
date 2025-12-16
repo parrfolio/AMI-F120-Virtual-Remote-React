@@ -6,7 +6,7 @@ function common() {
 
   // total leds for channel 1 strips
   this.num_leds_channel_01 = () => {
-    return 174;
+    return 151;
   };
 
   //cylon

@@ -10,7 +10,7 @@ const baseStripConfig = {
     cabinet_accent_bottom_front: { start: 0, stop: 60, channelSet: 1 },
     record_rack_bottom: { start: 60, stop: 120, channelSet: 1 },
     door_light: { start: 120, stop: 143, channelSet: 1 },
-    coin_light: { start: 143, stop: 174, channelSet: 1 },
+    coin_light: { start: 143, stop: 151, channelSet: 1 },
 };
 
 // record_rack - facing down on the records in cabinet
