@@ -12,6 +12,7 @@ import {
   SunMedium,
   Eye,
   Circle,
+  Music,
 } from "lucide-react";
 import { LAYOUT_CONFIG } from "@/config/layout";
 
@@ -36,6 +37,10 @@ const animationConfig: Record<
   xmas: {
     icon: TreePine,
     gradient: "bg-gradient-to-br from-red-600 via-green-600 to-red-600",
+  },
+  audioReactive: {
+    icon: Music,
+    gradient: "bg-gradient-to-br from-fuchsia-600 via-purple-600 to-indigo-600",
   },
   classic: {
     icon: Zap,

@@ -38,6 +38,9 @@ export const animationThemes: AnimationTheme = {
     twinkle: createStripConfig(1000 / 30, 192),
     xmas: createStripConfig(500, 192),
 
+    // Simulated audio-reactive (no mic)
+    audioReactive: createStripConfig(1000 / 30, 160),
+
     // White theme: keep lower by default
     classic: createStripConfig(1000 / 30, 128),
 

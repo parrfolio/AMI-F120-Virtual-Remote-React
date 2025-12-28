@@ -170,6 +170,7 @@ const createAnimationStub = (name) => ({
 
 // Try to load real animations on Raspberry Pi, use stubs on development machines
 let rainbow, twinkle, colorWave, xmas, classic, fadeInOut, cylonEye, pacman;
+let audioReactive;
 
 if (IS_RASPBERRY_PI) {
   try {
@@ -177,6 +178,7 @@ if (IS_RASPBERRY_PI) {
     twinkle = require("../animations/twinkle.cjs");
     colorWave = require("../animations/colorWave.cjs");
     xmas = require("../animations/xmas.cjs");
+    audioReactive = require("../animations/audioReactive.cjs");
     classic = require("../animations/classic.cjs");
     fadeInOut = require("../animations/fadeInOut.cjs");
     cylonEye = require("../animations/cylonEye.cjs");
@@ -188,6 +190,7 @@ if (IS_RASPBERRY_PI) {
     twinkle = createAnimationStub("Twinkle");
     colorWave = createAnimationStub("ColorWave");
     xmas = createAnimationStub("Xmas");
+    audioReactive = createAnimationStub("AudioReactive");
     classic = createAnimationStub("Classic");
     fadeInOut = createAnimationStub("FadeInOut");
     cylonEye = createAnimationStub("CylonEye");
@@ -201,6 +204,7 @@ if (IS_RASPBERRY_PI) {
   twinkle = createAnimationStub("Twinkle");
   colorWave = createAnimationStub("ColorWave");
   xmas = createAnimationStub("Xmas");
+  audioReactive = createAnimationStub("AudioReactive");
   classic = createAnimationStub("Classic");
   fadeInOut = createAnimationStub("FadeInOut");
   cylonEye = createAnimationStub("CylonEye");
@@ -254,6 +258,9 @@ const stopAllAnimations = () => {
         break;
       case "xmas":
         xmas.XmasPause();
+        break;
+      case "audioReactive":
+        audioReactive.AudioReactivePause();
         break;
       case "classic":
         classic.ClassicPause();
@@ -534,6 +541,16 @@ io.sockets.on("connection", function (socket) {
           console.log("Xmas Animation!");
           xmas.Xmas(data.stripConf);
           currentAnimation = "xmas";
+          if (callback && typeof callback === "function") {
+            callback({
+              running: true,
+            });
+          }
+          break;
+        case "audioReactive":
+          console.log("AudioReactive Animation!");
+          audioReactive.AudioReactive(data.stripConf);
+          currentAnimation = "audioReactive";
           if (callback && typeof callback === "function") {
             callback({
               running: true,
