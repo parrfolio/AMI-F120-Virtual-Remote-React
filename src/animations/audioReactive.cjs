@@ -63,18 +63,41 @@ const hsvToRgbInt = (h, s, v) => {
   );
 };
 
-// Simulated 8-band "audio" (no mic): drift + pulses.
+const intToRgb = (color) => ({
+  r: (color >> 16) & 0xff,
+  g: (color >> 8) & 0xff,
+  b: color & 0xff,
+});
+
+const blendRgbInt = (fromColor, toColor, alpha) => {
+  const a = clamp01(alpha);
+  const from = intToRgb(fromColor);
+  const to = intToRgb(toColor);
+  return common.rgb2Int(
+    Math.round(from.r + (to.r - from.r) * a),
+    Math.round(from.g + (to.g - from.g) * a),
+    Math.round(from.b + (to.b - from.b) * a)
+  );
+};
+
+// Simulated 8-band "audio" (no mic): smooth drift + beat envelope.
 const createBandSimulator = (bandCount = 8) => {
   const phases = Array.from({ length: bandCount }, (_, idx) => idx * 0.73);
-  const speeds = Array.from({ length: bandCount }, (_, idx) => 0.6 + idx * 0.12);
-  let pulse = 0;
+  const speeds = Array.from(
+    { length: bandCount },
+    (_, idx) => 0.6 + idx * 0.12
+  );
+  let beatPhase = 0;
+  let beatEnv = 0;
 
   return (dtSeconds) => {
-    // Random kick every ~0.4-1.2s
-    pulse -= dtSeconds * 1.8;
-    if (pulse < 0 && Math.random() < dtSeconds * 1.2) {
-      pulse = 1;
-    }
+    // Periodic beat with smooth envelope (less flashing than random kicks)
+    // ~110 BPM (1.83 Hz)
+    beatPhase = (beatPhase + dtSeconds * 1.83) % 1;
+    const beat = Math.max(0, Math.sin(beatPhase * Math.PI));
+    // Attack fast, release slower
+    beatEnv = Math.max(beatEnv - dtSeconds * 2.2, 0);
+    beatEnv = Math.max(beatEnv, beat);
 
     const bands = phases.map((phase, i) => {
       phases[i] += dtSeconds * speeds[i];
@@ -83,17 +106,26 @@ const createBandSimulator = (bandCount = 8) => {
 
       // Emphasize lows slightly like music
       const lowBias = 1 - i / (bandCount - 1);
-      const kick = pulse > 0 ? pulse * lowBias : 0;
+      const kick = beatEnv * lowBias;
 
-      const level = 0.15 + slow * 0.35 + mid * 0.35 + kick * 0.6;
+      const level = 0.12 + slow * 0.34 + mid * 0.34 + kick * 0.55;
       return clamp01(level);
     });
 
-    // decay pulse
-    pulse = Math.max(0, pulse - dtSeconds * 2.4);
-
     return bands;
   };
+};
+
+const lerp = (a, b, t) => a + (b - a) * t;
+
+const sampleBands = (bands, position01) => {
+  if (!bands || bands.length === 0) return 0;
+  const p = clamp01(position01) * (bands.length - 1);
+  const idx = Math.floor(p);
+  const frac = p - idx;
+  const a = bands[idx] ?? 0;
+  const b = bands[Math.min(bands.length - 1, idx + 1)] ?? a;
+  return lerp(a, b, frac);
 };
 
 function AudioReactive(config) {
@@ -108,38 +140,67 @@ function AudioReactive(config) {
   const delay = Math.round(1000 / fps);
 
   const simulateBands = createBandSimulator(8);
+  const smoothedBands = new Array(8).fill(0);
   let last = Date.now();
-  let hueOffset = 0;
+  let t = 0;
 
   timer = new RecurringTimer(function () {
     const now = Date.now();
     const dt = Math.min(0.1, Math.max(0.001, (now - last) / 1000));
     last = now;
 
-    const bands = simulateBands(dt);
-    const energy = Math.max(...bands);
+    t += dt;
 
-    // Slow hue shift; energy slightly accelerates.
-    hueOffset = (hueOffset + dt * (0.06 + energy * 0.22)) % 1;
+    const bands = simulateBands(dt);
+    // Smooth bands (attack/release) to reduce flashing
+    for (let i = 0; i < smoothedBands.length; i++) {
+      const target = bands[i] ?? 0;
+      const current = smoothedBands[i];
+      const attack = 10; // per second
+      const release = 3; // per second
+      const rate = target > current ? attack : release;
+      smoothedBands[i] = lerp(current, target, clamp01(dt * rate));
+    }
+
+    const energy = Math.max(...smoothedBands);
+
+    // Flow speed increases with energy
+    const flow = t * (0.25 + energy * 0.9);
 
     activeStrips.forEach((item) => {
       const isExtra = item.name === "extra_leds";
+      const length = Math.max(1, item.stop - item.start);
+      const stripSeed = (item.channelSet * 97 + item.start * 13) % 1000;
+
       for (let i = item.start; i < item.stop; i++) {
         if (isExtra) {
           item.stripArray[i] = 0x000000;
           continue;
         }
 
-        const pos = (i - item.start) / Math.max(1, item.stop - item.start);
-        const bandIndex = Math.min(7, Math.floor(pos * 8));
-        const level = bands[bandIndex];
+        const pos = (i - item.start) / length;
 
-        // Map each band to a different hue region; level controls value.
-        const hue = (hueOffset + bandIndex / 10) % 1;
-        const sat = 1;
-        const val = 0.05 + level * 0.95;
+        // Continuous "band" sampling across strip so it dances instead of stepping
+        const level = sampleBands(smoothedBands, pos);
 
-        item.stripArray[i] = hsvToRgbInt(hue, sat, val);
+        // Two waves: one global, one per-strip to create motion
+        const w1 = (Math.sin((pos * 2.0 + flow) * Math.PI * 2) + 1) / 2;
+        const w2 = (Math.sin((pos * 5.0 - flow * 1.3 + stripSeed / 1000) * Math.PI * 2) + 1) / 2;
+        const wave = 0.55 * w1 + 0.45 * w2;
+
+        // Hue gradient that scrolls, with slight energy-based shift
+        const hue = (pos * 0.65 + flow * 0.08 + energy * 0.12) % 1;
+        const sat = 0.95;
+
+        // Value follows audio and wave; keep a low floor so it never "pops" off
+        const val = clamp01(0.08 + level * 0.65 + wave * (0.12 + energy * 0.25));
+
+        const next = hsvToRgbInt(hue, sat, val);
+
+        // Blend frames to smooth transitions (reduces flashing)
+        const current = item.stripArray[i] || 0;
+        const blendAlpha = 0.28 + energy * 0.18;
+        item.stripArray[i] = blendRgbInt(current, next, blendAlpha);
       }
     });
 
